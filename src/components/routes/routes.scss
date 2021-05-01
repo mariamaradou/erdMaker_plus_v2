@@ -1,0 +1,94 @@
+.home-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.description {
+  width: 30%;
+  min-width: 280px;
+  margin: auto;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  color: rgb(19, 36, 112);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.reset-password {
+  max-width: 90%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.launch-button {
+  margin-top: 1.3em;
+  border-radius: 4px;
+  background-color: #3498db;
+  border: none;
+  color: #ffffff;
+  font-size: 28px;
+  padding: 20px;
+  width: 260px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.launch-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.launch-button span:before {
+  content: "\002b";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -20px;
+  transition: 0.5s;
+}
+
+.launch-button:hover span {
+  padding-left: 25px;
+}
+
+.launch-button:hover span:before {
+  opacity: 1;
+  left: 0;
+}
+
+.about {
+  max-width: 90%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .about-text {
+    text-align: justify;
+    font-size: $containerTextFontSize;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-wrapper {
+    display: block;
+  }
+
+  .description {
+    margin: 10px auto;
+    width: 80%;
+  }
+}
+
+/*
+.txt-bground {
+  background-color: rgba(255, 255, 255, 0.5);
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  position: absolute;
+  padding: 6em 7em;
+  z-index: -1;
+}*/

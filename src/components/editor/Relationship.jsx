@@ -1,0 +1,190 @@
+import React from "react";
+import { connect } from "react-redux";
+import {
+  updatePositionRelationship,
+  updateInitialPositionRelationship,
+  //updateInitialPositionChildren,
+  updatePositionChildren,
+  repositionComponents,
+  select,
+  deselect,
+} from "../../actions/actions";
+import { Group, Line, Text } from "react-konva";
+import {
+  stageWidth,
+  stageHeight,
+  relationshipWidth,
+  relationshipHeight,
+  relationshipTextWidth,
+  weakRelationshipOffset,
+  fontSize,
+  textHeight,
+  dragBoundOffset,
+} from "../../global/constants";
+
+class Relationship extends React.Component {
+  state = { initialPosition: { x: this.props.x, y: this.props.y } };
+
+  // Does not let the relationship to be dragged out of stage bounds
+  stageBound = (pos) => {
+    var newX;
+    var newY;
+
+    if (pos.x > stageWidth / 2)
+      newX =
+        pos.x > stageWidth - relationshipWidth - dragBoundOffset
+          ? stageWidth - relationshipWidth - dragBoundOffset
+          : pos.x;
+    else newX = pos.x < relationshipWidth + dragBoundOffset ? relationshipWidth + dragBoundOffset : pos.x;
+
+    if (pos.y > stageHeight / 2)
+      newY =
+        pos.y > stageHeight - relationshipHeight - dragBoundOffset
+          ? stageHeight - relationshipHeight - dragBoundOffset
+          : pos.y;
+    else newY = pos.y < relationshipHeight + dragBoundOffset ? relationshipHeight + dragBoundOffset : pos.y;
+
+    return {
+      x: newX,
+      y: newY,
+    };
+  };
+
+  render() {
+    
+    var weakRelationshipRhombus =  this.props.type.weak ? (
+      <Line
+        fill="#94dfea"
+        stroke={
+          this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"
+            ? "red"
+            : "black"
+        }
+        strokeWidth={0.5}
+       
+        lineJoin="bevel"
+        closed
+        points={[
+          0,
+          -relationshipHeight + weakRelationshipOffset, // TOP
+          relationshipWidth - 1.5 * weakRelationshipOffset,
+          0, // RIGHT
+          0,
+          relationshipHeight - weakRelationshipOffset, // BOTTOM
+          -relationshipWidth + 1.5 * weakRelationshipOffset,
+          0, // LEFT
+        ]}
+      />
+    ) : null;
+
+    return (
+      <Group
+        x={this.props.x}
+        y={this.props.y}
+        draggable
+        onDragStart={(e) => {
+          this.props.updateInitialPositionRelationship({
+            id: this.props.id,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+       
+          this.setState({
+            initialPosition: { x: e.target.x(), y: e.target.y() },
+          });
+        }}
+        onDragMove={(e) => {
+          this.props.updatePositionRelationship({
+            id: this.props.id,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+          this.props.updatePositionChildren({
+            id: this.props.id,
+            dx: e.target.x() - this.state.initialPosition.x,
+            dy: e.target.y() - this.state.initialPosition.y,
+          });
+          this.setState({
+            initialPosition: { x: e.target.x(), y: e.target.y() },
+          });
+        }}
+        onDragEnd={() => this.props.repositionComponents()}
+        onTap={() => {
+          this.props.deselect();
+          this.props.select({
+            type: "relationship",
+            id: this.props.id,
+            parentId: null,
+          });
+        }}
+       
+        onClick={() => {
+          this.props.deselect();
+          this.props.select({
+            type: "relationship",
+            id: this.props.id,
+            parentId: null,
+          });
+          
+          document.getElementsByClassName('react-contextmenu')[0].style.display='none'
+        }}
+        dragBoundFunc={(pos) => this.stageBound(pos)}
+      >
+        <Line
+         // fill="#94dfea"
+         fillLinearGradientStartPoint={{ x: -50, y: -50 }}
+         fillLinearGradientEndPoint={{ x: 50, y: 50 }}
+         fillLinearGradientColorStops={[0, '#B9D9EB', 1, '#89CFF0']}
+         opacity={this.props.components.hideRelationships? 0:1}
+          stroke={
+            this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"
+              ? "red"
+              : "black"
+          }
+          strokeWidth={0.5}
+          lineJoin="bevel"
+          closed
+          points={[
+            0,
+            -relationshipHeight, // TOP
+            relationshipWidth,
+            0, // RIGHT
+            0,
+            relationshipHeight, // BOTTOM
+            -relationshipWidth,
+            0, // LEFT
+          ]}
+        />
+        {weakRelationshipRhombus}
+        <Text
+          text={this.props.name}
+          fontSize={fontSize}
+          align="center"
+          verticalAlign="middle"
+          width={relationshipTextWidth}
+          height={textHeight}
+          offsetX={relationshipTextWidth / 2}
+          offsetY={!this.props.components.hideRelationships?textHeight / 2: textHeight/1.9}
+          listening={false}
+        />
+      </Group>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  components:state.components.present,
+  selector: state.selector,
+});
+
+const mapDispatchToProps = {
+  updatePositionRelationship,
+  updatePositionChildren,
+  updateInitialPositionRelationship,
+ // updateInitialPositionChildren,
+  repositionComponents,
+  select,
+  deselect,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Relationship);
