@@ -81,7 +81,7 @@ class AttributeBatCerNav extends React.Component {
 
     if (this.props.type.optional) nameText =  nameText + " (0,1) " ;      //optional
        
-        
+      if(this.props.type.unique && this.props.type.composite)  nameText = '*' + nameText;
 
      if(this.props.type.multivalued) nameText= nameText + " (1,n)";
 
