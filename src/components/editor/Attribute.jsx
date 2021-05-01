@@ -66,7 +66,7 @@ class Attribute extends React.Component {
 
     if (this.props.type.composite) nameText = "(" + nameText + ")";     //composite
 
-    var multivaluedEllipse = this.props.type.multivalued ? (         //multivalued
+    var multivaluedEllipse = this.props.type.multivalued && this.props.components.notation!=='Teorey Notation' ? (         //multivalued
       <Ellipse
     
         radiusX={attributeRadiusX - multivaluedAttributeOffset}

@@ -320,10 +320,11 @@ class Surface extends React.Component {
           continue;
         }
         lineList.push(
+          <Group  key={keyIndex}>
           <Line
-            key={keyIndex}
+           
             stroke="black"
-            strokeWidth={0.5}
+            strokeWidth={this.props.components.attributes[i].type.multivalued && this.props.components.notation==='Teorey Notation'?5:0.5}
             points={[
               this.props.components.attributes[i].x,
               this.props.components.attributes[i].y,
@@ -331,6 +332,19 @@ class Surface extends React.Component {
               parentCoords.y,
             ]}
           />
+          
+          <Line
+         
+          stroke="white"
+          strokeWidth={this.props.components.attributes[i].type.multivalued && this.props.components.notation==='Teorey Notation'?4:0}
+          points={[
+            this.props.components.attributes[i].x,
+            this.props.components.attributes[i].y,
+            parentCoords.x,
+            parentCoords.y,
+          ]}
+        />
+        </Group>
         );
         keyIndex = keyIndex + 1;
       }
