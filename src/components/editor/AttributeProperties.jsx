@@ -207,10 +207,10 @@ class AttributeProperties extends React.Component {
                     type="checkbox"
                     name="type"
                     value="unique"
-                    disabled={ !this.props.components.attributes[attributeIndex].type.unique?
+                   /* disabled={ !this.props.components.attributes[attributeIndex].type.unique?
                       this.props.components.attributes.some(attribute =>attribute.parentId===this.props.selector.current.parentId && 
                         attribute.type.unique===true)?
-                      true: false:false}
+                      true: false:false}*/
                     checked={this.props.components.attributes[attributeIndex].type.unique}
                     onChange={this.typeValueChange}
                   />
@@ -240,7 +240,7 @@ class AttributeProperties extends React.Component {
                     type="checkbox"
                     name="type"
                     value="optional"
-                    disabled = {this.props.components.attributes[attributeIndex].type.unique ? true: false}
+                  /*  disabled = {this.props.components.attributes[attributeIndex].type.unique ? true: false}*/
                     checked={this.props.components.attributes[attributeIndex].type.optional}
                     onChange={this.typeValueChange}
                   />
