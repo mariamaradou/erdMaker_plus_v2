@@ -354,7 +354,7 @@ const componentsReducer = (state = initialState, action) => {
       return newState;
     case "MODIFY_CONNECTION":
       console.log(state.relationships.find((relationship) =>
-      relationship.id === action.payload.parentId).connections)
+      relationship.id === action.payload.parentId).connections.map((connection)   => connection.id=== action.payload.id  ))
     /* return {
         ...state,
         relationships: state.relationships.find((relationship) =>

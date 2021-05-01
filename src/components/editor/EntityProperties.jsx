@@ -12,7 +12,7 @@ import {
   setTypeEntity,
   repositionComponents,
 } from "../../actions/actions";
-import { getRandomInt, getSpecificAngles } from "../../global/utils";
+import { getRandomInt } from "../../global/utils";
 import { nameSize, spawnRadius } from "../../global/constants";
 
 

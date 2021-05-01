@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React  from "react";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -20,7 +20,7 @@ import {
   setMeta,
   deselect,
 } from "../../actions/actions";
-import Checkbox from "@material-ui/core/Checkbox";
+//import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {

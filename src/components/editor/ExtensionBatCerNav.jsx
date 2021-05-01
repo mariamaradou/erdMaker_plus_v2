@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updatePositionExtension, updateInitialPositionExtension, select, repositionComponents } from "../../actions/actions";
-import { Group, Circle, Line, Text } from "react-konva";
-import { stageWidth, stageHeight, extensionRadius, fontSize, dragBoundOffset } from "../../global/constants";
-var pixelWidth = require("string-pixel-width");
+import { Group, Circle } from "react-konva";
+import { stageWidth, stageHeight, extensionRadius, dragBoundOffset } from "../../global/constants";
+
 
 
 
@@ -45,17 +45,7 @@ componentWillUnmount(){
 
 
   render() {
-    var text;
-    if (this.props.type === "specialize")
-      if (this.props.cardinality === "disjoint") text = "d";
-      else if (this.props.cardinality === "overlap") text = "o";
-      else text = "";
-    else if (this.props.type === "union") text = "u";
-
-    var textPixelWidth = pixelWidth(text, {
-      font: "Arial",
-      size: fontSize,
-    });
+   
     return (
       
       <Group
