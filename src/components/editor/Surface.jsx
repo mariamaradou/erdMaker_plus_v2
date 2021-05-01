@@ -238,8 +238,8 @@ class Surface extends React.Component {
           }
           y={
             this.props.components.notation === "Crow's foot Notation" ||
-            this.props.components.notation === "Bachman Notation"     ||
-            this.props.components.notation ===  "Barker Notation"
+            this.props.components.notation === "Bachman Notation" ||
+            this.props.components.notation === "Barker Notation"
               ? attribute.initY
               : attribute.y
           }
@@ -281,14 +281,13 @@ class Surface extends React.Component {
 
     var anchor; // Object that holds the location of the anchor to connect too and the angle at which it ll be displayed
     var specificValuesPoints; // Object that holds the location for specificValues text
-    
 
     var keyIndex = 0; // Only used to distinguish items in a list
 
     // This loop creates the lines that connect attributes to their parents
     if (
       this.props.components.notation !== "Crow's foot Notation" &&
-      this.props.components.notation !== "Bachman Notation"     &&
+      this.props.components.notation !== "Bachman Notation" &&
       this.props.components.notation !== "Barker Notation"
     ) {
       for (let i in this.props.components.attributes) {
@@ -577,7 +576,7 @@ class Surface extends React.Component {
           if (
             this.props.components.notation === "Crow's foot Notation" ||
             this.props.components.notation === "Bachman Notation" ||
-            this.props.components.notation === 'Barker Notation'
+            this.props.components.notation === "Barker Notation"
           ) {
             switch (anchor.angle) {
               case -90:
@@ -641,14 +640,12 @@ class Surface extends React.Component {
               CardPart = AnchorMinMax;
               break;
             case "Teorey Notation":
-              CardPart= AnchorChen
+              CardPart = AnchorChen;
               break;
             default:
-              CardPart= AnchorChen;
+              CardPart = AnchorChen;
               break;
           }
-
-          
 
           lineList.push(
             <CardPart
