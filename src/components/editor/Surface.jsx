@@ -576,9 +576,10 @@ class Surface extends React.Component {
           index = this.props.components.entities.findIndex(locateIndex);
 
           // If current connection 8 connections don't draw any line
-          if(this.props.components.entities[index].connectionCount!=='undefined'){
+          if(this.props.components.entities[index]!=='undefined'){
           if (this.props.components.entities[index].connectionCount > 8)
             continue;}
+            
 
           // Get the nearest available anchor to this relationship for this connected entity
           anchor = this.findNearestAnchor(lockedAnchorPoints, index, i);

@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import {
   repositionComponents,
-  displayRelationship,
+ // displayRelationship,
   resetMeta,
   setParticipationDirection,
   setCardinalityDirection,
@@ -54,11 +54,11 @@ const SettingsButton = (props) => {
     }
   }
 
-  function setDisplay(e) {
+ /* function setDisplay(e) {
     props.displayRelationship({
       hide: e.target.checked,
     });
-  }
+  }*/
   function setCardinality(e) {
     props.setCardinalityDirection({
       valueDir: e.target.checked,
@@ -118,13 +118,13 @@ const SettingsButton = (props) => {
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem>
+                 {/*  <MenuItem>
                       {/*  <Checkbox
                       defaultChecked
                       disableRipple
                       size="small"
                       inputProps={{ 'aria-label': 'checkbox with small size' }}
-                    /> Show Relationship*/}
+                    /> Show Relationship
                       <label>
                         <input
                           type="checkbox"
@@ -135,7 +135,7 @@ const SettingsButton = (props) => {
                         />
                         Hide Relationships
                       </label>
-                    </MenuItem>
+                    </MenuItem>*/} 
 
                     <MenuItem>
                       <label>
@@ -183,7 +183,7 @@ const mapDispatchToProps = {
   repositionComponents,
   setParticipationDirection,
   setCardinalityDirection,
-  displayRelationship,
+ // displayRelationship,
   setMeta,
   deselect,
 };

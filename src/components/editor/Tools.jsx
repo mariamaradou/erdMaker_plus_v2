@@ -27,6 +27,7 @@ import UndoRedo from './UndoRedo'
 
 class Tools extends React.Component {
   state = {
+   
     saveEnabled:
       this.props.user.confirmed && (this.props.user.diagramsOwned < diagramLimit || this.props.general.activeDiagramId),
     saveStatus: { text: "Your progress is being saved.", color: "#00b53c" },
@@ -57,6 +58,26 @@ class Tools extends React.Component {
     clearInterval(this.saveTimer);
     clearTimeout(this.clickTimer);
   }
+ 
+  
+  findCardinality = (min,max) =>{
+    var cardinality;
+    if(min==='zero' && max==='one'){
+      cardinality='?'
+    }
+    else if(min==='zero' && max==='many'){
+      cardinality='*'
+    }
+    else if(min==='one' && max==='one'){
+       cardinality='1'
+    }
+    else if(min==='one' && max==='many'){
+       cardinality='+'
+    }
+    
+    this.setState({cardinality: cardinality})
+   
+  }
 
   ////////////////////////////
 
@@ -66,15 +87,56 @@ class Tools extends React.Component {
      
     
    var state=[]
+   var relationships=[]
  
-    //const state = '['+ this.props.components.entities[0].x + ']' ;
+    
 
      for (let i in this.props.components.entities){
+      state.push(" ")
+      state.push( '[' + this.props.components.entities[i].name + ']  ')
+      
+      for (let j in this.props.components.attributes){
        
-      state.push( '[' + this.props.components.entities[i].name + ']  {bgcolor: #ffdd91} ')
+       
+        if(this.props.components.attributes[j].parentId=== this.props.components.entities[i].id){
+          if(this.props.components.attributes[j].type.unique){
+            state.push("  " + '*' +this.props.components.attributes[j].name)
+          }
+          else{
+          state.push("  " + this.props.components.attributes[j].name)}
+        }
+      }
      }
-
-
+     state.push(" ")
+      for (let i in this.props.components.relationships){
+      
+        if(this.props.components.relationships[i].connections.length===2){
+          for (let j in this.props.components.relationships[i].connections)
+          { var min = this.props.components.relationships[i].connections[j].min
+            var max = this.props.components.relationships[i].connections[j].max
+            if(min==='zero' && max==='one'){
+              var cardinality='?'
+            }
+            else if(min==='zero' && max==='many'){
+              cardinality='*'
+            }
+            else if(min==='one' && max==='one'){
+               cardinality='1'
+            }
+            else if(min==='one' && max==='many'){
+               cardinality='+'
+            }
+            else cardinality=""
+         
+            relationships.push(this.props.components.entities.find((entity) =>
+             entity.id===this.props.components.relationships[i].connections[j].connectId).name)
+             relationships.push(cardinality)
+          }
+        }
+      }
+      for (var r= 0; r < relationships.length; r+=4){
+        state.push( relationships[r] + " " + relationships[r+1]+ "--"+ relationships[r+3] + " " + relationships[r+2])}
+       console.log(relationships)
        const components = {
         state
        };

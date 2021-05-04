@@ -26,7 +26,7 @@ const initialState = {
   notation: 'Chen Notation',
   cardinalityDirection: 'Look Here',
   participationDirection: 'Look Here',
-  hideRelationships: false,
+ // hideRelationships: false,
   cardDir:false,
   partDir: false,
   count: 0, // Total number of components created in a single diagram (includes deleted).
@@ -47,12 +47,12 @@ const componentsReducer = (state = initialState, action) => {
           ...state,
           notation: action.payload.notation
         }
-     case "DISPLAY_RELATIONSHIP":
+   /*  case "DISPLAY_RELATIONSHIP":
        return {
          ...state,
          hideRelationships: action.payload.hide
        }
-
+*/
      case "SET_CARDINALITY_DIRECTION":
        return {
          ...state,

@@ -58,7 +58,7 @@ export const DELETE_XCONNECTION = "DELETE_XCONNECTION";
 export const SET_NOTATION='SET_NOTATION';
 export const UPDATE_ATTRIBUTE_COMPOSITE="UPDATE_ATTRIBUTE_COMPOSITE";
 export const UPDATE_ATTRIBUTE_CROWS="UPDATE_ATTRIBUTE_CROWS";
-export const DISPLAY_RELATIONSHIP="DISPLAY_RELATIONSHIP";
+/*export const DISPLAY_RELATIONSHIP="DISPLAY_RELATIONSHIP";*/
 export const SET_CARDINALITY_DIRECTION="SET_CARDINALITY_DIRECTION";
 export const SET_PARTICIPATION_DIRECTION="SET_PARTICIPATION_DIRECTION";
 
@@ -73,10 +73,10 @@ export const setCardinalityDirection= (payload) => ({
   payload:payload
 })
 
-export const displayRelationship= (payload) => ({
+/*export const displayRelationship= (payload) => ({
   type: "DISPLAY_RELATIONSHIP",
   payload:payload
-})
+})*/
 export const updateAttributeCrows=(payload)=> ({
   type:"UPDATE_ATTRIBUTE_CROWS",
   payload:payload

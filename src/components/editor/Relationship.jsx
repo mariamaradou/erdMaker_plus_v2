@@ -23,8 +23,21 @@ import {
 } from "../../global/constants";
 
 class Relationship extends React.Component {
-  state = { initialPosition: { x: this.props.x, y: this.props.y } };
+  _isMounted = false;
+  state = {
+    initialPosition: { x: this.props.x, y: this.props.y },
+    shadowOffsetY: 0,
+    
+    fontSize: fontSize,
+  };
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   // Does not let the relationship to be dragged out of stage bounds
   stageBound = (pos) => {
     var newX;
@@ -35,14 +48,22 @@ class Relationship extends React.Component {
         pos.x > stageWidth - relationshipWidth - dragBoundOffset
           ? stageWidth - relationshipWidth - dragBoundOffset
           : pos.x;
-    else newX = pos.x < relationshipWidth + dragBoundOffset ? relationshipWidth + dragBoundOffset : pos.x;
+    else
+      newX =
+        pos.x < relationshipWidth + dragBoundOffset
+          ? relationshipWidth + dragBoundOffset
+          : pos.x;
 
     if (pos.y > stageHeight / 2)
       newY =
         pos.y > stageHeight - relationshipHeight - dragBoundOffset
           ? stageHeight - relationshipHeight - dragBoundOffset
           : pos.y;
-    else newY = pos.y < relationshipHeight + dragBoundOffset ? relationshipHeight + dragBoundOffset : pos.y;
+    else
+      newY =
+        pos.y < relationshipHeight + dragBoundOffset
+          ? relationshipHeight + dragBoundOffset
+          : pos.y;
 
     return {
       x: newX,
@@ -51,17 +72,16 @@ class Relationship extends React.Component {
   };
 
   render() {
-    
-    var weakRelationshipRhombus =  this.props.type.weak ? (
+    var weakRelationshipRhombus = this.props.type.weak ? (
       <Line
         fill="#94dfea"
         stroke={
-          this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"
+          this.props.id === this.props.selector.current.id &&
+          this.props.selector.current.type === "relationship"
             ? "red"
             : "black"
         }
         strokeWidth={0.5}
-       
         lineJoin="bevel"
         closed
         points={[
@@ -88,7 +108,7 @@ class Relationship extends React.Component {
             x: e.target.x(),
             y: e.target.y(),
           });
-       
+
           this.setState({
             initialPosition: { x: e.target.x(), y: e.target.y() },
           });
@@ -117,7 +137,6 @@ class Relationship extends React.Component {
             parentId: null,
           });
         }}
-       
         onClick={() => {
           this.props.deselect();
           this.props.select({
@@ -125,19 +144,29 @@ class Relationship extends React.Component {
             id: this.props.id,
             parentId: null,
           });
-          
-          document.getElementsByClassName('react-contextmenu')[0].style.display='none'
+
+          document.getElementsByClassName(
+            "react-contextmenu"
+          )[0].style.display = "none";
         }}
         dragBoundFunc={(pos) => this.stageBound(pos)}
       >
         <Line
-         // fill="#94dfea"
-         fillLinearGradientStartPoint={{ x: -50, y: -50 }}
-         fillLinearGradientEndPoint={{ x: 50, y: 50 }}
-         fillLinearGradientColorStops={[0, '#B9D9EB', 1, '#89CFF0']}
-         opacity={this.props.components.hideRelationships? 0:1}
+          // fill="#94dfea"
+          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
+          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
+          fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
+          opacity={
+           /* this.props.components.hideRelationships ||*/
+            this.props.components.notation === "Crow's foot Notation" ||
+            this.props.components.notation === "Bachman Notation" ||
+            this.props.components.notation === "Barker Notation"
+              ? 0
+              : 1
+          }
           stroke={
-            this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"
+            this.props.id === this.props.selector.current.id &&
+            this.props.selector.current.type === "relationship"
               ? "red"
               : "black"
           }
@@ -158,14 +187,77 @@ class Relationship extends React.Component {
         {weakRelationshipRhombus}
         <Text
           text={this.props.name}
-          fontSize={fontSize}
+          fontSize={this.state.fontSize}
+          strokeWidth={0}
+          shadowColor="silver"
+          stroke="black"
+          // shadowOffsetX={4}
+          shadowOffsetY={this.state.shadowOffsetY}
           align="center"
           verticalAlign="middle"
           width={relationshipTextWidth}
           height={textHeight}
           offsetX={relationshipTextWidth / 2}
-          offsetY={!this.props.components.hideRelationships?textHeight / 2: textHeight/1.9}
-          listening={false}
+          offsetY={
+         /*   this.props.components.hideRelationships ||*/
+            this.props.components.notation === "Crow's foot Notation" ||
+            this.props.components.notation === "Bachman Notation" ||
+            this.props.components.notation === "Barker Notation"
+              ? textHeight / 1.9
+              : textHeight / 2
+          }
+          onMouseOver={(e) => {
+            if (
+              this._isMounted &&
+              (this.props.components.notation === "Crow's foot Notation" ||
+                this.props.components.notation === "Bachman Notation" ||
+                this.props.components.notation === "Barker Notation")
+            )
+              this.setState({
+                fontSize: fontSize * 1.3,
+               
+                shadowOffsetY: 16,
+              });
+          }}
+          onMouseOut={() => {
+            if (
+              this._isMounted &&
+              (this.props.components.notation === "Crow's foot Notation" ||
+                this.props.components.notation === "Bachman Notation" ||
+                this.props.components.notation === "Barker Notation")
+            )
+              this.setState({
+                fontSize: fontSize,
+               
+                shadowOffsetY: 0,
+              });
+          }}
+          onMouseDown={(e) => {
+            if (
+              this._isMounted &&
+              (this.props.components.notation === "Crow's foot Notation" ||
+                this.props.components.notation === "Bachman Notation" ||
+                this.props.components.notation === "Barker Notation")
+            )
+              this.setState({
+                fontSize: fontSize * 1.3,
+              
+                shadowOffsetY: 16,
+              });
+          }}
+          onMouseUp={() => {
+            if (
+              this._isMounted &&
+              (this.props.components.notation === "Crow's foot Notation" ||
+                this.props.components.notation === "Bachman Notation" ||
+                this.props.components.notation === "Barker Notation")
+            )
+              this.setState({
+                fontSize: fontSize,
+          
+                shadowOffsetY: 0,
+              });
+          }}
         />
       </Group>
     );
@@ -173,7 +265,7 @@ class Relationship extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  components:state.components.present,
+  components: state.components.present,
   selector: state.selector,
 });
 
@@ -181,7 +273,7 @@ const mapDispatchToProps = {
   updatePositionRelationship,
   updatePositionChildren,
   updateInitialPositionRelationship,
- // updateInitialPositionChildren,
+  // updateInitialPositionChildren,
   repositionComponents,
   select,
   deselect,
