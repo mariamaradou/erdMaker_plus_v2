@@ -13,6 +13,7 @@ import AnchorChen from "./AnchorChen";
 import AnchorMinMax from "./AnchorMinMax";
 import AnchorBachman from "./AnchorBachman";
 import AnchorBarker from "./AnchorBarker";
+import AnchorKorth from "./AnchorKorth";
 import { ExtensionSpline } from "./ExtensionElmasri";
 import { Stage, Layer, Line, Rect, Arrow, Group } from "react-konva";
 import Properties from "./Properties";
@@ -39,6 +40,7 @@ import {
 } from "../../../node_modules/react-contextmenu";
 import AttributeCrows from "./AttributeCrows";
 import AttributeBatCerNav from "./AttributeBatCerNav";
+import AttributeKorth from "./AttributeKorth";
 
 class Surface extends React.Component {
   componentDidMount = () => {
@@ -119,6 +121,9 @@ class Surface extends React.Component {
       case "Batini, Ceri & Navathe Notation":
         Entity = EntityChen;
         break;
+      case "Korth, Silberschatz & Sudarshan":
+        Entity = EntityCrows;
+        break;
       default:
         Entity = EntityChen;
         break;
@@ -196,7 +201,7 @@ class Surface extends React.Component {
       />
     ));
 
-  drawAttributes = (e) => {
+ /* drawAttributes = (e) => {
     var attributesList = [];
     switch (this.props.components.notation) {
       case "Chen Notation":
@@ -217,6 +222,10 @@ class Surface extends React.Component {
       case "Batini, Ceri & Navathe Notation":
         AttributeNow = AttributeBatCerNav;
         break;
+      case "Korth, Silberschatz & Sudarshan":
+        
+        AttributeNow = AttributeCrows;
+        break;
       default:
         AttributeNow = Attribute;
         break;
@@ -231,6 +240,7 @@ class Surface extends React.Component {
           type={attribute.type}
           x={
             this.props.components.notation === "Crow's foot Notation" ||
+            (this.props.components.notation === "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((relationship)=> relationship.id===attribute.parentId))  ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation"
               ? attribute.initX
@@ -238,6 +248,7 @@ class Surface extends React.Component {
           }
           y={
             this.props.components.notation === "Crow's foot Notation" ||
+            (this.props.components.notation === "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((relationship)=> relationship.id===attribute.parentId)) ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation"
               ? attribute.initY
@@ -247,8 +258,89 @@ class Surface extends React.Component {
       )
     );
     return attributesList;
-  };
+  }; */
 
+  drawAttributes =() => {
+    var attributesList = [];
+    if(this.props.components.notation==="Chen Notation" || this.props.components.notation==="Teorey Notation"  || this.props.components.notation==="Min-Max/ISO Notation"){
+      this.props.components.attributes.map((attribute) =>
+      attributesList.push(
+        <Attribute
+          key={attribute.id}
+          parentId={attribute.parentId}
+          id={attribute.id}
+          name={attribute.name}
+          type={attribute.type}
+          x={attribute.x
+          }
+          y={ attribute.y
+          }
+        />
+      )
+    );
+    }
+    else if (this.props.components.notation==="Crow's foot Notation" || this.props.components.notation==="Bachman Notation" ||  this.props.components.notation==="Barker Notation"  ){
+      this.props.components.attributes.map((attribute) =>
+      attributesList.push(
+        <AttributeCrows
+          key={attribute.id}
+          parentId={attribute.parentId}
+          id={attribute.id}
+          name={attribute.name}
+          type={attribute.type}
+          x={attribute.initX}
+          y={ attribute.initY
+          }
+        />
+      )
+    );
+    }
+   else if (this.props.components.notation==="Batini, Ceri & Navathe Notation"){
+    this.props.components.attributes.map((attribute) =>
+    attributesList.push(
+      <AttributeBatCerNav
+        key={attribute.id}
+        parentId={attribute.parentId}
+        id={attribute.id}
+        name={attribute.name}
+        type={attribute.type}
+        x={attribute.x}
+        y={ attribute.y
+        }
+      />
+    )
+  );
+   }
+    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan"){
+      this.props.components.attributes.map((attribute) =>
+     
+    attributesList.push(
+     this.props.components.entities.find((entity)=>entity.id===attribute.parentId) || this.props.components.attributes.find((entity)=>entity.id===attribute.parentId)?
+      <AttributeCrows
+        key={attribute.id}
+        parentId={attribute.parentId}
+        id={attribute.id}
+        name={attribute.name}
+        type={attribute.type}
+        x={attribute.initX}
+        y={ attribute.initY
+        }
+      />
+      :  <AttributeKorth
+      key={attribute.id}
+      parentId={attribute.parentId}
+      id={attribute.id}
+      name={attribute.name}
+      type={attribute.type}
+      x={attribute.x}
+      y={ attribute.y
+      }
+    /> )
+  );
+    }
+  
+     return attributesList }
+      
   drawLabels = () =>
     this.props.components.labels.map((label) => (
       <Label
@@ -285,12 +377,14 @@ class Surface extends React.Component {
     var keyIndex = 0; // Only used to distinguish items in a list
 
     // This loop creates the lines that connect attributes to their parents
-    if (
-      this.props.components.notation !== "Crow's foot Notation" &&
-      this.props.components.notation !== "Bachman Notation" &&
-      this.props.components.notation !== "Barker Notation"
-    ) {
+   
       for (let i in this.props.components.attributes) {
+        if (
+          this.props.components.notation !== "Crow's foot Notation" &&
+          (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
+          this.props.components.notation !== "Bachman Notation" &&
+          this.props.components.notation !== "Barker Notation"
+        ){
         connectId = this.props.components.attributes[i].parentId;
         if (
           (index = this.props.components.entities.findIndex(locateIndex)) !== -1
@@ -331,6 +425,11 @@ class Surface extends React.Component {
               parentCoords.x,
               parentCoords.y,
             ]}
+            dash={
+              this.props.components.notation === "Korth, Silberschatz & Sudarshan"
+                ? [33, 10]
+                : [0]
+            }
           />
           
           <Line
@@ -348,7 +447,7 @@ class Surface extends React.Component {
         );
         keyIndex = keyIndex + 1;
       }
-    }
+      }
     // This loop creates the lines that connect extensions to their parents and children
     for (let i in this.props.components.extensions) {
       // Extension-Children lines
@@ -592,7 +691,8 @@ class Surface extends React.Component {
           if (
             this.props.components.notation === "Crow's foot Notation" ||
             this.props.components.notation === "Bachman Notation" ||
-            this.props.components.notation === "Barker Notation"
+            this.props.components.notation === "Barker Notation" ||
+            this.props.components.notation === "Korth, Silberschatz & Sudarshan" 
           ) {
             switch (anchor.angle) {
               case -90:
@@ -657,6 +757,9 @@ class Surface extends React.Component {
               break;
             case "Teorey Notation":
               CardPart = AnchorChen;
+              break;
+            case "Korth, Silberschatz & Sudarshan":
+              CardPart = AnchorKorth
               break;
             default:
               CardPart = AnchorChen;

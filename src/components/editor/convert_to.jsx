@@ -42,7 +42,8 @@ const ConvertTo = (props) => {
     "Bachman Notation",
     "Barker Notation",
     "Batini, Ceri & Navathe Notation",
-    "Teorey Notation"
+    "Teorey Notation",
+    "Korth, Silberschatz & Sudarshan"
     /*"IDEF1X",
     "UML Notation"*/
   ];

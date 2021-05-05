@@ -6,6 +6,8 @@ import {
   repositionComponents,
 //  updateInitialPositionChildren,
   updateInitialPositionEntity,
+  updatePositionAttribute,
+  updateInitialPositionAttribute,
   select,
   deselect,
 } from "../../actions/actions";
@@ -27,7 +29,7 @@ import {
 //ftiaxnw tin ontotita 
 
 
-class AttributeCrows extends React.Component {
+class AttributeKorth extends React.Component {
 
 
   state = { initialPosition: { x: this.props.x, y: this.props.y } };
@@ -47,6 +49,40 @@ class AttributeCrows extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
+        draggable
+        onDragStart={(e) => {
+          this.props.updateInitialPositionAttribute({
+            id: this.props.id,
+            parentId: this.props.parentId,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+        
+          this.setState({
+            initialPosition: { x: e.target.x(), y: e.target.y() },
+          });
+        }}
+        
+
+        onDragMove={(e) => {
+          this.props.updatePositionAttribute({
+            id: this.props.id,
+            parentId: this.props.parentId,
+          
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+          this.props.updatePositionChildren({
+            id: this.props.id,
+            parentId: this.props.parentId,
+            dx: e.target.x() - this.state.initialPosition.x,
+            dy: e.target.y() - this.state.initialPosition.y,
+          });
+          this.setState({
+            initialPosition: { x: e.target.x(), y: e.target.y() },
+          });
+        }}
+        onDragEnd={() => this.props.repositionComponents()}
        
         
         onTap={() => {
@@ -130,12 +166,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+    updatePositionAttribute,
+    updatePositionChildren,
+    updateInitialPositionAttribute,
+  //  updateInitialPositionChildren,
   updatePositionEntity,
   updateInitialPositionEntity,
-  updatePositionChildren,
   repositionComponents,
   select,
   deselect,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AttributeCrows);
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeKorth);

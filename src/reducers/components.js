@@ -400,7 +400,6 @@ const componentsReducer = (state = initialState, action) => {
         return newState;
       }
     case "ADD_ATTRIBUTE":
-      console.log( state.relationships.find(x => x.id === action.payload.id))
       
       return {
         ...state,
@@ -412,7 +411,7 @@ const componentsReducer = (state = initialState, action) => {
             
             typeof state.entities.find(x => x.id === action.payload.id)!=='undefined'?
             state.entities.find(x => x.id === action.payload.id).attributesNum :
-          
+           
             typeof state.relationships.find(x => x.id === action.payload.id)!=='undefined'?
             state.relationships.find(x => x.id === action.payload.id).attrNum+1:
             state.attributes.find(x => x.id === action.payload.id).attrNum+1 // code about composite attribute
