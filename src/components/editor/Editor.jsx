@@ -61,9 +61,9 @@ class Editor extends React.Component {
     window.removeEventListener("beforeunload", this.clearEditor);
   }
   clicked = (e) => {
-    if (e.keyCode === 90 && e.ctrlKey) {document.getElementsByClassName('undo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
+    if (e.keyCode === 90 ) {document.getElementsByClassName('undo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
 
-    else if(e.keyCode === 89 && e.ctrlKey) {document.getElementsByClassName('redo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
+    else if(e.keyCode === 89 ) {document.getElementsByClassName('redo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
   }
   clearEditor = () => {
     this.props.deselect();
