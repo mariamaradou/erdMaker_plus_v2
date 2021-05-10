@@ -8,7 +8,7 @@ import { Group, Line, Circle, Arrow } from "react-konva";
 const AnchorBachman = (props) => {
 
    
-  var mandatory = props.minimum === "one"  ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  ) ? ( //cardinality one
   
 
     <Circle fill={'black'} 
@@ -20,7 +20,7 @@ const AnchorBachman = (props) => {
     
   ) : null;
       
-  var optional = props.minimum === "zero" ? ( //cardinality one
+  var optional =(props.minimum==='0' || props.minimum==='null'|| props.minimum==='zero')  ? ( //cardinality one
   
 
     <Circle fill={'white'}
@@ -36,13 +36,13 @@ const AnchorBachman = (props) => {
   
 
 
-  var one = props.maximum === "one" ? ( //participation one
+  var one = (props.maximum==='1' || props.maximum==='one')  ? ( //participation one
     null
     ) : null;
 
 
    
-  var many = props.maximum === "many" ? ( //participation many
+  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='n') ? ( //participation many
      <Arrow  stroke={"black"}
      strokeWidth={0}
      x={props.x} 

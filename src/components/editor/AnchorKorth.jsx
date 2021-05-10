@@ -7,7 +7,7 @@ import { Group, Line, Arrow } from "react-konva";
 
 const AnchorKorth = (props) => {
 
-  var mandatory = props.minimum === "one"  ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  )  ? ( //cardinality one
    <Group>
     <Line
     stroke={"black"}
@@ -39,7 +39,7 @@ const AnchorKorth = (props) => {
   
  
 
-  var one = props.maximum === "one" ? ( //participation one
+  var one = (props.maximum==='1' || props.maximum==='one') ? ( //participation one
     <Arrow  stroke={"black"}
      strokeWidth={0}
      x={props.x} 
@@ -70,7 +70,7 @@ const AnchorKorth = (props) => {
      
       <Line
         stroke={"black"}
-        strokeWidth={props.minimum==='one'?5: 0.5}
+        strokeWidth={(props.minimum === "one" || props.minimum === "1" || props.minimum >1  )?5: 0.5}
         x={props.x} 
         y={props.y}
         rotation={props.angle}
@@ -84,7 +84,7 @@ const AnchorKorth = (props) => {
       <Line
         stroke={"white"}
        
-        strokeWidth={props.minimum==='one'?4: 0}
+        strokeWidth={(props.minimum === "one" || props.minimum === "1" || props.minimum >1  )?4: 0}
         x={props.x} 
         y={props.y}
         rotation={props.angle}

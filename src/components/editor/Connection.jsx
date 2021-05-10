@@ -8,7 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from '@material-ui/core/Tooltip';
 
 class Connection extends React.Component {
-  state = { expand: false };
+ /* state = { expand: true };*/
 
   findRelationshipIndex = (relationship) => relationship.id === this.props.selector.current.id;
 
@@ -30,24 +30,26 @@ class Connection extends React.Component {
     });
   };
 
-  handleExpand = () => this.setState({ expand: !this.state.expand });
+  /*handleExpand = () => this.setState({ expand: !this.state.expand });*/
 
   render() {
     var parentIndex = this.props.components.relationships.findIndex(this.findRelationshipIndex);
     var childIndex = this.props.components.relationships[parentIndex].connections.findIndex(this.findConnectionIndex);
     
-    var specificValues = this.state.expand ? (
+    var specificValues =/* this.state.expand ? */(
       <>
         <div className="connection-input-group">
           <label >
             exactMin:
             <input
              style={{marginBottom: 4}}
-              id="exactMin"
+             // id="exactMin" 
+                 id='min'
               className="small-editor-input"
               type="text"
               maxLength="7"
-              value={this.props.connection.exactMin} //timh tis min
+            // value={this.props.connection.exactMin} //timh tis min
+             value={this.props.connection.min}
               onChange={this.handleModifyConnection}
               //disabled={this.props.connection.min === "zero" || this.props.connection.min === "one" ? true : false}
             />
@@ -57,11 +59,13 @@ class Connection extends React.Component {
           <label>
             exactMax:
             <input
-              id="exactMax"
+            // id="exactMax" 
+              id="max"
               className="small-editor-input"
               type="text"
               maxLength="7"
-              value={this.props.connection.exactMax} //timi tis max
+             // value={this.props.connection.exactMax} 
+              value={this.props.connection.max} //timi tis max
               onChange={this.handleModifyConnection} //patwntas to mpainei h plhthikotita
               //disabled={this.props.connection.max === "one" ? true : false}
             />
@@ -83,11 +87,11 @@ class Connection extends React.Component {
           </label>
         </div>
       </>
-    ) : null ;
+    ) /*: null*/ ;
 
-    var expandIcon = this.state.expand ? <ExpandLessIcon /> : <ExpandMoreIcon />;
-
-    return (
+   /* var expandIcon = this.state.expand ? <ExpandLessIcon /> : <ExpandMoreIcon />;*/
+ 
+    return  this.props.components.notation!=="Min-Max/ISO Notation"?(
       <div className="connection" style={{ backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
         <div className="connection-input-group">
           <label>
@@ -122,9 +126,9 @@ class Connection extends React.Component {
         <div className="connection-input-group">
           <label >
             Min:{" "}
-            <select  style={{marginBottom: 4}} id="min" value={this.props.connection.min} onChange={this.handleModifyConnection}>
+            <select  style={{marginBottom: 4}} id="min" value={this.props.connection.min==='0' || this.props.connection.min==='null'|| this.props.connection.min==='zero' ? 'zero': this.props.connection.min==='1' || this.props.connection.min==='one' || this.props.connection.min>1? 'one':'undefined' } onChange={this.handleModifyConnection}>
               <option value="">Undefined</option>
-              <option value="zero">Zero</option>
+              <option value="zero"  >Zero</option>
               <option value="one">One</option>
             </select>
           </label>
@@ -132,7 +136,7 @@ class Connection extends React.Component {
         <div className="connection-input-group">
           <label>
             Max:{" "}
-            <select id="max" value={this.props.connection.max} onChange={this.handleModifyConnection}>
+            <select id="max" value={this.props.connection.max==='1' || this.props.connection.max==='one' ? 'one': this.props.connection.max>1 || this.props.connection.max==='many' || this.props.connection.max==='N' || this.props.connection.max==='n'? 'many':'undefined'} onChange={this.handleModifyConnection}>
               <option value="">Undefined</option>
               <option value="one">One</option>
               <option value="many">Many</option>
@@ -140,17 +144,64 @@ class Connection extends React.Component {
           </label>
         </div>
         
-        <Tooltip title="Custom min/max values" placement="right" >
+       {/* <Tooltip title="Custom min/max values" placement="right" >
         <span>
         <IconButton disabled={this.props.components.notation==='Min-Max/ISO Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
         </span>
         </Tooltip>
         
         <br />
+        {specificValues} */}
+        
+      </div>
+    ):
+    (
+      <div className="connection" style={{ backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
+        <div className="connection-input-group">
+          <label>
+            <b>Entity: </b>
+            <select
+              value={this.props.components.relationships[parentIndex].connections[childIndex].connectId}
+              onChange={this.handleEntityChange}
+            >
+              <option value={0} disabled>
+                Select an Entity
+              </option>
+              {this.props.components.entities.map((entity) => (
+                <option key={entity.id} value={entity.id} disabled={entity.connectionCount >= 8 ? true : false}>
+                  {entity.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <IconButton
+          onClick={() => {
+            this.props.deleteConnection({
+              id: this.props.connection.id,
+              parentId: this.props.selector.current.id,
+              connectId: this.props.connection.connectId,
+            });
+          }}
+        >
+          <DeleteIcon />
+        </IconButton>
+        <br />
+        
+        
+       {/* <Tooltip title="Custom min/max values" placement="right" >
+        <span>
+        <IconButton disabled={this.props.components.notation==='Min-Max/ISO Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
+        </span>
+        </Tooltip>
+        
+        <br /> */}
         {specificValues}
         
       </div>
-    );
+    )
+    
+
   }
 }
 

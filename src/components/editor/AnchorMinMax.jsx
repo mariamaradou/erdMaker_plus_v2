@@ -90,9 +90,9 @@ const AnchorMinMax = (props) => {
       <Text
         text={
           "(" +
-          (props.exactMin === "" ? "-" : props.exactMin) +
+          (props.exactMin === "" ? "-" : props.exactMin==='zero'?"0": props.exactMin==='one'?'1': props.exactMin) +
           "," +
-          (props.exactMax === "" ? "-" : props.exactMax) +
+          (props.exactMax === "" ? "-" : props.exactMax==='many'?'N': props.exactMax==="one"?"1": props.exactMax) +
           ")"
         }
         x={

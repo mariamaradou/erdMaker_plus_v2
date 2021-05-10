@@ -7,7 +7,7 @@ import { Group, Line } from "react-konva";
 
 const AnchorBarker = (props) => {
 
-  var mandatory = props.minimum === "one"  ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  )  ? ( //cardinality one
    
      null
   
@@ -15,13 +15,13 @@ const AnchorBarker = (props) => {
       
   
 
-  var optional = props.minimum === "zero" ? ( 
+  var optional =(props.minimum==='0' || props.minimum==='null'|| props.minimum==='zero') ? ( 
       
     // NA VALW DIEKOKEMENH GRAMMI
      null)
      : null;
 
-  var one = props.maximum === "one" ? ( //participation one
+  var one = (props.maximum==='1' || props.maximum==='one') ? ( //participation one
       <Line
        stroke={"black"}
        strokeWidth={0.5}
@@ -36,7 +36,7 @@ const AnchorBarker = (props) => {
 
 
    
-  var many = props.maximum === "many" ? ( //participation many
+  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='n') ? ( //participation many
       <Group>
         <Line
           stroke={"black"}

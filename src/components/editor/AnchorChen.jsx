@@ -7,7 +7,7 @@ import { Group, Line, Text, Circle } from "react-konva";
 
 const Anchor = (props) => {
 
-  var mandatory = props.minimum === "one" && props.notation==='Chen Notation' ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  ) && props.notation==='Chen Notation' ? ( //cardinality one
    <Group>
     <Line
     stroke={"black"}
@@ -35,14 +35,14 @@ const Anchor = (props) => {
     
   ) : null;
       
-  var optional = props.minimum === "zero" && props.notation==='Teorey Notation'  ?
+  var optional = (props.minimum==='0' || props.minimum==='null'|| props.minimum==='zero') && props.notation==='Teorey Notation'  ?
    (                 //cardinality zero
     <Circle x={props.x} y={props.y} rotation={props.angle} radius={5}  fill="white" stroke={"black"} strokeWidth={0.5} />)
    : null;
   
  
 
-  var one = props.maximum === "one" ? ( //participation one
+  var one = (props.maximum==='1' || props.maximum==='one') ? ( //participation one
     <Text  text={'1'} 
     x= {props.angle===180||props.angle===0?props.x+8 :props.x}
     y={Math.abs(props.angle)===90?props.y-18:props.y-(Math.abs(props.angle/10))}
@@ -51,7 +51,7 @@ const Anchor = (props) => {
 
 
    
-  var many = props.maximum === "many" ? ( //participation many
+  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='n') ? ( //participation many
       <Text  text={'N'} 
       x= {props.angle===180||props.angle===0?props.x+8 :props.x}
       y={Math.abs(props.angle)===90?props.y-18:props.y-(Math.abs(props.angle/10))}
@@ -70,7 +70,7 @@ const Anchor = (props) => {
      
       <Line
         stroke={"black"}
-        strokeWidth={props.notation==='Chen Notation' && props.minimum==='one'?5: 0.5}
+        strokeWidth={props.notation==='Chen Notation' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?5: 0.5}
         x={props.x} 
         y={props.y}
         rotation={props.angle}
@@ -84,7 +84,7 @@ const Anchor = (props) => {
       <Line
         stroke={"white"}
        
-        strokeWidth={props.notation==='Chen Notation' && props.minimum==='one'?4: 0}
+        strokeWidth={props.notation==='Chen Notation' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?4: 0}
         x={props.x} 
         y={props.y}
         rotation={props.angle}

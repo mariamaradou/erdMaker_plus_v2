@@ -782,10 +782,12 @@ class Surface extends React.Component {
                 this.props.components.relationships[i].connections[j].max
               }
               exactMin={
-                this.props.components.relationships[i].connections[j].exactMin
+               // this.props.components.relationships[i].connections[j].exactMin
+               this.props.components.relationships[i].connections[j].min
               }
               exactMax={
-                this.props.components.relationships[i].connections[j].exactMax
+               // this.props.components.relationships[i].connections[j].exactMax
+               this.props.components.relationships[i].connections[j].max
               }
             />
           );

@@ -3,9 +3,10 @@ import { combineReducers } from "redux";
 import userReducer from "./user";
 import metaReducer from "./metadata";
 import componentsReducer from "./components";
-import undoable from 'redux-undo';
-import {  UPDATE_INITIAL_POSITION_ENTITY,
- // UPDATE_INITIAL_POSITION_CHILDREN, 
+import undoable from "redux-undo";
+import {
+  UPDATE_INITIAL_POSITION_ENTITY,
+  // UPDATE_INITIAL_POSITION_CHILDREN,
   UPDATE_INITIAL_POSITION_EXTENSION,
   UPDATE_INITIAL_POSITION_RELATIONSHIP,
   UPDATE_INITIAL_POSITION_ATTRIBUTE,
@@ -43,62 +44,59 @@ import {  UPDATE_INITIAL_POSITION_ENTITY,
   RESET_COMPONENTS,
   SET_NOTATION,
   UPDATE_ATTRIBUTE_CROWS,
-  
-  } from "../actions/actions";
-
+} from "../actions/actions";
 
 const finalReducer = combineReducers({
-   selector: selectionReducer,
-   stager: stageReducer,
-   general: generalReducer,
-   meta:metaReducer,
-   user: userReducer,
-   components: undoable(componentsReducer,{ limit:30, 
+  selector: selectionReducer,
+  stager: stageReducer,
+  general: generalReducer,
+  meta: metaReducer,
+  user: userReducer,
+  components: undoable(componentsReducer, {
+    limit: 30,
     filter: function filterActions(action, currentState, previousHistory) {
-      return action.type === UPDATE_INITIAL_POSITION_ENTITY || 
-      action.type===UPDATE_ATTRIBUTE_COMPOSITE||
-      action.type===ADD_ENTITY ||
-      action.type=== SET_NAME_ENTITY ||
-      action.type===SET_NOTATION||
-      action.type===  SET_TYPE_ENTITY||
-      action.type=== DELETE_ENTITY||
-      action.type=== ADD_EXTENSION||
-      action.type===  MODIFY_EXTENSION||
-      action.type=== UPDATE_ATTRIBUTE_CROWS||
-      action.type=== UPDATE_INITIAL_POSITION_EXTENSION||
-      action.type===UPDATE_INITIAL_POSITION_RELATIONSHIP||
-      action.type===UPDATE_INITIAL_POSITION_ATTRIBUTE||
-      action.type===UPDATE_INITIAL_POSITION_LABEL||
-      action.type=== DELETE_EXTENSION||
-      action.type=== ADD_XCONNECTION ||
-      action.type=== CHANGE_XCONNECTION||
-      action.type=== DELETE_XCONNECTION||
-      action.type=== ADD_RELATIONSHIP||
-      action.type=== SET_NAME_RELATIONSHIP||
-      action.type===SET_TYPE_RELATIONSHIP||
-      action.type===DELETE_RELATIONSHIP||
-      action.type===ADD_CONNECTION||
-  action.type=== CHANGE_CONNECTION||
-      action.type=== MODIFY_CONNECTION||
-      action.type=== DELETE_CONNECTION||
-      action.type===ADD_ATTRIBUTE||
-      action.type===SET_NAME_ATTRIBUTE||
-      action.type===SET_TYPE_ATTRIBUTE||
-      action.type===DELETE_ATTRIBUTE||
-      action.type===DELETE_CHILDREN||
-      action.type===ADD_LABEL||
-      action.type===SET_TEXT_LABEL||
-      action.type===RESIZE_LABEL||
-      action.type===DELETE_LABEL||
-      action.type===REPOSITION_COMPONENTS||
-      action.type===SET_COMPONENTS||
-      action.type===RESET_COMPONENTS
-     
-      ; // gia ayta ta actions tha yparxei istoriko
-    }})
- 
+      return (
+        action.type === UPDATE_INITIAL_POSITION_ENTITY ||
+        action.type === UPDATE_ATTRIBUTE_COMPOSITE ||
+        action.type === ADD_ENTITY ||
+        action.type === SET_NAME_ENTITY ||
+        action.type === SET_NOTATION ||
+        action.type === SET_TYPE_ENTITY ||
+        action.type === DELETE_ENTITY ||
+        action.type === ADD_EXTENSION ||
+        action.type === MODIFY_EXTENSION ||
+        action.type === UPDATE_ATTRIBUTE_CROWS ||
+        action.type === UPDATE_INITIAL_POSITION_EXTENSION ||
+        action.type === UPDATE_INITIAL_POSITION_RELATIONSHIP ||
+        action.type === UPDATE_INITIAL_POSITION_ATTRIBUTE ||
+        action.type === UPDATE_INITIAL_POSITION_LABEL ||
+        action.type === DELETE_EXTENSION ||
+        action.type === ADD_XCONNECTION ||
+        action.type === CHANGE_XCONNECTION ||
+        action.type === DELETE_XCONNECTION ||
+        action.type === ADD_RELATIONSHIP ||
+        action.type === SET_NAME_RELATIONSHIP ||
+        action.type === SET_TYPE_RELATIONSHIP ||
+        action.type === DELETE_RELATIONSHIP ||
+        action.type === ADD_CONNECTION ||
+        action.type === CHANGE_CONNECTION ||
+        action.type === MODIFY_CONNECTION ||
+        action.type === DELETE_CONNECTION ||
+        action.type === ADD_ATTRIBUTE ||
+        action.type === SET_NAME_ATTRIBUTE ||
+        action.type === SET_TYPE_ATTRIBUTE ||
+        action.type === DELETE_ATTRIBUTE ||
+        action.type === DELETE_CHILDREN ||
+        action.type === ADD_LABEL ||
+        action.type === SET_TEXT_LABEL ||
+        action.type === RESIZE_LABEL ||
+        action.type === DELETE_LABEL ||
+        action.type === REPOSITION_COMPONENTS ||
+        action.type === SET_COMPONENTS ||
+        action.type === RESET_COMPONENTS
+      ); // gia ayta ta actions tha yparxei istoriko
+    },
+  }),
 });
-
-
 
 export default finalReducer;

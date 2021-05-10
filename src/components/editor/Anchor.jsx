@@ -2,11 +2,11 @@ import React from "react";
 import { Group, Line, Ellipse } from "react-konva";
 
 
-//sxediasmos plithikothtwn sta relatioships
+//sxediasmos plithikothtwn sta relationships
 
 const Anchor = (props) => {
 
-  var mandatory = props.minimum === "one"  ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  )  ? ( //cardinality one
    
      <Line
        stroke={"black"}
@@ -22,11 +22,11 @@ const Anchor = (props) => {
       
   
 
-  var optional = props.minimum === "zero" ? (                 //cardinality zero
+  var optional =(props.minimum==='0' || props.minimum==='null'|| props.minimum==='zero') ? (                 //cardinality zero
       <Ellipse y={10} radiusX={8} radiusY={4} fill="white" stroke={"black"} strokeWidth={0.5} />)
      : null;
 
-  var one = props.maximum === "one" ? ( //participation one
+  var one = (props.maximum==='1' || props.maximum==='one') ? ( //participation one
       <Line
        stroke={"black"}
        strokeWidth={0.5}
@@ -41,7 +41,7 @@ const Anchor = (props) => {
 
 
    
-  var many = props.maximum === "many" ? ( //participation many
+  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='n') ? ( //participation many
       <Group>
         <Line
           stroke={"black"}
