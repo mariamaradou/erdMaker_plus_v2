@@ -81,6 +81,14 @@ componentDidMount() {
           handleModifyExtension={this.handleModifyExtension}
         />
       );
+      else if (this.props.components.extensions[extensionIndex].type === "aggregation")
+      content = (
+        <Aggregation
+          extension={this.props.components.extensions[extensionIndex]}
+          parent={this.props.components.entities[parentIndex]}
+          handleModifyExtension={this.handleModifyExtension}
+        />
+      );
     else content = null;
 
     const addEntityButton =
@@ -111,7 +119,7 @@ componentDidMount() {
             value={this.props.components.extensions[extensionIndex].type}
             onChange={this.handleModifyExtension}
             onKeyDown={ (event) => {if (event.keyCode===46) {
-             this.props.deleteExtension({ id: this.props.selector.current.id });
+             this.props.deleteExtension({ id: this.props.selector.current.id, parentId: this.props.selector.current.parentId });
               this.props.deselect();
               document.getElementsByClassName('stage')[0].focus();
               console.log('clicked extention sth')
@@ -125,7 +133,8 @@ componentDidMount() {
               Select Type
             </option>
             <option value="specialize">Specialize</option>
-            <option value="union">Union</option>
+            <option style={{display:this.props.components.notation==='Teorey Notation'?'none':'block'}} value="union">Union</option>
+            <option style={{display:this.props.components.notation!=='Teorey Notation'?'none':'block'}} value='aggregation'>Aggregation</option>
             
           </select>
         </div>
@@ -141,7 +150,7 @@ componentDidMount() {
            style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
             type="button"
             onClick={() => {
-              this.props.deleteExtension({ id: this.props.selector.current.id });
+              this.props.deleteExtension({ id: this.props.selector.current.id, parentId: this.props.selector.current.parentId });
               this.props.deselect();
             }}
           >
@@ -211,6 +220,15 @@ const Union = (props) => {
       </div>
       <hr />
       <div className="extension-group" style={{fontWeight:'bold'}}>{props.parent.name} is a Union of:</div>
+    </>
+  );
+};
+
+const Aggregation = (props) => {
+  return (
+    <>
+     
+      <div className="extension-group" style={{fontWeight:'bold'}}>{props.parent.name} is an Aggregation of:</div>
     </>
   );
 };

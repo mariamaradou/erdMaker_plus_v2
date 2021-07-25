@@ -90,7 +90,7 @@ class RelationshipProperties extends React.Component {
     var relationshipIndex = this.props.components.relationships.findIndex(this.findRelationshipIndex);
     var addConnectionButton =
 
-     (this.props.components.relationships[relationshipIndex].connections.length>1 && (this.props.components.notation==="Crow's foot Notation" || this.props.components.notation==="Bachman Notation" || this.props.components.notation==="Barker Notation" ))? null:
+     (this.props.components.relationships[relationshipIndex].connections.length>1 && (this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" || this.props.components.notation==="Barker Notation" ))? null:
       (this.props.components.relationships[relationshipIndex].connections.length < 5)  ? 
              (
         <button

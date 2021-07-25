@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 let UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }) => (
   <p>
+    
     <button  className="undo tools-button-blue" onClick={onUndo} disabled={!canUndo}>
       Undo
     </button>

@@ -1,13 +1,14 @@
-import React,{useRef, useEffect} from 'react';
+import React,{ useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import Modal from '@material-ui/core/Modal';
+
 import Backdrop from '@material-ui/core/Backdrop';
 import { storeUserData } from "../../actions/actions";
-import {  sharediagramtemp } from "../../global/diagramRequests";
-import { clientHost } from "../../global/constants";
-import { Link } from "react-router-dom";
+import {  sharediagramtemp,sharediagramtempuser } from "../../global/diagramRequests";
+
+//import { shareDiagramTemp } from '../../global/globalFuncs';
 
 import axios from "axios";
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -16,9 +17,10 @@ import {
     deselect,
   } from "../../actions/actions";
 
-  const { nanoid } = require('nanoid')
+  
 
- export var   randomID;
+export var   randomID;
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -69,10 +71,11 @@ Fade.propTypes = {
 };
 
   const SpringModal = (props) => {
+   
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const cancelToken = useRef(null);
-
+  //const cancelToken = useRef(null);
+    const cancelToken=axios.CancelToken.source();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -80,17 +83,39 @@ Fade.propTypes = {
   
 const handleSubmit=(e)=>{
   e.preventDefault();
-
+ // window.history.pushState("", "", "/designer/"+ randomID);
 
 }
+
+//var randomID;
+//var random_id;
+
   const shareDiagramTemp = () => {
-    sharediagramtemp(cancelToken.current)
+    
+    if (props.user.isLogged && props.general.activeDiagramId) {
+      sharediagramtempuser(props.general.activeDiagramId, cancelToken)
       .then((res) => {
-        if (res && res.status === 200) {
+        if (res /*&& res.status === 201*/) {
+          console.log(res)
+          window.history.pushState("", "", "/designer/"+ res.data.random_id);
+
+          console.log('link fetched')
+        }
+      }).catch(() => {});
+    }
+    
+     else {
+    sharediagramtemp(cancelToken)
+      .then((res) => {
+        if (res /*&& res.status === 201*/) {
+          
+          window.history.pushState("", "", "/designer/"+ res.data.random_id);
+
           console.log('saved to db temporary')
         }
       })
       .catch(() => {});
+     }
   };
 
   useEffect(() => {
@@ -98,10 +123,12 @@ const handleSubmit=(e)=>{
     return () => {
       cancelToken.current.cancel("Request is being canceled");
     };
-  }, []);
+  }, [ cancelToken]);
 
   const handleClose = () => {
     setOpen(false);
+    window.history.pushState("", "", "/designer");
+
   };
 
   return (
@@ -113,16 +140,16 @@ const handleSubmit=(e)=>{
     
   }}>*/}
 
-        {/* <form action={"/designer/"+ randomID} className="form"  onSubmit={(e)=>handleSubmit(e)}>*/}
+         <form action={"/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
       <button
           className="tools-button-blue"
         
           onClick={() => {
             props.deselect();
             
-           randomID=nanoid()
+         //  randomID=nanoid()
           
-          
+        
           shareDiagramTemp();
      
            handleOpen();
@@ -132,7 +159,7 @@ const handleSubmit=(e)=>{
           
          Share
         </button>
-    {/*    </form>*/}
+        </form>
        {/*</Link>*/}
       <Modal
         aria-labelledby="spring-modal-title"
@@ -148,8 +175,9 @@ const handleSubmit=(e)=>{
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="spring-modal-title">Copy & Paste the link below to share diagram</h2>
-            <p id="spring-modal-description">{clientHost}?id={randomID}</p>
+            <h2 id="spring-modal-title">Copy & Paste the link in the search bar to share diagram</h2>
+            {/*<p id="spring-modal-description">{clientHost}?id={randomID}</p> */}
+           {/* <p id="spring-modal-description">{clientHost}/designer/{randomID}</p>*/}
           </div>
         </Fade>
       </Modal>
@@ -158,7 +186,10 @@ const handleSubmit=(e)=>{
 }
 
 const mapStateToProps = (state) => ({
-    components: state.components.present,
+  user: state.user,
+  general: state.general,
+  meta: state.meta,
+  components: state.components.present,
   });
   
   const mapDispatchToProps = {

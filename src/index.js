@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import finalReducer from "./reducers";
 import { Provider } from "react-redux";
-
+import {params_id} from "./components/editor/Editor"
 
 
 //*
@@ -30,8 +30,10 @@ const loadState = () => {
 };
 const saveState = (state) => {
   try {
-    const serializedState = JSON.stringify(state);    
-    localStorage.setItem("state", serializedState); 
+    const serializedState = JSON.stringify(state);  
+    if(typeof params_id==='undefined'){
+  
+    localStorage.setItem("state", serializedState); }
    
   } catch (err) {}
 };
@@ -53,7 +55,8 @@ export const store =
 //*
 // Save Redux Store in LocalStorage when it changes
 store.subscribe(() => {
-  saveState(store.getState());
+  if(typeof params_id==='undefined'){
+  saveState(store.getState());}
 
 });
 

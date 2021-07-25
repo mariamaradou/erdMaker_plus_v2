@@ -2,10 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { changeConnection, deleteConnection, modifyConnection } from "../../actions/actions";
 import IconButton from "@material-ui/core/IconButton";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+
 import DeleteIcon from "@material-ui/icons/Delete";
-import Tooltip from '@material-ui/core/Tooltip';
+
 
 class Connection extends React.Component {
  /* state = { expand: true };*/

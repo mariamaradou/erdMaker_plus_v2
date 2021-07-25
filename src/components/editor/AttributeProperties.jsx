@@ -309,7 +309,7 @@ class AttributeProperties extends React.Component {
 
               this.props.deleteChildren({ id: this.props.selector.current.id });
            
-             if(this.props.components.notation==="Crow's foot Notation" || this.props.components.notation==="Bachman Notation" ||this.props.components.notation==="Barker Notation" || (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) ){
+             if(this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" ||this.props.components.notation==="Barker Notation" || (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) ){
               this.props.updateAttributeCrows({
                 idRight:this.props.components.attributes[attributeIndex].id,
                 id:  this.props.components.attributes[attributeIndex].parentId,

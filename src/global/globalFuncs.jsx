@@ -1,6 +1,6 @@
 import { store } from "../index.js";
 import { logout, profile } from "./userRequests";
-import { getdiagram, sharediagramtemp, createURL } from "./diagramRequests";
+import { getdiagram, getdiagramtemp } from "./diagramRequests";
 import {
   storeUserData,
   removeUserData,
@@ -62,27 +62,32 @@ export const getDiagram = (diagramId, cancelToken) => {
 
 
 
-export const shareDiagram = (cancelToken) => {
-  return sharediagramtemp(cancelToken)
-// return createURL(cancelToken)
+
+export const getDiagramTemp = (params_id,cancelToken) => {
+  return getdiagramtemp(params_id,cancelToken)
     .then((res) => {
       if (res && res.status === 200) {
-      
+     
         let data = makeCompatible(res.data);
-     //  let data = makeCompatible(res.data.args);
         store.dispatch(setComponents(data.components));
         store.dispatch(setMeta(data.meta));
         store.dispatch(repositionComponents());
+        store.dispatch(ActionCreators.clearHistory())
+        console.log(res.data)
       } else {
         store.dispatch(resetActiveDiagram());
-        window.location.replace("/");
+        window.location.replace("/nodiagramfound");
+        
       }
     })
     .catch((err) => {
+     
       store.dispatch(resetActiveDiagram());
-      window.location.replace("/");
+    window.location.replace("/nodiagramfound");
+     
     });
 };
+
 
 
 export function makeCompatible(data) {

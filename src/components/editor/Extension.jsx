@@ -41,7 +41,9 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
       if (this.props.cardinality === "disjoint") text = "d";
       else if (this.props.cardinality === "overlap") text = "o";
       else text = "";
-    else if (this.props.type === "union") text = "u";
+    else if (this.props.type === "union") text = "u"
+   
+    ;
 
     var textPixelWidth = pixelWidth(text, {
       font: "Arial",
@@ -52,21 +54,31 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
       <Group
         x={this.props.x}
         y={this.props.y}
+      
         draggable
+       
         dragBoundFunc={(pos) => this.stageBound(pos)}
         onDragStart={(e) => {
+        
+   
+          
+          
+        
           this.props.updateInitialPositionExtension({
             id: this.props.id,
             x: e.target.x(),
             y: e.target.y(),
-          });
+          })
+        
         }}
+        
         onDragMove={(e) => {
+          
           this.props.updatePositionExtension({
             id: this.props.id,
             x: e.target.x(),
             y: e.target.y(),
-          });
+          })
         }}
         onDragEnd={() => this.props.repositionComponents()}
         onTap={() => {
@@ -93,6 +105,7 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
      
           radius={extensionRadius}
           fill="white"
+         
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"
               ? "red"
@@ -117,6 +130,7 @@ export const ExtensionSpline = (props) => {
       y={props.y}
       rotation={props.angle}
       stroke={"black"}
+    
       strokeWidth={0.5}
       tension={0.5}
       points={[-15, -5, 0, 0, 15, -5]}
@@ -127,6 +141,7 @@ export const ExtensionSpline = (props) => {
 
 const mapStateToProps = (state) => ({
   selector: state.selector,
+  components: state.components.present,
 });
 
 const mapDispatchToProps = {

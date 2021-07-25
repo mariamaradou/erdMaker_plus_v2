@@ -26,7 +26,7 @@ class Relationship extends React.Component {
   _isMounted = false;
   state = {
     initialPosition: { x: this.props.x, y: this.props.y },
-    shadowOffsetY: 0,
+   // shadowOffsetY: 0,
     
     fontSize: fontSize,
   };
@@ -158,7 +158,7 @@ class Relationship extends React.Component {
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
           opacity={
            /* this.props.components.hideRelationships ||*/
-            this.props.components.notation === "Crow's foot Notation" ||
+            this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation"
               ? 0
@@ -192,7 +192,7 @@ class Relationship extends React.Component {
           shadowColor="silver"
           stroke="black"
           // shadowOffsetX={4}
-          shadowOffsetY={this.state.shadowOffsetY}
+        //  shadowOffsetY={this.state.shadowOffsetY}
           align="center"
           verticalAlign="middle"
           width={relationshipTextWidth}
@@ -200,7 +200,7 @@ class Relationship extends React.Component {
           offsetX={relationshipTextWidth / 2}
           offsetY={
          /*   this.props.components.hideRelationships ||*/
-            this.props.components.notation === "Crow's foot Notation" ||
+            this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation"
               ? textHeight / 1.9
@@ -209,53 +209,53 @@ class Relationship extends React.Component {
           onMouseOver={(e) => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Crow's foot Notation" ||
+              (this.props.components.notation === "Information Engineering Notation" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
               this.setState({
                 fontSize: fontSize * 1.3,
                
-                shadowOffsetY: 16,
+              //  shadowOffsetY: 16,
               });
           }}
           onMouseOut={() => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Crow's foot Notation" ||
+              (this.props.components.notation === "Information Engineering Notation" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
               this.setState({
                 fontSize: fontSize,
                
-                shadowOffsetY: 0,
+              //  shadowOffsetY: 0,
               });
           }}
           onMouseDown={(e) => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Crow's foot Notation" ||
+              (this.props.components.notation === "Information Engineering Notation" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
               this.setState({
                 fontSize: fontSize * 1.3,
               
-                shadowOffsetY: 16,
+              //  shadowOffsetY: 16,
               });
           }}
           onMouseUp={() => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Crow's foot Notation" ||
+              (this.props.components.notation === "Information Engineering Notation" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
               this.setState({
                 fontSize: fontSize,
           
-                shadowOffsetY: 0,
+              //  shadowOffsetY: 0,
               });
           }}
         />

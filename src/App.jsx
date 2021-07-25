@@ -16,7 +16,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/designer" exact component={Editor} />
-        
+        <Route path="/designer/:id" render={(props) => <Editor {...props} />} /> 
         
         <Route>
           <div className="main-page">
@@ -27,8 +27,8 @@ const App = () => {
                 <Route path="/emailchangesuccess" exact component={EmailChangeSuccess} />
                 <Route path="/about" exact component={About} />
                 <Route path="/" exact component={Home} />
-               
-              {/*\  <Route path='/sharediagram' render={(props) => (<Editor {...props} components={} /> )}/>*/}
+                <Route path='/nodiagramfound'  component= {NoDiagramFound}/>
+            
                 <Route component={NoMatchPage} />
               </Switch>
             </div>
@@ -46,6 +46,17 @@ const NoMatchPage = () => {
     <div className="general-centered-container">
       <div className="container">
         <h1>404 - Nope, nothing here.</h1>
+      </div>
+    </div>
+  );
+};
+
+const NoDiagramFound = () => {
+  document.title = "404";
+  return (
+    <div className="general-centered-container">
+      <div className="container">
+        <h1>The link doesn't exist or has expired.</h1>
       </div>
     </div>
   );

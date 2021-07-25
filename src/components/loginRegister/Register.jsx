@@ -48,8 +48,10 @@ class Register extends React.Component {
       confirmPassword: "",
     });
     this.recaptchaRef.current.reset();
+     
 
     register(newUser, this.cancelToken)
+     
       .then((res) => {
         if (res) {
           if (res.status === 200) {
@@ -240,7 +242,7 @@ class Register extends React.Component {
           <div className="form-group">
             <ReCAPTCHA
               ref={this.recaptchaRef}
-              sitekey="6LfnzsoUAAAAAEIhX6yNXpGNXvQjAFlyYh54pJPn"
+              sitekey="6LeoE7UaAAAAAIJwbijjjitfPp1tbrpDaiqlqOn5"
               style={{
                 transform: "scale(0.7)",
                 WebkitTransform: "scale(0.7)",

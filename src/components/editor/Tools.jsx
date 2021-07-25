@@ -18,11 +18,12 @@ import ShareButton from "./ShareButton";
 import { savediagram } from "../../global/diagramRequests";
 import ImportExportMenuListComposition from "./ImportExportMenu";
 import ConvertToMenuListComposition from "./convert_to";
-import SettingsButton from "./Settings";
+import ConstraintsButton from "./Constraints";
 import saveImg from "../../img/saveIcon.png";
 import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
+
 
 class Tools extends React.Component {
   state = {
@@ -93,7 +94,7 @@ class Tools extends React.Component {
           this.props.components.entities[i].id
         ) {
           if (this.props.components.attributes[j].type.unique) {
-            state.push("  " + "*" + this.props.components.attributes[j].name);
+            state.push("  *"  + this.props.components.attributes[j].name);
           } else {
             state.push("  " + this.props.components.attributes[j].name);
           }
@@ -146,7 +147,7 @@ class Tools extends React.Component {
     };
 
     axios
-      .post("http://localhost:3080/create", components)
+      .post("http://localhost:3080/create", components)        //na to allaksw se serverHost!
       .then(() => console.log("submitted"))
       .catch((err) => {
         console.error(err);
@@ -187,7 +188,7 @@ class Tools extends React.Component {
 
   clearStage = () => {
     this.props.deselect();
-    this.props.resetMeta();
+  //  this.props.resetMeta();
     this.props.resetComponents();
   };
 
@@ -249,9 +250,9 @@ class Tools extends React.Component {
       ) : null;
 
     var clearStageButton =
-      (!this.props.user.confirmed ||
+     /* (!this.props.user.confirmed ||    /// NA EMFANIZETAI to clear diagram KAI OTAN O XRHSTHS EINAI LOGGED IN 
         this.props.user.diagramsOwned >= diagramLimit) &&
-      !this.props.general.activeDiagramId ? (
+      !this.props.general.activeDiagramId ? (*/
         <button
           type="button"
           className="tools-button-red"
@@ -263,8 +264,8 @@ class Tools extends React.Component {
           onMouseOut={this.end}
         >
           {this.state.clearButtonText}
-        </button>
-      ) : null;
+        </button>/*
+      ) : null;*/
 
     // CSS classes are set for the burger menu (whether its displayed or not)
     var toolsClasses = "tools__list";
@@ -296,9 +297,11 @@ class Tools extends React.Component {
               .txt export
             </button>
           </form>
-          <SettingsButton />
+          <ConstraintsButton />
           <UndoRedo />
+          
           <ShareButton />
+    
           <ConvertToMenuListComposition />
 
           {titleInput}

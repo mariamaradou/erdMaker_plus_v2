@@ -95,10 +95,17 @@ class EntityProperties extends React.Component {
     const radius = spawnRadius;
     
     var randomAngle = getRandomInt(0, 360);
+    
+
     var xOffset = radius * Math.cos(randomAngle);
     var yOffset = radius * Math.sin(randomAngle);
+   
+ 
+  
     this.props.addExtension({
       id: this.props.selector.current.id,
+      korthX:this.props.components.entities[entityIndex].x,  //for korth notation
+      korthY:this.props.components.entities[entityIndex].y + 40,
       x: this.props.components.entities[entityIndex].x + xOffset,
       y: this.props.components.entities[entityIndex].y + yOffset,
     });
@@ -216,14 +223,16 @@ class EntityProperties extends React.Component {
           >
             Add Attribute
           </button>
-          <button
-          /*  className="properties-neutral-button"*/
-          className='buttonmenu'
-            type="button"
-            style={{cursor:'pointer',border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
-            onClick={() => this.handleAddExtension(entityIndex)}
-          >
-            Add Extension
+        
+            <button
+        
+        className='buttonmenu'
+          type="button"
+          disabled={this.props.components.entities[entityIndex].connectionCount>7 ? true: false}
+          style={{cursor:'pointer',border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+          onClick={() => this.handleAddExtension(entityIndex)}
+        >
+          Add Extension
           </button>
           <button
            className='buttonmenu'

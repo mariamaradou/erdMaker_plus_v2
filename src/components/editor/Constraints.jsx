@@ -1,11 +1,10 @@
 import React  from "react";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import SettingsIcon from "@material-ui/icons/Settings";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SettingsButton = (props) => {
+const ConstraintsButton = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -40,12 +39,12 @@ const SettingsButton = (props) => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  /*const handleClose = (event) => {
     //if (anchorRef.current && anchorRef.current.contains(event.target)) {
     //  return;
     //}
     setOpen(false);
-  };
+  };*/
 
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -53,22 +52,73 @@ const SettingsButton = (props) => {
       setOpen(false);
     }
   }
+  
+  function Cardinality(){
+    switch (props.components.notation) {
+      case "Information Engineering Notation":
+        var cardinality = 'Look Across';
+        break;
+      case "Elmasri & Navathe Notation":
+        cardinality = 'Look Across';
+        break;
+      case "Min-Max/ISO Notation":
+        cardinality = 'Look Here';
+        break;
+      case "Bachman Notation":
+        cardinality = 'Look Across';
+        break;
+      case "Barker Notation":
+        cardinality = 'Look Across';
+        break;
+      case "Batini, Ceri & Navathe Notation":
+        cardinality = 'Look Here';
+        break;
+      case "Teorey Notation":
+        cardinality = 'Look Across';
+        break;
+      case "Korth, Silberschatz & Sudarshan":
+        cardinality = 'Look Across'
+        break;
+      default:
+        cardinality = 'Look Across';
+        break;
+    }
+    return cardinality;
+  }
 
- /* function setDisplay(e) {
-    props.displayRelationship({
-      hide: e.target.checked,
-    });
-  }*/
-  function setCardinality(e) {
-    props.setCardinalityDirection({
-      valueDir: e.target.checked,
-    });
+  function Participation(){
+    switch (props.components.notation) {
+      case "Information Engineering Notation":
+        var participation = 'Look Across';
+        break;
+      case "Elmasri & Navathe Notation":
+        participation = 'Look Here';
+        break;
+      case "Min-Max/ISO Notation":
+        participation = 'Look Here';
+        break;
+      case "Bachman Notation":
+        participation = 'Look Here';
+        break;
+      case "Barker Notation":
+        participation = 'Look Here';
+        break;
+      case "Batini, Ceri & Navathe Notation":
+        participation = 'Look Here';
+        break;
+      case "Teorey Notation":
+        participation = 'Look Across';
+        break;
+      case "Korth, Silberschatz & Sudarshan":
+        participation = 'Look Here'
+        break;
+      default:
+        participation = 'Look Here';
+        break;
+    }
+    return participation;
   }
-  function setParticipation(e) {
-    props.setParticipationDirection({
-      valuePart: e.target.checked,
-    });
-  }
+ 
 
   // Return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
@@ -93,7 +143,8 @@ const SettingsButton = (props) => {
             handleToggle();
           }}
         >
-          <SettingsIcon style={{ fontSize: 17 }}></SettingsIcon>
+        {/*  <SettingsIcon style={{ fontSize: 17 }}></SettingsIcon> */}
+        Constraints
         </button>
         <Popper
           className="import-export-popper"
@@ -112,57 +163,29 @@ const SettingsButton = (props) => {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
+                
                   <MenuList
                     autoFocusItem={open}
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                 {/*  <MenuItem>
-                      {/*  <Checkbox
-                      defaultChecked
-                      disableRipple
-                      size="small"
-                      inputProps={{ 'aria-label': 'checkbox with small size' }}
-                    /> Show Relationship
-                      <label>
-                        <input
-                          type="checkbox"
-                          name="showRel"
-                          value="showRel"
-                          checked={props.components.hideRelationships}
-                          onChange={setDisplay}
-                        />
-                        Hide Relationships
-                      </label>
-                    </MenuItem>*/} 
 
                     <MenuItem>
                       <label>
-                        <input
-                          type="checkbox"
-                          name="showRel"
-                          value="showCard"
-                            checked={props.components.cardDir}
-                          onChange={setCardinality}
-                        />
+                      
                         Cardinality: { props.components.cardinalityDirection}
+                       
                       </label>
                     </MenuItem>
                     <MenuItem>
                       <label>
-                        <input
-                          type="checkbox"
-                          name="showPart"
-                          value="showPart"
-                          checked={props.components.partDir}
-                          onChange={setParticipation}
-                        />
-                        Participation:  { props.components.participationDirection}
+                       
+                         Participation:  { props.components.participationDirection}
+                       
                       </label>
                     </MenuItem>
                   </MenuList>
-                </ClickAwayListener>
+                
               </Paper>
             </Grow>
           )}
@@ -188,4 +211,4 @@ const mapDispatchToProps = {
   deselect,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintsButton);

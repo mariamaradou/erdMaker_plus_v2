@@ -1,15 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updatePositionExtension, updateInitialPositionExtension, select, repositionComponents } from "../../actions/actions";
+import { updatePositionExtension, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
 import { Group, Circle, Line, Text } from "react-konva";
 import { stageWidth, stageHeight, extensionRadius, fontSize, dragBoundOffset } from "../../global/constants";
 var pixelWidth = require("string-pixel-width");
 
 class Extension extends React.Component {
- 
-componentDidMount(){ if(this.selected===true)  document.getElementById('type').focus();}
 
-    
+  _isMounted = false;
+ 
+  state={shadowOffset: 0, fill:'white'}
+
+componentDidMount(){ 
+ 
+  if(this.selected===true)  document.getElementById('type').focus();  this._isMounted = true;}
+
+
+componentWillUnmount() {
+  this._isMounted = false;
+}
+     
+   
   // Does not let the extension to be dragged out of stage bounds
   stageBound = (pos) => {
     var newX;
@@ -36,12 +47,15 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
 
 
   render() {
+    
+   
     var text;
     if (this.props.type === "specialize")
       if (this.props.cardinality === "disjoint") text = "d";
-      else if (this.props.cardinality === "overlap") text = "o";
+      else if (this.props.cardinality === "overlap") text = "O";
       else text = "";
-    else if (this.props.type === "union") text = "u";
+    else if (this.props.type === "union") text = "U"
+    else if (this.props.type === "aggregation") text = "A";
 
     var textPixelWidth = pixelWidth(text, {
       font: "Arial",
@@ -51,9 +65,13 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
       
       <Group
         x={this.props.x}
-        y={this.props.y}
-        draggable
+        y={this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'?this.props.y-17: this.props.y}
+     draggable={     this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'? false: true}
         dragBoundFunc={(pos) => this.stageBound(pos)}
+        onMouseOver={ ()=> this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+      this.setState({shadowOffset:0.5, fill:'lightgrey'}):  this.setState({shadowOffset:0, fill:'white'})}
+      onMouseOut ={() =>this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+       this.setState({shadowOffset:0, fill:'white'}):null}
         onDragStart={(e) => {
           this.props.updateInitialPositionExtension({
             id: this.props.id,
@@ -92,7 +110,13 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
         <Circle
      
           radius={extensionRadius}
-          fill="white"
+          opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'?
+          this.state.shadowOffset:
+          this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='disjoint'?
+          this.state.shadowOffset:
+          1}
+          fill={this.state.fill}
+          
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"
               ? "red"
@@ -102,7 +126,7 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
           strokeWidth={0.5}
         />
         
-        <Text text={text} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
+        <Text text={text} fontStyle={"bold"} opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
       </Group>
       
     );
@@ -127,12 +151,14 @@ export const ExtensionSpline = (props) => {
 
 const mapStateToProps = (state) => ({
   selector: state.selector,
+  components: state.components.present
 });
 
 const mapDispatchToProps = {
   updatePositionExtension,
   updateInitialPositionExtension,
   select,
+  modifyExtension,
   repositionComponents,
 };
 

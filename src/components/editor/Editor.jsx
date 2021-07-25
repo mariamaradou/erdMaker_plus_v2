@@ -1,7 +1,7 @@
 import React from "react";
 import Surface from "./Surface";
 import Tools from "./Tools";
-import { getDiagram, makeCompatible } from "../../global/globalFuncs";
+import { getDiagram, makeCompatible, getDiagramTemp } from "../../global/globalFuncs";
 import { connect } from "react-redux";
 import {
   deselect,
@@ -17,7 +17,7 @@ import axios from "axios";
 import { ActionCreators } from 'redux-undo';
 import { store } from "../../index.js"
 
-
+export var params_id;
 class Editor extends React.Component {
   
   constructor(props) {
@@ -44,15 +44,22 @@ class Editor extends React.Component {
    // window.addEventListener("beforeunload", this.clearEditor);
     this.props.deselect();
     store.dispatch(ActionCreators.clearHistory())
-    console.log(this.props.user.isLogged)
-    console.log(this.props.general.activeDiagramId)
+    
+    params_id= this.props.match.params.id;
+    if(typeof this.props.match.params.id==='undefined'){
     if (this.props.user.isLogged && this.props.general.activeDiagramId) {
       getDiagram(this.props.general.activeDiagramId, this.cancelToken);
     }
-
- 
+    
+    } else {
+      console.log('params=',this.props.match.params.id)
+   getDiagramTemp(this.props.match.params.id,this.cancelToken)
+  
+   console.log(this.props.match.params.id)}
     
   };
+
+  
 
   componentWillUnmount() {
     this.clearEditor();
@@ -60,11 +67,17 @@ class Editor extends React.Component {
     window.removeEventListener("resize", this.props.updateSidepanelWidth,this.props.updateSidepanelHeight);
     window.removeEventListener("beforeunload", this.clearEditor);
   }
+ 
   clicked = (e) => {
-  /*  if (e.keyCode === 90 ) {document.getElementsByClassName('undo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
+    //e.preventDefault();
+     
+   if (e.altKey && e.key === 'z' ) {
+      console.log('pressed')
+      document.getElementsByClassName('undo')[0].click(); 
+       document.getElementsByClassName('stage')[0].focus();}
 
-    else if(e.keyCode === 89 ) {document.getElementsByClassName('redo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
-  */}
+    else if(e.altKey && e.key === 'y' ) {document.getElementsByClassName('redo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
+   }
   clearEditor = () => {
     this.props.deselect();
     if (this.props.general.activeDiagramId) {
