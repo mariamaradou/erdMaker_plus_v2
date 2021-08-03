@@ -93,7 +93,7 @@ const ImportExportMenuListComposition = (props) => {
       state.push(" ");
       state.push("[" + props.components.entities[i].name + "]  ");
 
-      for (let j in props.components.attributes) {
+      for (let j in props.components.attributes)  {
         if (
           props.components.attributes[j].parentId ===
           props.components.entities[i].id
