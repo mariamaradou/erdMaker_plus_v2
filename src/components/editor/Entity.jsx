@@ -4,6 +4,7 @@ import {
   updatePositionEntity,
   updatePositionChildren,
   repositionComponents,
+  updatePositionExtensionChildren,
 //  updateInitialPositionChildren,
   updateInitialPositionEntity,
   select,
@@ -145,6 +146,7 @@ class EntityChen extends React.Component {
             dx: e.target.x() - this.state.initialPosition.x,
             dy: e.target.y() - this.state.initialPosition.y,
           });
+        
          this.setState({
             initialPosition: { x: e.target.x(), y: e.target.y() },
           });
@@ -239,6 +241,7 @@ const mapDispatchToProps = {
 //  updateInitialPositionChildren,
   updateInitialPositionEntity,
   updatePositionChildren,
+  updatePositionExtensionChildren,
   repositionComponents,
   select,
   deselect,

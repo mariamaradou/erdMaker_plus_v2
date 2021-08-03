@@ -53,72 +53,7 @@ const ConstraintsButton = (props) => {
     }
   }
   
-  function Cardinality(){
-    switch (props.components.notation) {
-      case "Information Engineering Notation":
-        var cardinality = 'Look Across';
-        break;
-      case "Elmasri & Navathe Notation":
-        cardinality = 'Look Across';
-        break;
-      case "Min-Max/ISO Notation":
-        cardinality = 'Look Here';
-        break;
-      case "Bachman Notation":
-        cardinality = 'Look Across';
-        break;
-      case "Barker Notation":
-        cardinality = 'Look Across';
-        break;
-      case "Batini, Ceri & Navathe Notation":
-        cardinality = 'Look Here';
-        break;
-      case "Teorey Notation":
-        cardinality = 'Look Across';
-        break;
-      case "Korth, Silberschatz & Sudarshan":
-        cardinality = 'Look Across'
-        break;
-      default:
-        cardinality = 'Look Across';
-        break;
-    }
-    return cardinality;
-  }
-
-  function Participation(){
-    switch (props.components.notation) {
-      case "Information Engineering Notation":
-        var participation = 'Look Across';
-        break;
-      case "Elmasri & Navathe Notation":
-        participation = 'Look Here';
-        break;
-      case "Min-Max/ISO Notation":
-        participation = 'Look Here';
-        break;
-      case "Bachman Notation":
-        participation = 'Look Here';
-        break;
-      case "Barker Notation":
-        participation = 'Look Here';
-        break;
-      case "Batini, Ceri & Navathe Notation":
-        participation = 'Look Here';
-        break;
-      case "Teorey Notation":
-        participation = 'Look Across';
-        break;
-      case "Korth, Silberschatz & Sudarshan":
-        participation = 'Look Here'
-        break;
-      default:
-        participation = 'Look Here';
-        break;
-    }
-    return participation;
-  }
- 
+  
 
   // Return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);

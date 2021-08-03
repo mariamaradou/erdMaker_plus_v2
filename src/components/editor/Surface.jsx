@@ -53,6 +53,10 @@ class Surface extends React.Component {
     this.stage.focus();
   };
 
+  /*componentDidUpdate =() =>{
+    console.log('ok')
+  }*/
+
   componentWillUnmount = () => {
     this.props.deselect();
   };
@@ -188,6 +192,7 @@ class Surface extends React.Component {
       entitiesList.push(
         <Entity
           key={entity.id}
+          attributesNum={entity.attributesNum}
           id={entity.id}
           name={entity.name}
           type={entity.type}
@@ -199,6 +204,7 @@ class Surface extends React.Component {
     return entitiesList;
   };
 
+  
   drawExtensions = () => {
    
     
@@ -212,9 +218,7 @@ class Surface extends React.Component {
       case "Min-Max/ISO Notation":
         Extension = ExtensionElmasri;
         break;
-      case "Bachman Notation":
-        Extension = ExtensionElmasri;
-        break;
+     
       case "Barker Notation":
         Extension = ExtensionElmasri;
         break;
@@ -237,8 +241,10 @@ class Surface extends React.Component {
           
           participation={extension.participation}
           cardinality={extension.cardinality}
-         x={this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  extension.cardinality==='overlap'? extension.korthX:extension.x }
-          y={this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  extension.cardinality==='overlap'?extension.korthY:extension.y}
+         x={this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  extension.cardinality==='overlap'?
+          extension.korthX:extension.x }
+          y={this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  extension.cardinality==='overlap'?
+          extension.korthY:extension.y}
        
         />
       )
@@ -520,7 +526,7 @@ class Surface extends React.Component {
               stroke={"black"}
               strokeWidth={0}
               visible={ this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  this.props.components.extensions[i].cardinality==='overlap' ? true: false}
-              fill={"green"}
+              fill={"black"}
               pointerLength={40}
               pointerWidth={20}
               //rotation={this.props.angle}
@@ -644,7 +650,7 @@ class Surface extends React.Component {
             <Arrow
               stroke={"black"}
               strokeWidth={0}
-              fill={"purple"}
+              fill={"black"}
               pointerLength={25}
               pointerWidth={15}
               //rotation={this.props.angle}
@@ -891,21 +897,21 @@ class Surface extends React.Component {
               angle={anchor.angle}
               minimum={
                // this.props.components.relationships[i].connections[j].min
-               correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i],this.props.components.participationDirection,j)
+               correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i].connections[j].minAcross,this.props.components.relationships[i],this.props.components.participationDirection,j)
               }
               maximum={
                // this.props.components.relationships[i].connections[j].max
-               correctDirection( this.props.components.relationships[i].connections[j].max,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
+               correctDirection( this.props.components.relationships[i].connections[j].max, this.props.components.relationships[i].connections[j].maxHere,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
               }
               exactMin={
                // this.props.components.relationships[i].connections[j].exactMin
               // this.props.components.relationships[i].connections[j].min
-              correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i],this.props.components.participationDirection,j)
+              correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i].connections[j].minAcross,this.props.components.relationships[i],this.props.components.participationDirection,j)
               }
               exactMax={
                // this.props.components.relationships[i].connections[j].exactMax
               // this.props.components.relationships[i].connections[j].max
-              correctDirection( this.props.components.relationships[i].connections[j].max,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
+              correctDirection( this.props.components.relationships[i].connections[j].max,this.props.components.relationships[i].connections[j].maxHere,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
               }
             />
           );
@@ -1060,7 +1066,9 @@ class Surface extends React.Component {
   };
   stageClicked = (e) => {
     console.log(this.props.components);
+    
     if (e.target === e.target.getStage()) {
+     
       this.props.deselect();
       this.setState({
         positionPr: e.evt.clientX + this.stage.scrollLeft,
@@ -1146,16 +1154,18 @@ class Surface extends React.Component {
       <ReactReduxContext.Consumer>
         {({ store }) => (
           <div>
-            <ContextMenuTrigger id="same_unique_identifier" holdToDisplay={-1}>
+            <ContextMenuTrigger id="same_unique_identifier" holdToDisplay={-1} /*disable={true otan mi syndedemenos xristis kai params}*/>
               <div
                 ref={(ref) => (this.stage = ref)}
                 onScroll={this.propertiesHide}
                 className="stage"
                 tabIndex={1}
+                
                 onKeyDown={this.clickedButtons}
                 onFocus={() => this.menu()}
               >
                 <Stage
+                //  listening={false otan mi sindedemenos xristis kai params}
                   width={stageWidth}
                   height={stageHeight}
                   onClick={(e) => this.stageClicked(e)}
@@ -1163,6 +1173,7 @@ class Surface extends React.Component {
                   <Provider store={store}>
                     <Layer>
                       <Rect
+                        
                         width={stageWidth}
                         height={stageHeight}
                         fill="#f9ffff"
@@ -1172,12 +1183,12 @@ class Surface extends React.Component {
                         className="canvas"
                       ></Rect>
                      {this.drawLines()}
-                      {this.drawExtensions()}
+                     {this.drawExtensions()}
                       {this.drawRelationships()}
                       {this.drawEntities()}
                       {this.drawAttributes()}
                       {this.drawLabels()}
-                      
+                     
                     </Layer>
                   </Provider>
                 </Stage>
@@ -1266,6 +1277,7 @@ class Surface extends React.Component {
 const mapStateToProps = (state) => ({
   components: state.components.present,
   selector: state.selector,
+  user: state.user
 });
 
 const mapDispatchToProps = {

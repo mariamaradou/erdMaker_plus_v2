@@ -15,9 +15,11 @@ import {
 } from "../../actions/actions";
 import axios from "axios";
 import { ActionCreators } from 'redux-undo';
+import {  sharediagramtempuser } from "../../global/diagramRequests";
 import { store } from "../../index.js"
 
 export var params_id;
+var  keys=[]
 class Editor extends React.Component {
   
   constructor(props) {
@@ -48,15 +50,24 @@ class Editor extends React.Component {
     params_id= this.props.match.params.id;
     if(typeof this.props.match.params.id==='undefined'){
     if (this.props.user.isLogged && this.props.general.activeDiagramId) {
+    
       getDiagram(this.props.general.activeDiagramId, this.cancelToken);
+      sharediagramtempuser(this.props.general.activeDiagramId, this.cancelToken)
+      .then((res) => {
+        if (res) {
+         
+          window.history.pushState("", "", "/designer/"+ res.data.random_id);
+
+        }
+      }).catch(() => {});
     }
     
     } else {
-      console.log('params=',this.props.match.params.id)
+
    getDiagramTemp(this.props.match.params.id,this.cancelToken)
   
-   console.log(this.props.match.params.id)}
-    
+   }
+  
   };
 
   
@@ -67,17 +78,38 @@ class Editor extends React.Component {
     window.removeEventListener("resize", this.props.updateSidepanelWidth,this.props.updateSidepanelHeight);
     window.removeEventListener("beforeunload", this.clearEditor);
   }
+  
  
   clicked = (e) => {
-    //e.preventDefault();
+   // e.preventDefault();
+  
+    if (  e.key==='z' || e.key==='Alt' ) {
+      keys.push(e.key)
+    
+    
+    if(keys[0]==='Alt' && keys[1]==='z'){
      
-   if (e.altKey && e.key === 'z' ) {
-      console.log('pressed')
-      document.getElementsByClassName('undo')[0].click(); 
+      document.getElementsByClassName('undo tools-button-blue')[0].click()
        document.getElementsByClassName('stage')[0].focus();}
-
-    else if(e.altKey && e.key === 'y' ) {document.getElementsByClassName('redo')[0].click();  document.getElementsByClassName('stage')[0].focus();}
+    }
+ 
+    else if  (  e.key==='y' || e.key==='Alt' ) {
+      keys.push(e.key)
+    
+    
+    if(keys[0]==='Alt' && keys[1]==='y'){
+     
+      document.getElementsByClassName('redo tools-button-blue')[0].click()
+       document.getElementsByClassName('stage')[0].focus();}
+    }
    }
+   unclicked = (e) => {
+    // e.preventDefault();
+      keys=[]
+   
+     
+   
+    }
   clearEditor = () => {
     this.props.deselect();
     if (this.props.general.activeDiagramId) {
@@ -97,7 +129,7 @@ class Editor extends React.Component {
   render() {
     return (
   
-      <div className="editor" onClick={() => this.setState({ showSaveWarning: false })} onKeyDown={(e) => this.clicked(e)}> 
+      <div className="editor" onClick={() => this.setState({ showSaveWarning: false })} onKeyDown={(e) => this.clicked(e)} onKeyUp={(e) => this.unclicked(e)}> 
     
         <Tools />  
        

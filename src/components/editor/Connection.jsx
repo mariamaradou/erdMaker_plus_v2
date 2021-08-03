@@ -24,7 +24,7 @@ class Connection extends React.Component {
     this.props.modifyConnection({
       id: this.props.connection.id,
       parentId: this.props.relationshipId,
-      prop: e.target.id,        //exactMin, exactMax, min, max
+      prop: e.target.id,        //min, max
       value: e.target.value,
     });
   };
@@ -43,7 +43,8 @@ class Connection extends React.Component {
             <input
              style={{marginBottom: 4}}
              // id="exactMin" 
-                 id='min'
+               // id='min'
+              id={this.props.components.participationDirection==='Look Across' && this.props.components.relationships[parentIndex].connections.length>2? 'minAcross': 'min' }
               className="small-editor-input"
               type="text"
               maxLength="7"
@@ -59,12 +60,13 @@ class Connection extends React.Component {
             exactMax:
             <input
             // id="exactMax" 
-              id="max"
+             // id="max"
+              id={this.props.components.cardinalityDirection==='Look Here' && this.props.components.relationships[parentIndex].connections.length>2? 'maxHere': 'max' }
               className="small-editor-input"
               type="text"
               maxLength="7"
              // value={this.props.connection.exactMax} 
-              value={this.props.connection.max} //timi tis max
+              value={this.props.components.cardinalityDirection==='Look Here' && this.props.components.relationships[parentIndex].connections.length>2 ?this.props.connection.maxHere:this.props.connection.max} //timi tis max
               onChange={this.handleModifyConnection} //patwntas to mpainei h plhthikotita
               //disabled={this.props.connection.max === "one" ? true : false}
             />
@@ -125,7 +127,18 @@ class Connection extends React.Component {
         <div className="connection-input-group">
           <label >
             Min:{" "}
-            <select  style={{marginBottom: 4}} id="min" value={this.props.connection.min==='0' || this.props.connection.min==='null'|| this.props.connection.min==='zero' ? 'zero': this.props.connection.min==='1' || this.props.connection.min==='one' || this.props.connection.min>1? 'one':'undefined' } onChange={this.handleModifyConnection}>
+            <select  style={{marginBottom: 4}} id={this.props.components.participationDirection==='Look Across' && this.props.components.relationships[parentIndex].connections.length>2? 'minAcross':'min'}
+             value={
+              this.props.components.participationDirection==='Look Across' && this.props.components.relationships[parentIndex].connections.length>2?
+              this.props.connection.minAcross==='0' || this.props.connection.minAcross==='null'||
+              this.props.connection.minAcross==='zero' ? 
+              'zero': 
+              this.props.connection.minAcross==='1' || this.props.connection.minAcross==='one' || this.props.connection.minAcross>1? 'one':'undefined':
+              this.props.connection.min==='0' || 
+              this.props.connection.min==='null'||
+               this.props.connection.min==='zero' ? 
+               'zero': 
+               this.props.connection.min==='1' || this.props.connection.min==='one' || this.props.connection.min>1? 'one':'undefined' } onChange={this.handleModifyConnection}>
               <option value="">Undefined</option>
               <option value="zero"  >Zero</option>
               <option value="one">One</option>
@@ -135,7 +148,16 @@ class Connection extends React.Component {
         <div className="connection-input-group">
           <label>
             Max:{" "}
-            <select id="max" value={this.props.connection.max==='1' || this.props.connection.max==='one' ? 'one': this.props.connection.max>1 || this.props.connection.max==='many' || this.props.connection.max==='N' || this.props.connection.max==='n'? 'many':'undefined'} onChange={this.handleModifyConnection}>
+            <select   id={this.props.components.cardinalityDirection==='Look Here' && this.props.components.relationships[parentIndex].connections.length>2? 'maxHere': 'max' }
+             value={
+              this.props.components.cardinalityDirection==='Look Here' && this.props.components.relationships[parentIndex].connections.length>2?
+              this.props.connection.maxHere==='1' || this.props.connection.maxHere==='one' ? 'one':
+             this.props.connection.maxHere>1 || this.props.connection.maxHere==='many' || this.props.connection.maxHere==='N' ||
+              this.props.connection.maxHere==='n'? 'many':'undefined':
+              this.props.connection.max==='1' || this.props.connection.max==='one' ? 'one':
+              this.props.connection.max>1 || this.props.connection.max==='many' || this.props.connection.max==='N' ||
+               this.props.connection.max==='n'? 'many': 'undefined'
+            } onChange={this.handleModifyConnection}>
               <option value="">Undefined</option>
               <option value="one">One</option>
               <option value="many">Many</option>

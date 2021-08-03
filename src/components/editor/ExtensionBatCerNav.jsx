@@ -34,15 +34,15 @@ componentWillUnmount(){
           ? stageHeight - extensionRadius - dragBoundOffset
           : pos.y;
     else newY = pos.y < extensionRadius + dragBoundOffset ? extensionRadius + dragBoundOffset : pos.y;
-
+    
     return {
       x: newX,
       y: newY,
     };
   };
 
- 
 
+ 
 
   render() {
    
@@ -52,7 +52,7 @@ componentWillUnmount(){
         x={this.props.x}
         y={this.props.y}
         draggable
-        dragBoundFunc={(pos) => this.stageBound(pos)}
+        dragBoundFunc={(pos) => {this.stageBound(pos); }}
         onDragStart={(e) => {
           this.props.updateInitialPositionExtension({
             id: this.props.id,
@@ -67,7 +67,7 @@ componentWillUnmount(){
             y: e.target.y(),
           });
         }}
-        onDragEnd={() => this.props.repositionComponents()}
+        onDragEnd={() => {this.props.repositionComponents(); }}
         onTap={() => {
           this.props.select({
             type: "extension",

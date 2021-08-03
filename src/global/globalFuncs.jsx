@@ -61,7 +61,7 @@ export const getDiagram = (diagramId, cancelToken) => {
 
 
 
-
+// pairnw diagramma apo ti vasi dedomenwn symfwna me to random_id meta to /designer/
 
 export const getDiagramTemp = (params_id,cancelToken) => {
   return getdiagramtemp(params_id,cancelToken)

@@ -61,6 +61,12 @@ export const UPDATE_ATTRIBUTE_CROWS="UPDATE_ATTRIBUTE_CROWS";
 /*export const DISPLAY_RELATIONSHIP="DISPLAY_RELATIONSHIP";*/
 export const SET_CARDINALITY_DIRECTION="SET_CARDINALITY_DIRECTION";
 export const SET_PARTICIPATION_DIRECTION="SET_PARTICIPATION_DIRECTION";
+export const UPDATE_POSITION_EXTENSION_CHILDREN="UPDATE_POSITION_EXTENSION_CHILDREN";
+
+export const updatePositionExtensionChildren=(payload)=> ({
+  type:"UPDATE_POSITION_EXTENSION_CHILDREN",
+  payload:payload
+})
 
 
 export const setParticipationDirection= (payload) => ({

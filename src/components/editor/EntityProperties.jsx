@@ -104,8 +104,8 @@ class EntityProperties extends React.Component {
   
     this.props.addExtension({
       id: this.props.selector.current.id,
-      korthX:this.props.components.entities[entityIndex].x,  //for korth notation
-      korthY:this.props.components.entities[entityIndex].y + 40,
+      korthX:this.props.components.entities[entityIndex].x ,  //for korth notation
+      korthY:this.props.components.entities[entityIndex].y + 40 + this.props.components.entities[entityIndex].attributesNum * 39,
       x: this.props.components.entities[entityIndex].x + xOffset,
       y: this.props.components.entities[entityIndex].y + yOffset,
     });

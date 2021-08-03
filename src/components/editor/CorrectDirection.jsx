@@ -1,4 +1,4 @@
-export const correctDirection = (max,relationship,cardinalityDirection,k) => {
+export const correctDirection = (max,maxHere,relationship,cardinalityDirection,k) => {
   if (
     relationship.connections.length <= 2 &&
     cardinalityDirection === "Look Across"
@@ -27,10 +27,11 @@ export const correctDirection = (max,relationship,cardinalityDirection,k) => {
                                          
   }
   else{                                                       //gia triadiki sxesi & Look Here
-    return (max = "");   }
+    max=maxHere;
+    return max  }
 };
 
-export const correctParticipation = (min,relationship,participationDirection,k) => {
+export const correctParticipation = (min,minAcross,relationship,participationDirection,k) => {
   if (
     relationship.connections.length <= 2 &&
     participationDirection === "Look Across"
@@ -52,7 +53,12 @@ export const correctParticipation = (min,relationship,participationDirection,k) 
           : relationship.connections[k - 1].min; 
       return min;
     }
-  } else {
-    return (min = "");                              //gia triadiki sxesi mhn emfaniseis tipota
+  }else if( participationDirection === "Look Here"){       //gia triadiki sxesi & Look Here                                               
+    return min
+                                         
   }
+  else{                                                       //gia triadiki sxesi & Look Across
+    min=minAcross;
+    return min  }
 };
+

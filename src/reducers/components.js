@@ -24,8 +24,8 @@ const initialState = {
   extensions: [],
   labels: [],
   notation: 'Elmasri & Navathe Notation',
-  cardinalityDirection: '',
-  participationDirection: '',
+  cardinalityDirection: 'Look Across',
+  participationDirection: 'Look Here',
  // hideRelationships: false,
  // cardDir:false,
  // partDir: false,
@@ -253,7 +253,7 @@ const componentsReducer = (state = initialState, action) => {
             type: {
               weak: false,
             },
-            min: null,
+            min: null,         //mallon prepei na ta svisw
             max: null,
             exactMin: null,
             exactMax:null,
@@ -329,6 +329,8 @@ const componentsReducer = (state = initialState, action) => {
                     max: "",
                     exactMin: "",
                     exactMax: "",
+                    maxHere:"",
+                    minAcross:"",
                     role: "",
                   },
                 ],
@@ -412,7 +414,7 @@ const componentsReducer = (state = initialState, action) => {
         return newState;
       }
     case "ADD_ATTRIBUTE":
-      
+      console.log( state.relationships.find(x => x.id === action.payload.id))
       return {
         ...state,
         attributes: [
@@ -441,7 +443,9 @@ const componentsReducer = (state = initialState, action) => {
             state.entities.find(x => x.id === action.payload.id)? 
             state.entities.find(x => x.id === action.payload.id).x:   //composite
            state.attributes.find(x => x.id === action.payload.parentAttrId)?
-            state.attributes.find(x => x.id === action.payload.parentAttrId).initX: null  
+            state.attributes.find(x => x.id === action.payload.parentAttrId).initX: 
+            state.relationships.find(x => x.id === action.payload.id)? 
+            state.relationships.find(x => x.id === action.payload.id).x: null  
            /* typeof state.entities.find(x => x.id === action.payload.id)!=='undefined'? 
             state.entities.find(x => x.id === action.payload.id).x:   //composite
             typeof state.attributes.find(x => x.id === action.payload.parentAttrId)!=='undefined'?
@@ -456,7 +460,10 @@ const componentsReducer = (state = initialState, action) => {
             state.entities.find(x => x.id === action.payload.id).y+ (state.entities.find(x => x.id === action.payload.id).attributesNum+1.2)*40:
             state.attributes.find(x => x.id === action.payload.parentAttrId)?
             state.attributes.find(x => x.id === action.payload.parentAttrId).initY+ 0.98*40:
-            null ,         //relationship case
+            state.relationships.find(x => x.id === action.payload.id)? 
+            state.relationships.find(x => x.id === action.payload.id).attributesNum===0?
+            state.relationships.find(x => x.id === action.payload.id).y+ (state.relationships.find(x => x.id === action.payload.id).attributesNum+1)*50:
+            state.relationships.find(x => x.id === action.payload.id).y+ (state.relationships.find(x => x.id === action.payload.id).attributesNum+1.2)*40: null ,         //relationship case
             parentEntity:  action.payload.grandparentAttrId ? action.payload.grandparentAttrId: action.payload.id,
 
           
@@ -553,7 +560,12 @@ const componentsReducer = (state = initialState, action) => {
        entities: state.entities.map((entity) =>
         entity.id === action.payload.parentId || 
          entity.id===  grandparentid? 
-        { ...entity,attributesNum: entity.attributesNum-childrenList.length-1} : entity)
+        { ...entity,attributesNum: entity.attributesNum-childrenList.length-1} : entity),
+
+        relationships: state.relationships.map(( relationship) =>
+        relationship.id === action.payload.parentId || 
+        relationship.id===  grandparentid? 
+        { ...relationship,attributesNum: relationship.attributesNum-childrenList.length-1} : relationship)
 
       };
     case "DELETE_CHILDREN":
@@ -584,14 +596,19 @@ const componentsReducer = (state = initialState, action) => {
                   y: attribute.y + action.payload.dy,
                   initX:  state.entities.find(x => x.id === action.payload.id)? 
                   state.entities.find(x => x.id === action.payload.id).x: 
-                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).x,
+                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id))?
+                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).x:
+                  state.relationships.find(x => x.id === action.payload.id)? 
+                  state.relationships.find(x => x.id === action.payload.id).x:null
+                  ,
                   initY:  state.entities.find(x => x.id === action.payload.id)? 
                   attribute.attrNum===0?
                   state.entities.find(x => x.id === action.payload.id).y+ (attribute.attrNum+1)*50:
                   state.entities.find(x => x.id === action.payload.id).y+ (attribute.attrNum+1.2)*40:
                   attribute.attrNum===0?
                   state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).y+ (attribute.attrNum+1)*50:
-                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).y+ (attribute.attrNum+1.2)*40, 
+                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).y+ (attribute.attrNum+1.2)*40
+                   
                 }
               : attribute
           ),
@@ -601,7 +618,7 @@ const componentsReducer = (state = initialState, action) => {
     case "UPDATE_POSITION_CHILDREN": // Moves children along with parent component
       getChildren(childrenList, state.attributes, action.payload.id); // Retrieve children of component with provided id
      
-      getChildren(childrenList, state.extensions, action.payload.id);
+     // getChildren(childrenList, state.extensions, action.payload.id);
       return {
         ...state,
         attributes: state.attributes.map((attribute) =>
@@ -626,10 +643,19 @@ const componentsReducer = (state = initialState, action) => {
               }
             : attribute
         ),
+ 
+      };
+      case "UPDATE_POSITION_EXTENSION_CHILDREN": // Moves children along with parent component
+     
+   
+      getChildren(childrenList, state.extensions, action.payload.id);
+      return {
+        ...state,
+        
         extensions: state.extensions.map((extension) =>  childrenList.includes(extension.id) ? {
        ...extension, x: extension.x + action.payload.dx, y: extension.y + action.payload.dy, 
        korthX:state.entities.find(x => x.id === action.payload.id).x,
-       korthY:state.entities.find(x => x.id === action.payload.id).y+40 } : extension
+       korthY:state.entities.find(x => x.id === action.payload.id).y+40 + state.entities.find(x => x.id === action.payload.id).attributesNum * 39 } : extension
       )
       };
     case "ADD_LABEL":
@@ -699,6 +725,7 @@ const componentsReducer = (state = initialState, action) => {
         labels: state.labels.filter((label) => label.id !== action.payload.id),
       };
     case "REPOSITION_COMPONENTS": // Used to return all components within stage bound if dragged off
+   
       for (let i in newState.entities) {
         if (newState.entities[i].x > stageWidth - entityWidth / 2 - dragBoundOffset)
           newState.entities[i].x = stageWidth - entityWidth / 2 - dragBoundOffset;

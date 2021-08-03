@@ -43,6 +43,7 @@ const ConvertTo = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [openDialogRelAt, setOpenDialogRelAt] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const options = [
@@ -66,6 +67,14 @@ const ConvertTo = (props) => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  };
+
+  const handleClickOpenDialogRelAt = () => {
+    setOpenDialogRelAt(true);
+  };
+
+  const handleCloseDialogRelAt = () => {
+    setOpenDialogRelAt(false);
   };
 
   const changeDirection=(option)=>{
@@ -136,7 +145,7 @@ const ConvertTo = (props) => {
         break;
       default:
         this.props.setParticipationDirection({
-          valuePart:'Look Across'
+          valuePart:'Look Here'
         })
         this.props.setCardinalityDirection({
           valueDir:'Look Across'
@@ -155,6 +164,17 @@ const ConvertTo = (props) => {
     
     setOpen(false);
   };
+ const moveAttributetoManySide=(option) => {
+
+  if((props.components.relationships.find((relationship)=> relationship.attributesNum>0/* && (
+    (relationship.connections[0].max==='one' && relationship.connections[1].max==='many' ) ||
+    (relationship.connections[0].max==='many' && relationship.connections[1].max==='one' ))
+     */)) )  handleClickOpenDialogRelAt()
+     else { props.setNotation({
+      notation: option
+  })}
+   
+ }
 
   const changeNotation = (option)=> {
     props.components.extensions.map((extension)=>
@@ -191,20 +211,26 @@ const ConvertTo = (props) => {
   
     // elegxos gia to an pairnei n ary relationship to kathe notation
     if(props.components.relationships.length!==0){
-    if( typeof props.components.relationships.find((relationship)=> relationship.connections.length<=2)!=='undefined'  ||
-    (option!=="Information Engineering Notation" && option!=="Bachman Notation" && 
-    option!=='Barker Notation')){
+    if( typeof props.components.relationships.find((relationship)=> relationship.connections.length>2)!=='undefined'  &&
+    (option==="Information Engineering Notation" || option==="Bachman Notation" ||
+    option==='Barker Notation')){
+      console.log('this notation doesnt accept n ary relationships. ')
+      handleClickOpenDialog()
+    }
+ else if (option==="Information Engineering Notation" || option==="Bachman Notation" ||      //kai dyadiki
+ option==='Barker Notation'){
+  moveAttributetoManySide(option)
    
+ } 
+else {
+    
     props.setNotation({
       notation: option
   })
-changeDirection(option) }
-  else {
-    console.log('this notation doesnt accept n ary relationships. ')
-    handleClickOpenDialog()
-    
+changeDirection(option)
   }
-}else{ props.setNotation({
+}
+else{ props.setNotation({
   notation: option
 }) 
 changeDirection(option)
@@ -254,11 +280,31 @@ changeDirection(option)
         <DialogTitle id="alert-dialog-title">{"  The notation you have selected doesn't support n-ary relationships. "}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            A relationship in your ERD has up to 2 connections. Change your ERD and try again. 
+            A relationship in your ERD has up to 2 connections. Tip: Convert the n-ary relationship to an associative entity . 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
+           OK
+          </Button>
+         
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDialogRelAt}
+        onClose={handleCloseDialogRelAt}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"  The notation you have selected doesn't support  attributes on relationships "}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           There is an attribute on a relationship. Tip: If it is a N-1 or 1-N relationship, move the attribute under the N side entity.
+            If it is a M-N relationship, convert the relationship to an associative entity.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialogRelAt} color="primary">
            OK
           </Button>
          

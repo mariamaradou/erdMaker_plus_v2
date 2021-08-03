@@ -8,6 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { storeUserData } from "../../actions/actions";
 import {  sharediagramtemp,sharediagramtempuser } from "../../global/diagramRequests";
 
+
 //import { shareDiagramTemp } from '../../global/globalFuncs';
 
 import axios from "axios";
@@ -98,8 +99,6 @@ const handleSubmit=(e)=>{
         if (res /*&& res.status === 201*/) {
           console.log(res)
           window.history.pushState("", "", "/designer/"+ res.data.random_id);
-
-          console.log('link fetched')
         }
       }).catch(() => {});
     }
@@ -127,7 +126,7 @@ const handleSubmit=(e)=>{
 
   const handleClose = () => {
     setOpen(false);
-    window.history.pushState("", "", "/designer");
+  //  window.history.pushState("", "", "/designer");
 
   };
 
@@ -141,9 +140,12 @@ const handleSubmit=(e)=>{
   }}>*/}
 
          <form action={"/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
+         
+           
       <button
-          className="tools-button-blue"
-        
+         
+          className="tools-button-blue  "
+          disabled={props.user.isLogged && !props.general.activeDiagramId?true: !props.user.isLogged?true:false}
           onClick={() => {
             props.deselect();
             
@@ -158,7 +160,10 @@ const handleSubmit=(e)=>{
         >
           
          Share
+        
         </button>
+       
+        
         </form>
        {/*</Link>*/}
       <Modal

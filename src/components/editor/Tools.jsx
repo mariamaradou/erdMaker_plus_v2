@@ -184,6 +184,7 @@ class Tools extends React.Component {
         }
       })
       .catch(() => {});
+    
   };
 
   clearStage = () => {

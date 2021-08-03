@@ -38,7 +38,7 @@ class AttributeKorth extends React.Component {
   findParentIndex = (parent) => parent.id === this.props.parentId;
  
 
-
+ 
   
 
   render() {

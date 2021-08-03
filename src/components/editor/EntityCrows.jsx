@@ -5,7 +5,8 @@ import {
   updatePositionChildren,
   repositionComponents,
 //  updateInitialPositionChildren,
-  updateInitialPositionEntity,
+updatePositionExtensionChildren,
+updateInitialPositionEntity,
   select,
   deselect,
 } from "../../actions/actions";
@@ -32,7 +33,14 @@ import {
 class EntityCrows extends React.Component {
   state = { initialPosition: { x: this.props.x , y: this.props.y } };
 
- 
+ componentDidMount=() =>{
+   if(this.props.components.notation==='Korth, Silberschatz & Sudarshan'){
+  this.props.updatePositionExtensionChildren({
+    id: this.props.id,
+    dx: null,
+    dy: null,
+  })}
+ }
  
   // Does not let the entity to be dragged out of stage bounds
   stageBound = (pos) => {
@@ -70,9 +78,33 @@ class EntityCrows extends React.Component {
   }*/
 
   render() {
-    
+    var weakReactKorth = 
+    this.props.type  === "weak" && this.props.components.notation==='Korth, Silberschatz & Sudarshan' ? (
+      <Rect        //weak rect
+      visible={this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type==='weak'?true:false}
+      x={-entityWidthCrows /1.81}
+      y={-entityHeight / 1.6}
+      width={entityWidthCrows*1.1}
+      height={this.props.attributesNum===0?
+      entityHeight*1.3:
+      this.props.attributesNum===1?
+   
+        entityHeight*(1.1+this.props.attributesNum):
+        entityHeight*(0.8+this.props.attributesNum)}
+     // fill="#ffdd91"
+   
+     fillLinearGradientStartPoint={{ x: -50, y: -50 }}
+     fillLinearGradientEndPoint={{ x: 50, y: 50 }}
+     fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
+      stroke={
+        this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"
+          ? "red"
+          : "black"
+      }
+      strokeWidth={0.5}
+    />): null;
     var weakRect =
-      this.props.type === "weak" ? (
+      this.props.type  === "weak" && this.props.components.notation!=='Korth, Silberschatz & Sudarshan' ? (
         <Rect
       
           x={-entityWidthCrows / 2 + entityWeakOffset / 2}
@@ -158,6 +190,15 @@ class EntityCrows extends React.Component {
             dx: e.target.x() - this.state.initialPosition.x,
             dy: e.target.y() - this.state.initialPosition.y,
           });
+       
+         this.props.updatePositionExtensionChildren(
+          this.props.components.extensions.find((extension)=> extension.cardinality==='overlap') ?{
+            id: this.props.id,
+            dx: e.target.x() - this.state.initialPosition.x,
+            dy: e.target.y() - this.state.initialPosition.y,
+          }:{id: this.props.id,
+          dx: null,
+          dy: null});
          this.setState({
             initialPosition: { x: e.target.x(), y: e.target.y() },
           });
@@ -198,7 +239,7 @@ class EntityCrows extends React.Component {
 
         dragBoundFunc={(pos) => this.stageBound(pos)}
       >
-       
+        {weakReactKorth}
       
         <Rect
           
@@ -219,9 +260,10 @@ class EntityCrows extends React.Component {
           strokeWidth={0.5}
         />
         
-        
+       
         
         {weakRect}
+       
         {associativeDiamond}
         
         <Text
@@ -254,6 +296,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   updatePositionEntity,
 //  updateInitialPositionChildren,
+updatePositionExtensionChildren,
   updateInitialPositionEntity,
   updatePositionChildren,
   repositionComponents,

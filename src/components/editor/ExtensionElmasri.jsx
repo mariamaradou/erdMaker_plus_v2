@@ -25,6 +25,7 @@ componentWillUnmount() {
   stageBound = (pos) => {
     var newX;
     var newY;
+   
 
     if (pos.x > stageWidth / 2)
       newX =
@@ -44,7 +45,12 @@ componentWillUnmount() {
     };
   };
 
+ /* getStage=() =>this.stage;
+  
+extensionLimit=(e)=>{
 
+  console.log(e.evt.clientX)
+}*/
 
   render() {
     
@@ -86,7 +92,7 @@ componentWillUnmount() {
             y: e.target.y(),
           });
         }}
-        onDragEnd={() => this.props.repositionComponents()}
+        onDragEnd={(e) => {this.props.repositionComponents(); /*this.extensionLimit(e)*/ }}
         onTap={() => {
           this.props.select({
             type: "extension",

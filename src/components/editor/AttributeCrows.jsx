@@ -5,6 +5,7 @@ import {
   updatePositionChildren,
   repositionComponents,
 //  updateInitialPositionChildren,
+updatePositionExtensionChildren,
   updateInitialPositionEntity,
   select,
   deselect,
@@ -31,11 +32,25 @@ class AttributeCrows extends React.Component {
 
 
   state = { initialPosition: { x: this.props.x, y: this.props.y } };
-  
+  componentDidMount=() =>{
+    if(this.props.components.notation==='Korth, Silberschatz & Sudarshan'){
+   this.props.updatePositionExtensionChildren({
+     id: this.props.parentId,
+     dx: null,
+     dy: null,
+   })}
+  }
 
   findParentIndex = (parent) => parent.id === this.props.parentId;
  
-
+  componentWillUnmount=() =>{
+    if(this.props.components.notation==='Korth, Silberschatz & Sudarshan'){
+   this.props.updatePositionExtensionChildren({
+     id: this.props.parentId,
+     dx: null,
+     dy: null,
+   })}
+  }
 
   
 
@@ -134,6 +149,7 @@ const mapDispatchToProps = {
   updateInitialPositionEntity,
   updatePositionChildren,
   repositionComponents,
+  updatePositionExtensionChildren,
   select,
   deselect,
 };

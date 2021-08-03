@@ -181,7 +181,11 @@ class RelationshipProperties extends React.Component {
           <button                                         //koumpi Add Connection
           /*  className="properties-neutral-button"*/
             type="button"
-            style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+           
+            style={{ display: this.props.components.notation==='Information Engineering Notation' || 
+            this.props.components.notation==='Bachman Notation' ||
+            this.props.components.notation==='Barker Notation'?
+            'none': 'block',cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
             className='buttonmenu'
             onClick={() => this.handleAddAttribute(relationshipIndex)}
           >
@@ -189,6 +193,23 @@ class RelationshipProperties extends React.Component {
 
             New Attribute
           </button>
+        {/*  <button                                         //koumpi Add Connection
+        
+            type="button"
+           
+            style={{ display:  
+              (this.props.components.notation==='Information Engineering Notation' || 
+            this.props.components.notation==='Bachman Notation' ||
+            this.props.components.notation==='Barker Notation') ||  this.props.components.relationships[relationshipIndex].connections.length>2?
+            'none': this.props.components.relationships[relationshipIndex].attributesNum===0  ? 'none': 'block',
+            cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+            className='buttonmenu'
+          //  onClick={() => convertToAssociativeEntity(this.props.components.relationships[relationshipIndex].x, this.props.components.relationships[relationshipIndex].y, this.props.components.relationships[relationshipIndex].name)}
+          >
+
+
+           Make Associative Entity
+          </button>*/}
           <button
           /*  className="properties-delete-button"*/
             type="button"
@@ -204,12 +225,7 @@ class RelationshipProperties extends React.Component {
           >
             Delete
           </button>
-      { /*   <button id='drag' className="buttonmenu" 
-          style={{cursor:'pointer', border:'none',outline:'none',
-          fontSize:17, backgroundColor: '#f2f2f2', 
-          fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}} 
-          onMouseDown={(e) =>this.dragMouseDown(e)}
-         >Drag</button>  */}
+   
         </div>
       </div>
     );
