@@ -8,6 +8,7 @@ import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 import { exportdiagram } from "../../global/diagramRequests";
 import { connect } from "react-redux";
+import {serverHost} from '../../global/constants'
 import {
   repositionComponents,
   resetMeta,
@@ -81,6 +82,103 @@ const ImportExportMenuListComposition = (props) => {
       })
       .catch(() => {});
   };
+  const handleSubmit = () => {
+ 
+
+    var state = [];
+    var relationships = [];
+
+    state.push("# Entities ");
+    for (let i in props.components.entities) {
+      state.push(" ");
+      state.push("[" + props.components.entities[i].name + "]  ");
+
+      for (let j in props.components.attributes) {
+        if (
+          props.components.attributes[j].parentId ===
+          props.components.entities[i].id
+        ) {
+          if (props.components.attributes[j].type.unique) {
+            state.push("  *"  + props.components.attributes[j].name);
+          } else {
+            state.push("  " + props.components.attributes[j].name);
+          }
+        }
+      }
+    }
+    state.push(" ");
+    state.push("# Relationships");
+    state.push(" ");
+    for (let i in props.components.relationships) {
+      if (props.components.relationships[i].connections.length === 2) {
+        for (let j in props.components.relationships[i].connections) {
+          var min = props.components.relationships[i].connections[j].min;
+          var max = props.components.relationships[i].connections[j].max;
+          if (min === "zero" && max === "one") {
+            var cardinality = "?";
+          } else if (min === "zero" && max === "many") {
+            cardinality = "*";
+          } else if (min === "one" && max === "one") {
+            cardinality = "1";
+          } else if (min === "one" && max === "many") {
+            cardinality = "+";
+          } else cardinality = "";
+
+          relationships.push(
+            props.components.entities.find(
+              (entity) =>
+                entity.id ===
+                props.components.relationships[i].connections[j].connectId
+            ).name
+          );
+          relationships.push(cardinality);
+        }
+      }
+    }
+    for (var r = 0; r < relationships.length; r += 4) {
+      state.push(
+        relationships[r] +
+          " " +
+          relationships[r + 1] +
+          "--" +
+          relationships[r + 3] +
+          " " +
+          relationships[r + 2]
+      );
+    }
+    console.log(relationships);
+   
+   /* const components = {
+      state,
+    };
+
+    axios
+      .post(serverHost +"/create", components)        //na to allaksw se serverHost!
+      .then(() => console.log("submitted"))
+      .catch((err) => {
+        console.error(err);
+      });
+     
+      */
+      var surfaceState = JSON.stringify(state, null,2 );
+
+      var surfaceStateTxt= surfaceState.replace(/,/g, '').replace(/"/g, '')/*.replace(/^\[/,'')*/.replace(/\[/,'').replace(/[ \]]*$/,'')
+  const element = document.createElement('a');
+  const file = new Blob([surfaceStateTxt], {
+    type: "text/plain; charset-utf-8"
+  });
+   
+  element.href=URL.createObjectURL(file);
+  element.download = 'BurntSushi.txt';
+  document.body.appendChild(element);
+  element.click();
+  
+    };
+
+
+
+
+
 
   // Runs when user clicks to select file for import
   const importDiagram = (e) => {
@@ -300,6 +398,26 @@ const ImportExportMenuListComposition = (props) => {
                         Export Image
                       </a>
                     </MenuItem>
+                    {/* <MenuItem>
+                      
+                  <form onSubmit={handleSubmit}>
+            <button //creating Share button
+            onClick={handleSubmit}
+              className="tools-button-blue"
+              type="submit"
+            >
+               Export BurntSushi file
+            </button>
+               </form>
+               </MenuItem>*/}
+               <MenuItem
+                      type="button"
+                      onClick={()=>handleSubmit()}
+                    >
+                    Export BurntSushi file
+                    </MenuItem>
+                     
+                   
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
