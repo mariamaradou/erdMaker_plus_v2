@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [headerNavListActive, setHeaderNavListActive] = useState(false);
   const headerLinks = [
+    {label: 'Tutorial', link: "/tutorial", type:'morext'},
     { label: "About", link: "/about", type: "int" },
     {
       label: "Github",
@@ -25,7 +26,8 @@ const Header = () => {
         <Link className="nav__link" to={link.link} onClick={() => setHeaderNavListActive(!headerNavListActive)}>
           {link.label}
         </Link>
-      ) : (
+      ) : 
+      (
         <a className="nav__link" href={link.link} target="_blank" rel="noopener noreferrer">
           {link.label}
         </a>
