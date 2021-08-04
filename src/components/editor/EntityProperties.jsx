@@ -128,7 +128,7 @@ class EntityProperties extends React.Component {
           <input
            /* className="big-editor-input" */
            //new
-           style={{outline: 'none',border:'none',margin: 3}}
+           style={{outline: 'none',border:'none',margin: 3, width:'220px', paddingLeft: '6px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
            //
            placeholder="Set entity name"
             type="text"
@@ -155,7 +155,7 @@ class EntityProperties extends React.Component {
               this.props.deleteEntity({ id: this.props.selector.current.id });
               this.props.deselect();
             }
-            else if (event.keyCode===27){ this.props.deselect(); }
+            else if (event.keyCode===27 || event.keyCode===13){ this.props.deselect(); }
           }}
           
             

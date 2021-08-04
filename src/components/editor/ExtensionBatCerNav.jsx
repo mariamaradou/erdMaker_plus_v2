@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updatePositionExtension, updateInitialPositionExtension, select, repositionComponents } from "../../actions/actions";
+import { updatePositionExtension, deselect,updateInitialPositionExtension, select, repositionComponents } from "../../actions/actions";
 import { Group, Circle } from "react-konva";
 import { stageWidth, stageHeight, extensionRadius, dragBoundOffset } from "../../global/constants";
 
@@ -72,14 +72,41 @@ componentWillUnmount(){
           this.props.select({
             type: "extension",
             id: this.props.id,
+            parentEntity: null,
             parentId: this.props.parentId,
+            attrNum:null,
+            value:true
           });
         }}
+        onMouseOver={(e) => {
+          document.getElementsByClassName('stage')[0].focus();
+          this.props.deselect();
+          this.props.select({
+            type: "extension",
+            id: this.props.id,
+            parentEntity: null,
+            parentId: this.props.parentId,
+            attrNum:null,
+            value:false
+           
+          }); 
+          
+        }}
+        onMouseOut={(e) => {
+          if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+            this.props.deselect();
+          }
+         
+         
+          }}
         onClick={() => {
           this.props.select({
             type: "extension",
             id: this.props.id,
+            parentEntity: null,
             parentId: this.props.parentId,
+            attrNum:null,
+            value:true
           });
           
           document.getElementsByClassName('react-contextmenu')[0].style.display='none'
@@ -90,13 +117,18 @@ componentWillUnmount(){
       
         <Circle
      
-          radius={10}
-         onMouseOver={(e)=>{if  (this._isMounted)this.setState({opacity:0.4})}}
+          radius={extensionRadius}
+         onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
          onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}
          opacity={this.state.opacity}
-          fill={this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"
-          ? "red"
-          : "black"}
+         stroke={
+          this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"
+            ? "red"
+            : "black"
+        }
+        
+        strokeWidth={0.5}
+          fill={'lightgrey'}
       
         />
         
@@ -115,6 +147,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   updatePositionExtension,
+  deselect,
   updateInitialPositionExtension,
   select,
   repositionComponents,

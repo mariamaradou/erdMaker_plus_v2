@@ -48,7 +48,7 @@ import {
     props.selector.current.type === "relationship" || props.selector.current.type === "extension"
       ? props.stager.sidepanelWidth.wide
       : props.stager.sidepanelWidth.standard;
-  var sidepanelWidth = sidepanelWidthOriginal - 17;
+  var sidepanelWidth = sidepanelWidthOriginal -10;
 
   var sidepanelHeight = // Wider sidepanel for relationships
     props.selector.current.type === "relationship" || props.selector.current.type === "extension"

@@ -92,8 +92,32 @@ class AttributeKorth extends React.Component {
               type: "attribute",
               id: this.props.id,
               parentId: this.props.parentId,
+              attrNum:this.props.attrNum,
+              parentEntity: this.props.parentEntity,
+              value:true
             });
           }}
+          onMouseOver={(e) => {
+            document.getElementsByClassName('stage')[0].focus();
+            this.props.deselect();
+            this.props.select({
+              type: "attribute",
+              id: this.props.id,
+              parentId: this.props.parentId,
+              attrNum:this.props.attrNum,
+              parentEntity: this.props.parentEntity,
+              value:false
+             
+            }); 
+           
+          }}
+          onMouseOut={(e) => {
+            if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+              this.props.deselect();
+            }
+           
+           
+            }}
           onClick={() => {
            
             this.props.deselect();
@@ -101,6 +125,9 @@ class AttributeKorth extends React.Component {
               type: "attribute",
               id: this.props.id,
               parentId: this.props.parentId,
+              attrNum:this.props.attrNum,
+              parentEntity: this.props.parentEntity,
+              value:true
             });
             document.getElementsByClassName('react-contextmenu')[0].style.display='none'
           }}

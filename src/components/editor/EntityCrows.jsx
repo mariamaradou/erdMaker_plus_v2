@@ -210,10 +210,33 @@ class EntityCrows extends React.Component {
           this.props.select({
             type: "entity",
             id: this.props.id,
-            parentId: null
+            parentId: null,
+            attrNum:null,
+            parentEntity: null,
+            value:true
           });
         }}
-       
+        onMouseOver={(e) => {
+          document.getElementsByClassName('stage')[0].focus();
+          this.props.deselect();
+          this.props.select({
+            type: "entity",
+            id: this.props.id,
+            attrNum:null,
+            parentId: null,
+            parentEntity: null,
+            value:false
+           
+          }); 
+          
+        }}
+        onMouseOut={(e) => {
+          if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+            this.props.deselect();
+          }
+         
+         
+          }}
         onClick={() => {
           
           this.setState({clicked:!this.state.clicked})
@@ -224,8 +247,11 @@ class EntityCrows extends React.Component {
           this.props.select({
             type: "entity",
             id: this.props.id,
+            attrNum:null,
             parentId: null,
-            selection:this.state.clicked
+            parentEntity: null,
+            selection:this.state.clicked,
+            value:true
             
           });
           document.getElementsByClassName('react-contextmenu')[0].style.display='none'

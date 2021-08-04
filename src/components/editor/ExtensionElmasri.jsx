@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updatePositionExtension, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
+import { updatePositionExtension,deselect, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
 import { Group, Circle, Line, Text } from "react-konva";
 import { stageWidth, stageHeight, extensionRadius, fontSize, dragBoundOffset } from "../../global/constants";
 var pixelWidth = require("string-pixel-width");
@@ -74,10 +74,30 @@ extensionLimit=(e)=>{
         y={this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'?this.props.y-17: this.props.y}
      draggable={     this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'? false: true}
         dragBoundFunc={(pos) => this.stageBound(pos)}
-        onMouseOver={ ()=> this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+        onMouseOver={ ()=> {
+          document.getElementsByClassName('stage')[0].focus();
+          this.props.deselect();
+          this.props.select({
+            type: "extension",
+            id: this.props.id,
+            attrNum:null,
+            parentEntity: null,
+            parentId: this.props.parentId,
+            value:false
+           
+          }); 
+         
+          this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
       this.setState({shadowOffset:0.5, fill:'lightgrey'}):  this.setState({shadowOffset:0, fill:'white'})}
-      onMouseOut ={() =>this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
-       this.setState({shadowOffset:0, fill:'white'}):null}
+    }
+      onMouseOut ={() =>{
+        if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+          this.props.deselect();
+        }
+       
+        this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+       this.setState({shadowOffset:0, fill:'white'}):  this.setState({shadowOffset:0, fill:'white'})}
+      }
         onDragStart={(e) => {
           this.props.updateInitialPositionExtension({
             id: this.props.id,
@@ -98,13 +118,20 @@ extensionLimit=(e)=>{
             type: "extension",
             id: this.props.id,
             parentId: this.props.parentId,
+            attrNum:null,
+            parentEntity: null,
+            value:true
           });
         }}
+        
         onClick={() => {
           this.props.select({
             type: "extension",
             id: this.props.id,
+            attrNum:null,
+            parentEntity: null,
             parentId: this.props.parentId,
+            value:true
           });
           document.getElementById('type').focus()
           document.getElementsByClassName('react-contextmenu')[0].style.display='none'
@@ -132,7 +159,7 @@ extensionLimit=(e)=>{
           strokeWidth={0.5}
         />
         
-        <Text text={text} fontStyle={"bold"} opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
+        <Text text={text} fontStyle={"bold"}  listening={false} opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
       </Group>
       
     );
@@ -147,6 +174,7 @@ export const ExtensionSpline = (props) => {
       y={props.y}
       rotation={props.angle}
       stroke={"black"}
+     
       strokeWidth={0.5}
       tension={0.5}
       points={[-15, -5, 0, 0, 15, -5]}
@@ -162,6 +190,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   updatePositionExtension,
+  deselect,
   updateInitialPositionExtension,
   select,
   modifyExtension,

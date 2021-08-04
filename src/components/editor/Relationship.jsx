@@ -134,15 +134,46 @@ class Relationship extends React.Component {
           this.props.select({
             type: "relationship",
             id: this.props.id,
+            parentEntity: null,
+            attrNum:null,
             parentId: null,
+            value:true
           });
         }}
-        onClick={() => {
+        onMouseOver={(e) => {
+          document.getElementsByClassName('stage')[0].focus();
           this.props.deselect();
           this.props.select({
             type: "relationship",
             id: this.props.id,
+            attrNum:null,
+            parentEntity: null,
             parentId: null,
+            value:false
+           
+          }); 
+          
+        }}
+        onMouseOut={(e) => {
+          if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+            this.props.deselect();
+          }
+         
+         
+          }}
+          
+        onClick={() => {
+          
+          this.props.deselect();
+          this.props.select({
+            type: "relationship",
+            id: this.props.id,
+            attrNum:null,
+            parentEntity: null,
+            parentId: null,
+            value:true
+            
+         
           });
 
           document.getElementsByClassName(
@@ -191,6 +222,7 @@ class Relationship extends React.Component {
           strokeWidth={0}
           shadowColor="silver"
           stroke="black"
+          listening={false}
           // shadowOffsetX={4}
         //  shadowOffsetY={this.state.shadowOffsetY}
           align="center"
@@ -207,6 +239,8 @@ class Relationship extends React.Component {
               : textHeight / 2
           }
           onMouseOver={(e) => {
+            
+            
             if (
               this._isMounted &&
               (this.props.components.notation === "Information Engineering Notation" ||

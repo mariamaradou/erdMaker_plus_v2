@@ -170,7 +170,7 @@ class AttributeProperties extends React.Component {
         {/* Name:{" "} */}
           <input
           /*  className="big-editor-input" */
-          style={{outline: 'none',border:'none',margin: 3}}
+          style={{outline: 'none',border:'none',margin: 3, width:'220px', paddingLeft: '8px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
           placeholder="Set entity name"
             type="text"
             autoComplete="off"
@@ -185,14 +185,30 @@ class AttributeProperties extends React.Component {
             onChange={this.nameValueChange}
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to attribute
             onKeyDown={ (event) => {if (event.keyCode===46) {
-              this.props.deleteChildren({ id: this.props.selector.current.id });
+           
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
-                
+                parentId: this.props.components.attributes[attributeIndex].parentId,
+                attrNum: this.props.components.attributes[attributeIndex].attrNum,
+               
               });
+
+              this.props.deleteChildren({ id: this.props.selector.current.id });
+           
+             if(this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" ||this.props.components.notation==="Barker Notation" || (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) ){
+              this.props.updateAttributeCrows({
+                idRight:this.props.components.attributes[attributeIndex].id,
+                id:  this.props.components.attributes[attributeIndex].parentId,
+                grandParent:this.props.components.attributes[attributeIndex].parentEntity,
+                dx: null,
+                dy: null,
+              });}
+
+              
+             
               this.props.deselect();
             }
-            else if (event.keyCode===27){this.props.deselect(); this.getStage();}
+            else if (event.keyCode===27 || event.keyCode===13){this.props.deselect(); this.getStage();}
           }}
           />
         </label>

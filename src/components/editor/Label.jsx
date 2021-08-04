@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updatePositionLabel,updateInitialPositionLabel, resizeLabel, select, repositionComponents } from "../../actions/actions";
+import { updatePositionLabel,updateInitialPositionLabel,deselect, resizeLabel, select, repositionComponents } from "../../actions/actions";
 import { Group, Rect, Line, Text } from "react-konva";
 import { stageWidth, stageHeight, resizeRectSize, fontSize, dragBoundOffset } from "../../global/constants";
 
@@ -130,17 +130,43 @@ class Label extends React.Component {
             this.props.select({
               type: "label",
               id: this.props.id,
+              attrNum:null,
               parentId: null,
+              parentEntity: null,
+              value:true
             });
           }}
          
-          
+          onMouseOver={(e) => {
+            document.getElementsByClassName('stage')[0].focus();
+           
+            this.props.select({
+              type: "label",
+              id: this.props.id,
+              attrNum:null,
+              parentId: null,
+              parentEntity: null,
+              value:false
+             
+            }); 
+           
+          }}
+          onMouseOut={(e) => {
+            if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+              this.props.deselect();
+            }
+           
+           
+            }}
           onClick={() => {
            
             this.props.select({
               type: "label",
               id: this.props.id,
+              attrNum:null,
+              parentEntity: null,
               parentId: null,
+              value:true
             });
             document.getElementById('text').focus()
             document.getElementById('text').select()
@@ -220,7 +246,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  
+  deselect,
   select,
   resizeLabel,
   updatePositionLabel,

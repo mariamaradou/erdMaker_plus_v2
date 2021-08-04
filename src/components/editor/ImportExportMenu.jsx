@@ -8,7 +8,7 @@ import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 import { exportdiagram } from "../../global/diagramRequests";
 import { connect } from "react-redux";
-import {serverHost} from '../../global/constants'
+
 import {
   repositionComponents,
   resetMeta,

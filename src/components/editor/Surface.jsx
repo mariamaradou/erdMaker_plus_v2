@@ -23,7 +23,15 @@ import { Provider, ReactReduxContext, connect } from "react-redux";
 import {
   deselect,
   select,
+  updateAttributeCrows,
   addEntity,
+  deleteChildren,
+  deleteAttribute,
+  deleteExtension,
+  deleteLabel,
+  deleteRelationship,
+  deleteConnection,
+  deleteEntity,
   addRelationship,
   modifyExtension,
   addLabel,
@@ -275,7 +283,9 @@ class Surface extends React.Component {
         <Attribute
           key={attribute.id}
           parentId={attribute.parentId}
+          attrNum={attribute.attrNum}
           id={attribute.id}
+          parentEntity={attribute.parentEntity}
           name={attribute.name}
           type={attribute.type}
           x={attribute.x
@@ -292,7 +302,9 @@ class Surface extends React.Component {
         <AttributeCrows
           key={attribute.id}
           parentId={attribute.parentId}
+          attrNum={attribute.attrNum}
           id={attribute.id}
+          parentEntity={attribute.parentEntity}
           name={attribute.name}
           type={attribute.type}
           x={attribute.initX}
@@ -307,8 +319,10 @@ class Surface extends React.Component {
     attributesList.push(
       <AttributeBatCerNav
         key={attribute.id}
+        attrNum={attribute.attrNum}
         parentId={attribute.parentId}
         id={attribute.id}
+        parentEntity={attribute.parentEntity}
         name={attribute.name}
         type={attribute.type}
         x={attribute.x}
@@ -325,8 +339,10 @@ class Surface extends React.Component {
      this.props.components.entities.find((entity)=>entity.id===attribute.parentId) || this.props.components.attributes.find((entity)=>entity.id===attribute.parentId)?
       <AttributeCrows
         key={attribute.id}
+        attrNum={attribute.attrNum}
         parentId={attribute.parentId}
         id={attribute.id}
+        parentEntity={attribute.parentEntity}
         name={attribute.name}
         type={attribute.type}
         x={attribute.initX}
@@ -335,6 +351,8 @@ class Surface extends React.Component {
       />
       :  <AttributeKorth
       key={attribute.id}
+      attrNum={attribute.attrNum}
+      parentEntity={attribute.parentEntity}
       parentId={attribute.parentId}
       id={attribute.id}
       name={attribute.name}
@@ -1066,9 +1084,9 @@ class Surface extends React.Component {
   };
   stageClicked = (e) => {
     console.log(this.props.components);
-    
+   
     if (e.target === e.target.getStage()) {
-     
+      document.getElementsByClassName('stage')[0].focus();
       this.props.deselect();
       this.setState({
         positionPr: e.evt.clientX + this.stage.scrollLeft,
@@ -1080,6 +1098,60 @@ class Surface extends React.Component {
   getStage = () => this.stage; // Get reference to the stage
 
   clickedButtons = (e) => {
+    if(e.keyCode === 46){
+      console.log(this.props.selector.current)
+      if(this.props.selector.current.type==='entity'){
+        this.props.deleteConnection({
+          id: null,
+          parentId: null,
+          connectId: this.props.selector.current.id,
+        });
+        this.props.deleteChildren({ id: this.props.selector.current.id });
+        this.props.deleteEntity({ id: this.props.selector.current.id });
+        this.props.deselect();
+      }
+      else if(this.props.selector.current.type==='attribute'){
+        this.props.deleteAttribute({
+          id: this.props.selector.current.id,
+          parentId: this.props.selector.current.parentId,
+          attrNum: this.props.selector.current.attrNum,
+         
+        });
+
+        this.props.deleteChildren({ id: this.props.selector.current.id });
+     
+       if(this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" ||this.props.components.notation==="Barker Notation" || (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity)) ){
+        this.props.updateAttributeCrows({
+          idRight:this.props.selector.current.id,
+          id:  this.props.selector.current.parentId,
+          grandParent:this.props.selector.current.parentEntity,
+          dx: null,
+          dy: null,
+        });}
+
+        
+       
+        this.props.deselect();
+      }
+      else if(this.props.selector.current.type==='relationship'){
+        this.props.deleteChildren({ id: this.props.selector.current.id });
+        this.props.deleteRelationship({
+          id: this.props.selector.current.id,
+        });
+        this.props.deselect();
+      }
+      else if(this.props.selector.current.type==='extension'){
+        this.props.deleteExtension({ id: this.props.selector.current.id, parentId: this.props.selector.current.parentId });
+        this.props.deselect();
+        document.getElementsByClassName('stage')[0].focus();
+      }
+      else if(this.props.selector.current.type ==='label'){
+        this.props.deleteLabel({
+          id: this.props.selector.current.id,
+        });
+        this.props.deselect();
+      }
+    }
     if (e.keyCode === 17) {
       //  console.log('state is: ',this.state)
     } else if (e.keyCode === 27) {
@@ -1208,6 +1280,7 @@ class Surface extends React.Component {
                     x: e.clientX + this.stage.scrollLeft,
                     y: e.clientY + this.stage.scrollTop,
                   });
+                  this.stage.focus();
                   this.props.select({
                     type: "entity",
                     id: this.props.components.count + 1,
@@ -1231,6 +1304,7 @@ class Surface extends React.Component {
                     x: e.clientX + this.stage.scrollLeft,
                     y: e.clientY + this.stage.scrollTop,
                   });
+                  this.stage.focus();
                   this.props.select({
                     type: "relationship",
                     id: this.props.components.count + 1,
@@ -1254,6 +1328,7 @@ class Surface extends React.Component {
                     x: e.clientX + this.stage.scrollLeft,
                     y: e.clientY + this.stage.scrollTop,
                   });
+                  this.stage.focus();
                   this.props.select({
                     type: "label",
                     id: this.props.components.count + 1,
@@ -1283,6 +1358,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   deselect,
   select,
+  deleteConnection,
+  updateAttributeCrows,
+  deleteEntity,
+  deleteAttribute,
+  deleteExtension,
+  deleteLabel,
+  deleteRelationship,
+  deleteChildren,
   modifyExtension,
   addEntity,
   addRelationship,

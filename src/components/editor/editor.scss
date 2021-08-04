@@ -117,6 +117,7 @@ hr{margin-top: 3px;
 
 .sidepanel-active-right {
   visibility: visible;
+
  // right: 0px;
   //transform: translateX(0%);
 }
@@ -214,20 +215,19 @@ hr{margin-top: 3px;
   //padding: 5px 10px;
   padding: 8px 20px ; //neo
   border: 0;
- // background-color: $noHoverColor;
+
   background: rgba(255, 255, 255, 0.410); //neo
  
-  //color: #fff;
   color: black;
   cursor: pointer;
   border-radius: 3px;
-  transition: all 250ms ease-in-out;
+  transition: all 180ms ease-in-out;
   cursor: pointer;
   
   margin: 0 0.5vw;
-  &:hover {
-    transform: scale(0.90);
-   // background-color: $hoverColor;
+  &:hover:enabled {
+   // transform: scale(0.90);
+    background-color: $hoverColor;
     
   }
   &:focus {
@@ -236,7 +236,7 @@ hr{margin-top: 3px;
 }
 
 .tools-button-blue {
-  @include toolsButton(#2154c4, #1441a1);
+  @include toolsButton(#2154c4, #acc5fa);
 }
 
 .tools-button-blue:disabled{
@@ -247,7 +247,7 @@ hr{margin-top: 3px;
 
 .tools-button-red {
   @include unselectableText();
-  @include toolsButton(#b61127, #8a0d1e);
+  @include toolsButton(#b61127, rgb(230, 61, 68));
   min-width: 16vw;
 }
 
@@ -342,6 +342,7 @@ hr{margin-top: 3px;
     text-align: left;
     padding: 4px;
   }
+
 
   input[type="radio"] {
     margin-right: 5px;

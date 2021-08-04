@@ -115,7 +115,7 @@ class RelationshipProperties extends React.Component {
             /*className="big-editor-input"*/
             type="text"
             autoComplete="off"
-            style={{outline: 'none',border:'none',margin: 3}}
+            style={{outline: 'none',border:'none',margin: 3, width:'280px', paddingLeft: '6px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
             placeholder="Set relationship name"
             name="name"
             id="name"
@@ -135,7 +135,7 @@ class RelationshipProperties extends React.Component {
               });
               this.props.deselect();
             }
-            else if (event.keyCode===27){this.props.deselect(); this.getStage()}
+            else if (event.keyCode===27 || event.keyCode===13){this.props.deselect(); this.getStage()}
           }}
             //////////////
           />

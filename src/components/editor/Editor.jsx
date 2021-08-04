@@ -81,30 +81,32 @@ class Editor extends React.Component {
   
  
   clicked = (e) => {
-   // e.preventDefault();
+ 
   
-    if (  e.key==='z' || e.key==='Alt' ) {
+    if (  e.key==='z' || e.key==='Alt' || e.key==='ζ' ) {
       keys.push(e.key)
     
     
-    if(keys[0]==='Alt' && keys[1]==='z'){
+    if(keys[0]==='Alt' && (keys[1]==='z' || keys[1]==='ζ')){
      
       document.getElementsByClassName('undo tools-button-blue')[0].click()
        document.getElementsByClassName('stage')[0].focus();}
+      
     }
  
-    else if  (  e.key==='y' || e.key==='Alt' ) {
+    else if  ( e.key==='υ' || e.key==='y' || e.key==='Alt' ) {
       keys.push(e.key)
     
     
-    if(keys[0]==='Alt' && keys[1]==='y'){
+    if(keys[0]==='Alt' && (keys[1]==='y' || keys[1]==='υ' )){
      
       document.getElementsByClassName('redo tools-button-blue')[0].click()
        document.getElementsByClassName('stage')[0].focus();}
     }
    }
    unclicked = (e) => {
-    // e.preventDefault();
+
+  
       keys=[]
    
      

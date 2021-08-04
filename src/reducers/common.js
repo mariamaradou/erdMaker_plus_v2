@@ -28,8 +28,12 @@ export const selectionReducer = (state = selectionInitialState, action) => {
           type: action.payload.type,
           id: action.payload.id,
           parentId: action.payload.parentId,
+          parentEntity: action.payload.parentEntity,
+          attrNum: action.payload.attrNum
         },
-        selectionExists: true,
+        selectionExists: action.payload.value,
+        
+        
       };
     case "DESELECT":
      

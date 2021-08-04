@@ -86,13 +86,40 @@ componentDidMount(){ if(this.selected===true)  document.getElementById('type').f
             type: "extension",
             id: this.props.id,
             parentId: this.props.parentId,
+            attrNum:null,
+            parentEntity: null,
+            value:true
           });
         }}
-        onClick={() => {
+        onMouseOver={(e) => {
+          
+         
           this.props.select({
             type: "extension",
             id: this.props.id,
             parentId: this.props.parentId,
+            parentEntity: null,
+            attrNum:null,
+            value:false
+           
+          }); 
+          
+        }}
+        onMouseOut={(e) => {
+          if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+            this.props.deselect();
+          }
+         
+         
+          }}
+        onClick={() => {
+          this.props.select({
+            type: "extension",
+            id: this.props.id,
+            parentEntity: null,
+            parentId: this.props.parentId,
+            attrNum:null,
+            value:true
           });
           document.getElementById('type').focus()
           document.getElementsByClassName('react-contextmenu')[0].style.display='none'

@@ -112,7 +112,7 @@ componentDidMount() {
     return (
       <div className="sidepanel-content">
         {/*<h3>Extension</h3>*/}
-        <div /*className="extension-group"*/ style={{marginBottom: 5}}>
+        <div /*className="extension-group"*/ style={{marginBottom: 5, padding: '6px 0px 0px 6px'}}>
           Type:
           <select
             id="type"
@@ -122,10 +122,10 @@ componentDidMount() {
              this.props.deleteExtension({ id: this.props.selector.current.id, parentId: this.props.selector.current.parentId });
               this.props.deselect();
               document.getElementsByClassName('stage')[0].focus();
-              console.log('clicked extention sth')
+              
              
             }
-          else if(event.keyCode===27){
+          else if(event.keyCode===27 || event.keyCode===13){
           this.props.deselect();
           document.getElementsByClassName('stage')[0].focus();}} }
           >
@@ -188,14 +188,14 @@ componentDidMount() {
 const Specialize = (props) => {
   return (
     <>
-      <div /*className="extension-group"*/ style={{marginBottom: 5}}>
+      <div /*className="extension-group"*/ style={{marginBottom: 5, padding: '6px 0px 0px 6px'}}>
         Participation:
         <select id="participation" value={props.extension.participation} onChange={props.handleModifyExtension}>
           <option value="partial">Partial</option>
           <option value="total">Total</option>
         </select>
       </div>
-      <div /*className="extension-group"*/ style={{marginBottom: 5}}>
+      <div /*className="extension-group"*/ style={{marginBottom: 5, padding: '6px 0px 0px 6px'}}>
         Cardinality:
         <select id="cardinality" value={props.extension.cardinality} onChange={props.handleModifyExtension}>
           <option value="disjoint">Disjoint</option>
@@ -211,7 +211,7 @@ const Specialize = (props) => {
 const Union = (props) => {
   return (
     <>
-      <div className="extension-group">
+      <div className="extension-group" style={{marginBottom: 5, padding: '6px 0px 0px 6px'}}>
         Participation:
         <select id="participation" value={props.extension.participation} onChange={props.handleModifyExtension}>
           <option value="partial">Partial</option>

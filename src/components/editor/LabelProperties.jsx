@@ -48,7 +48,7 @@ const LabelProperties = (props) => {
           });
           props.deselect();
         }
-        else if (event.keyCode===27){ props.deselect();
+        else if (event.keyCode===27 || event.keyCode===13){ props.deselect();
           document.getElementsByClassName('stage')[0].focus();
          }
       }}

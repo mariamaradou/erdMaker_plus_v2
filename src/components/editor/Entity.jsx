@@ -158,22 +158,44 @@ class EntityChen extends React.Component {
           this.props.select({
             type: "entity",
             id: this.props.id,
-            parentId: null
+            attrNum:null,
+            parentId: null,
+            parentEntity: null,
+            value:true
           });
         }}
-       
-        onClick={() => {
-          
-          this.setState({clicked:!this.state.clicked})
-          console.log(!this.state.clicked)
-         this.props.deselect();
-          
-          //Emfanizetai to toolbar dipla kai dinei plirofories
+        onMouseOver={(e) => {
+          document.getElementsByClassName('stage')[0].focus();
+          this.props.deselect();
           this.props.select({
             type: "entity",
             id: this.props.id,
+            attrNum:null,
+            parentEntity:null,
             parentId: null,
-            selection:this.state.clicked
+            value:false
+           
+          }); 
+          
+        }}
+        onMouseOut={(e) => {
+          if(typeof document.getElementsByClassName('sidepanel sidepanel-active-right')[0]==='undefined'){
+            this.props.deselect();
+          }
+         
+         
+          }}
+        onClick={() => {
+           this.props.deselect();
+          
+         
+          this.props.select({
+            type: "entity",
+            id: this.props.id,
+            attrNum:null,
+            parentId: null,
+            parentEntity: null,
+            value:true
             
           });
           document.getElementsByClassName('react-contextmenu')[0].style.display='none'
