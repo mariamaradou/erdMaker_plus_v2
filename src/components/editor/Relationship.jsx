@@ -201,7 +201,7 @@ class Relationship extends React.Component {
               ? "red"
               : "black"
           }
-          strokeWidth={0.5}
+          strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"?0.7:0.5}
           lineJoin="bevel"
           closed
           points={[

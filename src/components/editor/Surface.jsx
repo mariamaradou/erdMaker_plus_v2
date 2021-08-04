@@ -1082,9 +1082,11 @@ class Surface extends React.Component {
     document.getElementsByClassName("react-contextmenu")[0].style.display =
       "block";
   };
+
+ 
   stageClicked = (e) => {
     console.log(this.props.components);
-   
+    
     if (e.target === e.target.getStage()) {
       document.getElementsByClassName('stage')[0].focus();
       this.props.deselect();
@@ -1093,13 +1095,14 @@ class Surface extends React.Component {
         positionY: e.evt.clientY + this.stage.scrollTop,
       });
     }
+    
   };
 
   getStage = () => this.stage; // Get reference to the stage
 
   clickedButtons = (e) => {
     if(e.keyCode === 46){
-      console.log(this.props.selector.current)
+     
       if(this.props.selector.current.type==='entity'){
         this.props.deleteConnection({
           id: null,
@@ -1226,13 +1229,13 @@ class Surface extends React.Component {
       <ReactReduxContext.Consumer>
         {({ store }) => (
           <div>
-            <ContextMenuTrigger id="same_unique_identifier" holdToDisplay={-1} /*disable={true otan mi syndedemenos xristis kai params}*/>
+            <ContextMenuTrigger id="same_unique_identifier" holdToDisplay={-1} disable={this.props.selector.current.type===null?false:true}>
               <div
                 ref={(ref) => (this.stage = ref)}
                 onScroll={this.propertiesHide}
                 className="stage"
                 tabIndex={1}
-                
+                onContextMenu={(e)=>e.preventDefault()}
                 onKeyDown={this.clickedButtons}
                 onFocus={() => this.menu()}
               >

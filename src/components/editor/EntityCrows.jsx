@@ -116,6 +116,7 @@ class EntityCrows extends React.Component {
          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
          fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
+         listening={false}
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"
               ? "red"
@@ -139,6 +140,7 @@ class EntityCrows extends React.Component {
               : "black"
           }
           strokeWidth={0.5}
+          listening={false}
           lineJoin="bevel"
           closed
           points={[
@@ -283,7 +285,7 @@ class EntityCrows extends React.Component {
               ? "red"
               : "black"
           }
-          strokeWidth={0.5}
+          strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"?0.7:0.5}
         />
         
        

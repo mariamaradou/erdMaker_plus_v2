@@ -127,7 +127,7 @@ componentWillUnmount(){
             : "black"
         }
         
-        strokeWidth={0.5}
+        strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
           fill={'lightgrey'}
       
         />

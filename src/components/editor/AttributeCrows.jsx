@@ -132,7 +132,7 @@ class AttributeCrows extends React.Component {
               ? "red"
               : "black"
           }
-          strokeWidth={0.5}
+          strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "attribute"?0.7:0.5}
           
         />
        

@@ -67,7 +67,7 @@ class EntityChen extends React.Component {
           y={-entityHeight / 2 + entityWeakOffset / 2}
           width={entityWidth - entityWeakOffset}
           height={entityHeight - entityWeakOffset}
-        
+          listening={false}
          // fill="#ffdd91"
          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
@@ -88,7 +88,7 @@ class EntityChen extends React.Component {
         fillLinearGradientEndPoint={{ x: 50, y: 50 }}
         fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
       
-          
+          listening={false}
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"
               ? "red"
@@ -188,7 +188,7 @@ class EntityChen extends React.Component {
         onClick={() => {
            this.props.deselect();
           
-         
+          
           this.props.select({
             type: "entity",
             id: this.props.id,
@@ -221,13 +221,16 @@ class EntityChen extends React.Component {
        
           fillLinearGradientStartPoint={{ x: -50, y: -50 }}
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
-          fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
+         fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
+        
+        
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"
               ? "red"
               : "black"
           }
-          strokeWidth={0.5}
+         
+          strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"?0.7:0.5}
           
         />
         {weakRect}
