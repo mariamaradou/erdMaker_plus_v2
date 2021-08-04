@@ -184,7 +184,7 @@ class AttributeProperties extends React.Component {
             value={this.props.components.attributes[attributeIndex].name}
             onChange={this.nameValueChange}
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to attribute
-            onKeyDown={ (event) => {if (event.keyCode===46) {
+            onKeyDown={ (event) => {if (event.key==='Delete') {
            
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
@@ -208,7 +208,7 @@ class AttributeProperties extends React.Component {
              
               this.props.deselect();
             }
-            else if (event.keyCode===27 || event.keyCode===13){this.props.deselect(); this.getStage();}
+            else if (event.key==='Escape' || event.key==='Enter'){this.props.deselect(); this.getStage();}
           }}
           />
         </label>

@@ -145,7 +145,7 @@ class EntityProperties extends React.Component {
             value={this.props.components.entities[entityIndex].name}
             onChange={this.nameValueChange}
             //prosthesa to kleidi delete wste otan to pataw na diagrafetai h ontotita
-            onKeyDown={ (event) => {if (event.keyCode===46) {
+            onKeyDown={ (event) => {if (event.key==='Delete') {
               this.props.deleteConnection({
                 id: null,
                 parentId: null,
@@ -155,7 +155,7 @@ class EntityProperties extends React.Component {
               this.props.deleteEntity({ id: this.props.selector.current.id });
               this.props.deselect();
             }
-            else if (event.keyCode===27 || event.keyCode===13){ this.props.deselect(); }
+            else if (event.key==='Escape' || event.key==='Enter'){ this.props.deselect(); }
           }}
           
             

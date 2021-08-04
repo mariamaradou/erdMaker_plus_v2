@@ -48,15 +48,16 @@ const ConvertTo = (props) => {
 
   const options = [
     "Elmasri & Navathe Notation",
+    "Crow's foot Notation",
     "Min-Max/ISO Notation",
     "Information Engineering Notation",
     "Bachman Notation",
     "Barker Notation",
     "Batini, Ceri & Navathe Notation",
     "Teorey Notation",
-    "Korth, Silberschatz & Sudarshan"
-    /*"IDEF1X",
-    "UML Notation"*/
+    "Korth, Silberschatz & Sudarshan",
+    
+    /*"UML Notation"*/
   ];
  
   const [selectedIndex, setSelectedIndex] = React.useState(options.indexOf(props.components.notation));
@@ -90,6 +91,14 @@ const ConvertTo = (props) => {
       case "Elmasri & Navathe Notation":
         props.setParticipationDirection({
           valuePart:'Look Here'
+        })
+        props.setCardinalityDirection({
+          valueDir:'Look Across'
+        })
+        break;
+        case "Crow's foot Notation":
+        props.setParticipationDirection({
+          valuePart:'Look Across'
         })
         props.setCardinalityDirection({
           valueDir:'Look Across'
@@ -144,10 +153,10 @@ const ConvertTo = (props) => {
         })
         break;
       default:
-        this.props.setParticipationDirection({
+        props.setParticipationDirection({
           valuePart:'Look Here'
         })
-        this.props.setCardinalityDirection({
+        props.setCardinalityDirection({
           valueDir:'Look Across'
         })
         break;

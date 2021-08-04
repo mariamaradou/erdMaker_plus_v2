@@ -118,14 +118,14 @@ componentDidMount() {
             id="type"
             value={this.props.components.extensions[extensionIndex].type}
             onChange={this.handleModifyExtension}
-            onKeyDown={ (event) => {if (event.keyCode===46) {
+            onKeyDown={ (event) => {if (event.key==='Delete') {
              this.props.deleteExtension({ id: this.props.selector.current.id, parentId: this.props.selector.current.parentId });
               this.props.deselect();
               document.getElementsByClassName('stage')[0].focus();
               
              
             }
-          else if(event.keyCode===27 || event.keyCode===13){
+          else if(event.key==='Escape' || event.key==='Enter'){
           this.props.deselect();
           document.getElementsByClassName('stage')[0].focus();}} }
           >

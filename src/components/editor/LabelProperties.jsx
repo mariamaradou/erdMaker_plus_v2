@@ -42,13 +42,13 @@ const LabelProperties = (props) => {
             text: e.target.value,
           })
         }
-        onKeyDown={ (event) => {if (event.keyCode===46) {
+        onKeyDown={ (event) => {if (event.key==='Delete') {
           props.deleteLabel({
             id: props.selector.current.id,
           });
           props.deselect();
         }
-        else if (event.keyCode===27 || event.keyCode===13){ props.deselect();
+        else if (event.key==='Escape' || event.key==='Enter'){ props.deselect();
           document.getElementsByClassName('stage')[0].focus();
          }
       }}

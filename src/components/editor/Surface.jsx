@@ -172,6 +172,9 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Entity = EntityChen;
         break;
+        case "Crow's foot Notation":
+           Entity = EntityChen;
+          break;
       case "Information Engineering Notation":
         Entity = EntityCrows;
         break;
@@ -220,6 +223,9 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Extension = ExtensionElmasri;
         break;
+        case "Crow's foot Notation":
+           Extension = ExtensionElmasri;
+          break;
       case "Information Engineering Notation":
         Extension = ExtensionElmasri;
         break;
@@ -277,7 +283,7 @@ class Surface extends React.Component {
 
   drawAttributes =() => {
     var attributesList = [];
-    if(this.props.components.notation==="Elmasri & Navathe Notation" || this.props.components.notation==="Teorey Notation"  || this.props.components.notation==="Min-Max/ISO Notation"){
+    if(this.props.components.notation==="Elmasri & Navathe Notation" || this.props.components.notation==="Crow's foot Notation" || this.props.components.notation==="Teorey Notation"  || this.props.components.notation==="Min-Max/ISO Notation"){
       this.props.components.attributes.map((attribute) =>
       attributesList.push(
         <Attribute
@@ -881,6 +887,9 @@ class Surface extends React.Component {
             case "Elmasri & Navathe Notation":
               CardPart = AnchorChen;
               break;
+              case "Crow's foot Notation":
+                CardPart = Anchor;
+                break;
             case "Min-Max/ISO Notation":
               CardPart = AnchorMinMax;
               break;
@@ -1101,7 +1110,7 @@ class Surface extends React.Component {
   getStage = () => this.stage; // Get reference to the stage
 
   clickedButtons = (e) => {
-    if(e.keyCode === 46){
+    if(e.key === 'Delete'){
      
       if(this.props.selector.current.type==='entity'){
         this.props.deleteConnection({
@@ -1155,12 +1164,10 @@ class Surface extends React.Component {
         this.props.deselect();
       }
     }
-    if (e.keyCode === 17) {
-      //  console.log('state is: ',this.state)
-    } else if (e.keyCode === 27) {
+    if (e.key === 'Escape') {
       this.props.deselect();
       this.getStage();
-    } else if (e.keyCode === 82) {
+    } else if (e.key=== 'r' || e.key=== 'ρ' ) {
       this.props.addRelationship({
         x:
           this.state.positionPr == null
@@ -1179,7 +1186,7 @@ class Surface extends React.Component {
         parentId: null,
       });
       this.setState({ toolsListActive: !this.state.toolsListActive });
-    } else if (e.keyCode === 69) {
+    } else if (e.key === 'e' || e.key=== 'ε') {
       this.props.addEntity({
         x:
           this.state.positionPr == null
@@ -1198,7 +1205,7 @@ class Surface extends React.Component {
         parentId: null,
       });
       this.setState({ toolsListActive: !this.state.toolsListActive });
-    } else if (e.keyCode === 76) {
+    } else if (e.key === 'l' || e.key=== 'λ') {
       this.props.addLabel({
         x:
           this.state.positionPr == null
