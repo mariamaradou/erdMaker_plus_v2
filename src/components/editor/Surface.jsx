@@ -175,6 +175,9 @@ class Surface extends React.Component {
         case "Crow's foot Notation":
            Entity = EntityChen;
           break;
+        case "UML Notation":
+          Entity= EntityCrows
+          break;
       case "Information Engineering Notation":
         Entity = EntityCrows;
         break;
@@ -227,6 +230,9 @@ class Surface extends React.Component {
            Extension = ExtensionElmasri;
           break;
       case "Information Engineering Notation":
+        Extension = ExtensionElmasri;
+        break;
+      case "UML Notation":
         Extension = ExtensionElmasri;
         break;
       case "Min-Max/ISO Notation":
@@ -302,7 +308,7 @@ class Surface extends React.Component {
       )
     );
     }
-    else if (this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" ||  this.props.components.notation==="Barker Notation"  ){
+    else if (this.props.components.notation==="Information Engineering Notation"   ||  this.props.components.notation==="UML Notation" || this.props.components.notation==="Bachman Notation" ||  this.props.components.notation==="Barker Notation"  ){
       this.props.components.attributes.map((attribute) =>
       attributesList.push(
         <AttributeCrows
@@ -338,7 +344,7 @@ class Surface extends React.Component {
     )
   );
    }
-    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan"){
+    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan" ){
       this.props.components.attributes.map((attribute) =>
      
     attributesList.push(
@@ -418,6 +424,7 @@ class Surface extends React.Component {
         if (
           // na  traviksw grammes an isxuoun oi parakatw sinthikes
           this.props.components.notation !== "Information Engineering Notation" &&
+          this.props.components.notation !== "UML Notation"  &&
           (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
           this.props.components.notation !== "Bachman Notation" &&
           this.props.components.notation !== "Barker Notation" 
@@ -835,6 +842,7 @@ class Surface extends React.Component {
           if (
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
+            this.props.components.notation === 'UML Notation' || 
             this.props.components.notation === "Barker Notation" ||
             this.props.components.notation === "Korth, Silberschatz & Sudarshan" 
           ) {
@@ -887,9 +895,12 @@ class Surface extends React.Component {
             case "Elmasri & Navathe Notation":
               CardPart = AnchorChen;
               break;
-              case "Crow's foot Notation":
-                CardPart = Anchor;
-                break;
+            case "Crow's foot Notation":
+              CardPart = Anchor;
+              break;
+            case "UML Notation":
+              CardPart = AnchorMinMax;
+              break;
             case "Min-Max/ISO Notation":
               CardPart = AnchorMinMax;
               break;

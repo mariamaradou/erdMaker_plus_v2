@@ -187,11 +187,12 @@ class Relationship extends React.Component {
           fillLinearGradientStartPoint={{ x: -50, y: -50 }}
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
-          opacity={
-           /* this.props.components.hideRelationships ||*/
+          opacity={                                                      //kryvw ton rompo tou relationship
+         
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
-            this.props.components.notation === "Barker Notation"
+            this.props.components.notation === "Barker Notation" || 
+            this.props.components.notation === "UML Notation"
               ? 0
               : 1
           }

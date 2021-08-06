@@ -47,13 +47,9 @@ const componentsReducer = (state = initialState, action) => {
           ...state,
           notation: action.payload.notation
         }
-   /*  case "DISPLAY_RELATIONSHIP":
-       return {
-         ...state,
-         hideRelationships: action.payload.hide
-       }
-*/
+  
     case "SET_CARDINALITY_DIRECTION":
+      console.log('dosos')
        return {
          ...state,
          
@@ -579,11 +575,11 @@ const componentsReducer = (state = initialState, action) => {
 
       case "UPDATE_ATTRIBUTE_CROWS":
         if( action.payload.grandParent!==action.payload.id){
-        getChildren(childrenList, state.attributes, action.payload.grandParent);  console.log('ok')}
+        getChildren(childrenList, state.attributes, action.payload.grandParent);  }
        
-         else {getChildren(childrenList, state.attributes,action.payload.id ); console.log('okkk')}
+         else {getChildren(childrenList, state.attributes,action.payload.id ); }
         
-        console.log(childrenList)
+       
         return {
           ...state,
           attributes: state.attributes.map((attribute) =>
@@ -596,8 +592,10 @@ const componentsReducer = (state = initialState, action) => {
                   y: attribute.y + action.payload.dy,
                   initX:  state.entities.find(x => x.id === action.payload.id)? 
                   state.entities.find(x => x.id === action.payload.id).x: 
-                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id))?
-                  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).x:
+                //  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id))?
+                state.entities.find(x => x.id === action.payload.grandParent)?
+                 // state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).x:
+                 state.entities.find(x => x.id === action.payload.grandParent).x:
                   state.relationships.find(x => x.id === action.payload.id)? 
                   state.relationships.find(x => x.id === action.payload.id).x:null
                   ,
