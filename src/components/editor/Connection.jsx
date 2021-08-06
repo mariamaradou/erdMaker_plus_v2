@@ -92,7 +92,7 @@ class Connection extends React.Component {
 
    /* var expandIcon = this.state.expand ? <ExpandLessIcon /> : <ExpandMoreIcon />;*/
  
-    return  this.props.components.notation!=="Min-Max/ISO Notation"?(
+    return  (this.props.components.notation!=="Min-Max/ISO Notation" && this.props.components.notation!=="UML Notation") ?(
       <div className="connection" style={{ paddingLeft: '6px', backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
         <div className="connection-input-group">
           <label>

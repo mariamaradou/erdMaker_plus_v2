@@ -49,7 +49,7 @@ const componentsReducer = (state = initialState, action) => {
         }
   
     case "SET_CARDINALITY_DIRECTION":
-      console.log('dosos')
+     
        return {
          ...state,
          
@@ -361,7 +361,25 @@ const componentsReducer = (state = initialState, action) => {
             connectionCount: newState.entities[i].connectionCount + 1,
           };
       }
+     
       return newState;
+   /*  return {
+       ...state,
+       relationships:state.relationships.map((relationship)=> relationship.id=== action.payload.parentId?
+       relationship.connections.map((connection)=> connection.id===action.payload.id?{
+      prevConnectId:connection.connectId,
+    ...connection,connectId: action.payload.connectId}:connection
+       )
+       : relationship),
+      
+       entities: state.entities.map((entity)=> entity.id===prevConnectId?
+       {...entity, connectionCount: entity.connectionCount-1}:
+       entity.id===action.payload.connectId?{
+         ...entity,connectionCount:entity.connectionCount+1
+       }: entity
+       )
+      
+     }*/
     case "MODIFY_CONNECTION":
       console.log(state.relationships.find((relationship) =>
       relationship.id === action.payload.parentId).connections.map((connection)   => connection.id=== action.payload.id  ))
@@ -410,7 +428,7 @@ const componentsReducer = (state = initialState, action) => {
         return newState;
       }
     case "ADD_ATTRIBUTE":
-      console.log( state.relationships.find(x => x.id === action.payload.id))
+ 
       return {
         ...state,
         attributes: [
@@ -430,7 +448,7 @@ const componentsReducer = (state = initialState, action) => {
             state.entities.find(x => x.id === action.payload.id).attributesNum :
            
            state.relationships.find(x => x.id === action.payload.id)?
-            state.relationships.find(x => x.id === action.payload.id).attrNum+1:
+            state.relationships.find(x => x.id === action.payload.id).attributesNum+1:
             state.attributes.find(x => x.id === action.payload.id).attrNum+1 // code about composite attribute
             ,
             parentId: action.payload.id,

@@ -232,10 +232,11 @@ class Relationship extends React.Component {
           height={textHeight}
           offsetX={relationshipTextWidth / 2}
           offsetY={
-         /*   this.props.components.hideRelationships ||*/
+        
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
-            this.props.components.notation === "Barker Notation"
+            this.props.components.notation === "Barker Notation" ||
+            this.props.components.notation === "UML Notation"
               ? textHeight / 1.9
               : textHeight / 2
           }

@@ -185,7 +185,7 @@ class AttributeProperties extends React.Component {
             onChange={this.nameValueChange}
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to attribute
             onKeyDown={ (event) => {if (event.key==='Delete') {
-           
+              
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
@@ -197,20 +197,31 @@ class AttributeProperties extends React.Component {
            
              if(this.props.components.notation==="Information Engineering Notation" || 
              this.props.components.notation==="Bachman Notation" ||
+            
              this.props.components.notation==="Barker Notation" || 
-             (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && 
-             this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) ){
-              this.props.updateAttributeCrows({
+             ( (this.props.components.notation=== "UML Notation" ) &&
+              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
+            ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
+              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
+              ){
+               
+             this.props.updateAttributeCrows({
                 idRight:this.props.components.attributes[attributeIndex].id,
                 id:  this.props.components.attributes[attributeIndex].parentId,
                 grandParent:this.props.components.attributes[attributeIndex].parentEntity,
                 dx: null,
                 dy: null,
-              });}
+              });
+             
+              
+              
+            
+            }
 
               
              
               this.props.deselect();
+             
             }
             else if (event.key==='Escape' || event.key==='Enter'){this.props.deselect(); this.getStage();}
           }}
@@ -333,7 +344,8 @@ class AttributeProperties extends React.Component {
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
-             this.props.components.notation==='UML Notation' ||
+             ( (this.props.components.notation=== "UML Notation" ) &&
+              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
               this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
               ){

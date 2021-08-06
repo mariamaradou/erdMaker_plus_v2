@@ -192,7 +192,7 @@ const ConvertTo = (props) => {
       } else if (
         option === "Information Engineering Notation" ||
         option === "Bachman Notation" ||
-        option === "UML Notation" || //kai dyadiki
+      
         option === "Barker Notation"
       ) {
         moveAttributetoManySide(option);

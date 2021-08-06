@@ -5,6 +5,7 @@ import Relationship from "./Relationship";
 import Attribute from "./Attribute";
 import EntityCrows from "./EntityCrows";
 import ExtensionElmasri from "./ExtensionElmasri";
+import ExtensionUML from "./ExtensionUML";
 import ExtensionBatCerNav from "./ExtensionBatCerNav";
 import Label from "./Label";
 import SpecificValues from "./SpecificValues";
@@ -14,6 +15,7 @@ import AnchorMinMax from "./AnchorMinMax";
 import AnchorBachman from "./AnchorBachman";
 import AnchorBarker from "./AnchorBarker";
 import AnchorKorth from "./AnchorKorth";
+import AnchorUML from "./AnchorUML";
 import { ExtensionSpline } from "./ExtensionElmasri";
 import { Stage, Layer, Line, Rect, Arrow, Group, Text } from "react-konva";
 import Properties from "./Properties";
@@ -233,7 +235,7 @@ class Surface extends React.Component {
         Extension = ExtensionElmasri;
         break;
       case "UML Notation":
-        Extension = ExtensionElmasri;
+        Extension = ExtensionUML;
         break;
       case "Min-Max/ISO Notation":
         Extension = ExtensionElmasri;
@@ -308,7 +310,7 @@ class Surface extends React.Component {
       )
     );
     }
-    else if (this.props.components.notation==="Information Engineering Notation"   ||  this.props.components.notation==="UML Notation" || this.props.components.notation==="Bachman Notation" ||  this.props.components.notation==="Barker Notation"  ){
+    else if (this.props.components.notation==="Information Engineering Notation"  || this.props.components.notation==="Bachman Notation" ||  this.props.components.notation==="Barker Notation"  ){
       this.props.components.attributes.map((attribute) =>
       attributesList.push(
         <AttributeCrows
@@ -344,7 +346,7 @@ class Surface extends React.Component {
     )
   );
    }
-    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan" ){
+    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan" || this.props.components.notation==="UML Notation" ){
       this.props.components.attributes.map((attribute) =>
      
     attributesList.push(
@@ -424,7 +426,7 @@ class Surface extends React.Component {
         if (
           // na  traviksw grammes an isxuoun oi parakatw sinthikes
           this.props.components.notation !== "Information Engineering Notation" &&
-          this.props.components.notation !== "UML Notation"  &&
+          (this.props.components.notation !== "UML Notation" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
           (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
           this.props.components.notation !== "Bachman Notation" &&
           this.props.components.notation !== "Barker Notation" 
@@ -472,7 +474,7 @@ class Surface extends React.Component {
               parentCoords.y,
             ]}
             dash={
-              this.props.components.notation === "Korth, Silberschatz & Sudarshan"
+              (this.props.components.notation === "Korth, Silberschatz & Sudarshan" ||  this.props.components.notation === "UML Notation" )
                 ? [33, 10]
                 : [0]
             }
@@ -524,11 +526,7 @@ class Surface extends React.Component {
           <Line
             
             stroke={"black"}
-           /* dash={
-              this.props.components.notation === "Korth, Silberschatz & Sudarshan" &&  this.props.components.extensions[i].participation === "total"
-                ? [33, 10]
-                : [0]
-            }*/
+           
             strokeWidth={0.5}
             points={ this.props.components.notation === "Korth, Silberschatz & Sudarshan" &&   this.props.components.extensions[i].cardinality==='overlap' ?
             [
@@ -547,8 +545,7 @@ class Surface extends React.Component {
           this.props.components.extensions[i].x,
 
         this.props.components.extensions[i].y,
-        //  this.props.components.extensions[i].x-40,        this is for batini, ceri & navathe (the line bending)
-        //  this.props.components.extensions[i].y,
+       
       
         ]
       }
@@ -605,7 +602,8 @@ class Surface extends React.Component {
           angle = angle - auxAngle;
           if (
             this.props.components.notation !== "Batini, Ceri & Navathe Notation" && 
-             this.props.components.notation !== "Korth, Silberschatz & Sudarshan" 
+             this.props.components.notation !== "Korth, Silberschatz & Sudarshan" &&
+             this.props.components.notation !== "UML Notation"
           ) {
             lineList.push(
               <ExtensionSpline
@@ -676,7 +674,8 @@ class Surface extends React.Component {
         continue;
       }
       lineList.push(
-        this.props.components.notation === "Batini, Ceri & Navathe Notation" || (this.props.components.notation ===  "Korth, Silberschatz & Sudarshan" && this.props.components.extensions[i].cardinality==='disjoint' ) ? (
+        this.props.components.notation === "Batini, Ceri & Navathe Notation" ||  this.props.components.notation === "UML Notation" ||
+        (this.props.components.notation ===  "Korth, Silberschatz & Sudarshan" && this.props.components.extensions[i].cardinality==='disjoint' ) ? (
           <Group key={keyIndex}>
             <Arrow
               stroke={"black"}
@@ -684,7 +683,7 @@ class Surface extends React.Component {
               fill={"black"}
               pointerLength={25}
               pointerWidth={15}
-              //rotation={this.props.angle}
+              visible={this.props.components.notation==='UML Notation'?false:true}
               points={
               
                 [
@@ -692,8 +691,7 @@ class Surface extends React.Component {
               this.props.components.extensions[i].y,
             anchor.x,
              anchor.y,
-            //  parentCoords.x,
-             // parentCoords.y+20,
+           
             ]} //to velaki gia na fainetai!
             ></Arrow>
              <Text text={'   total'} 
@@ -704,10 +702,11 @@ class Surface extends React.Component {
               angle={anchor.angle}></Text>
              
             <Line
-              stroke="purple"
+              stroke="black"
               strokeWidth={
-                (this.props.components.notation !==
-                  "Batini, Ceri & Navathe Notation" && this.props.components.notation !== "Korth, Silberschatz & Sudarshan" )&&
+                (this.props.components.notation !=="Batini, Ceri & Navathe Notation" && 
+                this.props.components.notation !== "Korth, Silberschatz & Sudarshan" && 
+                  this.props.components.notation !=="UML Notation") &&
                 this.props.components.extensions[i].participation === "total"
                   ? 3.5
                   : 0.5
@@ -715,8 +714,6 @@ class Surface extends React.Component {
               points={[
                 this.props.components.extensions[i].x,
                 this.props.components.extensions[i].y,
-               // parentCoords.x,
-                // parentCoords.y+20,  // prosoxi edw gia korth & silberschatz mono alliws thema me velaki
               anchor.x,
               anchor.y
               ]}
@@ -746,7 +743,9 @@ class Surface extends React.Component {
 
       // aspri grammi gia to efe tis diplis grammis se total kai partial participation
       if (
-        this.props.components.notation !== "Batini, Ceri & Navathe Notation" && this.props.components.notation !== "Korth, Silberschatz & Sudarshan"
+        this.props.components.notation !== "Batini, Ceri & Navathe Notation" && 
+        this.props.components.notation !== "Korth, Silberschatz & Sudarshan" &&
+        this.props.components.notation !== "UML Notation"
       ) {
         if (this.props.components.extensions[i].participation === "total" &&   this.props.components.extensions[i].type!=='aggregation' ) {
           lineList.push(
@@ -786,7 +785,8 @@ class Surface extends React.Component {
           angle = angle - auxAngle;
           if (
             this.props.components.notation !== "Batini, Ceri & Navathe Notation" &&
-            this.props.components.notation !== "Korth, Silberschatz & Sudarshan"
+            this.props.components.notation !== "Korth, Silberschatz & Sudarshan" &&
+            this.props.components.notation !== "UML Notation"
           ) {
             lineList.push(
               <ExtensionSpline
@@ -899,7 +899,7 @@ class Surface extends React.Component {
               CardPart = Anchor;
               break;
             case "UML Notation":
-              CardPart = AnchorMinMax;
+              CardPart = AnchorUML;
               break;
             case "Min-Max/ISO Notation":
               CardPart = AnchorMinMax;
@@ -1134,6 +1134,7 @@ class Surface extends React.Component {
         this.props.deselect();
       }
       else if(this.props.selector.current.type==='attribute'){
+              
         this.props.deleteAttribute({
           id: this.props.selector.current.id,
           parentId: this.props.selector.current.parentId,
@@ -1143,18 +1144,33 @@ class Surface extends React.Component {
 
         this.props.deleteChildren({ id: this.props.selector.current.id });
      
-       if(this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" ||this.props.components.notation==="Barker Notation" || (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" && this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity)) ){
-        this.props.updateAttributeCrows({
+       if(this.props.components.notation==="Information Engineering Notation" || 
+       this.props.components.notation==="Bachman Notation" ||
+      
+       this.props.components.notation==="Barker Notation" || 
+       ( (this.props.components.notation=== "UML Notation" ) &&
+        this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity))  ||
+      ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
+        this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity)) 
+        ){
+         
+       this.props.updateAttributeCrows({
           idRight:this.props.selector.current.id,
           id:  this.props.selector.current.parentId,
           grandParent:this.props.selector.current.parentEntity,
           dx: null,
           dy: null,
-        });}
+        });
+       
+        
+        
+      
+      }
 
         
        
         this.props.deselect();
+       
       }
       else if(this.props.selector.current.type==='relationship'){
         this.props.deleteChildren({ id: this.props.selector.current.id });
