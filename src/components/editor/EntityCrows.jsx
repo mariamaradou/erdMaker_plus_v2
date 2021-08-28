@@ -295,8 +295,9 @@ class EntityCrows extends React.Component {
         {associativeDiamond}
         
         <Text
+        
           text={this.props.name}
-          fontSize={fontSize}
+         fontSize={fontSize}
           align="center"
           verticalAlign="middle"
           width={entityTextWidthCrows}

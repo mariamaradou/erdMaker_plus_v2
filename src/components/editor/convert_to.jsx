@@ -184,7 +184,7 @@ const ConvertTo = (props) => {
         ) !== "undefined" &&
         (option === "Information Engineering Notation" ||
           option === "Bachman Notation" ||
-          option === "UML Notation" ||
+        
           option === "Barker Notation")
       ) {
         console.log("this notation doesnt accept n ary relationships. ");
@@ -193,7 +193,8 @@ const ConvertTo = (props) => {
         option === "Information Engineering Notation" ||
         option === "Bachman Notation" ||
       
-        option === "Barker Notation"
+        option === "Barker Notation" 
+      
       ) {
         moveAttributetoManySide(option);
       } else {

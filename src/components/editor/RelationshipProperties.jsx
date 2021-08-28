@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   addAttribute,
+  addEntity,
   setNameRelationship,
   setTypeRelationship,
   select,
@@ -72,6 +73,20 @@ class RelationshipProperties extends React.Component {
     var randomAngle = getRandomInt(0, 360);
     var xOffset = radius * Math.cos(randomAngle);
     var yOffset = radius * Math.sin(randomAngle);
+   if(this.props.components.notation==='UML Notation'){
+    this.props.addEntity({
+      x: this.props.components.relationships[relationshipIndex].x + xOffset,
+      y: this.props.components.relationships[relationshipIndex].y + yOffset,
+      parentId:this.props.selector.current.id,
+      nameUML: this.props.components.relationships[relationshipIndex].name
+    });
+    this.props.select({
+      type: "entity",
+      id: this.props.components.count + 1,
+      parentId: null,
+    });
+   }
+   else{
     this.props.addAttribute({
       id: this.props.selector.current.id,
       parentEntity:null,
@@ -84,6 +99,9 @@ class RelationshipProperties extends React.Component {
       id: this.props.components.count + 1,
       parentId: this.props.selector.current.id,
     });
+   }
+ 
+   
   };
 
   render() {
@@ -184,6 +202,7 @@ class RelationshipProperties extends React.Component {
            
             style={{ display: this.props.components.notation==='Information Engineering Notation' || 
             this.props.components.notation==='Bachman Notation' ||
+          
             this.props.components.notation==='Barker Notation'?
             'none': 'block',cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
             className='buttonmenu'
@@ -262,6 +281,7 @@ const mapDispatchToProps = {
   setNameRelationship,
   select,
   deselect,
+  addEntity,
   setTypeRelationship,
   deleteChildren,
   deleteRelationship,

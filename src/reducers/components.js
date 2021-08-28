@@ -72,6 +72,8 @@ const componentsReducer = (state = initialState, action) => {
           {
             id: state.count + 1,
             name: "<New>",
+            nameUML: action.payload.nameUML,          //for UML Notation
+            parentId: action.payload.parentId,      //for UML Notation
             x:action.payload.x,
             y:action.payload.y,
             type: "regular",
@@ -381,8 +383,7 @@ const componentsReducer = (state = initialState, action) => {
       
      }*/
     case "MODIFY_CONNECTION":
-      console.log(state.relationships.find((relationship) =>
-      relationship.id === action.payload.parentId).connections.map((connection)   => connection.id=== action.payload.id  ))
+     
     /* return {
         ...state,
         relationships: state.relationships.find((relationship) =>

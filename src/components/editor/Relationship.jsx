@@ -192,7 +192,9 @@ class Relationship extends React.Component {
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation" || 
-            this.props.components.notation === "UML Notation"
+            (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+              (relationship) => relationship.connections.length > 2
+            ) === "undefined")
               ? 0
               : 1
           }
@@ -205,7 +207,20 @@ class Relationship extends React.Component {
           strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"?0.7:0.5}
           lineJoin="bevel"
           closed
-          points={[
+          points={
+            (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+              (relationship) => relationship.connections.length > 2
+            ) !== "undefined")?
+            [
+            0,
+            -relationshipHeight/2, // TOP               //n-ary relationship se UML Notation
+            relationshipWidth/3,
+            0, // RIGHT
+            0,
+            relationshipHeight/2, // BOTTOM
+            -relationshipWidth/3,
+            0, // LEFT
+          ]:  [
             0,
             -relationshipHeight, // TOP
             relationshipWidth,
@@ -214,12 +229,16 @@ class Relationship extends React.Component {
             relationshipHeight, // BOTTOM
             -relationshipWidth,
             0, // LEFT
-          ]}
+          ]
+        }
         />
         {weakRelationshipRhombus}
         <Text
           text={this.props.name}
           fontSize={this.state.fontSize}
+          opacity={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+            (relationship) => relationship.connections.length > 2
+          ) !== "undefined")? 0: 1}
           strokeWidth={0}
           shadowColor="silver"
           stroke="black"

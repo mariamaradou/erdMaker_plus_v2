@@ -42,7 +42,7 @@ export const correctParticipation = (min,minAcross,relationship,participationDir
     participationDirection === "Look Here"
   ) {
     if (relationship.connections.length === 1) {    //sxesi me ena entity
-      console.log(k);
+     
       min = relationship.connections[k].min;
 
       return min;

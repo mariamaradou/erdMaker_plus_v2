@@ -210,6 +210,8 @@ class Surface extends React.Component {
           key={entity.id}
           attributesNum={entity.attributesNum}
           id={entity.id}
+          nameUML = {entity.nameUML}
+          parentId={entity.parentId}
           name={entity.name}
           type={entity.type}
           x={entity.x}
@@ -403,6 +405,8 @@ class Surface extends React.Component {
     function locateIndex(element) {
       return element.id === connectId;
     }
+
+   
 
     
 
@@ -805,7 +809,55 @@ class Surface extends React.Component {
       
     }
 
-    // This loop creates the lines that connect relationships with entities
+    // This loop creates the lines that connect relationships with entities-attributesUML
+
+    
+  for (let i in this.props.components.entities) {
+    
+        if (
+          // na  traviksw grammes an isxuoun oi parakatw sinthikes
+ 
+          this.props.components.notation === "UML Notation" 
+         
+        ){
+        connectId = this.props.components.entities[i].parentId;
+       
+        if (
+          (index = this.props.components.relationships.findIndex(locateIndex)) !== -1 
+        ) {
+          parentCoords = {
+            x: this.props.components.relationships[index].x,
+            y: this.props.components.relationships[index].y,
+          };
+        } 
+        } else {
+          continue;
+        }
+        if( typeof this.props.components.relationships[index]!=='undefined'){
+        
+       lineList.push(
+          <Group  key={keyIndex}>
+          <Line
+           
+            stroke="black"
+            dash={[33,10]}
+            strokeWidth={0.5}
+            points={[
+              this.props.components.entities[i].x,
+              this.props.components.entities[i].y,
+              parentCoords.x,
+              parentCoords.y,
+            ]}
+           
+          />
+          
+        
+        </Group>
+        );
+        keyIndex = keyIndex + 1;}
+      }
+      
+
   
       for (let i = 0; i < this.props.components.relationships.length; i++) {
 
