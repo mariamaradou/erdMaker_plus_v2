@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { updatePositionExtension,deselect, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
 import { Group, RegularPolygon } from "react-konva";
-import { stageWidth, stageHeight, extensionRadius, fontSize, dragBoundOffset } from "../../global/constants";
-var pixelWidth = require("string-pixel-width");
+import { stageWidth, stageHeight, extensionRadius, dragBoundOffset } from "../../global/constants";
+
 
 class ExtensionUML extends React.Component {
 
