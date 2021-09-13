@@ -1,13 +1,13 @@
 import React from "react";
 import LookAcross from "../../img/Look Across.jpg"
-import LookHere from "../../img/Look Across.jpg"
+import LookHere from "../../img/Look Here.jpg"
 
 import extensionVideo from "../../img/overlap video.mp4"
 
 const Tutorial = () => {
   document.title = "ERD Maker - Tutorial";
   
-  /////////////////// xwrise to HOW TO USE me to SOME THEOREY se 2 stiles se pinaka /////////////////////
+
   return (
     <div className="about">
       <div className="containerTwo">
