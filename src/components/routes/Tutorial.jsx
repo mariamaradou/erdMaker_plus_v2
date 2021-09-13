@@ -2,21 +2,26 @@ import React from "react";
 import LookAcross from "../../img/Look Across.jpg"
 import LookHere from "../../img/Look Across.jpg"
 
+import extensionVideo from "../../img/overlap video.mp4"
+
 const Tutorial = () => {
   document.title = "ERD Maker - Tutorial";
   
   /////////////////// xwrise to HOW TO USE me to SOME THEOREY se 2 stiles se pinaka /////////////////////
   return (
     <div className="about">
-      <div className="container">
+      <div className="containerTwo">
+        <div className="flex-container">
         <div>
         <h2>How to use</h2>
-         Right-click on surface to display context-menu: New Entity, New Relationship &amp; New Text <br></br>
-         Alternatively, you can click the spot on the surface where you want to add the component 
-         and then press its corresponding shortcut (look below)
-         <hr/>
-        <h2>Keyboard shortcuts</h2>
-        <hr/>
+        <h3>Context-menu display</h3>
+        <div style={{textAlign:'left'}}>
+         <p>Right-click on surface to display context-menu: New Entity, New Relationship &amp; New Text.  </p>
+        <p> Alternatively, you can click the spot on the surface where you want to add the component 
+         and then press its corresponding shortcut (look below).</p>
+         </div>
+        <h3>Keyboard shortcuts</h3>
+        
         <table  >
           <tbody style={{textAlign:'left', paddingLeft:"100px"}}>
          <tr><td> "e" key for new Entity</td></tr>
@@ -29,23 +34,37 @@ const Tutorial = () => {
          <tr><td>   Escape key to deselect a surface component</td></tr>
          </tbody>
         </table>
-        <h2>Some theorey</h2>
-        <h3>Ternary Relationships</h3>
-        Cardinality &amp; Participation don't have the same meaning in ternary relationships in comparison to binary relationships.
-        <hr/>
+    
+       <h4>How to add an overlap extension</h4>
+        <video width="95%" height="400" controls >
+      <source src={extensionVideo} type="video/mp4"/>
+     </video>
+      
+        </div>
+
+        <div>
+        <h2 >Some theorey</h2>
+        
+        <h3 >Ternary Relationships</h3>
+        <p style={{textAlign:'left'}}>Cardinality &amp; Participation don't have the same meaning in ternary relationships in comparison to binary relationships.</p>
+        
         <h3>Look Across &amp; Look Here notation</h3>
-        <hr></hr>
-        Both notations have the same meaning: <br></br>
-        • The entity Employee works for One Department <br></br>
-        • The entity Department has Many Employees
-        <hr></hr>
-        Look Across notation
-        <img alt="Look Across" src={LookAcross} width={'500px'} ></img>
-        <hr></hr>
-        Look Here notation
-        <img alt="Look Here" src={LookHere} width={'500px'}></img>
+        
+        <div style={{textAlign:'center'}}>
+        <p> Both notations below have the same meaning:   </p>
+        
+        <p>• The entity Employee works for One Department  </p>
+        <p>• The entity Department has Many Employees    </p>
+        </div>
+       
+        <p><i>1. Look Across notation</i></p>
+        <img alt="Look Across" src={LookAcross} width={'85%'} ></img>
+        
+        <p><i>2. Look Here notation</i></p>
+        <img alt="Look Here" src={LookHere} width={'85%'}></img>
         
         </div>
+      </div>
       </div>
     </div>
   );

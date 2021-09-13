@@ -90,10 +90,76 @@ $inputBackgroundColor: #f3f3f3;
 
   h2 {
     margin-top: 0;
+    
     margin-bottom: 0;
   }
 
   h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .container-icon {
+    margin: 12px auto;
+  }
+
+  .container-text {
+    font-size: $containerTextFontSize;
+  }
+}
+.flex-container {
+  display: flex;
+ flex-wrap: wrap;
+ 
+ 
+}
+
+.flex-container >div {
+  width: 50%;
+  
+
+}
+
+
+.flex-container >div:first-child{
+  border-right: rgb(77, 76, 76)  solid 1px ;
+ 
+}
+
+.flex-container >div:last-child{
+  p {
+    
+    padding-left: 8px;
+  }
+
+ 
+ 
+}
+.containerTwo {
+
+  //flex-direction: column;
+ // flex-wrap: wrap;
+  background-color: $appThemeColor;
+  align-items: center;
+  
+  box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+  border-radius: 4px;
+  z-index: 1;
+  width: 100%;
+  padding: 20px;
+  margin-top: 3%;
+  margin-bottom: 3%;
+
+ 
+
+  h2 {
+    margin-top: 0;
+    text-decoration: underline;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    padding-top: 5px;
     margin-top: 0;
     margin-bottom: 0;
   }

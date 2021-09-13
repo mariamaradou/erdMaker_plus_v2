@@ -136,7 +136,7 @@ import {
 
       switch (props.selector.current.type) {
         case "entity":
-          xPosition = xPosition - 2.2 * entityWidth - stageScrollX;
+          xPosition = xPosition - 3.34 * entityWidth - stageScrollX;
 
           break;
 

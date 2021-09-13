@@ -28,15 +28,9 @@ class EntityProperties extends React.Component {
     document.getElementsByClassName('sidepanel')[0].style.display='block'
     var entityIndex = this.props.components.entities.findIndex(this.findEntityIndex);
 
-    //na anoigei mes sta oria toy parathyroy
-   if (this.props.components.entities[entityIndex].y!==27){
-    
-     document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-150 + 'px';}
-
-     else {
        document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y +'px';
      
-     } 
+   
     
     
   }
