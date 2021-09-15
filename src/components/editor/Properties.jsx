@@ -16,6 +16,7 @@ import {
   relationshipWidth,
   attributeRadiusX,
   entityHeight,
+  stageHeight,
   // labelMaxWidth,
   //stageWidth,
 } from "../../global/constants";
@@ -80,8 +81,9 @@ import {
         );
         if (typeof props.components.extensions[extensionIndex] !== 'undefined') {
           xPosition = props.components.extensions[extensionIndex].x + extensionRadius - stageScrollX;
-          yPositionOr = props.components.extensions[extensionIndex].y + extensionRadius - stageScrollY;
-          yPosition = yPositionOr - 70;
+         yPosition = props.components.extensions[extensionIndex].y  - stageScrollY-20;
+        
+         
          
           loadedProperties = <ExtensionProperties />;
         

@@ -62,7 +62,18 @@ export const UPDATE_ATTRIBUTE_CROWS="UPDATE_ATTRIBUTE_CROWS";
 export const SET_CARDINALITY_DIRECTION="SET_CARDINALITY_DIRECTION";
 export const SET_PARTICIPATION_DIRECTION="SET_PARTICIPATION_DIRECTION";
 export const UPDATE_POSITION_EXTENSION_CHILDREN="UPDATE_POSITION_EXTENSION_CHILDREN";
+export const DELETE_ENTITY_CHILD="DELETE_ENTITY_CHILD";
+//export const CHANGE_PARENT = "CHANGE_PARENT";
 
+/*export const changeParent=(payload)=>({
+  type:"CHANGE_PARENT",
+  payload:payload
+})*/
+
+export const deleteEntityChild=(payload)=>({
+type:"DELETE_ENTITY_CHILD",
+payload:payload
+})
 export const updatePositionExtensionChildren=(payload)=> ({
   type:"UPDATE_POSITION_EXTENSION_CHILDREN",
   payload:payload

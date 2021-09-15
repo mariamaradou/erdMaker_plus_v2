@@ -17,7 +17,7 @@ import AnchorBarker from "./AnchorBarker";
 import AnchorKorth from "./AnchorKorth";
 import AnchorUML from "./AnchorUML";
 import { ExtensionSpline } from "./ExtensionElmasri";
-import { Stage, Layer, Line, Rect, Arrow, Group, Text } from "react-konva";
+import { Stage, Layer, Line, Rect, Arrow, Group, Text, RegularPolygon } from "react-konva";
 import Properties from "./Properties";
 import { Provider, ReactReduxContext, connect } from "react-redux";
 //import AlertDialog from "./alertDialog";
@@ -32,6 +32,7 @@ import {
   deleteExtension,
   deleteLabel,
   deleteRelationship,
+  deleteEntityChild,
   deleteConnection,
   deleteEntity,
   addRelationship,
@@ -43,6 +44,8 @@ import {
   stageWidth,
   stageHeight,
   entityWidth,
+  relationshipHeight,
+  relationshipWidth,
   entityHeight,
   anchorLength,
 } from "../../global/constants";
@@ -347,12 +350,36 @@ class Surface extends React.Component {
       />
     )
   );
+   }else if ( this.props.components.notation==="UML Notation" ){
+    this.props.components.attributes.map((attribute) =>
+   
+  attributesList.push(
+   
+    <AttributeCrows
+      key={attribute.id}
+      attrNum={attribute.attrNum}
+      parentId={attribute.parentId}
+      id={attribute.id}
+      parentEntity={attribute.parentEntity}
+      name={attribute.name}
+      type={attribute.type}
+      x={attribute.initX}
+      y={ attribute.initY
+      }
+    />
+   )
+);
+  
+
    }
-    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan" || this.props.components.notation==="UML Notation" ){
+    else if (this.props.components.notation==="Korth, Silberschatz & Sudarshan" ){
       this.props.components.attributes.map((attribute) =>
      
     attributesList.push(
-     this.props.components.entities.find((entity)=>entity.id===attribute.parentId) || this.props.components.attributes.find((entity)=>entity.id===attribute.parentId)?
+      //xwris UML
+  //  this.props.components.entities.find((entity)=>entity.id===attribute.parentId) || this.props.components.attributes.find((entity)=>entity.id===attribute.parentId)?
+ //me UML
+ this.props.components.entities.find((entity)=>entity.id===attribute.parentEntity) || this.props.components.attributes.find((entity)=>entity.id===attribute.parentEntity)?
       <AttributeCrows
         key={attribute.id}
         attrNum={attribute.attrNum}
@@ -430,13 +457,15 @@ class Surface extends React.Component {
         if (
           // na  traviksw grammes an isxuoun oi parakatw sinthikes
           this.props.components.notation !== "Information Engineering Notation" &&
-          (this.props.components.notation !== "UML Notation" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
-          (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
-          this.props.components.notation !== "Bachman Notation" &&
+          this.props.components.notation !== "UML Notation"  &&
+        // (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentId)) ) &&
+        (this.props.components.notation !== "Korth, Silberschatz & Sudarshan" || (!this.props.components.entities.find((relationship)=> relationship.id===this.props.components.attributes[i].parentEntity) && !this.props.components.attributes.find((relationship)=> relationship.id===this.props.components.attributes[i].parentEntity)) ) &&
+        this.props.components.notation !== "Bachman Notation" &&
           this.props.components.notation !== "Barker Notation" 
          
         ){
-        connectId = this.props.components.attributes[i].parentId;
+        connectId = (this.props.components.notation!=='UML Notation' && this.props.components.relationships.find((relationship)=>relationship.id=== this.props.components.attributes[i].parentEntity))?
+        this.props.components.attributes[i].parentEntity: this.props.components.attributes[i].parentId;
        
         if (
           (index = this.props.components.entities.findIndex(locateIndex)) !== -1
@@ -633,7 +662,7 @@ class Surface extends React.Component {
       if (this.props.components.entities[index].connectionCount > 8)
         continue;}
 
-     // Get the nearest available anchor to this relationship for this connected entity
+     //vriskw to pio kontino shmeio sthn ontotita gia na paei h grammi apo to extension
     anchor = this.findNearestAnchorExtend(lockedAnchorPoints, index, i);
 
     
@@ -643,6 +672,7 @@ class Surface extends React.Component {
      if (
        this.props.components.notation === "Information Engineering Notation" ||
        this.props.components.notation === "Bachman Notation" ||
+       this.props.components.notation==='UML Notation' || 
        this.props.components.notation === "Barker Notation" ||
        this.props.components.notation === "Korth, Silberschatz & Sudarshan" 
      ) {
@@ -681,6 +711,26 @@ class Surface extends React.Component {
         this.props.components.notation === "Batini, Ceri & Navathe Notation" ||  this.props.components.notation === "UML Notation" ||
         (this.props.components.notation ===  "Korth, Silberschatz & Sudarshan" && this.props.components.extensions[i].cardinality==='disjoint' ) ? (
           <Group key={keyIndex}>
+             
+            <Rect
+            opacity={this.props.components.notation==='UML Notation' && this.props.components.extensions[i].type==='aggregation'? 1: 0}
+             lineJoin="bevel"
+          closed
+          
+             fill={'black'}
+           
+         width={18}
+         height={18}
+         rotation={47}
+         
+        x={anchor.angle===90?anchor.x+16:anchor.angle===-90?anchor.x-15:anchor.x}
+        y={anchor.angle===90?anchor.y-13:anchor.angle===-90?anchor.y-10:anchor.angle===0?anchor.y-25:anchor.y}
+            
+            >
+            </Rect>
+            
+            
+            
             <Arrow
               stroke={"black"}
               strokeWidth={0}
@@ -1200,8 +1250,7 @@ class Surface extends React.Component {
        this.props.components.notation==="Bachman Notation" ||
       
        this.props.components.notation==="Barker Notation" || 
-       ( (this.props.components.notation=== "UML Notation" ) &&
-        this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity))  ||
+        this.props.components.notation=== "UML Notation"    ||
       ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
         this.props.components.entities.find((entity)=>entity.id=== this.props.selector.current.parentEntity)) 
         ){
@@ -1229,6 +1278,9 @@ class Surface extends React.Component {
         this.props.deleteRelationship({
           id: this.props.selector.current.id,
         });
+        this.props.deleteEntityChild({
+          id: this.props.selector.current.id
+        })
         this.props.deselect();
       }
       else if(this.props.selector.current.type==='extension'){
@@ -1453,6 +1505,7 @@ const mapDispatchToProps = {
   deleteAttribute,
   deleteExtension,
   deleteLabel,
+  deleteEntityChild,
   deleteRelationship,
   deleteChildren,
   modifyExtension,

@@ -15,7 +15,7 @@ import {
   dragBoundOffset,
 } from "../global/constants";
 
-import { getChildren } from "../global/utils";
+import { getChildren, getChildrenRelationship } from "../global/utils";
 
 const initialState = {
   entities: [],
@@ -61,7 +61,19 @@ const componentsReducer = (state = initialState, action) => {
          
           participationDirection: action.payload.valuePart
         }
-    
+   
+  /* case "CHANGE_PARENT":
+    return {
+      ...state,
+      attributes: state.attributes.map((attribute) =>
+        attribute.id === action.payload.id
+          ? {
+              ...attribute,
+              parentId: action.payload.parentId
+            }
+          : attribute
+      ),
+    };*/
     case "ADD_ENTITY":
      
       return {
@@ -101,10 +113,15 @@ const componentsReducer = (state = initialState, action) => {
         };
         //
     case "SET_NAME_ENTITY":
+     
       return {
         ...state,
         entities: state.entities.map((entity) =>
           entity.id === action.payload.id ? { ...entity, name: action.payload.name } : entity
+        ),
+        //UML relationship parent
+        relationships: state.relationships.map((relationship) =>
+          relationship.id === action.payload.parentId ? { ...relationship, name: action.payload.name } : relationship
         ),
       };
     case "SET_TYPE_ENTITY":
@@ -115,14 +132,24 @@ const componentsReducer = (state = initialState, action) => {
         ),
       };
     case "DELETE_ENTITY":
+    console.log(action.payload.attributesNum)
       return {
         ...state,
-        entities: state.entities.filter((entity) => entity.id !== action.payload.id),
+        entities: state.entities.filter((entity) =>entity.id !== action.payload.id ),
+       relationships: state.relationships.map((relationship) =>relationship.id === action.payload.parentId?{...relationship,attributesNum:relationship.attributesNum-action.payload.attributesNum}:relationship ),
         attributes: state.attributes.filter((attribute) => attribute.parentId !== action.payload.id),
         extensions: state.extensions.filter((extension) => extension.parentId !== action.payload.id),
       };
         
-
+      case "DELETE_ENTITY_CHILD":
+      //  var entityAttributes=state.entities.find((entity)=> entity.parentId===action.payload.id).atttributesNum
+       return {
+         ...state,
+         entities: state.entities.filter((entity) =>entity.parentId !== action.payload.id ),
+    
+         attributes: state.attributes.filter((attribute) => attribute.parentId !== state.entities.find((entity) =>entity.parentId === action.payload.id ).id),
+      //   relationships: state.relationships.map((relationship) =>relationship.id === action.payload.id?{...relationship,attributesNum:relationship.attributesNum-entityAttributes}:relationship ),
+       };
      
     case "ADD_EXTENSION":
       console.log(action.payload.id)
@@ -284,6 +311,10 @@ const componentsReducer = (state = initialState, action) => {
         ...state,
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id ? { ...relationship, name: action.payload.name } : relationship
+        ),
+        //UML Entity
+        entities: state.entities.map((entity) =>
+          entity.parentId === action.payload.id ? { ...entity, name: action.payload.name } : entity
         ),
       };
 
@@ -584,19 +615,29 @@ const componentsReducer = (state = initialState, action) => {
 
       };
     case "DELETE_CHILDREN":
-      getChildren(childrenList, state.attributes, action.payload.id ); // Retrieve children of component with provided id
      
+   
+      getChildren(childrenList, state.attributes, action.payload.id ); // Retrieve children of component with provided id
+    
       return {
         ...state,
        
-        attributes: state.attributes.filter((attribute) => !childrenList.includes(attribute.id)),
+        attributes: state.attributes.filter((attribute) => (!childrenList.includes(attribute.id)) ) ,
+      
+       
       };
 
       case "UPDATE_ATTRIBUTE_CROWS":
-        if( action.payload.grandParent!==action.payload.id){
+        if( action.payload.grandParent!==action.payload.id && !state.relationships.find((relationship)=> relationship.id=action.payload.grandParent)){
         getChildren(childrenList, state.attributes, action.payload.grandParent);  }
-       
+    
+      else if(state.relationships.find((relationship)=> relationship.id=action.payload.grandParent)){
+        
+        getChildrenRelationship(childrenList, state.attributes, action.payload.grandParent);
+      }
+      
          else {getChildren(childrenList, state.attributes,action.payload.id ); }
+        
         
        
         return {

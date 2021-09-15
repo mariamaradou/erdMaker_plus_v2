@@ -236,6 +236,9 @@ class Relationship extends React.Component {
         <Text
           text={this.props.name}
           fontSize={this.state.fontSize}
+         visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+          (relationship) => relationship.attributesNum > 0
+        ) !== "undefined")? false: true}
           opacity={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
             (relationship) => relationship.connections.length > 2
           ) !== "undefined")? 0: 1}

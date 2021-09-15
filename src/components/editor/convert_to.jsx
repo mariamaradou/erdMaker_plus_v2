@@ -16,10 +16,12 @@ import {
   setParticipationDirection,
   setCardinalityDirection,
   setNotation,
+  
   resetComponents,
   setComponents,
   setMeta,
   deselect,
+ // changeParent,
 } from "../../actions/actions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -129,6 +131,7 @@ const ConvertTo = (props) => {
   const handleClose = (event) => {
     setOpen(false);
   };
+
   const moveAttributetoManySide = (option) => {
     if (
       props.components.relationships.find(
@@ -149,7 +152,7 @@ const ConvertTo = (props) => {
 
   const changeNotation = (option) => {
     props.components.extensions.map((extension) =>
-      extension.type === "aggregation" && option !== "Teorey Notation"
+      extension.type === "aggregation" && (option !== "Teorey Notation" && option !== "UML Notation")
         ? props.modifyExtension({
             id: extension.id,
             prop: "type",
@@ -163,7 +166,7 @@ const ConvertTo = (props) => {
     );
 
     props.components.extensions.map((extension) =>
-      extension.type === "union" && option === "Teorey Notation"
+      extension.type === "union" && (option === "Teorey Notation" || option==='UML Notation')
         ? props.modifyExtension({
             id: extension.id,
             prop: "type",
@@ -198,12 +201,34 @@ const ConvertTo = (props) => {
       ) {
         moveAttributetoManySide(option);
       } else {
+   /*   if   (option!=='UML Notation' && props.components.notation==='UML Notation') {
+   
+     props.components.attributes.map((attribute)=>props.components.relationships.find((relationship)=>relationship.id===attribute.parentEntity)?
+     props.changeParent({
+       id:attribute.id,
+       parentId:attribute.parentEntity
+     }): null
+     )
+  
+   }*/
+        
         props.setNotation({
           notation: option,
         });
         changeDirection(option);
       }
     } else {
+    /*  if   (option==='UML Notation' && props.components.notation!=='UML Notation') {
+       
+         props.components.attributes.map((attribute)=>props.components.relationships.find((relationship)=>relationship.id===attribute.parentEntity)?
+         props.changeParent({
+          id:attribute.id,
+          parentId:attribute.parentEntity
+        }):null
+         )
+      
+       }*/
+       
       props.setNotation({
         notation: option,
       });
@@ -351,6 +376,7 @@ const mapDispatchToProps = {
   resetMeta,
   resetComponents,
   modifyExtension,
+ // changeParent,
   setComponents,
   setParticipationDirection,
   setCardinalityDirection,

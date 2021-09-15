@@ -48,11 +48,13 @@ class EntityProperties extends React.Component {
 
   findEntityIndex = (entity) => entity.id === this.props.selector.current.id;
 
-  nameValueChange = (e) =>
+  nameValueChange = (e) =>{
+  console.log(this.props.selector.current)
     this.props.setNameEntity({
       id: this.props.selector.current.id,
+      parentId:this.props.selector.current.parentId,
       name: e.target.value,
-    });
+    });}
 
   typeValueChange = (e) =>
     this.props.setTypeEntity({
@@ -70,7 +72,7 @@ class EntityProperties extends React.Component {
     this.props.addAttribute({
       id: this.props.selector.current.id,
       parentEntity:null,
-    
+      grandparentAttrId  : this.props.selector.current.parentId,     //UML
       x: this.props.components.entities[entityIndex].x + xOffset,
       y: this.props.components.entities[entityIndex].y + yOffset,
     });
@@ -146,7 +148,9 @@ class EntityProperties extends React.Component {
                 connectId: this.props.selector.current.id,
               });
               this.props.deleteChildren({ id: this.props.selector.current.id });
-              this.props.deleteEntity({ id: this.props.selector.current.id });
+              this.props.deleteEntity({ id: this.props.selector.current.id, attributesNum: this.props.selector.current.attrNum ,
+                parentId:this.props.selector.current.parentId
+              });
               this.props.deselect();
             }
             else if (event.key==='Escape' || event.key==='Enter'){ this.props.deselect(); }
@@ -240,7 +244,8 @@ class EntityProperties extends React.Component {
                 connectId: this.props.selector.current.id,
               });
               this.props.deleteChildren({ id: this.props.selector.current.id });
-              this.props.deleteEntity({ id: this.props.selector.current.id });
+              this.props.deleteEntity({ id: this.props.selector.current.id, attributesNum: this.props.selector.current.attrNum, 
+                 parentId: this.props.selector.current.parentId });
               this.props.deselect();
             }}
           >

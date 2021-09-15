@@ -199,10 +199,12 @@ class AttributeProperties extends React.Component {
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
-             ( (this.props.components.notation=== "UML Notation" ) &&
-              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
+           //  ( (this.props.components.notation=== "UML Notation" ) &&
+            //  this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
+            this.props.components.notation=== "UML Notation" ||
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
-              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
+            
+            this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
               ){
                
              this.props.updateAttributeCrows({
@@ -344,8 +346,7 @@ class AttributeProperties extends React.Component {
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
-             ( (this.props.components.notation=== "UML Notation" ) &&
-              this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
+              this.props.components.notation=== "UML Notation"  ||
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
               this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
               ){

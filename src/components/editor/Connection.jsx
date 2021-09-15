@@ -94,7 +94,7 @@ class Connection extends React.Component {
  
     return  (this.props.components.notation!=="Min-Max/ISO Notation" && this.props.components.notation!=="UML Notation") ?(
       <div className="connection" style={{ paddingLeft: '6px', backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
-        <div className="connection-input-group">
+        <div className="connection-input-group" >
           <label>
             <b>Entity: </b>
             <select
@@ -177,7 +177,7 @@ class Connection extends React.Component {
       </div>
     ):
     (
-      <div className="connection" style={{ backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
+      <div className="connection" style={{ paddingLeft: '6px', backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf" }}>
         <div className="connection-input-group">
           <label>
             <b>Entity: </b>

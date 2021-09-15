@@ -398,23 +398,12 @@ const ImportExportMenuListComposition = (props) => {
                         Export Image
                       </a>
                     </MenuItem>
-                    {/* <MenuItem>
-                      
-                  <form onSubmit={handleSubmit}>
-            <button //creating Share button
-            onClick={handleSubmit}
-              className="tools-button-blue"
-              type="submit"
-            >
-               Export BurntSushi file
-            </button>
-               </form>
-               </MenuItem>*/}
+                   
                <MenuItem
                       type="button"
                       onClick={()=>handleSubmit()}
                     >
-                    Export BurntSushi file
+                    Export BurntSushi/erd file
                     </MenuItem>
                      
                    

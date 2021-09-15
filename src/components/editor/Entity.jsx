@@ -67,6 +67,7 @@ class EntityChen extends React.Component {
           y={-entityHeight / 2 + entityWeakOffset / 2}
           width={entityWidth - entityWeakOffset}
           height={entityHeight - entityWeakOffset}
+          
           listening={false}
          // fill="#ffdd91"
          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
@@ -115,7 +116,9 @@ class EntityChen extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
-       
+        //gia UML notation -- krivw to associative entity poy emfanizetai mono sti UML
+        visible={ this.props.components.notation !=='UML Notation' && 
+        this.props.components.relationships.find((relationship)=> relationship.id===this.props.parentId)?false:true}
         draggable
         //diko moy gia history
         onDragStart={(e) => {
@@ -259,6 +262,7 @@ class EntityChen extends React.Component {
 
 const mapStateToProps = (state) => ({
   selector: state.selector,
+  components: state.components.present,
 });
 
 const mapDispatchToProps = {

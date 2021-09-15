@@ -8,6 +8,7 @@ import {
   select,
   deselect,
   deleteChildren,
+  deleteEntityChild,
   deleteRelationship,
   addConnection,
   repositionComponents
@@ -68,26 +69,46 @@ class RelationshipProperties extends React.Component {
     });}
 
   handleAddAttribute = (relationshipIndex) => {
+
+    
+    
     // Randomly position the attribute around the relationship
     const radius = spawnRadius;
     var randomAngle = getRandomInt(0, 360);
     var xOffset = radius * Math.cos(randomAngle);
     var yOffset = radius * Math.sin(randomAngle);
-   if(this.props.components.notation==='UML Notation'){
+  // if(this.props.components.notation==='UML Notation'){
+      if (typeof this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id)==='undefined'){
     this.props.addEntity({
       x: this.props.components.relationships[relationshipIndex].x + xOffset,
       y: this.props.components.relationships[relationshipIndex].y + yOffset,
       parentId:this.props.selector.current.id,
       nameUML: this.props.components.relationships[relationshipIndex].name
     });
+    this.props.addAttribute({
+     id:  this.props.components.count+1,
+     grandparentAttrId:this.props.components.relationships[relationshipIndex].id,
+      parentId: this.props.components.count+1,
+      x: this.props.components.relationships[relationshipIndex].x + xOffset,
+      y: this.props.components.relationships[relationshipIndex].y + yOffset,
+    });}
+    else{
+      this.props.addAttribute({
+        id:  this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id).id,
+       grandparentAttrId:this.props.components.relationships[relationshipIndex].id,
+         parentId: this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id).id,
+         x: this.props.components.relationships[relationshipIndex].x + xOffset,
+         y: this.props.components.relationships[relationshipIndex].y + yOffset,
+       });
+    }
     this.props.select({
       type: "entity",
       id: this.props.components.count + 1,
-      parentId: null,
+      parentId: this.props.selector.current.id,
     });
-   }
-   else{
-    this.props.addAttribute({
+ //  }
+ //  else{
+  /*  this.props.addAttribute({
       id: this.props.selector.current.id,
       parentEntity:null,
       x: this.props.components.relationships[relationshipIndex].x + xOffset,
@@ -98,8 +119,8 @@ class RelationshipProperties extends React.Component {
       type: "attribute",
       id: this.props.components.count + 1,
       parentId: this.props.selector.current.id,
-    });
-   }
+    });*/
+  // }
  
    
   };
@@ -151,6 +172,9 @@ class RelationshipProperties extends React.Component {
               this.props.deleteRelationship({
                 id: this.props.selector.current.id,
               });
+              this.props.deleteEntityChild({
+                id: this.props.selector.current.id
+              })
               this.props.deselect();
             }
             else if (event.key==='Escape' || event.key==='Enter'){this.props.deselect(); this.getStage()}
@@ -239,6 +263,9 @@ class RelationshipProperties extends React.Component {
               this.props.deleteRelationship({
                 id: this.props.selector.current.id,
               });
+              this.props.deleteEntityChild({
+                id: this.props.selector.current.id
+              })
               this.props.deselect();
             }}
           >
@@ -281,6 +308,7 @@ const mapDispatchToProps = {
   setNameRelationship,
   select,
   deselect,
+  deleteEntityChild,
   addEntity,
   setTypeRelationship,
   deleteChildren,

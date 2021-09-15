@@ -32,7 +32,20 @@ export function minJsonArray(arr, prop) {
 export const getChildren = (list, array, id) => {
   
   for (let i in array) {
+    
     if (array[i].parentId === id  ) {
+      list.push(array[i].id);
+      
+      getChildren(list, array, array[i].id);
+    }
+  }
+};
+
+export const getChildrenRelationship = (list, array, id) => {
+  
+  for (let i in array) {
+    
+    if (array[i].parentEntity === id  ) {
       list.push(array[i].id);
       
       getChildren(list, array, array[i].id);

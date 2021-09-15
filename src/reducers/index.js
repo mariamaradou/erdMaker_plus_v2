@@ -64,7 +64,8 @@ const finalReducer = combineReducers({
         action.type === SET_NOTATION ||
         action.type === SET_TYPE_ENTITY ||
         action.type === DELETE_ENTITY ||
-   
+        
+        action.type=== DELETE_CONNECTION ||
         action.type === ADD_EXTENSION ||
         action.type === MODIFY_EXTENSION ||
         action.type === UPDATE_ATTRIBUTE_CROWS ||
@@ -83,7 +84,7 @@ const finalReducer = combineReducers({
         action.type === ADD_CONNECTION ||
         action.type === CHANGE_CONNECTION ||
         action.type === MODIFY_CONNECTION ||
-        action.type === DELETE_CONNECTION ||
+      
         action.type === ADD_ATTRIBUTE ||
         action.type === SET_NAME_ATTRIBUTE ||
         action.type === SET_TYPE_ATTRIBUTE ||

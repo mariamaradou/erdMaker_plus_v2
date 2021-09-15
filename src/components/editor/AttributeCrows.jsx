@@ -62,8 +62,9 @@ class AttributeCrows extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
-       
-        
+       /* visible={ this.props.components.notation!=='UML Notation' && 
+        typeof this.props.components.entities.find((entity)=> entity.id===this.props.parentId).nameUML!=='undefined'?false:true}
+        */
         onTap={() => {
            
             this.props.deselect();
@@ -123,7 +124,7 @@ class AttributeCrows extends React.Component {
           width={entityWidthCrows}
           height={entityHeight-10}
          // fill="#ffdd91"
-        
+       
          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
          fillLinearGradientColorStops={[0, '#ff9b8e', 1, '#fa7564']}

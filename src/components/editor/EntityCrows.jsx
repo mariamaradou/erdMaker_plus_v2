@@ -161,7 +161,9 @@ class EntityCrows extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
-       
+        //gia UML notation -- krivw to associative entity poy emfanizetai mono sti UML
+       visible={ this.props.components.notation!=='UML Notation' && 
+       this.props.components.relationships.find((relationship)=> relationship.id===this.props.parentId)?false:true}
         draggable
         //diko moy gia history
         onDragStart={(e) => {
@@ -249,8 +251,8 @@ class EntityCrows extends React.Component {
           this.props.select({
             type: "entity",
             id: this.props.id,
-            attrNum:null,
-            parentId: null,
+            attrNum:this.props.attributesNum,
+            parentId: this.props.parentId,
             parentEntity: null,
             selection:this.state.clicked,
             value:true
@@ -296,7 +298,7 @@ class EntityCrows extends React.Component {
         
         <Text
         
-          text={this.props.name}
+          text={/*this.props.components.notation==='UML Notation'?this.props.nameUML:*/ this.props.name}
          fontSize={fontSize}
           align="center"
           verticalAlign="middle"

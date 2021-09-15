@@ -50,6 +50,8 @@ class AttributeKorth extends React.Component {
         x={this.props.x}
         y={this.props.y}
         draggable
+        /*visible={ this.props.components.notation!=='UML Notation' && 
+        typeof this.props.components.entities.find((entity)=> entity.id===this.props.parentId).nameUML!=='undefined'?false:true}*/
         onDragStart={(e) => {
           this.props.updateInitialPositionAttribute({
             id: this.props.id,

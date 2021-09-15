@@ -27,17 +27,20 @@ componentDidMount() {
  if(this.props.components.notation!=='Batini, Ceri & Navathe Notation') document.getElementById('type').focus(); 
   document.getElementsByClassName('sidepanel')[0].style.display='block';
   
-  //na anoigei mes sta oria tou parathyroy
+  //na anoigei mes sta oria tou parathyroy panw kai katw
   var extensionIndex = this.props.components.extensions.findIndex(this.findExtensionIndex);
- if (this.props.components.extensions[extensionIndex].y!==22){
+ if (this.props.components.extensions[extensionIndex].y===22){
    
-  //document.getElementsByClassName('sidepanel')[0].style.top= '250px';
-  document.getElementsByClassName('sidepanel')[0].style.top=stageHeight/6  +'px'}
-
-  else {
-    document.getElementsByClassName('sidepanel')[0].style.top= dragBoundOffset + 'px'
+    document.getElementsByClassName('sidepanel')[0].style.top= dragBoundOffset+38 + 'px'
   }
- 
+ if(document.getElementsByClassName('sidepanel')[0].offsetTop + document.getElementsByClassName('sidepanel')[0].offsetHeight>690){
+  document.getElementsByClassName('sidepanel')[0].style.top= document.getElementsByClassName('sidepanel')[0].offsetTop-0.8*document.getElementsByClassName('sidepanel')[0].offsetHeight + 'px'
+
+ }
+
+ if(document.getElementsByClassName('sidepanel')[0].offsetTop <0){
+  document.getElementsByClassName('sidepanel')[0].style.top= -document.getElementsByClassName('sidepanel')[0].offsetTop+  'px'
+ }
 
 }
 
@@ -133,8 +136,8 @@ componentDidMount() {
               Select Type
             </option>
             <option value="specialize">Specialize</option>
-            <option style={{display:this.props.components.notation==='Teorey Notation'?'none':'block'}} value="union">Union</option>
-            <option style={{display:this.props.components.notation!=='Teorey Notation'?'none':'block'}} value='aggregation'>Aggregation</option>
+            <option style={{display:(this.props.components.notation==='Teorey Notation' || this.props.components.notation==='UML Notation')?'none':'block'}} value="union">Union</option>
+            <option style={{display:(this.props.components.notation!=='Teorey Notation' && this.props.components.notation!=='UML Notation')?'none':'block'}} value='aggregation'>Aggregation</option>
             
           </select>
         </div>

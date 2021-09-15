@@ -131,13 +131,14 @@ extensionLimit=(e)=>{
         }}
         
       >
-       
+       {/*να βαλω εδω εναν κυκλο για να δειχνω το selection otan dn yparxei to polygwno */}
       
         
        <RegularPolygon
      
           radius={extensionRadius-5}
           sides={3}
+          opacity={this.props.type==='aggregation'? 0: 1}
           fill={this.props.cardinality === "overlap"? 'black' : 'white'}
           
           stroke={
