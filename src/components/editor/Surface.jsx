@@ -588,8 +588,8 @@ class Surface extends React.Component {
               strokeWidth={0}
               visible={ this.props.components.notation==="Korth, Silberschatz & Sudarshan" &&  this.props.components.extensions[i].cardinality==='overlap' ? true: false}
               fill={"black"}
-              pointerLength={40}
-              pointerWidth={20}
+              pointerLength={25}
+              pointerWidth={15}
               //rotation={this.props.angle}
               points={ this.props.components.notation === "Korth, Silberschatz & Sudarshan" &&  this.props.components.extensions[i].cardinality==='overlap' ?
                 [
