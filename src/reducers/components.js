@@ -148,7 +148,7 @@ const componentsReducer = (state = initialState, action) => {
          entities: state.entities.filter((entity) =>entity.parentId !== action.payload.id ),
     
          attributes: state.attributes.filter((attribute) => attribute.parentId !== state.entities.find((entity) =>entity.parentId === action.payload.id ).id),
-      //   relationships: state.relationships.map((relationship) =>relationship.id === action.payload.id?{...relationship,attributesNum:relationship.attributesNum-entityAttributes}:relationship ),
+      //  relationships: state.relationships.map((relationship) =>relationship.id === action.payload.id?{...relationship,attributesNum:relationship.attributesNum-entityAttributes}:relationship ),
        };
      
     case "ADD_EXTENSION":

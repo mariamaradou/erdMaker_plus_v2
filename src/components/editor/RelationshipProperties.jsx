@@ -172,9 +172,10 @@ class RelationshipProperties extends React.Component {
               this.props.deleteRelationship({
                 id: this.props.selector.current.id,
               });
-              this.props.deleteEntityChild({
-                id: this.props.selector.current.id
-              })
+              if(this.props.components.entities.find(x=> x.parentId===this.props.selector.current.id)){
+                this.props.deleteEntityChild({
+                  id: this.props.selector.current.id
+                })}
               this.props.deselect();
             }
             else if (event.key==='Escape' || event.key==='Enter'){this.props.deselect(); this.getStage()}
@@ -263,9 +264,12 @@ class RelationshipProperties extends React.Component {
               this.props.deleteRelationship({
                 id: this.props.selector.current.id,
               });
+               if(this.props.components.entities.find(x=> x.parentId===this.props.selector.current.id)){
               this.props.deleteEntityChild({
                 id: this.props.selector.current.id
-              })
+              })}
+             
+            
               this.props.deselect();
             }}
           >
