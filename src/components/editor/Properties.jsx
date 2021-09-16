@@ -105,7 +105,13 @@ import {
           (attribute) => attribute.id === props.selector.current.id
         );
         if (typeof props.components.attributes[attributeIndex] !== 'undefined') {
-          if(props.components.notation!=="Information Engineering Notation"){
+          if((props.components.notation!=="Information Engineering Notation" &&
+          props.components.notation!=="UML Notation" &&
+          props.components.notation!=="Korth, Silberschatz & Sudarshan" &&
+          props.components.notation!=='Barker Notation' &&
+          props.components.notation!=='Bachman Notation'
+          
+          )){
           xPosition = props.components.attributes[attributeIndex].x + attributeRadiusX - stageScrollX;
           yPositionOr = props.components.attributes[attributeIndex].y + attributeRadiusX - stageScrollY;
           yPosition = yPositionOr - 70;}
