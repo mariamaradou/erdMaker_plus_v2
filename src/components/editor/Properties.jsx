@@ -153,7 +153,7 @@ import {
 
           break;
         case "attribute":
-          xPosition = xPosition - 4.5 * attributeRadiusX - stageScrollX;
+          xPosition = xPosition - 4.5 * attributeRadiusX-100 - stageScrollX;
 
           break;
         case "relationship":
