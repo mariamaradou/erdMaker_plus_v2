@@ -118,7 +118,8 @@ class AttributeProperties extends React.Component {
       y: this.props.components.attributes[attributeIndex].y + yOffset,
       parentAttrId:  this.props.components.attributes[attributeIndex].id,
       
-      grandparentAttrId:  this.props.components.attributes[attributeIndex].parentId
+      grandparentAttrId:  this.props.components.attributes[attributeIndex].parentId,
+      grandgrandparent:  this.props.components.attributes[attributeIndex].parentEntity
     });
    this.props.updatePositionChildren({
       id:this.props.components.attributes[attributeIndex].parentId,
@@ -190,6 +191,7 @@ class AttributeProperties extends React.Component {
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
                 attrNum: this.props.components.attributes[attributeIndex].attrNum,
+        
                
               });
 

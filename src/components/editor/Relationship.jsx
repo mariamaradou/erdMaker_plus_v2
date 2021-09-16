@@ -9,7 +9,7 @@ import {
   select,
   deselect,
 } from "../../actions/actions";
-import { Group, Line, Text } from "react-konva";
+import { Group, Line, Text, Circle } from "react-konva";
 import {
   stageWidth,
   stageHeight,
@@ -18,6 +18,7 @@ import {
   relationshipTextWidth,
   weakRelationshipOffset,
   fontSize,
+  extensionRadius,
   textHeight,
   dragBoundOffset,
 } from "../../global/constants";
@@ -27,7 +28,7 @@ class Relationship extends React.Component {
   state = {
     initialPosition: { x: this.props.x, y: this.props.y },
    // shadowOffsetY: 0,
-    
+    opacity:0,
     fontSize: fontSize,
   };
 
@@ -233,6 +234,8 @@ class Relationship extends React.Component {
         }
         />
         {weakRelationshipRhombus}
+        
+      
         <Text
           text={this.props.name}
           fontSize={this.state.fontSize}
@@ -317,6 +320,24 @@ class Relationship extends React.Component {
               });
           }}
         />
+         <Circle
+      visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+        (relationship) => relationship.attributesNum > 0
+      ) !== "undefined")? true: false}
+     radius={extensionRadius}
+    onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
+    onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}
+    opacity={this.state.opacity}
+    stroke={
+     this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"
+       ? "red"
+       : "black"
+   }
+   
+   strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
+     fill={'lightgrey'}
+ 
+  />
       </Group>
     );
   }

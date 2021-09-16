@@ -468,14 +468,7 @@ const componentsReducer = (state = initialState, action) => {
           {
             id: state.count + 1,
             attrNum: 
-            
-           /* typeof state.entities.find(x => x.id === action.payload.id)!=='undefined'?
-            state.entities.find(x => x.id === action.payload.id).attributesNum :
-           
-            typeof state.relationships.find(x => x.id === action.payload.id)!=='undefined'?
-            state.relationships.find(x => x.id === action.payload.id).attrNum+1:
-            state.attributes.find(x => x.id === action.payload.id).attrNum+1 // code about composite attribute
-           */
+          
              state.entities.find(x => x.id === action.payload.id)?
             state.entities.find(x => x.id === action.payload.id).attributesNum :
            
@@ -492,10 +485,7 @@ const componentsReducer = (state = initialState, action) => {
             state.attributes.find(x => x.id === action.payload.parentAttrId).initX: 
             state.relationships.find(x => x.id === action.payload.id)? 
             state.relationships.find(x => x.id === action.payload.id).x: null  
-           /* typeof state.entities.find(x => x.id === action.payload.id)!=='undefined'? 
-            state.entities.find(x => x.id === action.payload.id).x:   //composite
-            typeof state.attributes.find(x => x.id === action.payload.parentAttrId)!=='undefined'?
-            state.attributes.find(x => x.id === action.payload.parentAttrId).initX: null          //relationship case */
+          
 
             
             
@@ -530,7 +520,7 @@ const componentsReducer = (state = initialState, action) => {
       ),
       relationships: state.relationships.map((relationship) =>
 
-        (relationship.id === action.payload.id || relationship.id === action.payload.grandparentAttrId   ) ? { ...relationship,attributesNum: relationship.attributesNum+1} : relationship
+        (relationship.id === action.payload.id || relationship.id === action.payload.grandparentAttrId || relationship.id === action.payload.grandgrandparent   ) ? { ...relationship,attributesNum: relationship.attributesNum+1} : relationship
       ),
         count: state.count + 1,
       };
@@ -593,13 +583,15 @@ const componentsReducer = (state = initialState, action) => {
       getChildren(childrenList, state.attributes, action.payload.id )
 
       var grandparentid=state.attributes.find(x=>x.id===action.payload.id).parentEntity;
+      if(typeof state.attributes.find(x=>x.id===action.payload.parentId)!=='undefined'){
+      var grandgrandparentid=state.attributes.find(x=>x.id===action.payload.parentId).parentEntity;}
   
       return {
       
         ...state,
        attributes: state.attributes.filter((attribute) => attribute.id !== action.payload.id).map((attribute) =>
        attribute.attrNum >action.payload.attrNum && (attribute.parentId=== action.payload.parentId 
-        ||  attribute.parentEntity===grandparentid) ? 
+        ||  attribute.parentEntity===grandparentid || attribute.parentEntity===  grandgrandparentid ) ? 
        { ...attribute,attrNum: attribute.attrNum-childrenList.length-1 } : attribute),
        
       
@@ -610,7 +602,10 @@ const componentsReducer = (state = initialState, action) => {
 
         relationships: state.relationships.map(( relationship) =>
         relationship.id === action.payload.parentId || 
-        relationship.id===  grandparentid? 
+        relationship.id===  grandparentid ||
+        relationship.id===  grandgrandparentid
+       
+        ? 
         { ...relationship,attributesNum: relationship.attributesNum-childrenList.length-1} : relationship)
 
       };
@@ -628,16 +623,13 @@ const componentsReducer = (state = initialState, action) => {
       };
 
       case "UPDATE_ATTRIBUTE_CROWS":
-        if( action.payload.grandParent!==action.payload.id && !state.relationships.find((relationship)=> relationship.id=action.payload.grandParent)){
-        getChildren(childrenList, state.attributes, action.payload.grandParent);  }
-    
-      else if(state.relationships.find((relationship)=> relationship.id=action.payload.grandParent)){
-        
-        getChildrenRelationship(childrenList, state.attributes, action.payload.grandParent);
-      }
-      
-         else {getChildren(childrenList, state.attributes,action.payload.id ); }
-        
+     
+
+     
+          if(state.entities.find(x=>x.id===action.payload.grandParent)){
+           getChildren(childrenList, state.attributes,action.payload.grandParent );}
+           else { getChildren(childrenList, state.attributes,action.payload.id )}
+        console.log(childrenList)
         
        
         return {
@@ -652,9 +644,9 @@ const componentsReducer = (state = initialState, action) => {
                   y: attribute.y + action.payload.dy,
                   initX:  state.entities.find(x => x.id === action.payload.id)? 
                   state.entities.find(x => x.id === action.payload.id).x: 
-                //  state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id))?
+                
                 state.entities.find(x => x.id === action.payload.grandParent)?
-                 // state.entities.find(x => x.id === state.attributes.find(x => x.id === action.payload.id).parentId).x:
+          
                  state.entities.find(x => x.id === action.payload.grandParent).x:
                   state.relationships.find(x => x.id === action.payload.id)? 
                   state.relationships.find(x => x.id === action.payload.id).x:null

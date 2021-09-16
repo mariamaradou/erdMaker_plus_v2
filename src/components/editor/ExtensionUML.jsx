@@ -1,20 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updatePositionExtension,deselect, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
-import { Group, RegularPolygon } from "react-konva";
+import { Group, RegularPolygon, Circle } from "react-konva";
 import { stageWidth, stageHeight, extensionRadius, dragBoundOffset } from "../../global/constants";
 
 
 class ExtensionUML extends React.Component {
 
-  
+  _isMounted = false;
+  state={opacity:0}
+
+
+
+
 
 componentDidMount(){ 
  
+  this._isMounted = true;
   if(this.selected===true)  document.getElementById('type').focus(); }
 
 
-
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
      
    
   // Does not let the extension to be dragged out of stage bounds
@@ -131,7 +139,7 @@ extensionLimit=(e)=>{
         }}
         
       >
-       {/*να βαλω εδω εναν κυκλο για να δειχνω το selection otan dn yparxei to polygwno */}
+     
       
         
        <RegularPolygon
@@ -149,6 +157,22 @@ extensionLimit=(e)=>{
           
           strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
         />
+         <Circle
+     visible={this.props.type==='aggregation'? 1: 0}
+     radius={extensionRadius}
+    onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
+    onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}
+    opacity={this.state.opacity}
+    stroke={
+     this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"
+       ? "red"
+       : "black"
+   }
+   
+   strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
+     fill={'lightgrey'}
+ 
+   />
       </Group>
       
     );
