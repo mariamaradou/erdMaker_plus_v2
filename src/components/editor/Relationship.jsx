@@ -183,11 +183,15 @@ class Relationship extends React.Component {
         }}
         dragBoundFunc={(pos) => this.stageBound(pos)}
       >
+         
         <Line
           // fill="#94dfea"
           fillLinearGradientStartPoint={{ x: -50, y: -50 }}
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
+          visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
+            (relationship) => relationship.attributesNum > 0
+          ) !== "undefined")? false: true}
           opacity={                                                      //kryvw ton rompo tou relationship
          
             this.props.components.notation === "Information Engineering Notation" ||
@@ -235,7 +239,7 @@ class Relationship extends React.Component {
         />
         {weakRelationshipRhombus}
         
-      
+       
         <Text
           text={this.props.name}
           fontSize={this.state.fontSize}
@@ -320,7 +324,7 @@ class Relationship extends React.Component {
               });
           }}
         />
-         <Circle
+        <Circle
       visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
         (relationship) => relationship.attributesNum > 0
       ) !== "undefined")? true: false}
@@ -334,10 +338,11 @@ class Relationship extends React.Component {
        : "black"
    }
    
-   strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
+   strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "relationship"?0.7:0.5}
      fill={'lightgrey'}
  
   />
+        
       </Group>
     );
   }

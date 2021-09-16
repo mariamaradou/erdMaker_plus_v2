@@ -16,7 +16,7 @@ const SpecificValues = (props) => {
         y={-fontSize / 2}
       >
         <Tag fill="white" />
-        <Text text={props.text} fontSize={fontSize} />
+        <Text   text={props.text} fontSize={fontSize} />
       </Label>
     </Group>
   );

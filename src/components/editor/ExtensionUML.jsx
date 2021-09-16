@@ -158,7 +158,7 @@ extensionLimit=(e)=>{
           strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
         />
          <Circle
-     visible={this.props.type==='aggregation'? 1: 0}
+     visible={this.props.type==='aggregation'? true: false}
      radius={extensionRadius}
     onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
     onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}

@@ -7,6 +7,7 @@ import {
   updateAttributeComposite,
   updatePositionChildren,
   deleteChildren,
+  deleteEntity,
   deleteAttribute,
   updateAttributeCrows,
   select,
@@ -334,7 +335,7 @@ class AttributeProperties extends React.Component {
             className='buttonmenu'
             style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
             onClick={() => {
-              
+             
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
@@ -365,9 +366,13 @@ class AttributeProperties extends React.Component {
               
             
             }
-
+            
               
-             
+           /* if( this.props.selector.current.attrNum===0){
+              this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
+                parentId:this.props.selector.current.parentId
+              });
+            }*/
               this.props.deselect();
              
             }}
@@ -389,6 +394,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addAttribute,
   setNameAttribute,
+  deleteEntity,
   setTypeAttribute,
   updateAttributeComposite,
   updatePositionChildren,

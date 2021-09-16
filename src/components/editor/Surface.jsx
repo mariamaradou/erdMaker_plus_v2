@@ -926,7 +926,7 @@ class Surface extends React.Component {
           index = this.props.components.entities.findIndex(locateIndex);
        
           // If current connection 8 connections don't draw any line
-          if(this.props.components.entities[index]!=='undefined'){
+          if(typeof this.props.components.entities[index]!=='undefined'){
           if (this.props.components.entities[index].connectionCount > 8)
             continue;}
             
@@ -1058,12 +1058,14 @@ class Surface extends React.Component {
       
           keyIndex = keyIndex + 1;
 
-          if (this.props.components.relationships[i].connections[j].role) {
+          if (this.props.components.relationships[i].connections[j].role && (this.props.components.notation==='UML Notation' || this.props.components.notation==='Min-Max/ISO Notation')) {
             lineList.push(
               <SpecificValues
+                
                 key={keyIndex}
                 x={specificValuesPoints.roleTextPos.x}
                 y={specificValuesPoints.roleTextPos.y}
+               
                 text={
                   this.props.components.relationships[i].connections[j].role
                 }

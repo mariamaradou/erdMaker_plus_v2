@@ -189,7 +189,7 @@ class Connection extends React.Component {
                 Select an Entity
               </option>
               {this.props.components.entities.map((entity) => (
-                <option key={entity.id} value={entity.id} disabled={entity.connectionCount >= 8 ? true : false}>
+                <option key={entity.id} value={entity.id} disabled={entity.connectionCount >= 8 || typeof entity.parentId!=='undefined' ? true : false}>
                   {entity.name}
                 </option>
               ))}
