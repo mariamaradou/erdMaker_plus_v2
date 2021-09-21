@@ -18,7 +18,7 @@ const App = () => {
       <Switch>
         <Route path="/designer" exact component={Editor} />
         <Route path="/designer/:id" render={(props) => <Editor {...props} />} /> 
-        <Route path='/tutorial'  component={Tutorial}/>
+        <Route path='/help'  component={Tutorial}/>
         <Route>
           <div className="main-page">
             <Header />

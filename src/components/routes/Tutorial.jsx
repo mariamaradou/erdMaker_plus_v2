@@ -5,7 +5,7 @@ import LookHere from "../../img/Look Here.jpg"
 import extensionVideo from "../../img/overlap video.mp4"
 
 const Tutorial = () => {
-  document.title = "ERD Maker - Tutorial";
+  document.title = "ERD Maker - Help";
   
 
   return (

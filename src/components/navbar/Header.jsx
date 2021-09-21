@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [headerNavListActive, setHeaderNavListActive] = useState(false);
   const headerLinks = [
-    {label: 'Tutorial', link: "/tutorial", type:'morext'},
+    {label: 'Help', link: "/help", type:'morext'},
     { label: "About", link: "/about", type: "int" },
     {
       label: "Github",
