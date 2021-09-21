@@ -6,6 +6,7 @@ import {
   deselect,
   addXConnection,
   changeXConnection,
+  modifyXConnectionUml,
   deleteXConnection,
 } from "../../actions/actions";
 
@@ -151,7 +152,43 @@ componentDidMount() {
           </select>
         </div>
         {content}
-        <div className="connections-list" style={{backgroundColor: '#dfdfdf'}}>
+        <div className="connections-list" style={{backgroundColor: '#dfdfdf'}} >
+         <div  style={{ display: this.props.components.notation==='UML Notation' && 
+    (this.props.components.extensions[extensionIndex].type==='aggregation' || this.props.components.extensions[extensionIndex].type==='composition')?
+    'block' : 'none'}}>
+    <label>
+        parentMin:
+        <input
+          style={{ marginBottom: 4 }}
+         
+          id='minParent'
+          className="small-editor-input"
+          type="text"
+          maxLength="7"
+          
+          value={this.props.components.extensions[extensionIndex].minParent}
+          onChange={(e) => this.handleModifyExtension( e)}
+         
+        />
+      </label>
+      <br/>
+      <label>
+        parentMax:
+        <input
+          style={{ marginBottom: 4 }}
+         
+          id='maxParent'
+          className="small-editor-input"
+          type="text"
+          maxLength="7"
+          
+          value={this.props.components.extensions[extensionIndex].maxParent}
+          onChange={(e) => this.handleModifyExtension( e)}
+         
+        />
+      </label>
+      <br/>
+    </div>
           <XConnections  extension={this.props.components.extensions[extensionIndex]} notation={this.props.components.notation} />
         </div>
         <div className="buttons-list">
@@ -175,8 +212,8 @@ componentDidMount() {
     {/*<h3>Extension</h3>*/}
     
     
-    <div className="connections-list" style={{backgroundColor: '#dfdfdf'}}>
-      <XConnections  extension={this.props.components.extensions[extensionIndex]} />
+    <div className="connections-list"  style={{backgroundColor: '#dfdfdf'}}>
+      <XConnections  extension={this.props.components.extensions[extensionIndex]} notation={this.props.components.notation} />
     </div>
     <div className="buttons-list">
       {addEntityButton}
@@ -265,6 +302,7 @@ const mapDispatchToProps = {
   deselect,
   addXConnection,
   changeXConnection,
+  modifyXConnectionUml,
   deleteXConnection,
 };
 
@@ -274,21 +312,34 @@ const XConnections = connect(
   mapDispatchToProps
 )((props) => {
   let xconnectionList = [];
+ const handleModifyXConnectionUml=(xconnectionId, e) => 
+
+ props.modifyXConnectionUml({
+  id: props.extension.id,
+  xconnectionIndex: xconnectionId,
+  prop: e.target.id, //minUML, maxUML
+  value: e.target.value,
+ })
   const handleChangeXConnection = (xconnectionId, e) =>
     props.changeXConnection({
       id: props.extension.id,
       xconnectionIndex: xconnectionId,
       connectId: Number(e.target.value),
     });
+ 
 
   for (let i in props.extension.xconnections) {
+    
     xconnectionList.push(
       <span key={i} style={{ margin: "auto", marginBottom: "10px" }}>
+        <div >
         <div>
+       
         <select
           value={props.extension.xconnections[i].connectId}
           onChange={(e) => handleChangeXConnection(props.extension.xconnections[i].id, e)}
         >
+          
           <option value={0} disabled>
             Select Entity
           </option>
@@ -314,33 +365,44 @@ const XConnections = connect(
         </div>
         
         {/*GIA UML MONO*/}
-        <div id='connectionUML' style={{display: props.notation==='UML Notation' && 
+        <div id='connectionUML' 
+         style={{ display: props.notation==='UML Notation' && 
         (props.extension.type==='aggregation' || props.extension.type==='composition')?
         'block' : 'none'}}>
         <div >
-          <label >
-            Min:{" "}
-            <select  style={{marginBottom: 4}} id={'minUML'}
-             value={
-              'undefined' } onChange={null}>
-              <option value="">Undefined</option>
-              <option value="zero"  >Zero</option>
-              <option value="one">One</option>
-            </select>
+        <label>
+            childMin:
+            <input
+              style={{ marginBottom: 4 }}
+             
+              id='minUml'
+              className="small-editor-input"
+              type="text"
+              maxLength="7"
+              
+              value={props.extension.xconnections[i].minUml}
+              onChange={(e) => handleModifyXConnectionUml(props.extension.xconnections[i].id, e)}
+             
+            />
           </label>
         </div>
         <div>
-          <label>
-            Max:{" "}
-            <select   id={ 'maxUML' }
-             value={
-             'undefined'
-            } onChange={null}>
-              <option value="">Undefined</option>
-              <option value="one">One</option>
-              <option value="many">Many</option>
-            </select>
+        <label>
+            childMax:
+            <input
+              style={{ marginBottom: 4 }}
+             
+              id='maxUml'
+              className="small-editor-input"
+              type="text"
+              maxLength="7"
+              
+              value={props.extension.xconnections[i].maxUml}
+              onChange={(e) => handleModifyXConnectionUml(props.extension.xconnections[i].id, e)}
+             
+            />
           </label>
+        </div>
         </div>
         </div>
         {/*GIA UML MONO*/}
@@ -348,7 +410,7 @@ const XConnections = connect(
       </span>
     );
   }
-  return <div style={{ display: "flex", flexDirection: "column" }}>{xconnectionList}</div>;
+  return <div className="connectionsList" style={{ display: "flex", flexDirection: "column" }}>{xconnectionList}</div>;
 });
 
 const XEntityList = connect(
@@ -365,6 +427,10 @@ const XEntityList = connect(
         found = true;
         break;
       }
+    }
+    if(typeof props.components.entities[i].parentId !== "undefined"){
+      
+      found=true;
     }
     entityList.push(
       <option key={props.components.entities[i].id} value={props.components.entities[i].id} disabled={found}>

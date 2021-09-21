@@ -297,8 +297,19 @@ hr{margin-top: 3px;
   max-height: 320px;
   overflow-y: scroll;
   max-height: 41vh;
+ 
 }
 
+
+.connectionsList> span:nth-child(odd){
+  background-color: #dfdfdf;
+ 
+}
+
+.connectionsList> span:nth-child(even){
+  background-color: #c9c9c9;
+  
+}
 .connection {
   padding-bottom: 15px;
 }

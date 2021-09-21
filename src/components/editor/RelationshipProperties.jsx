@@ -11,46 +11,56 @@ import {
   deleteEntityChild,
   deleteRelationship,
   addConnection,
-  repositionComponents
+  repositionComponents,
 } from "../../actions/actions";
 import Connection from "./Connection";
 import { getRandomInt } from "../../global/utils";
-import { nameSize, spawnRadius,stageHeight,dragBoundOffset } from "../../global/constants";
+import {
+  nameSize,
+  spawnRadius,
+  stageHeight,
+  dragBoundOffset,
+} from "../../global/constants";
 
 class RelationshipProperties extends React.Component {
- 
   componentDidMount() {
-    this.nameInput.focus(); 
-    document.getElementsByClassName('sidepanel')[0].style.display='block'
-  
-    var relationshipIndex = this.props.components.relationships.findIndex(this.findRelationshipIndex);
-  
+    this.nameInput.focus();
+    document.getElementsByClassName("sidepanel")[0].style.display = "block";
 
-     if (this.props.components.relationships[relationshipIndex].y!==37){
-      console.log(this.props.components.relationships[relationshipIndex].y)
-   //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-150 + 'px';}
-   document.getElementsByClassName('sidepanel')[0].style.top=stageHeight/7+document.getElementsByClassName('sidepanel')[0].style.height  - dragBoundOffset +'px'}
-     else {
-     //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y +'px';
-     document.getElementsByClassName('sidepanel')[0].style.top=document.getElementsByClassName('sidepanel')[0].style.height / 2 + dragBoundOffset + 'px'
-     } 
-    
+    var relationshipIndex = this.props.components.relationships.findIndex(
+      this.findRelationshipIndex
+    );
+
+    if (this.props.components.relationships[relationshipIndex].y !== 37) {
+      console.log(this.props.components.relationships[relationshipIndex].y);
+      //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-150 + 'px';}
+      document.getElementsByClassName("sidepanel")[0].style.top =
+        stageHeight / 7 +
+        document.getElementsByClassName("sidepanel")[0].style.height -
+        dragBoundOffset +
+        "px";
+    } else {
+      //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y +'px';
+      document.getElementsByClassName("sidepanel")[0].style.top =
+        document.getElementsByClassName("sidepanel")[0].style.height / 2 +
+        dragBoundOffset +
+        "px";
+    }
   }
 
-  componentWillUnmount(){ 
-    document.getElementsByClassName('stage')[0].focus();
-  console.log('unmounted')
-  document.getElementsByClassName('react-contextmenu')[0].style.display='block'}
-  
+  componentWillUnmount() {
+    document.getElementsByClassName("stage")[0].focus();
+    console.log("unmounted");
+    document.getElementsByClassName("react-contextmenu")[0].style.display =
+      "block";
+  }
+
   getStage = () => this.stage;
-
- 
-
-  
 
   handleFocus = (e) => e.target.select();
 
-  findRelationshipIndex = (relationship) => relationship.id === this.props.selector.current.id;
+  findRelationshipIndex = (relationship) =>
+    relationship.id === this.props.selector.current.id;
 
   nameValueChange = (e) =>
     this.props.setNameRelationship({
@@ -58,57 +68,62 @@ class RelationshipProperties extends React.Component {
       name: e.target.value,
     });
 
-  typeValueChange = (e) =>{
-    
-    
+  typeValueChange = (e) => {
     this.props.setTypeRelationship({
       id: this.props.selector.current.id,
       type: e.target.value,
       checked: e.target.checked,
-      
-    });}
+    });
+  };
 
   handleAddAttribute = (relationshipIndex) => {
-
-    
-    
     // Randomly position the attribute around the relationship
     const radius = spawnRadius;
     var randomAngle = getRandomInt(0, 360);
     var xOffset = radius * Math.cos(randomAngle);
     var yOffset = radius * Math.sin(randomAngle);
-  // if(this.props.components.notation==='UML Notation'){
-      if (typeof this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id)==='undefined'){
-    this.props.addEntity({
-      x: this.props.components.relationships[relationshipIndex].x + xOffset,
-      y: this.props.components.relationships[relationshipIndex].y + yOffset,
-      parentId:this.props.selector.current.id,
-      nameUML: this.props.components.relationships[relationshipIndex].name
-    });
-    this.props.addAttribute({
-     id:  this.props.components.count+1,
-     grandparentAttrId:this.props.components.relationships[relationshipIndex].id,
-      parentId: this.props.components.count+1,
-      x: this.props.components.relationships[relationshipIndex].x + xOffset,
-      y: this.props.components.relationships[relationshipIndex].y + yOffset,
-    });}
-    else{
+    // if(this.props.components.notation==='UML Notation'){
+    if (
+      typeof this.props.components.entities.find(
+        (entity) => entity.parentId === this.props.selector.current.id
+      ) === "undefined"
+    ) {
+      this.props.addEntity({
+        x: this.props.components.relationships[relationshipIndex].x + xOffset,
+        y: this.props.components.relationships[relationshipIndex].y + yOffset,
+        parentId: this.props.selector.current.id,
+        nameUML: this.props.components.relationships[relationshipIndex].name,
+      });
       this.props.addAttribute({
-        id:  this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id).id,
-       grandparentAttrId:this.props.components.relationships[relationshipIndex].id,
-         parentId: this.props.components.entities.find((entity)=> entity.parentId===this.props.selector.current.id).id,
-         x: this.props.components.relationships[relationshipIndex].x + xOffset,
-         y: this.props.components.relationships[relationshipIndex].y + yOffset,
-       });
+        id: this.props.components.count + 1,
+        grandparentAttrId:
+          this.props.components.relationships[relationshipIndex].id,
+        parentId: this.props.components.count + 1,
+        x: this.props.components.relationships[relationshipIndex].x + xOffset,
+        y: this.props.components.relationships[relationshipIndex].y + yOffset,
+      });
+    } else {
+      this.props.addAttribute({
+        id: this.props.components.entities.find(
+          (entity) => entity.parentId === this.props.selector.current.id
+        ).id,
+        grandparentAttrId:
+          this.props.components.relationships[relationshipIndex].id,
+        parentId: this.props.components.entities.find(
+          (entity) => entity.parentId === this.props.selector.current.id
+        ).id,
+        x: this.props.components.relationships[relationshipIndex].x + xOffset,
+        y: this.props.components.relationships[relationshipIndex].y + yOffset,
+      });
     }
     this.props.select({
       type: "entity",
       id: this.props.components.count + 1,
       parentId: this.props.selector.current.id,
     });
- //  }
- //  else{
-  /*  this.props.addAttribute({
+    //  }
+    //  else{
+    /*  this.props.addAttribute({
       id: this.props.selector.current.id,
       parentEntity:null,
       x: this.props.components.relationships[relationshipIndex].x + xOffset,
@@ -120,41 +135,61 @@ class RelationshipProperties extends React.Component {
       id: this.props.components.count + 1,
       parentId: this.props.selector.current.id,
     });*/
-  // }
- 
-   
+    // }
   };
 
   render() {
-    var relationshipIndex = this.props.components.relationships.findIndex(this.findRelationshipIndex);
+    var relationshipIndex = this.props.components.relationships.findIndex(
+      this.findRelationshipIndex
+    );
     var addConnectionButton =
-
-     (this.props.components.relationships[relationshipIndex].connections.length>1 && (this.props.components.notation==="Information Engineering Notation" || this.props.components.notation==="Bachman Notation" || this.props.components.notation==="Barker Notation" ))? null:
-      (this.props.components.relationships[relationshipIndex].connections.length < 5)  ? 
-             (
+      this.props.components.relationships[relationshipIndex].connections
+        .length > 1 &&
+      (this.props.components.notation === "Information Engineering Notation" ||
+        this.props.components.notation === "Bachman Notation" ||
+        this.props.components.notation === "Barker Notation") ? null : this
+          .props.components.relationships[relationshipIndex].connections
+          .length < 5 ? (
         <button
           /*className="properties-neutral-button"*/
           type="button"
-          className='buttonmenu'
-          style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+          className="buttonmenu"
+          style={{
+            cursor: "pointer",
+            border: "none",
+            outline: "none",
+            fontSize: 17,
+            backgroundColor: "#f2f2f2",
+            fontFamily:
+              "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+          }}
           onClick={() => {
             this.props.addConnection({ id: this.props.selector.current.id });
           }}
         >
           Add Connection
         </button>
-      ) : null ;
+      ) : null;
 
     return (
-      <div className="sidepanel-content" >
-       {/* <h3>Relationship</h3> */}
+      <div className="sidepanel-content">
+        {/* <h3>Relationship</h3> */}
         <label>
-         {/* Name:{" "}*/}
+          {/* Name:{" "}*/}
           <input
             /*className="big-editor-input"*/
             type="text"
             autoComplete="off"
-            style={{outline: 'none',border:'none',margin: 3, width:'280px', paddingLeft: '6px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+            style={{
+              outline: "none",
+              border: "none",
+              margin: 3,
+              width: "280px",
+              paddingLeft: "6px",
+              fontSize: "17px",
+              fontFamily:
+                "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+            }}
             placeholder="Set relationship name"
             name="name"
             id="name"
@@ -165,40 +200,57 @@ class RelationshipProperties extends React.Component {
             maxLength={nameSize}
             value={this.props.components.relationships[relationshipIndex].name}
             onChange={this.nameValueChange}
-            
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to relationship
-            onKeyDown={ (event) => {if (event.key==='Delete'){
-              this.props.deleteChildren({ id: this.props.selector.current.id });
-              this.props.deleteRelationship({
-                id: this.props.selector.current.id,
-              });
-              if(this.props.components.entities.find(x=> x.parentId===this.props.selector.current.id)){
-                this.props.deleteEntityChild({
-                  id: this.props.selector.current.id
-                })}
-              this.props.deselect();
-            }
-            else if (event.key==='Escape' || event.key==='Enter'){this.props.deselect(); this.getStage()}
-          }}
+            onKeyDown={(event) => {
+              if (event.key === "Delete") {
+                this.props.deleteChildren({
+                  id: this.props.selector.current.id,
+                });
+                this.props.deleteRelationship({
+                  id: this.props.selector.current.id,
+                });
+                if (
+                  this.props.components.entities.find(
+                    (x) => x.parentId === this.props.selector.current.id
+                  )
+                ) {
+                  this.props.deleteEntityChild({
+                    id: this.props.selector.current.id,
+                  });
+                }
+                this.props.deselect();
+              } else if (event.key === "Escape" || event.key === "Enter") {
+                this.props.deselect();
+                this.getStage();
+              }
+            }}
             //////////////
           />
         </label>
         <hr />
-        <table style={{fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" }} /*className="type-inputs"*/>
+        <table
+          style={{
+            fontFamily:
+              "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+          }} /*className="type-inputs"*/
+        >
           <tbody>
             <tr>
-             { /*<td>Type:</td>*/}
-              <td  className='buttonmenu'>
+              {/*<td>Type:</td>*/}
+              <td className="buttonmenu">
                 <label>
                   <input
                     type="checkbox"
-                  /* ref={(input) => {                                //gia peiramatikous logous
+                    /* ref={(input) => {                                //gia peiramatikous logous
                       this.typeInput = input;
                     }} */
-                   
+
                     name="type"
                     value="weak"
-                    checked={this.props.components.relationships[relationshipIndex].type.weak}
+                    checked={
+                      this.props.components.relationships[relationshipIndex]
+                        .type.weak
+                    }
                     onChange={this.typeValueChange}
                   />
                   Identifying
@@ -208,74 +260,77 @@ class RelationshipProperties extends React.Component {
           </tbody>
         </table>
         <hr />
-       
-        <div className="connections-list"> 
-          <Connections                            //to endiameso kouti anamesa type kai new attribute 
+
+        <div className="connections-list">
+          <Connections //to endiameso kouti anamesa type kai new attribute
             selected={this.props.selector.current}
             entities={this.props.components.entities}
             relationships={this.props.components.relationships}
             findRelationshipIndex={this.findRelationshipIndex}
           />
         </div>
-        
+
         {addConnectionButton}
         <hr />
-        <div className="buttons-list" >
-          <button                                         //koumpi Add Connection
-          /*  className="properties-neutral-button"*/
+        <div className="buttons-list">
+          <button //koumpi Add Connection
+            /*  className="properties-neutral-button"*/
             type="button"
-           
-            style={{ display: this.props.components.notation==='Information Engineering Notation' || 
-            this.props.components.notation==='Bachman Notation' ||
-          
-            this.props.components.notation==='Barker Notation'?
-            'none': 'block',cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
-            className='buttonmenu'
+            style={{
+              display:
+                this.props.components.notation ===
+                  "Information Engineering Notation" ||
+                this.props.components.notation === "Bachman Notation" ||
+                this.props.components.notation === "Barker Notation"
+                  ? "none"
+                  : "block",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              fontSize: 17,
+              backgroundColor: "#f2f2f2",
+              fontFamily:
+                "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+            }}
+            className="buttonmenu"
             onClick={() => this.handleAddAttribute(relationshipIndex)}
           >
-
-
             New Attribute
           </button>
-        {/*  <button                                         //koumpi Add Connection
         
-            type="button"
-           
-            style={{ display:  
-              (this.props.components.notation==='Information Engineering Notation' || 
-            this.props.components.notation==='Bachman Notation' ||
-            this.props.components.notation==='Barker Notation') ||  this.props.components.relationships[relationshipIndex].connections.length>2?
-            'none': this.props.components.relationships[relationshipIndex].attributesNum===0  ? 'none': 'block',
-            cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
-            className='buttonmenu'
-          //  onClick={() => convertToAssociativeEntity(this.props.components.relationships[relationshipIndex].x, this.props.components.relationships[relationshipIndex].y, this.props.components.relationships[relationshipIndex].name)}
-          >
-
-
-           Make Associative Entity
-          </button>*/}
           <button
-          /*  className="properties-delete-button"*/
+            /*  className="properties-delete-button"*/
             type="button"
-            className='buttonmenu'
-            style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+            className="buttonmenu"
+            style={{
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              fontSize: 17,
+              backgroundColor: "#f2f2f2",
+              fontFamily:
+                "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+            }}
             onClick={() => {
               this.props.deleteChildren({ id: this.props.selector.current.id });
               this.props.deleteRelationship({
                 id: this.props.selector.current.id,
               });
-               if(this.props.components.entities.find(x=> x.parentId===this.props.selector.current.id)){
-              this.props.deleteEntityChild({
-                id: this.props.selector.current.id
-              })}
-             
-            
+              if (
+                this.props.components.entities.find(
+                  (x) => x.parentId === this.props.selector.current.id
+                )
+              ) {
+                this.props.deleteEntityChild({
+                  id: this.props.selector.current.id,
+                });
+              }
+
               this.props.deselect();
             }}
           >
             Delete
           </button>
-   
         </div>
       </div>
     );
@@ -285,7 +340,9 @@ class RelationshipProperties extends React.Component {
 // Component for all connections
 const Connections = (props) => {
   let connectionList = [];
-  let relationshipIndex = props.relationships.findIndex(props.findRelationshipIndex);
+  let relationshipIndex = props.relationships.findIndex(
+    props.findRelationshipIndex
+  );
   for (let i in props.relationships[relationshipIndex].connections) {
     connectionList.push(
       <React.Fragment key={i}>
@@ -303,7 +360,7 @@ const Connections = (props) => {
 
 const mapStateToProps = (state) => ({
   components: state.components.present,
-  
+
   selector: state.selector,
 });
 
@@ -321,4 +378,7 @@ const mapDispatchToProps = {
   repositionComponents,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RelationshipProperties);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RelationshipProperties);

@@ -171,6 +171,8 @@ const componentsReducer = (state = initialState, action) => {
             participation: "partial",
             cardinality: "disjoint",
             xconnections: [],
+            minParent:"",
+            maxParent:""
             //connectionCount: 0, // Number of connections
           },
         ],
@@ -231,6 +233,7 @@ const componentsReducer = (state = initialState, action) => {
                     connectId: 0,
                     minUml:"",
                     maxUml:"",
+                    
                   },
                 ],
               }
@@ -254,6 +257,22 @@ const componentsReducer = (state = initialState, action) => {
             : extension
         ),
       };
+      case "MODIFY_XCONNECTION_UML":
+        return {
+          ...state,
+          extensions: state.extensions.map((extension) =>
+            extension.id === action.payload.id
+              ? {
+                  ...extension,
+                  xconnections: extension.xconnections.map((xconnection) =>
+                    xconnection.id === action.payload.xconnectionIndex
+                      ? { ...xconnection, [action.payload.prop]: action.payload.value }
+                      : xconnection
+                  ),
+                }
+              : extension
+          ),
+        };
    /* case "DELETE_XCONNECTION":
       return {
         ...state,
@@ -429,6 +448,8 @@ const componentsReducer = (state = initialState, action) => {
        )
       
      }*/
+
+
     case "MODIFY_CONNECTION":
      
     /* return {

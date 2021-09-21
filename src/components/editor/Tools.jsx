@@ -24,8 +24,6 @@ import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
 
-
-
 class Tools extends React.Component {
   state = {
     saveEnabled:
@@ -61,8 +59,6 @@ class Tools extends React.Component {
     clearTimeout(this.clickTimer);
   }
 
-  
-
   saveDiagram = () => {
     this.setState({ saveStatus: { text: "Saving...", color: "#0086a8" } });
     savediagram(this.cancelToken)
@@ -84,20 +80,18 @@ class Tools extends React.Component {
         } else {
           this.setState({
             saveStatus: {
-              text:
-                "Not able to save. Leaving or refreshing the page might log you out.",
+              text: "Not able to save. Leaving or refreshing the page might log you out.",
               color: "#b30d23",
             },
           });
         }
       })
       .catch(() => {});
-    
   };
 
   clearStage = () => {
     this.props.deselect();
-  //  this.props.resetMeta();
+    //  this.props.resetMeta();
     this.props.resetComponents();
   };
 
@@ -158,22 +152,23 @@ class Tools extends React.Component {
         />
       ) : null;
 
-    var clearStageButton =
-     /* (!this.props.user.confirmed ||    /// NA EMFANIZETAI to clear diagram KAI OTAN O XRHSTHS EINAI LOGGED IN 
+    var clearStageButton = (
+      /* (!this.props.user.confirmed ||    /// NA EMFANIZETAI to clear diagram KAI OTAN O XRHSTHS EINAI LOGGED IN 
         this.props.user.diagramsOwned >= diagramLimit) &&
       !this.props.general.activeDiagramId ? (*/
-        <button
-          type="button"
-          className="tools-button-red"
-          onTouchStart={this.start}
-          onTouchEnd={this.end}
-          onTouchCancel={this.end}
-          onMouseDown={this.start}
-          onMouseUp={this.end}
-          onMouseOut={this.end}
-        >
-          {this.state.clearButtonText}
-        </button>/*
+      <button
+        type="button"
+        className="tools-button-red"
+        onTouchStart={this.start}
+        onTouchEnd={this.end}
+        onTouchCancel={this.end}
+        onMouseDown={this.start}
+        onMouseUp={this.end}
+        onMouseOut={this.end}
+      >
+        {this.state.clearButtonText}
+      </button>
+    ); /*
       ) : null;*/
 
     // CSS classes are set for the burger menu (whether its displayed or not)
@@ -195,15 +190,18 @@ class Tools extends React.Component {
         <Link to="/">
           <img src={Logo} className="logo" alt=":(" />
         </Link>
+
         {saveGroup}
         <ul className={toolsClasses}>
           {saveButton}
-         
+          <Link to="/help" target="_blank">
+            <button className="undo tools-button-blue">Help</button>
+          </Link>
           <ConstraintsButton />
           <UndoRedo />
-          
+
           <ShareButton />
-    
+
           <ConvertToMenuListComposition />
 
           {titleInput}
