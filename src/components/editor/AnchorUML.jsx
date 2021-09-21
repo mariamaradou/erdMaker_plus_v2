@@ -67,7 +67,7 @@ const AnchorUML = (props) => {
     ) : null;
 
   var many =
-    props.maximum === "many" ? ( //participation many
+    (props.maximum === "many"  ) ? ( //participation many
       <Text
         text={props.minimum ? "    *)" : "(..*)"}
         x={
@@ -92,7 +92,7 @@ const AnchorUML = (props) => {
           
           (props.exactMin === "" ? "-" : props.exactMin==='zero'?"0": props.exactMin==='one'?'1': props.exactMin) +
           ".." +
-          (props.exactMax === "" ? "-" : props.exactMax==='many'?'*': props.exactMax==="one"?"1": props.exactMax) 
+          (props.exactMax === "" ? "-" : (props.exactMax==='many'|| props.maximum === "n" || props.maximum === "N")?'*': props.exactMax==="one"?"1": props.exactMax) 
           
         }
         x={

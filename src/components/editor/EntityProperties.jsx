@@ -4,6 +4,7 @@ import {
   setNameEntity,
   addAttribute,
   addExtension,
+  deleteXConnection,
   deleteChildren,
   deleteEntity,
   deleteConnection,
@@ -147,6 +148,10 @@ class EntityProperties extends React.Component {
                 parentId: null,
                 connectId: this.props.selector.current.id,
               });
+              this.props.deleteXConnection({
+                xconnectionId: null,
+                entityId: this.props.selector.current.id
+              });
               this.props.deleteChildren({ id: this.props.selector.current.id });
               this.props.deleteEntity({ id: this.props.selector.current.id, attributesNum: this.props.selector.current.attrNum ,
                 parentId:this.props.selector.current.parentId
@@ -243,6 +248,10 @@ class EntityProperties extends React.Component {
                 parentId: null,
                 connectId: this.props.selector.current.id,
               });
+              this.props.deleteXConnection({
+                xconnectionId: null,
+                entityId: this.props.selector.current.id
+              });
               this.props.deleteChildren({ id: this.props.selector.current.id });
               this.props.deleteEntity({ id: this.props.selector.current.id, attributesNum: this.props.selector.current.attrNum, 
                  parentId: this.props.selector.current.parentId });
@@ -272,7 +281,7 @@ const mapDispatchToProps = {
   deleteEntity,
   deleteConnection,
   select,
- 
+  deleteXConnection,
   deselect,
   setTypeEntity,
   repositionComponents,

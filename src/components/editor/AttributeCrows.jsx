@@ -147,7 +147,9 @@ class AttributeCrows extends React.Component {
              'o ' + this.props.name :
              this.props.components.notation==='Barker Notation'?
              '* ' + this.props.name
-             :this.props.name}
+             :
+              this.props.components.notation==='UML Notation' && this.props.type.unique ?
+             'PK  ' + this.props.name: this.props.name}
           fontSize={fontSize}
           align="center"
           verticalAlign="middle"

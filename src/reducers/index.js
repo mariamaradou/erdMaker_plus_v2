@@ -8,7 +8,7 @@ import {
   UPDATE_INITIAL_POSITION_ENTITY,
   // UPDATE_INITIAL_POSITION_CHILDREN,
   UPDATE_INITIAL_POSITION_EXTENSION,
-
+  DELETE_ENTITY_CHILD,
   UPDATE_INITIAL_POSITION_RELATIONSHIP,
   UPDATE_INITIAL_POSITION_ATTRIBUTE,
   UPDATE_INITIAL_POSITION_LABEL,
@@ -64,7 +64,7 @@ const finalReducer = combineReducers({
         action.type === SET_NOTATION ||
         action.type === SET_TYPE_ENTITY ||
         action.type === DELETE_ENTITY ||
-        
+        action.type=== DELETE_ENTITY_CHILD || 
         action.type=== DELETE_CONNECTION ||
         action.type === ADD_EXTENSION ||
         action.type === MODIFY_EXTENSION ||

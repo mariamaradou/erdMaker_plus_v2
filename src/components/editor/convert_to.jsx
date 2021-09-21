@@ -152,7 +152,7 @@ const ConvertTo = (props) => {
 
   const changeNotation = (option) => {
     props.components.extensions.map((extension) =>
-      extension.type === "aggregation" && (option !== "Teorey Notation" && option !== "UML Notation")
+      (extension.type === "aggregation" || extension.type === "composition") && (option !== "Teorey Notation" && option !== "UML Notation")
         ? props.modifyExtension({
             id: extension.id,
             prop: "type",

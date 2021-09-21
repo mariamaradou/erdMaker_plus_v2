@@ -17,7 +17,7 @@ import AnchorBarker from "./AnchorBarker";
 import AnchorKorth from "./AnchorKorth";
 import AnchorUML from "./AnchorUML";
 import { ExtensionSpline } from "./ExtensionElmasri";
-import { Stage, Layer, Line, Rect, Arrow, Group, Text, RegularPolygon } from "react-konva";
+import { Stage, Layer, Line, Rect, Arrow, Group, Text } from "react-konva";
 import Properties from "./Properties";
 import { Provider, ReactReduxContext, connect } from "react-redux";
 //import AlertDialog from "./alertDialog";
@@ -29,6 +29,7 @@ import {
   addEntity,
   deleteChildren,
   deleteAttribute,
+  deleteXConnection,
   deleteExtension,
   deleteLabel,
   deleteRelationship,
@@ -44,8 +45,6 @@ import {
   stageWidth,
   stageHeight,
   entityWidth,
-  relationshipHeight,
-  relationshipWidth,
   entityHeight,
   anchorLength,
 } from "../../global/constants";
@@ -607,8 +606,7 @@ class Surface extends React.Component {
               this.props.components.extensions[i].x,
 
             this.props.components.extensions[i].y,
-            //  this.props.components.extensions[i].x-40,        this is for batini, ceri & navathe (the line bending)
-            //  this.props.components.extensions[i].y,
+           
           
             ]
           }
@@ -712,22 +710,7 @@ class Surface extends React.Component {
         (this.props.components.notation ===  "Korth, Silberschatz & Sudarshan" && this.props.components.extensions[i].cardinality==='disjoint' ) ? (
           <Group key={keyIndex}>
              
-            <Rect
-            opacity={this.props.components.notation==='UML Notation' && this.props.components.extensions[i].type==='aggregation'? 1: 0}
-             lineJoin="bevel"
-          closed
-          
-             fill={'black'}
            
-         width={18}
-         height={18}
-         rotation={47}
-         
-        x={anchor.angle===90?anchor.x+16:anchor.angle===-90?anchor.x-15:anchor.x}
-        y={anchor.angle===90?anchor.y-13:anchor.angle===-90?anchor.y-10:anchor.angle===0?anchor.y-25:anchor.y}
-            
-            >
-            </Rect>
             
             
             
@@ -772,6 +755,24 @@ class Surface extends React.Component {
               anchor.y
               ]}
             />
+             <Rect
+            opacity={this.props.components.notation==='UML Notation' && (this.props.components.extensions[i].type==='aggregation' || this.props.components.extensions[i].type==='composition')? 1: 0}
+             lineJoin="bevel"
+          closed
+          
+             fill={this.props.components.extensions[i].type==='aggregation'?'white': 'black'}
+           stroke={'black'}
+           strokeWidth={0.5}
+         width={18}
+         height={18}
+         rotation={47}
+         
+        x={anchor.angle===90?anchor.x+16:anchor.angle===-90?anchor.x-15:anchor.x}
+        y={anchor.angle===90?anchor.y-13:anchor.angle===-90?anchor.y-10:anchor.angle===0?anchor.y-25:anchor.y}
+            
+            >
+            </Rect>
+            
           </Group>
         ) : (
           <Line
@@ -1233,8 +1234,14 @@ class Surface extends React.Component {
           parentId: null,
           connectId: this.props.selector.current.id,
         });
+        this.props.deleteXConnection({
+          xconnectionId: null,
+          entityId: this.props.selector.current.id
+        });
         this.props.deleteChildren({ id: this.props.selector.current.id });
-        this.props.deleteEntity({ id: this.props.selector.current.id });
+        this.props.deleteEntity({ id: this.props.selector.current.id, attributesNum: this.props.selector.current.attrNum ,
+          parentId:this.props.selector.current.parentId
+        });
         this.props.deselect();
       }
       else if(this.props.selector.current.type==='attribute'){
@@ -1513,6 +1520,7 @@ const mapDispatchToProps = {
   deleteChildren,
   modifyExtension,
   addEntity,
+  deleteXConnection,
   addRelationship,
   addLabel,
 };

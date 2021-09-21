@@ -226,12 +226,13 @@ class EntityCrows extends React.Component {
           this.props.select({
             type: "entity",
             id: this.props.id,
-            attrNum:null,
-            parentId: null,
+            attrNum:this.props.attributesNum,
+            parentId: this.props.parentId,
             parentEntity: null,
-            value:false
            
-          }); 
+            value:false
+            
+          });
           
         }}
         onMouseOut={(e) => {
@@ -254,7 +255,7 @@ class EntityCrows extends React.Component {
             attrNum:this.props.attributesNum,
             parentId: this.props.parentId,
             parentEntity: null,
-            selection:this.state.clicked,
+            
             value:true
             
           });

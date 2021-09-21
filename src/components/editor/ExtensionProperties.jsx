@@ -13,7 +13,7 @@ import {
 
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {stageHeight,dragBoundOffset} from '../../global/constants'
+import {dragBoundOffset} from '../../global/constants'
 
 
 class ExtensionProperties extends React.Component {
@@ -91,6 +91,15 @@ componentDidMount() {
           parent={this.props.components.entities[parentIndex]}
           handleModifyExtension={this.handleModifyExtension}
         />
+
+      );
+      else if (this.props.components.extensions[extensionIndex].type === "composition")
+      content = (
+        <Composition
+          extension={this.props.components.extensions[extensionIndex]}
+          parent={this.props.components.entities[parentIndex]}
+          handleModifyExtension={this.handleModifyExtension}
+        />
       );
     else content = null;
 
@@ -138,12 +147,12 @@ componentDidMount() {
             <option value="specialize">Specialize</option>
             <option style={{display:(this.props.components.notation==='Teorey Notation' || this.props.components.notation==='UML Notation')?'none':'block'}} value="union">Union</option>
             <option style={{display:(this.props.components.notation!=='Teorey Notation' && this.props.components.notation!=='UML Notation')?'none':'block'}} value='aggregation'>Aggregation</option>
-            
+            <option style={{display: this.props.components.notation!=='UML Notation'?'none':'block'}} value='composition'>Composition</option>
           </select>
         </div>
         {content}
         <div className="connections-list" style={{backgroundColor: '#dfdfdf'}}>
-          <XConnections  extension={this.props.components.extensions[extensionIndex]} />
+          <XConnections  extension={this.props.components.extensions[extensionIndex]} notation={this.props.components.notation} />
         </div>
         <div className="buttons-list">
           {addEntityButton}
@@ -236,6 +245,15 @@ const Aggregation = (props) => {
   );
 };
 
+const Composition = (props) => {
+  return (
+    <>
+     
+      <div className="extension-group" style={{fontWeight:'bold'}}>{props.parent.name} is a Composition of:</div>
+    </>
+  );
+};
+
 const mapStateToProps = (state) => ({
   components: state.components.present,
   selector: state.selector,
@@ -266,6 +284,7 @@ const XConnections = connect(
   for (let i in props.extension.xconnections) {
     xconnectionList.push(
       <span key={i} style={{ margin: "auto", marginBottom: "10px" }}>
+        <div>
         <select
           value={props.extension.xconnections[i].connectId}
           onChange={(e) => handleChangeXConnection(props.extension.xconnections[i].id, e)}
@@ -278,15 +297,54 @@ const XConnections = connect(
         <IconButton
         
           onClick={() => {
-            props.deleteXConnection({
+         /*   props.deleteXConnection({
               extensionId: props.extension.id,
               xconnectionId: props.extension.xconnections[i].id,
             });
-            
+            */
+            props.deleteXConnection({
+              xconnectionId: props.extension.xconnections[i].id,
+              entityId: null
+            });
+          
           }}
         >
           <DeleteIcon />
         </IconButton>
+        </div>
+        
+        {/*GIA UML MONO*/}
+        <div id='connectionUML' style={{display: props.notation==='UML Notation' && 
+        (props.extension.type==='aggregation' || props.extension.type==='composition')?
+        'block' : 'none'}}>
+        <div >
+          <label >
+            Min:{" "}
+            <select  style={{marginBottom: 4}} id={'minUML'}
+             value={
+              'undefined' } onChange={null}>
+              <option value="">Undefined</option>
+              <option value="zero"  >Zero</option>
+              <option value="one">One</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Max:{" "}
+            <select   id={ 'maxUML' }
+             value={
+             'undefined'
+            } onChange={null}>
+              <option value="">Undefined</option>
+              <option value="one">One</option>
+              <option value="many">Many</option>
+            </select>
+          </label>
+        </div>
+        </div>
+        {/*GIA UML MONO*/}
+
       </span>
     );
   }

@@ -14,8 +14,8 @@ import {
   labelMaxHeight,
   dragBoundOffset,
 } from "../global/constants";
-
-import { getChildren, getChildrenRelationship } from "../global/utils";
+import _ from "lodash";
+import { getChildren } from "../global/utils";
 
 const initialState = {
   entities: [],
@@ -32,6 +32,8 @@ const initialState = {
   count: 0, // Total number of components created in a single diagram (includes deleted).
   // Never decreases and new ids depend on it
 };
+
+
 
 
 
@@ -132,7 +134,7 @@ const componentsReducer = (state = initialState, action) => {
         ),
       };
     case "DELETE_ENTITY":
-    console.log(action.payload.attributesNum)
+   
       return {
         ...state,
         entities: state.entities.filter((entity) =>entity.id !== action.payload.id ),
@@ -152,7 +154,7 @@ const componentsReducer = (state = initialState, action) => {
        };
      
     case "ADD_EXTENSION":
-      console.log(action.payload.id)
+    
       return {
         ...state,
         extensions: [
@@ -227,6 +229,8 @@ const componentsReducer = (state = initialState, action) => {
                   {
                     id: state.count + 1,
                     connectId: 0,
+                    minUml:"",
+                    maxUml:"",
                   },
                 ],
               }
@@ -250,7 +254,7 @@ const componentsReducer = (state = initialState, action) => {
             : extension
         ),
       };
-    case "DELETE_XCONNECTION":
+   /* case "DELETE_XCONNECTION":
       return {
         ...state,
         extensions: state.extensions.map((extension) =>
@@ -263,7 +267,19 @@ const componentsReducer = (state = initialState, action) => {
               }
             : extension
         ),
-      };
+      };*/
+      case "DELETE_XCONNECTION": {
+        let newState = _.cloneDeep(state);
+  
+        let test = ()=> true;
+        if (action.payload.xconnectionId) test = (xconnection) => xconnection.id !== action.payload.xconnectionId;
+        else if (action.payload.entityId) test = (xconnection) => xconnection.connectId !== action.payload.entityId;
+  
+        for (let extension of newState.extensions) extension.xconnections = extension.xconnections.filter(test);
+  
+        if (JSON.stringify(state) === JSON.stringify(newState)) return state;
+        else return newState;
+      }
     case "ADD_RELATIONSHIP":
       return {
         ...state,
@@ -629,7 +645,7 @@ const componentsReducer = (state = initialState, action) => {
           if(state.entities.find(x=>x.id===action.payload.grandParent)){
            getChildren(childrenList, state.attributes,action.payload.grandParent );}
            else { getChildren(childrenList, state.attributes,action.payload.id )}
-        console.log(childrenList)
+      
         
        
         return {

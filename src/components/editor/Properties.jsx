@@ -15,8 +15,7 @@ import {
   extensionRadius,
   relationshipWidth,
   attributeRadiusX,
-  entityHeight,
-  stageHeight,
+  entityHeight
   // labelMaxWidth,
   //stageWidth,
 } from "../../global/constants";

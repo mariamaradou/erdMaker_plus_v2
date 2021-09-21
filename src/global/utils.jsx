@@ -41,17 +41,7 @@ export const getChildren = (list, array, id) => {
   }
 };
 
-export const getChildrenRelationship = (list, array, id) => {
-  
-  for (let i in array) {
-    
-    if (array[i].parentEntity === id  ) {
-      list.push(array[i].id);
-      
-      getChildren(list, array, array[i].id);
-    }
-  }
-};
+
 
 
 
@@ -71,21 +61,3 @@ export function onSafari() {
   else return true;
 }
 
-/*export function checkDirection(cardinalityDirection,participationDirection){
- if( typeof this.props.components.relationships.find((relationship)=> relationship.connections.length<=2)!=='undefined'){
-  if(cardinalityDirection==='Look Across'){
-    return null
-  }
-  else{
-    //antestrepse tis times
-  }
-  if(participationDirection==='Look Across'){
-    //afhse tis participation times opws einai
-  }
-  else{
-    //antistrepse tis times
-  }
-}
-else{
-  return null
-}}*/
