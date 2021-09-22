@@ -195,7 +195,7 @@ class Tools extends React.Component {
         <ul className={toolsClasses}>
           {saveButton}
           <Link to="/help" target="_blank">
-            <button className="undo tools-button-blue">Help</button>
+            <button className="tools-button-blue">Help</button>
           </Link>
           <ConstraintsButton />
           <UndoRedo />

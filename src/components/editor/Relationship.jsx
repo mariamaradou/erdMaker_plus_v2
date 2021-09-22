@@ -85,6 +85,16 @@ class Relationship extends React.Component {
         strokeWidth={0.5}
         lineJoin="bevel"
         closed
+        visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
+        opacity={                                                      //kryvw ton rompo tou relationship
+       
+          this.props.components.notation === "Information Engineering Notation" ||
+          this.props.components.notation === "Bachman Notation" ||
+          this.props.components.notation === "Barker Notation" || 
+          (this.props.components.notation === "UML Notation" &&  this.props.connections.length<=2)
+            ? 0
+            : 1
+        }
         points={[
           0,
           -relationshipHeight + weakRelationshipOffset, // TOP
@@ -189,17 +199,13 @@ class Relationship extends React.Component {
           fillLinearGradientStartPoint={{ x: -50, y: -50 }}
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
-          visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-            (relationship) => relationship.attributesNum > 0
-          ) !== "undefined")? false: true}
+          visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
           opacity={                                                      //kryvw ton rompo tou relationship
          
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation" || 
-            (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-              (relationship) => relationship.connections.length > 2
-            ) === "undefined")
+            (this.props.components.notation === "UML Notation" &&  this.props.connections.length<=2)
               ? 0
               : 1
           }
@@ -213,9 +219,7 @@ class Relationship extends React.Component {
           lineJoin="bevel"
           closed
           points={
-            (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-              (relationship) => relationship.connections.length > 2
-            ) !== "undefined")?
+            (this.props.components.notation === "UML Notation" &&   this.props.connections.length>2)?
             [
             0,
             -relationshipHeight/2, // TOP               //n-ary relationship se UML Notation
@@ -243,12 +247,8 @@ class Relationship extends React.Component {
         <Text
           text={this.props.name}
           fontSize={this.state.fontSize}
-         visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-          (relationship) => relationship.attributesNum > 0
-        ) !== "undefined")? false: true}
-          opacity={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-            (relationship) => relationship.connections.length > 2
-          ) !== "undefined")? 0: 1}
+         visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
+          opacity={ (this.props.components.notation === "UML Notation" &&   this.props.connections.length>2)? 0: 1}
           strokeWidth={0}
           shadowColor="silver"
           stroke="black"
@@ -325,9 +325,7 @@ class Relationship extends React.Component {
           }}
         />
         <Circle
-      visible={ (this.props.components.notation === "UML Notation" &&  typeof this.props.components.relationships.find(
-        (relationship) => relationship.attributesNum > 0
-      ) !== "undefined")? true: false}
+      visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? true: false}
      radius={extensionRadius}
     onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
     onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}

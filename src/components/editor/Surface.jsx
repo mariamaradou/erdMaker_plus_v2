@@ -284,6 +284,8 @@ class Surface extends React.Component {
       <Relationship
         key={relationship.id}
         id={relationship.id}
+        connections={relationship.connections}
+        attributesNum={relationship.attributesNum}
         name={relationship.name}
         type={relationship.type}
         x={relationship.x}
@@ -555,6 +557,10 @@ class Surface extends React.Component {
               x={ this.props.components.extensions[i].korthX-65} 
               y={ this.props.components.extensions[i].korthY} 
               ></Text>
+              <Text  visible={this.props.components.notation==='UML Notation' && this.props.components.extensions[i].type!=='specialize' ?true:false }
+               x={ childCoords.x} 
+              y={ childCoords.y - 45}  
+              text={this.props.components.extensions[i].xconnections[j].minUml+'..' + this.props.components.extensions[i].xconnections[j].maxUml } />
           <Line
             
             stroke={"black"}
@@ -755,6 +761,8 @@ class Surface extends React.Component {
               anchor.y
               ]}
             />
+            <Text  visible={this.props.components.notation==='UML Notation' && this.props.components.extensions[i].type!=='specialize' ?true:false} text={ this.props.components.extensions[i].minParent+'..'+ this.props.components.extensions[i].maxParent}  x={anchor.angle===90?anchor.x+30:anchor.angle===-90?anchor.x-50:anchor.x+15}
+        y={anchor.angle===90?anchor.y-13:anchor.angle===-90?anchor.y-10:anchor.angle===0?anchor.y-25:anchor.y+5}/>
              <Rect
             opacity={this.props.components.notation==='UML Notation' && (this.props.components.extensions[i].type==='aggregation' || this.props.components.extensions[i].type==='composition')? 1: 0}
              lineJoin="bevel"

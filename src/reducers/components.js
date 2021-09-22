@@ -115,7 +115,9 @@ const componentsReducer = (state = initialState, action) => {
         };
         //
     case "SET_NAME_ENTITY":
-     
+     console.log(action.payload.id)
+     console.log(action.payload.name)
+
       return {
         ...state,
         entities: state.entities.map((entity) =>

@@ -9,6 +9,7 @@ import {
   deselect,
   deleteChildren,
   deleteEntityChild,
+  setNameEntity,
   deleteRelationship,
   addConnection,
   repositionComponents,
@@ -93,7 +94,12 @@ class RelationshipProperties extends React.Component {
         y: this.props.components.relationships[relationshipIndex].y + yOffset,
         parentId: this.props.selector.current.id,
         nameUML: this.props.components.relationships[relationshipIndex].name,
+       
       });
+      this.props.setNameEntity({
+        id:this.props.components.count+1,
+        name:this.props.components.relationships[relationshipIndex].name
+      })
       this.props.addAttribute({
         id: this.props.components.count + 1,
         grandparentAttrId:
@@ -367,6 +373,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addAttribute,
   setNameRelationship,
+  setNameEntity,
   select,
   deselect,
   deleteEntityChild,

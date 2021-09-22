@@ -65,7 +65,13 @@ class Connection extends React.Component {
               type="text"
               maxLength="7"
               // value={this.props.connection.exactMin} //timh tis min
-              value={this.props.connection.min}
+             // value={this.props.connection.min}
+             value={  this.props.components.participationDirection ===
+              "Look Across" &&
+            this.props.components.relationships[parentIndex].connections
+              .length > 2
+              ? this.props.connection.minAcross
+              : this.props.connection.min}
               onChange={this.handleModifyConnection}
               //disabled={this.props.connection.min === "zero" || this.props.connection.min === "one" ? true : false}
             />

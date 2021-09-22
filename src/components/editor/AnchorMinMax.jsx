@@ -5,7 +5,7 @@ import { Group, Line, Text } from "react-konva";
 
 const AnchorMinMax = (props) => {
   var mandatory =
-    props.minimum === "zero" ? ( //cardinality one
+    props.minimum === "zero" ? ( 
       <Text
         text={props.maximum ? "(0, " : "(0,-)"}
         x={
@@ -25,7 +25,7 @@ const AnchorMinMax = (props) => {
     ) : null;
 
   var optional =
-    props.minimum === "one" ? ( //cardinality one
+    props.minimum === "one" ? ( 
       <Text
         text={props.maximum ? "(1, " : "(1,-)"}
         x={
@@ -47,7 +47,7 @@ const AnchorMinMax = (props) => {
  
 
   var one =
-    props.maximum === "one" ? ( //participation one
+    props.maximum === "one" ? ( 
       <Text
         text={props.minimum ? "   1)" : "(-,1)"}
          x={
@@ -67,7 +67,7 @@ const AnchorMinMax = (props) => {
     ) : null;
 
   var many =
-    props.maximum === "many" ? ( //participation many
+    props.maximum === "many" ? ( 
       <Text
         text={props.minimum ? "    N)" : "(-,N)"}
         x={
