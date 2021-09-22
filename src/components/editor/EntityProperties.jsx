@@ -25,6 +25,7 @@ class EntityProperties extends React.Component {
 
   
   componentDidMount() {
+  
    this.nameInput.focus();
     document.getElementsByClassName('sidepanel')[0].style.display='block'
     var entityIndex = this.props.components.entities.findIndex(this.findEntityIndex);
@@ -231,8 +232,10 @@ class EntityProperties extends React.Component {
         
         className='buttonmenu'
           type="button"
-          disabled={this.props.components.entities[entityIndex].connectionCount>7 ? true: false}
-          style={{cursor:'pointer',border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+          
+          disabled={ 
+            this.props.components.entities[entityIndex].connectionCount>7 ? true: false}
+          style={{display: process.env.REACT_APP_EER_MODEL==='false'?'none':'block', cursor:'pointer',border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
           onClick={() => this.handleAddExtension(entityIndex)}
         >
           Add Extension

@@ -5,6 +5,7 @@ import keyStrokesAndClicks from "../../img/keyStrokes&Clicks.gif"
 import extensionOverlap from "../../img/extensionOverlap.gif"
 import ternaryRel from "../../img/ternary_rel.jpg"
 import ternaryToBinary from "../../img/ternary_to_binary.jpg"
+import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 
 const Tutorial = () => {
   document.title = "ERD Maker - Help";
@@ -32,10 +33,10 @@ const Tutorial = () => {
          <tr><td> <b>"e"</b> key for new Entity</td></tr>
          <tr><td> <b>"r" </b> key for new Relationship</td></tr>
          <tr><td> <b>"l"</b> key for new Label</td></tr>
-         <tr><td> <b> "Alt+z" </b> keys for Undo action.<br/> <i>For multiple undos, don't press  'z' key alone, with 'Alt' pressed, but press both keys  
-         on each undo action.</i></td></tr>
-         <tr><td>  <b> "Alt+y"</b> keys for Redo action.<br/><i> For multiple redos, don't press only 'y' key alone, with 'Alt' pressed, but press both keys  
-         on each redo action.</i></td></tr>
+         <tr><td> <b> "Alt+z" </b> keys for Undo action.<br/> <i>For multiple undos, don't press  'z' key alone, with 'Alt' pressed.
+          Instead, press both keys  on each undo action.</i></td></tr>
+         <tr><td>  <b> "Alt+y"</b> keys for Redo action.<br/><i> For multiple redos, don't press only 'y' key alone, with 'Alt' pressed.
+         Instead, press both keys on each redo action.</i></td></tr>
          <tr><td>  <b>Arrow</b> keys to move around surface</td></tr>
          <tr><td> <b>  Delete</b> key to delete a surface component</td></tr>
          <tr><td>  <b> Escape</b> key to deselect a surface component</td></tr>
@@ -65,18 +66,33 @@ const Tutorial = () => {
         <p><i>fig 2. Look Here notation</i></p>
         <img alt="Look Here" src={LookHere} width={'85%'}></img>
         
-        <h3 >Ternary Relationships</h3>
-        <p style={{textAlign:'left'}}>🚩 Cardinality &amp; Participation constraints don't have the same meaning in ternary relationships in comparison to binary relationships.</p>
-        <h4>Τernary Relationship to Binary  </h4>
+        <h3 >Ternary relationships</h3>
+        <p style={{textAlign:'left'}}>🚩 Look Here &amp; Look Across notations
+       are  interpreted differently in ternary relationships in comparison to binary relationships.
+       Ternary relationship in figure 3 is interpreted as: </p>
+       <p>(i) In <i><b>Look Across</b></i> notation:</p>
+       <p>•	Each Employee, assigned to a Project, works at  one (1) Location.</p>
+       <p>•	Each Project, at a Location, is assigned to many (N) Employees.</p>
+       <p>•	Each Employee, at a Location, is assigned at  one (1) Project. </p>
+      
+
+       <p>(ii) In <i><b>Look Here</b></i> notation:</p>
+       <p>•	Each Project is assigned to one (1) Employee, at only one (1) Location.</p>
+       <p>• Each Employee is assigned to many (N) Projects, in many (N) Locations.	</p>
+       <p>• In each Location, one (1) Employee is assigned to one (1) Project.	 </p>
+       <p><i>fig 3. Ternary relationship with constraints</i></p>
+       <img src={ternaryTeorey} alt='ternaryteorey' width='70%'></img>
+
+        <h4>Τernary relationship to Binary  </h4>
         <p>Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
           If you have a ternary relationship in Crow's foot notation, you have to convert it into binary in order to proceed 
           to one of the three notations previously mentioned.</p>
-          <p><i>fig 3. Ternary Relationship</i></p>
+          <p><i>fig 4. Ternary relationship</i></p>
           <img alt='ternaryRelationship' src={ternaryRel} width={'70%'}></img>
-          <p><i>fig 4. Three Binary Relationships instead of one Ternary with SUPPLY as weak entity</i></p>
+          <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
           <img alt='ternaryToBinary' src={ternaryToBinary} width={'70%'}></img>
         
-        <h3>Attributes in Relationships</h3>
+        <h3>Attributes in relationships</h3>
         <p>εδω θα δειξω στον χρηστη τι συμβαινει στο γνωρισμα οταν δν επιτρεπεται να μπει σε συσχετιση</p>
         </div>
       </div>
