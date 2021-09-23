@@ -6,6 +6,8 @@ import extensionOverlap from "../../img/extensionOverlap.gif"
 import ternaryRel from "../../img/ternary_rel.jpg"
 import ternaryToBinary from "../../img/ternary_to_binary.jpg"
 import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
+import constraintsButton from "../../img/constraintsButton.jpg"
+
 
 const Tutorial = () => {
   document.title = "ERD Maker - Help";
@@ -50,22 +52,26 @@ const Tutorial = () => {
         </div>
 
         <div>
+
+          
         <h2 >Some theory</h2>
+        <p> ◉ Constraints button shows Cardinality &amp; Participation for each notation.</p>
+        <img src={constraintsButton} alt="constraintsButton" width={'50%'}></img>
         <h3>Look Across &amp; Look Here notation</h3>
         
         <div style={{textAlign:'center'}}>
-        <p> 💡 Both notations in figures 1 &amp; 2 below mean the following sentences:   </p>
+        <p> 💡 Both notations in figures 1 &amp; 2 below mean the following sentences: *   </p>
         
         <p>• The entity Employee works for One (1) Department  </p>
         <p>• The entity Department has Many (N) Employees    </p>
         </div>
        
-        <p><i>fig 1. Look Across notation</i></p>
+        <p><i>fig 1. Look Across notation </i></p>
         <img alt="Look Across" src={LookAcross} width={'85%'} ></img>
         
-        <p><i>fig 2. Look Here notation</i></p>
+        <p><i>fig 2. Look Here notation </i></p>
         <img alt="Look Here" src={LookHere} width={'85%'}></img>
-        
+        <p><i>* We are showing only Cardinalities in our examples but the same goes for Participations.</i> </p>
         <h3 >Ternary relationships</h3>
         <p style={{textAlign:'left'}}>🚩 Look Here &amp; Look Across notations
        are  interpreted differently in ternary relationships in comparison to binary relationships.
@@ -80,11 +86,12 @@ const Tutorial = () => {
        <p>•	Each Project is assigned to one (1) Employee, at only one (1) Location.</p>
        <p>• Each Employee is assigned to many (N) Projects, in many (N) Locations.	</p>
        <p>• In each Location, one (1) Employee is assigned to one (1) Project.	 </p>
+
        <p><i>fig 3. Ternary relationship with constraints</i></p>
        <img src={ternaryTeorey} alt='ternaryteorey' width='70%'></img>
 
         <h4>Τernary relationship to Binary  </h4>
-        <p>Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
+        <p>🚩 Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
           If you have a ternary relationship in Crow's foot notation, you have to convert it into binary in order to proceed 
           to one of the three notations previously mentioned.</p>
           <p><i>fig 4. Ternary relationship</i></p>
@@ -92,8 +99,7 @@ const Tutorial = () => {
           <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
           <img alt='ternaryToBinary' src={ternaryToBinary} width={'70%'}></img>
         
-        <h3>Attributes in relationships</h3>
-        <p>εδω θα δειξω στον χρηστη τι συμβαινει στο γνωρισμα οταν δν επιτρεπεται να μπει σε συσχετιση</p>
+       
         </div>
       </div>
       </div>

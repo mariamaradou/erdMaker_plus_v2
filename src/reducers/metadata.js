@@ -9,7 +9,11 @@ const metaReducer = (state = initialState, action) => {
         ...state,
         title: action.payload.title,
       };
-    
+    case "SET_HELP_MODAL":
+      return{
+        ...state,
+        modal:action.payload.modal
+      }
     case "SET_META":
       return action.payload;
     case "RESET_META":

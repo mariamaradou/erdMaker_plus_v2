@@ -1,5 +1,5 @@
 import React from "react";
-
+import App from './helpModal'
 import { connect } from "react-redux";
 import {
   addEntity,
@@ -194,8 +194,9 @@ class Tools extends React.Component {
         {saveGroup}
         <ul className={toolsClasses}>
           {saveButton}
+          <App/>
           <Link to="/help" target="_blank">
-            <button className="tools-button-blue">Help</button>
+            <button style={this.props.meta.modal?{backgroundColor:'#FFFF99', opacity:1}:null}className=" tools-button-blue">Help</button>
           </Link>
           <ConstraintsButton />
           <UndoRedo />

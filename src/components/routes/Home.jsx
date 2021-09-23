@@ -3,14 +3,14 @@ import LoginRegisterIndex from "../loginRegister/LoginRegisterIndex";
 import ProfileIndex from "../profile/ProfileIndex";
 import { LinkButton } from "../../global/globalComponents";
 import { connect } from "react-redux";
-import { resetActiveDiagram } from "../../actions/actions";
+import { resetActiveDiagram, setHelpModal} from "../../actions/actions";
 
 const Home = (props) => {
   document.title = "ERD Maker - Home";
   return (
     <div className="home-wrapper">
       
-      <Description resetActiveDiagram={props.resetActiveDiagram} />
+      <Description resetActiveDiagram={props.resetActiveDiagram} setHelpModal={props.setHelpModal}/>
       {props.user.isLogged ? <ProfileIndex /> : <LoginRegisterIndex />}
    
     </div>
@@ -30,7 +30,7 @@ const Description = (props) => (
       style={null}
       label="New Diagram"
       useSpan={true}
-      onClick={props.resetActiveDiagram}
+      onClick={()=>{props.resetActiveDiagram(); props.setHelpModal({modal:true}) }}
       pathname="/designer"
     />
   </div>
@@ -38,10 +38,12 @@ const Description = (props) => (
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  meta:state.meta
 });
 
 const mapDispatchToProps = {
   resetActiveDiagram,
+  setHelpModal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -11,6 +11,7 @@ import {
   resetMeta,
   resetActiveDiagram,
   setMeta,
+  setHelpModal,
   setComponents,
 } from "../../actions/actions";
 import axios from "axios";
@@ -39,7 +40,10 @@ class Editor extends React.Component {
 
   }
 
+  
+
   componentDidMount = () => {
+    
     document.title = "ERD Maker - Designer";
     
     window.addEventListener("resize", this.props.updateSidepanelWidth,this.props.updateSidepanelHeight);
@@ -67,12 +71,17 @@ class Editor extends React.Component {
    getDiagramTemp(this.props.match.params.id,this.cancelToken)
   
    }
+
+  // this.props.setHelpModal({modal:true})
   
   };
 
   
-
+ componentDidUpdate(){
+  this.props.setHelpModal({modal:false})
+ }
   componentWillUnmount() {
+   
     this.clearEditor();
     this.cancelToken.cancel("Request is being canceled");
     window.removeEventListener("resize", this.props.updateSidepanelWidth,this.props.updateSidepanelHeight);
@@ -158,6 +167,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   deselect,
+  setHelpModal,
   updateSidepanelWidth,
   updateSidepanelHeight,
   resetComponents,

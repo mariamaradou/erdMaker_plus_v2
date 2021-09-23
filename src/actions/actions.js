@@ -59,6 +59,13 @@ export const SET_PARTICIPATION_DIRECTION="SET_PARTICIPATION_DIRECTION";
 export const UPDATE_POSITION_EXTENSION_CHILDREN="UPDATE_POSITION_EXTENSION_CHILDREN";
 export const DELETE_ENTITY_CHILD="DELETE_ENTITY_CHILD";
 export const MODIFY_XCONNECTION_UML= "MODIFY_XCONNECTION_UML";
+export const SET_HELP_MODAL='SET_HELP_MODAL';
+
+
+export const setHelpModal=(payload)=>({
+  type:'SET_HELP_MODAL',
+  payload:payload
+})
 
 export const modifyXConnectionUml=(payload)=>({
   type:'MODIFY_XCONNECTION_UML',
