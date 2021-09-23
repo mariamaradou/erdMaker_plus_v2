@@ -1,5 +1,5 @@
 import React from "react";
-import { Group, Line, Text } from "react-konva";
+import { Group, Line, Text, Rect } from "react-konva";
 
 //sxediasmos plithikothtwn sta relatioships
 
@@ -97,7 +97,7 @@ const AnchorUML = (props) => {
         }
         x={
           props.angle === 180 || props.angle === 0
-            ? props.x + 5
+            ? props.x + 12
             : props.angle === -90
             ? props.x - 18
             : props.x - 4
@@ -126,7 +126,7 @@ const AnchorUML = (props) => {
           30, // BOTTOM
         ]}
       />
-
+   
       {specificValuesText}
       
     </Group>
@@ -147,12 +147,12 @@ const AnchorUML = (props) => {
           30, // BOTTOM
         ]}
       />
-
+ 
      {mandatory}
      {optional}
      {one}
      {many}
-      
+    
     </Group>
   );
   

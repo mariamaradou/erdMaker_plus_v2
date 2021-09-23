@@ -40,7 +40,7 @@ import {
   modifyExtension,
   addLabel,
 } from "../../actions/actions";
-import { distance, minJsonArray } from "../../global/utils";
+import { distance, minJsonArray, weakToAggregation } from "../../global/utils";
 import {
   stageWidth,
   stageHeight,
@@ -922,7 +922,7 @@ class Surface extends React.Component {
 
      
      
-     ////////////////swstos kwdikas///////////
+     ////////////////relationships- parents lines///////////
        for (
         let j = 0;
         j < this.props.components.relationships[i].connections.length;
@@ -964,8 +964,7 @@ class Surface extends React.Component {
                 break;
               case 180:
                 anchor.y =
-                  anchor.y +
-                  this.props.components.entities[index].attributesNum * 39; //wste h grammi na paei katw apo ta attributes
+                  anchor.y - 1+ this.props.components.entities[index].attributesNum * 39.5; //wste h grammi na paei katw apo ta attributes
                 break;
               case 90:
                 anchor.x = anchor.x + 25;
@@ -1036,8 +1035,9 @@ class Surface extends React.Component {
           }
            
           lineList.push(
+            <Group key={keyIndex}>
             <CardPart
-              key={keyIndex}
+            //  key={keyIndex}
               notation={this.props.components.notation}
               relx={this.props.components.relationships[i].x}
               rely={this.props.components.relationships[i].y}
@@ -1045,24 +1045,43 @@ class Surface extends React.Component {
               y={anchor.y}
               angle={anchor.angle}
               minimum={
-               // this.props.components.relationships[i].connections[j].min
+            
                correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i].connections[j].minAcross,this.props.components.relationships[i],this.props.components.participationDirection,j)
               }
               maximum={
-               // this.props.components.relationships[i].connections[j].max
+              
                correctDirection( this.props.components.relationships[i].connections[j].max, this.props.components.relationships[i].connections[j].maxHere,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
               }
               exactMin={
-               // this.props.components.relationships[i].connections[j].exactMin
-              // this.props.components.relationships[i].connections[j].min
+               
               correctParticipation( this.props.components.relationships[i].connections[j].min,this.props.components.relationships[i].connections[j].minAcross,this.props.components.relationships[i],this.props.components.participationDirection,j)
               }
               exactMax={
-               // this.props.components.relationships[i].connections[j].exactMax
-              // this.props.components.relationships[i].connections[j].max
+           
               correctDirection( this.props.components.relationships[i].connections[j].max,this.props.components.relationships[i].connections[j].maxHere,this.props.components.relationships[i],this.props.components.cardinalityDirection,j)
               }
             />
+
+          {/* aggregation otan vlepw weak entity!!! */}
+            <Rect
+           visible={weakToAggregation( this.props.components.entities, this.props.components.relationships[i],j, this.props.components.notation)}
+             lineJoin="bevel"
+          closed
+         
+             fill={'black'}
+           stroke={'black'}
+           strokeWidth={0.5}
+         width={18}
+         height={18}
+         rotation={47}
+         
+        x={anchor.angle===90?anchor.x-14:anchor.angle===-90?anchor.x+14:anchor.x}
+        y={anchor.angle===90?anchor.y-12:anchor.angle===180?anchor.y-28:anchor.angle===0?anchor.y+4:anchor.angle===-90?anchor.y-12:anchor.y}
+            
+            >
+           </Rect>
+            </Group>
+            
           );
       
           keyIndex = keyIndex + 1;
@@ -1087,7 +1106,7 @@ class Surface extends React.Component {
         }
       }
     } 
-    /////////////////swstos kwdikas//////////////
+  
     return lineList;
   };
 
@@ -1285,7 +1304,13 @@ class Surface extends React.Component {
       
       }
 
-        
+         //delete associative entity of Uml if the last attribute is deleted
+              
+         if( this.props.selector.current.attrNum===0 && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
+          this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
+            parentId:this.props.selector.current.parentId
+          });
+        }
        
         this.props.deselect();
        

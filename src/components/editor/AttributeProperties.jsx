@@ -223,7 +223,13 @@ class AttributeProperties extends React.Component {
             
             }
 
+               //delete associative entity of Uml if the last attribute is deleted
               
+           if( this.props.selector.current.attrNum===0 && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
+              this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
+                parentId:this.props.selector.current.parentId
+              });
+            }
              
               this.props.deselect();
              
@@ -366,13 +372,13 @@ class AttributeProperties extends React.Component {
               
             
             }
-            
+            //delete associative entity of Uml if the last attribute is deleted
               
-           /* if( this.props.selector.current.attrNum===0){
+            if( this.props.selector.current.attrNum===0  && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
               this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
                 parentId:this.props.selector.current.parentId
               });
-            }*/
+            }
               this.props.deselect();
              
             }}

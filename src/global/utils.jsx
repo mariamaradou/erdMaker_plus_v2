@@ -61,3 +61,27 @@ export function onSafari() {
   else return true;
 }
 
+export function weakToAggregation(  entities, relationships, k, notation){
+  if(relationships.connections.length===2 && notation==='UML Notation'){
+ 
+  if(k===0){
+    if(entities.find(x=>x.id===relationships.connections[k+1].connectId).type==='weak'){
+      return true
+    }
+    else{return false}
+  
+  }
+  else if(k===1){
+    if(entities.find(x=>x.id===relationships.connections[k-1].connectId).type==='weak'){
+      return true
+    }
+    else {return false}
+  
+  }
+
+}
+  else{
+    console.log('here')
+    return false}
+ 
+}

@@ -85,13 +85,13 @@ class Relationship extends React.Component {
         strokeWidth={0.5}
         lineJoin="bevel"
         closed
-        visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
+      //  visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
         opacity={                                                      //kryvw ton rompo tou relationship
        
           this.props.components.notation === "Information Engineering Notation" ||
           this.props.components.notation === "Bachman Notation" ||
           this.props.components.notation === "Barker Notation" || 
-          (this.props.components.notation === "UML Notation" &&  this.props.connections.length<=2)
+          (this.props.components.notation === "UML Notation" )
             ? 0
             : 1
         }
@@ -199,7 +199,7 @@ class Relationship extends React.Component {
           fillLinearGradientStartPoint={{ x: -50, y: -50 }}
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
-          visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
+         // visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
           opacity={                                                      //kryvw ton rompo tou relationship
          
             this.props.components.notation === "Information Engineering Notation" ||
