@@ -82,6 +82,7 @@ class Relationship extends React.Component {
             ? "red"
             : "black"
         }
+        listening={false}
         strokeWidth={0.5}
         lineJoin="bevel"
         closed

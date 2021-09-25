@@ -81,7 +81,31 @@ export function weakToAggregation(  entities, relationships, k, notation){
 
 }
   else{
-    console.log('here')
+  
     return false}
  
 }
+
+/*export function participationMandatory(relationships,entities){
+  if(relationships.connections.length===2){
+    for (let k in relationships.connections.length){
+    if(k===0){
+      if(entities.find(x=>x.id===relationships.connections[k+1].connectId).type==='weak' && relationships.type.weak){
+  
+        return "one"
+      }
+      else{return "undefined"}
+    
+    }
+    else if(k===1){
+      if(entities.find(x=>x.id===relationships.connections[k-1].connectId).type==='weak' && relationships.type.weak){
+        return "one"
+      }
+      else {return "undefined"}
+    
+    }
+    else {return "undefined"}
+    }
+  }
+}*/
+  

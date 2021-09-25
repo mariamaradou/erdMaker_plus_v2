@@ -5,6 +5,7 @@ import {
   deleteConnection,
   modifyConnection,
 } from "../../actions/actions";
+//import {participationMandatory} from '../../global/utils'
 import IconButton from "@material-ui/core/IconButton";
 
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -208,7 +209,9 @@ class Connection extends React.Component {
                     this.props.connection.min === "one" ||
                     this.props.connection.min > 1
                   ? "one"
-                  : "undefined"
+                  : 
+                  "undefined"
+                  //participationMandatory( this.props.components.relationships[parentIndex],childIndex,this.props.components.entities)
               }
               onChange={this.handleModifyConnection}
             >

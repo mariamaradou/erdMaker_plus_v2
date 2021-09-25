@@ -10,18 +10,20 @@ updatePositionExtensionChildren,
   select,
   deselect,
 } from "../../actions/actions";
-import { Group, Rect, Text } from "react-konva";
+import { Group, Rect, Text, Line } from "react-konva";
 import {
  
   entityWidthCrows,
   entityHeight,
   entityTextWidth,
-
+  attributeTextWidth,
   fontSize,
   textHeight,
 
 } from "../../global/constants";
 
+
+var pixelWidth = require("string-pixel-width");
 
 
 
@@ -55,7 +57,37 @@ class AttributeCrows extends React.Component {
   
 
   render() {
-    
+    var namePixelWidth = pixelWidth(this.props.name, {
+      font: "Arial",
+      size: fontSize,
+    });
+    var textRows = Math.ceil(namePixelWidth / attributeTextWidth);
+    var parentIndex;
+    if (
+      this.props.components.entities.length &&
+      (parentIndex = this.props.components.entities.findIndex(this.findParentIndex)) !== -1
+    ) {
+      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak") {
+        var dashedUnderlineList = [];
+        if (textRows < 4) {
+          for (let i = 0; i < textRows; i++) {
+            let lineOffset =
+              textRows % 2
+                ? fontSize / 2 + 0.8 + i * fontSize - Math.floor(textRows / 2) * fontSize
+                : fontSize / 2 + 0.8 + i * fontSize - (Math.floor(textRows / 2) * fontSize) / 2;
+            dashedUnderlineList.push(
+              <Line
+                key={i}
+                stroke="#ff9b8e"
+                strokeWidth={0.5}
+                dash={[3, 5]}
+                points={[-attributeTextWidth / 2 + 5, lineOffset, attributeTextWidth / 2 - 5, lineOffset]}
+              />
+            );
+          }
+        }
+      }
+    }
 
     return (
       
@@ -149,8 +181,15 @@ class AttributeCrows extends React.Component {
              '* ' + this.props.name
              :
               this.props.components.notation==='UML Notation' && this.props.type.unique ?
-             'PK  ' + this.props.name: this.props.name}
-          fontSize={fontSize}
+             'PK  ' + this.props.name:
+             this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.derived?
+             this.props.name + '()' : 
+             this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.multivalued?
+             '[' +this.props.name + ']':
+             this.props.name
+            }
+             textDecoration={  this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.unique ? "underline" : ""}
+             fontSize={fontSize}
           align="center"
           verticalAlign="middle"
           width={entityTextWidth}
@@ -159,7 +198,7 @@ class AttributeCrows extends React.Component {
           offsetY={textHeight / 2}
           listening={false}
         /> 
-      
+        {dashedUnderlineList}
         
      
       </Group>

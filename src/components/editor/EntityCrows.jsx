@@ -82,15 +82,29 @@ class EntityCrows extends React.Component {
     this.props.type  === "weak" && this.props.components.notation==='Korth, Silberschatz & Sudarshan' ? (
       <Rect        //weak rect
       visible={this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type==='weak'?true:false}
-      x={-entityWidthCrows /1.81}
-      y={-entityHeight / 1.6}
-      width={entityWidthCrows*1.1}
+      x={-entityWidthCrows /1.9}
+      y={-entityHeight /1.8}
+      listening={false}
+      width={entityWidthCrows*1.05}
       height={this.props.attributesNum===0?
-      entityHeight*1.3:
+      entityHeight*1.1:
       this.props.attributesNum===1?
    
-        entityHeight*(1.1+this.props.attributesNum):
-        entityHeight*(0.8+this.props.attributesNum)}
+        entityHeight*(0.9+this.props.attributesNum):
+        this.props.attributesNum===2?
+   
+        entityHeight*(0.7+this.props.attributesNum):
+        this.props.attributesNum===3?
+   
+        entityHeight*(0.5+this.props.attributesNum):
+        this.props.attributesNum===4?
+   
+        entityHeight*(0.3+this.props.attributesNum):
+        this.props.attributesNum===5?
+   
+        entityHeight*(0.1+this.props.attributesNum):
+
+        entityHeight*(this.props.attributesNum-0.3)}
      // fill="#ffdd91"
    
      fillLinearGradientStartPoint={{ x: -50, y: -50 }}
