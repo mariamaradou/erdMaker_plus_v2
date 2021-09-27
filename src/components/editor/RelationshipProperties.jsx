@@ -10,6 +10,7 @@ import {
   deleteChildren,
   deleteEntityChild,
   setNameEntity,
+  modifyConnection,
   deleteRelationship,
   addConnection,
   repositionComponents,
@@ -70,11 +71,46 @@ class RelationshipProperties extends React.Component {
     });
 
   typeValueChange = (e) => {
+    var relationshipIndex = this.props.components.relationships.findIndex(
+      this.findRelationshipIndex
+    );
+
     this.props.setTypeRelationship({
       id: this.props.selector.current.id,
       type: e.target.value,
       checked: e.target.checked,
     });
+
+    if( this.props.components.relationships[relationshipIndex].connections.length===2){
+      
+     
+      if(this.props.components.relationships[relationshipIndex].connections[0]){
+        
+        if(this.props.components.entities.find(x=>x.id=== this.props.components.relationships[relationshipIndex].connections[1].connectId).type==='weak' &&   e.target.checked){
+    
+          this.props.modifyConnection({
+            id: this.props.components.relationships[relationshipIndex].connections[0].id,
+            parentId: this.props.selector.current.id,
+            prop: 'min', //min, max
+            value: 'one',
+          });
+        }
+       
+      
+      }
+       if(this.props.components.relationships[relationshipIndex].connections[1]){
+        if(this.props.components.entities.find(x=>x.id=== this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak' &&   e.target.checked){
+          this.props.modifyConnection({
+            id: this.props.components.relationships[relationshipIndex].connections[1].id,
+            parentId: this.props.selector.current.id,
+            prop: 'min', //min, max
+            value: 'one',
+          });
+        }
+        
+     
+      }
+    }
   };
 
   handleAddAttribute = (relationshipIndex) => {
@@ -253,6 +289,7 @@ class RelationshipProperties extends React.Component {
 
                     name="type"
                     value="weak"
+                   
                     checked={
                       this.props.components.relationships[relationshipIndex]
                         .type.weak
@@ -375,6 +412,7 @@ const mapDispatchToProps = {
   setNameRelationship,
   setNameEntity,
   select,
+  modifyConnection,
   deselect,
   deleteEntityChild,
   addEntity,

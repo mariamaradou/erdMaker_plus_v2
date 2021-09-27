@@ -171,24 +171,26 @@ class AttributeCrows extends React.Component {
        
         
         <Text
-          text={(this.props.components.notation==='Bachman Notation' || this.props.components.notation==="Information Engineering Notation" ) && this.props.type.unique ?
-           "* " + this.props.name: 
+          text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+           "PK " + this.props.name: 
            this.props.type.unique && this.props.components.notation==='Barker Notation'?
-            "# *" + this.props.name :
+            "# " + this.props.name :
              this.props.type.optional && this.props.components.notation==='Barker Notation'?
              'o ' + this.props.name :
-             this.props.components.notation==='Barker Notation'?
+             this.props.components.notation==='Barker Notation'  ?
              '* ' + this.props.name
              :
-              this.props.components.notation==='UML Notation' && this.props.type.unique ?
+             (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
              'PK  ' + this.props.name:
+             this.props.components.notation==='UML Notation' && this.props.type.composite ?
+              this.props.name + ':':
              this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.derived?
              this.props.name + '()' : 
              this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.multivalued?
              '[' +this.props.name + ']':
              this.props.name
             }
-             textDecoration={  this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.unique ? "underline" : ""}
+             textDecoration={ ( this.props.components.notation==='Korth, Silberschatz & Sudarshan' || this.props.components.notation==="Information Engineering Notation" )&& this.props.type.unique ? "underline" : ""}
              fontSize={fontSize}
           align="center"
           verticalAlign="middle"

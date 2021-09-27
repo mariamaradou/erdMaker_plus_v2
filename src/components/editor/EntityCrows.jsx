@@ -118,7 +118,9 @@ class EntityCrows extends React.Component {
       strokeWidth={0.5}
     />): null;
     var weakRect =
-      this.props.type  === "weak" && (this.props.components.notation!=='Korth, Silberschatz & Sudarshan' && this.props.components.notation!=='UML Notation') ? (
+      this.props.type  === "weak" && (this.props.components.notation!=='Korth, Silberschatz & Sudarshan' 
+      && this.props.components.notation!=='UML Notation'
+      && this.props.components.notation!=='Information Engineering Notation') ? (
         <Rect
       
           x={-entityWidthCrows / 2 + entityWeakOffset / 2}

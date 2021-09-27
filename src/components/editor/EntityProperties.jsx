@@ -7,6 +7,7 @@ import {
   deleteXConnection,
   deleteChildren,
   deleteEntity,
+  modifyConnection,
   deleteConnection,
   select,
   deselect,
@@ -15,6 +16,7 @@ import {
 } from "../../actions/actions";
 import { getRandomInt } from "../../global/utils";
 import { nameSize, spawnRadius } from "../../global/constants";
+
 
 
 
@@ -58,11 +60,26 @@ class EntityProperties extends React.Component {
       name: e.target.value,
     });}
 
-  typeValueChange = (e) =>
+  typeValueChange = (e) =>{
+    
     this.props.setTypeEntity({
       id: this.props.selector.current.id,
       type: e.target.value,
     });
+   
+  
+  }
+
+  /*setMandatory =(e) =>{
+    
+    for(let  k in this.props.components.relationships){
+     if(this.props.components.relationships[k].connections.find(x=>x.connectId===this.props.selector.current.id)){
+      console.log(this.props.components.relationships[k].connections)
+      break
+    }
+    }
+   
+  }*/
 
   handleAddAttribute = (entityIndex) => {
        // Randomly position the attribute around the entity
@@ -281,6 +298,7 @@ const mapDispatchToProps = {
   addAttribute,
   addExtension,
   deleteChildren,
+  modifyConnection,
   deleteEntity,
   deleteConnection,
   select,

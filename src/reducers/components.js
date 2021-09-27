@@ -64,18 +64,7 @@ const componentsReducer = (state = initialState, action) => {
           participationDirection: action.payload.valuePart
         }
    
-  /* case "CHANGE_PARENT":
-    return {
-      ...state,
-      attributes: state.attributes.map((attribute) =>
-        attribute.id === action.payload.id
-          ? {
-              ...attribute,
-              parentId: action.payload.parentId
-            }
-          : attribute
-      ),
-    };*/
+ 
     case "ADD_ENTITY":
      
       return {
@@ -489,6 +478,7 @@ const componentsReducer = (state = initialState, action) => {
               (connection) => connection.id !== action.payload.id
             );
         }
+      
         return newState;
       } else {
         for (let i in newState.relationships) {
@@ -496,8 +486,11 @@ const componentsReducer = (state = initialState, action) => {
             (connection) => connection.connectId !== action.payload.connectId
           );
         }
+       
         return newState;
+        
       }
+    
     case "ADD_ATTRIBUTE":
  
       return {

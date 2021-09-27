@@ -47,7 +47,7 @@ const ConvertTo = (props) => {
 
   const options = [
     "Elmasri & Navathe Notation",
-    "Crow's foot Notation",
+    "Crow's foot  (customized)",
     "Min-Max/ISO Notation",
     "Information Engineering Notation",
     "Bachman Notation",
@@ -104,7 +104,7 @@ const ConvertTo = (props) => {
       case "Teorey Notation":
       case "Information Engineering Notation":
       case "UML Notation":
-      case "Crow's foot Notation":
+      case "Crow's foot  (customized)":
         props.setParticipationDirection({
           valuePart: "Look Across",
         });

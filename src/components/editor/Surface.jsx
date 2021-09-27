@@ -33,6 +33,7 @@ import {
   deleteExtension,
   deleteLabel,
   deleteRelationship,
+  modifyConnection,
   deleteEntityChild,
   deleteConnection,
   deleteEntity,
@@ -176,7 +177,7 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Entity = EntityChen;
         break;
-        case "Crow's foot Notation":
+        case "Crow's foot  (customized)":
            Entity = EntityChen;
           break;
         case "UML Notation":
@@ -232,7 +233,7 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Extension = ExtensionElmasri;
         break;
-        case "Crow's foot Notation":
+        case "Crow's foot  (customized)":
            Extension = ExtensionElmasri;
           break;
       case "Information Engineering Notation":
@@ -297,7 +298,7 @@ class Surface extends React.Component {
 
   drawAttributes =() => {
     var attributesList = [];
-    if(this.props.components.notation==="Elmasri & Navathe Notation" || this.props.components.notation==="Crow's foot Notation" || this.props.components.notation==="Teorey Notation"  || this.props.components.notation==="Min-Max/ISO Notation"){
+    if(this.props.components.notation==="Elmasri & Navathe Notation" || this.props.components.notation==="Crow's foot  (customized)" || this.props.components.notation==="Teorey Notation"  || this.props.components.notation==="Min-Max/ISO Notation"){
       this.props.components.attributes.map((attribute) =>
       attributesList.push(
         <Attribute
@@ -916,13 +917,13 @@ class Surface extends React.Component {
         keyIndex = keyIndex + 1;}
       }
       
-
+ ////////////////relationships- parents lines///////////
   
       for (let i = 0; i < this.props.components.relationships.length; i++) {
 
      
      
-     ////////////////relationships- parents lines///////////
+    
        for (
         let j = 0;
         j < this.props.components.relationships[i].connections.length;
@@ -979,9 +980,9 @@ class Surface extends React.Component {
               key={keyIndex}
               stroke="black"
               strokeWidth={0.5}
-              dash={
-                this.props.components.notation === "Barker Notation" &&
-                this.props.components.relationships[i].connections[j].min ===
+              dash= {(this.props.components.notation === "Information Engineering Notation" &&   !this.props.components.relationships[i].type.weak ) ||
+                (this.props.components.notation === "Barker Notation" &&
+                this.props.components.relationships[i].connections[j].min) ===
                   "zero"
                   ? [33, 10]
                   : [0]
@@ -1005,7 +1006,7 @@ class Surface extends React.Component {
             case "Elmasri & Navathe Notation":
               CardPart = AnchorChen;
               break;
-            case "Crow's foot Notation":
+            case "Crow's foot  (customized)":
               CardPart = Anchor;
               break;
             case "UML Notation":
@@ -1068,7 +1069,7 @@ class Surface extends React.Component {
              lineJoin="bevel"
           closed
          
-             fill={'black'}
+             fill={'white'}
            stroke={'black'}
            strokeWidth={0.5}
          width={18}
@@ -1104,7 +1105,11 @@ class Surface extends React.Component {
 
           
         }
+
+     
       }
+
+      
     } 
   
     return lineList;
@@ -1544,6 +1549,7 @@ const mapDispatchToProps = {
   select,
   deleteConnection,
   updateAttributeCrows,
+  modifyConnection,
   deleteEntity,
   deleteAttribute,
   deleteExtension,
