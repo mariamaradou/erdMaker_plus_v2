@@ -269,18 +269,24 @@ class RelationshipProperties extends React.Component {
             //////////////
           />
         </label>
-        <hr />
+        <hr /* style={{display: this.props.components.relationships[relationshipIndex].connections.find((connection)=>
+            typeof  this.props.components.entities.find(x=>x.id===connection.connectId)!=='undefined'?
+            this.props.components.entities.find(x=>x.id===connection.connectId).type==='weak': null ) && this.props.components.relationships[relationshipIndex].connections.length===2?'block':
+               'none'}}*/ />
         <table
           style={{
             fontFamily:
               "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
           }} /*className="type-inputs"*/
         >
-          <tbody>
-            <tr>
+          <tbody>       
+            <tr /*   style={{display: this.props.components.relationships[relationshipIndex].connections.find((connection)=>
+            typeof  this.props.components.entities.find(x=>x.id===connection.connectId)!=='undefined'?
+            this.props.components.entities.find(x=>x.id===connection.connectId).type==='weak': null ) && this.props.components.relationships[relationshipIndex].connections.length===2?'block':
+               'none'}}*/ >
               {/*<td>Type:</td>*/}
               <td className="buttonmenu">
-                <label>
+                <label >
                   <input
                     type="checkbox"
                     /* ref={(input) => {                                //gia peiramatikous logous
@@ -289,7 +295,7 @@ class RelationshipProperties extends React.Component {
 
                     name="type"
                     value="weak"
-                   
+                  
                     checked={
                       this.props.components.relationships[relationshipIndex]
                         .type.weak

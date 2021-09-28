@@ -10,7 +10,7 @@ export function getRandomInt(min, max) {
 }
 
 export function getSpecificAngles(array) {
-  var randomItem = array[Math.floor(Math.random()*array.length)];
+  var randomItem = array[Math.floor(Math.random() * array.length)];
   return randomItem;
 }
 
@@ -23,27 +23,22 @@ export function distance(a, b) {
 export function minJsonArray(arr, prop) {
   var min;
   for (let i = 0; i < arr.length; i++) {
-    if (min == null || parseInt(arr[i][prop]) < parseInt(min[prop])) min = arr[i];
+    if (min == null || parseInt(arr[i][prop]) < parseInt(min[prop]))
+      min = arr[i];
   }
   return min;
 }
 
 // Recursively return the entire subtree of node (id) in a list (of ids)
 export const getChildren = (list, array, id) => {
-  
   for (let i in array) {
-    
-    if (array[i].parentId === id  ) {
+    if (array[i].parentId === id) {
       list.push(array[i].id);
-      
+
       getChildren(list, array, array[i].id);
     }
   }
 };
-
-
-
-
 
 // Check if user is on Safari Browser
 export function onSafari() {
@@ -61,29 +56,32 @@ export function onSafari() {
   else return true;
 }
 
-export function weakToAggregation(  entities, relationships, k, notation){
-  if(relationships.connections.length===2 && notation==='UML Notation'){
- 
-  if(k===0){
-    if(entities.find(x=>x.id===relationships.connections[k+1].connectId).type==='weak'){
-      return true
+export function weakToAggregation(entities, relationships, k, notation) {
+  if (relationships.connections.length === 2 && notation === "UML Notation") {
+    if (k === 0) {
+      if (
+        entities.find(
+          (x) => x.id === relationships.connections[k + 1].connectId
+        ).type === "weak"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (k === 1) {
+      if (
+        entities.find(
+          (x) => x.id === relationships.connections[k - 1].connectId
+        ).type === "weak"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
-    else{return false}
-  
+  } else {
+    return false;
   }
-  else if(k===1){
-    if(entities.find(x=>x.id===relationships.connections[k-1].connectId).type==='weak'){
-      return true
-    }
-    else {return false}
-  
-  }
-
-}
-  else{
-  
-    return false}
- 
 }
 
 /*export function setMandatory(relationships,entities){
@@ -110,4 +108,3 @@ export function weakToAggregation(  entities, relationships, k, notation){
   
   }
 }*/
-  

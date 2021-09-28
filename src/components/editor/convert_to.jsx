@@ -48,7 +48,7 @@ const ConvertTo = (props) => {
   const options = [
     "Elmasri & Navathe Notation",
     "Crow's foot  (customized)",
-    "Min-Max/ISO Notation",
+    "Min-Max Notation",
     "Information Engineering Notation",
     "Bachman Notation",
     "Barker Notation",
@@ -91,7 +91,7 @@ const ConvertTo = (props) => {
           valueDir: "Look Across",
         });
         break;
-      case "Min-Max/ISO Notation":
+      case "Min-Max Notation":
       case "Batini, Ceri & Navathe Notation":
         props.setParticipationDirection({
           valuePart: "Look Here",

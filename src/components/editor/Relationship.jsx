@@ -201,14 +201,14 @@ class Relationship extends React.Component {
           fillLinearGradientEndPoint={{ x: 50, y: 50 }}
           fillLinearGradientColorStops={[0, "#B9D9EB", 1, "#89CFF0"]}
          // visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
-          opacity={                                                      //kryvw ton rompo tou relationship
+          visible={                                                      //kryvw ton rompo tou relationship
          
             this.props.components.notation === "Information Engineering Notation" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation" || 
             (this.props.components.notation === "UML Notation" &&  this.props.connections.length<=2)
-              ? 0
-              : 1
+              ? false
+              : true
           }
           stroke={
             this.props.id === this.props.selector.current.id &&
@@ -326,7 +326,9 @@ class Relationship extends React.Component {
           }}
         />
         <Circle
-      visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? true: false}
+      visible={this.props.components.notation === "Information Engineering Notation" ||
+      this.props.components.notation === "Bachman Notation" ||
+      this.props.components.notation === "Barker Notation" ||  this.props.components.notation === "UML Notation" ? true: false}
      radius={extensionRadius}
     onMouseOver={(e)=>{if ( this._isMounted )this.setState({opacity:0.4})}}
     onMouseOut={()=>{ if(this._isMounted)this.setState({opacity:0})}}

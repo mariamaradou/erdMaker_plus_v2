@@ -47,11 +47,13 @@ class Connection extends React.Component {
 
     var specificValues = (
       /* this.state.expand ? */ <>
-        <div className="connection-input-group">
+        <div className="connection-input-group"   style={{ display: this.props.components.notation!=='Min-Max Notation' && 
+              this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
           <label>
             exactMin:
             <input
-              style={{ marginBottom: 4 }}
+            
+            style={{ marginBottom: 4}}
               // id="exactMin"
               // id='min'
               id={
@@ -78,12 +80,14 @@ class Connection extends React.Component {
             />
           </label>
         </div>
-        <div className="connection-input-group">
+        <div className="connection-input-group"  style={{  display: this.props.components.notation!=='Min-Max Notation' && 
+              this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
           <label>
             exactMax:
             <input
               // id="exactMax"
               // id="max"
+             
               id={
                 this.props.components.cardinalityDirection === "Look Here" &&
                 this.props.components.relationships[parentIndex].connections
@@ -114,7 +118,7 @@ class Connection extends React.Component {
             <input
               id="role"
               className="small-editor-input"
-              style={{ width: "150px", marginTop: "10px" }}
+              style={{ width: "150px" }}
               type="text"
               maxLength="15"
               value={this.props.connection.role}
@@ -127,8 +131,7 @@ class Connection extends React.Component {
 
     /* var expandIcon = this.state.expand ? <ExpandLessIcon /> : <ExpandMoreIcon />;*/
 
-    return this.props.components.notation !== "Min-Max/ISO Notation" &&
-      this.props.components.notation !== "UML Notation" ? (
+    return  (
       <div
         className="connection"
         style={{
@@ -174,7 +177,8 @@ class Connection extends React.Component {
           <DeleteIcon />
         </IconButton>
         <br />
-        <div className="connection-input-group">
+        <div className="connection-input-group" style={{display: this.props.components.notation!=='Min-Max Notation' && 
+        this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
           <label>
             Min:{" "}
             <select
@@ -221,7 +225,9 @@ class Connection extends React.Component {
             </select>
           </label>
         </div>
-        <div className="connection-input-group">
+        <div className="connection-input-group" 
+        style={{display: this.props.components.notation!=='Min-Max Notation' && 
+        this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
           <label>
             Max:{" "}
             <select
@@ -266,75 +272,14 @@ class Connection extends React.Component {
 
         {/* <Tooltip title="Custom min/max values" placement="right" >
         <span>
-        <IconButton disabled={this.props.components.notation==='Min-Max/ISO Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
-        </span>
-        </Tooltip>
-        
-        <br />
-        {specificValues} */}
-      </div>
-    ) : (
-      <div
-        className="connection"
-        style={{
-          paddingLeft: "6px",
-          backgroundColor: this.props.index % 2 ? "#c9c9c9" : "#dfdfdf",
-        }}
-      >
-        <div className="connection-input-group">
-          <label>
-            <b>Entity: </b>
-            <select
-              value={
-                this.props.components.relationships[parentIndex].connections[
-                  childIndex
-                ].connectId
-              }
-              onChange={this.handleEntityChange}
-            >
-              <option value={0} disabled>
-                Select an Entity
-              </option>
-              {this.props.components.entities.map((entity) => (
-                <option
-                  key={entity.id}
-                  value={entity.id}
-                  disabled={
-                    entity.connectionCount >= 8 ||
-                    typeof entity.parentId !== "undefined"
-                      ? true
-                      : false
-                  }
-                >
-                  {entity.name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <IconButton
-          onClick={() => {
-            this.props.deleteConnection({
-              id: this.props.connection.id,
-              parentId: this.props.selector.current.id,
-              connectId: this.props.connection.connectId,
-            });
-          }}
-        >
-          <DeleteIcon />
-        </IconButton>
-        <br />
-
-        {/* <Tooltip title="Custom min/max values" placement="right" >
-        <span>
-        <IconButton disabled={this.props.components.notation==='Min-Max/ISO Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
+        <IconButton disabled={this.props.components.notation==='Min-Max Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
         </span>
         </Tooltip>
         
         <br /> */}
-        {specificValues}
+        {specificValues} 
       </div>
-    );
+    ) 
   }
 }
 
