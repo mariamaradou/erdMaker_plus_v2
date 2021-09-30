@@ -20,7 +20,7 @@ import { ExtensionSpline } from "./ExtensionElmasri";
 import { Stage, Layer, Line, Rect, Arrow, Group, Text } from "react-konva";
 import Properties from "./Properties";
 import { Provider, ReactReduxContext, connect } from "react-redux";
-//import AlertDialog from "./alertDialog";
+
 
 import {
   deselect,

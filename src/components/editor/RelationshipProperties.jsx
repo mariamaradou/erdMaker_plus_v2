@@ -81,34 +81,51 @@ class RelationshipProperties extends React.Component {
       checked: e.target.checked,
     });
 
-    if( this.props.components.relationships[relationshipIndex].connections.length===2){
-      
-     
-      if(this.props.components.relationships[relationshipIndex].connections[0]){
-        
-        if(this.props.components.entities.find(x=>x.id=== this.props.components.relationships[relationshipIndex].connections[1].connectId).type==='weak' &&   e.target.checked){
-    
+    if (
+      this.props.components.relationships[relationshipIndex].connections
+        .length === 2
+    ) {
+      if (
+        this.props.components.relationships[relationshipIndex].connections[0]
+      ) {
+        if (
+          this.props.components.entities.find(
+            (x) =>
+              x.id ===
+              this.props.components.relationships[relationshipIndex]
+                .connections[1].connectId
+          ).type === "weak" &&
+          e.target.checked
+        ) {
           this.props.modifyConnection({
-            id: this.props.components.relationships[relationshipIndex].connections[0].id,
+            id: this.props.components.relationships[relationshipIndex]
+              .connections[0].id,
             parentId: this.props.selector.current.id,
-            prop: 'min', //min, max
-            value: 'one',
+            prop: "min", //min, max
+            value: "one",
           });
         }
-       
-      
       }
-       if(this.props.components.relationships[relationshipIndex].connections[1]){
-        if(this.props.components.entities.find(x=>x.id=== this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak' &&   e.target.checked){
+      if (
+        this.props.components.relationships[relationshipIndex].connections[1]
+      ) {
+        if (
+          this.props.components.entities.find(
+            (x) =>
+              x.id ===
+              this.props.components.relationships[relationshipIndex]
+                .connections[0].connectId
+          ).type === "weak" &&
+          e.target.checked
+        ) {
           this.props.modifyConnection({
-            id: this.props.components.relationships[relationshipIndex].connections[1].id,
+            id: this.props.components.relationships[relationshipIndex]
+              .connections[1].id,
             parentId: this.props.selector.current.id,
-            prop: 'min', //min, max
-            value: 'one',
+            prop: "min", //min, max
+            value: "one",
           });
         }
-        
-     
       }
     }
   };
@@ -130,12 +147,11 @@ class RelationshipProperties extends React.Component {
         y: this.props.components.relationships[relationshipIndex].y + yOffset,
         parentId: this.props.selector.current.id,
         nameUML: this.props.components.relationships[relationshipIndex].name,
-       
       });
       this.props.setNameEntity({
-        id:this.props.components.count+1,
-        name:this.props.components.relationships[relationshipIndex].name
-      })
+        id: this.props.components.count + 1,
+        name: this.props.components.relationships[relationshipIndex].name,
+      });
       this.props.addAttribute({
         id: this.props.components.count + 1,
         grandparentAttrId:
@@ -269,33 +285,43 @@ class RelationshipProperties extends React.Component {
             //////////////
           />
         </label>
-        <hr /* style={{display: this.props.components.relationships[relationshipIndex].connections.find((connection)=>
-            typeof  this.props.components.entities.find(x=>x.id===connection.connectId)!=='undefined'?
-            this.props.components.entities.find(x=>x.id===connection.connectId).type==='weak': null ) && this.props.components.relationships[relationshipIndex].connections.length===2?'block':
-               'none'}}*/ />
+        <hr />
         <table
           style={{
             fontFamily:
               "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
           }} /*className="type-inputs"*/
         >
-          <tbody>       
-            <tr /*   style={{display: this.props.components.relationships[relationshipIndex].connections.find((connection)=>
-            typeof  this.props.components.entities.find(x=>x.id===connection.connectId)!=='undefined'?
-            this.props.components.entities.find(x=>x.id===connection.connectId).type==='weak': null ) && this.props.components.relationships[relationshipIndex].connections.length===2?'block':
-               'none'}}*/ >
+          <tbody>
+            <tr>
               {/*<td>Type:</td>*/}
               <td className="buttonmenu">
-                <label >
+                <label>
                   <input
                     type="checkbox"
-                    /* ref={(input) => {                                //gia peiramatikous logous
-                      this.typeInput = input;
-                    }} */
-
+                    disabled={
+                      (this.props.components.relationships[
+                        relationshipIndex
+                      ].connections.find((connection) =>
+                        typeof this.props.components.entities.find(
+                          (x) => x.id === connection.connectId
+                        ) !== "undefined"
+                          ? this.props.components.entities.find(
+                              (x) => x.id === connection.connectId
+                            ).type === "weak"
+                          : null
+                      ) &&
+                        this.props.components.relationships[relationshipIndex]
+                          .connections.length === 2) ||
+                      (this.props.components.relationships[relationshipIndex]
+                        .connections.length === 0 &&
+                        this.props.components.relationships[relationshipIndex]
+                          .type.weak)
+                        ? false
+                        : true
+                    }
                     name="type"
                     value="weak"
-                  
                     checked={
                       this.props.components.relationships[relationshipIndex]
                         .type.weak
@@ -346,7 +372,7 @@ class RelationshipProperties extends React.Component {
           >
             New Attribute
           </button>
-        
+
           <button
             /*  className="properties-delete-button"*/
             type="button"

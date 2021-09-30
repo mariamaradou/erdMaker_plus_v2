@@ -70,16 +70,7 @@ class EntityProperties extends React.Component {
   
   }
 
-  /*setMandatory =(e) =>{
-    
-    for(let  k in this.props.components.relationships){
-     if(this.props.components.relationships[k].connections.find(x=>x.connectId===this.props.selector.current.id)){
-      console.log(this.props.components.relationships[k].connections)
-      break
-    }
-    }
-   
-  }*/
+  
 
   handleAddAttribute = (entityIndex) => {
        // Randomly position the attribute around the entity

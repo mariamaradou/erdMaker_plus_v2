@@ -7,6 +7,7 @@ import ternaryRel from "../../img/ternary_rel.jpg"
 import ternaryToBinary from "../../img/ternary_to_binary.jpg"
 import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
+import weakEntity from "../../img/weakEntity.gif"
 
 
 const Tutorial = () => {
@@ -44,11 +45,14 @@ const Tutorial = () => {
          <tr><td>  <b> Escape</b> key to deselect a surface component</td></tr>
          </tbody>
         </table>
+  
+          <h4>How to add an identifying relationship (<i>Elmasri, Navathe &amp; notation</i>)</h4>
+          <p>You must have a weak entity in order to have an identifying relationship. <br/>
+            Then, the participation of the non weak entity is automatically 1. </p>
+           <img alt="identifyingRelationship" src={weakEntity} width={'75%'}></img>
+           <h4>How to add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     
-       <h4>How to add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
-    
-          <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
-      
+    <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
         </div>
 
         <div>

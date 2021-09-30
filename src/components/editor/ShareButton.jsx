@@ -27,10 +27,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    
+   // border: '2px solid black',
+    borderRadius: '8px',
+    color:'black',
+   
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -74,11 +79,16 @@ Fade.propTypes = {
   const SpringModal = (props) => {
    
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [openShare, setOpenShare] = React.useState(false);
+  const [openLogIn, setOpenLogIn] = React.useState(false);
   //const cancelToken = useRef(null);
     const cancelToken=axios.CancelToken.source();
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenModalShare = () => {
+    setOpenShare(true);
+  };
+
+  const handleOpenLogIn = () => {
+    setOpenLogIn(true);
   };
 
   
@@ -88,8 +98,7 @@ const handleSubmit=(e)=>{
 
 }
 
-//var randomID;
-//var random_id;
+
 
   const shareDiagramTemp = () => {
     
@@ -124,9 +133,14 @@ const handleSubmit=(e)=>{
     };
   }, [ cancelToken]);
 
-  const handleClose = () => {
-    setOpen(false);
-  //  window.history.pushState("", "", "/designer");
+  const handleCloseShare = () => {
+    setOpenShare(false);
+  
+
+  };
+  const handleCloseLogIn = () => {
+    setOpenLogIn(false);
+ 
 
   };
 
@@ -138,23 +152,27 @@ const handleSubmit=(e)=>{
     
     
   }}>*/}
-
+         
+        
          <form action={"/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
          
            
       <button
          
           className="tools-button-blue  "
-          disabled={props.user.isLogged && !props.general.activeDiagramId?true: !props.user.isLogged?true:false}
+         disabled={props.user.isLogged && !props.general.activeDiagramId?true:false} 
           onClick={() => {
-            props.deselect();
+          if  ( !props.user.isLogged)  handleOpenLogIn()
+         
+           else 
+           {props.deselect();
             
-         //  randomID=nanoid()
-          
+            //  randomID=nanoid()
+             
+           
+             shareDiagramTemp();
         
-          shareDiagramTemp();
-     
-           handleOpen();
+              handleOpenModalShare();}
             
           }}
         >
@@ -163,6 +181,7 @@ const handleSubmit=(e)=>{
         
         </button>
        
+       
         
         </form>
        {/*</Link>*/}
@@ -170,19 +189,38 @@ const handleSubmit=(e)=>{
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={openShare}
+        onClose={handleCloseShare}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={openShare}>
           <div className={classes.paper}>
-            <h2 id="spring-modal-title">Copy & Paste the link in the search bar to share diagram</h2>
-            {/*<p id="spring-modal-description">{clientHost}?id={randomID}</p> */}
-           {/* <p id="spring-modal-description">{clientHost}/designer/{randomID}</p>*/}
+            <h2 id="spring-modal-title">Copy & Paste the link in the search bar to share your diagram</h2>
+           
+          </div>
+        </Fade>
+      </Modal>
+      
+      <Modal
+        aria-labelledby="spring-modal-title"
+        aria-describedby="spring-modal-description"
+        className={classes.modal}
+        open={openLogIn}
+        onClose={handleCloseLogIn}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={openLogIn}>
+          <div className={classes.paper}>
+            <h2 id="spring-modal-title">⚠ You must be logged in to share diagram </h2>
+           
           </div>
         </Fade>
       </Modal>

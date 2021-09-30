@@ -59,7 +59,7 @@ export const sharediagramtemp = (cancelToken) => {
       
       serverHost + "/api/diagram/sharediagramtemp",
       {
-       // id: randomID,
+       
        id:nanoid(),
         
         data: {
