@@ -59,7 +59,7 @@ const NoDiagramFound = () => {
   return (
     <div className="general-centered-container">
       <div className="container">
-        <h1>The link doesn't exist or has expired.</h1>
+        <h1>This link doesn't exist or has been deleted.</h1>
       </div>
     </div>
   );

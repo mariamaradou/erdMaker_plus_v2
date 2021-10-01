@@ -90,6 +90,7 @@ const ImportExportMenuListComposition = (props) => {
 
     state.push("# Entities ");
     for (let i in props.components.entities) {
+      if(typeof props.components.entities[i].parentId==='undefined'){
       state.push(" ");
       state.push("[" + props.components.entities[i].name + "]  ");
 
@@ -105,7 +106,7 @@ const ImportExportMenuListComposition = (props) => {
           }
         }
       }
-    }
+    }}
     state.push(" ");
     state.push("# Relationships");
     state.push(" ");
@@ -146,7 +147,7 @@ const ImportExportMenuListComposition = (props) => {
           relationships[r + 2]
       );
     }
-    console.log(relationships);
+   
    
    /* const components = {
       state,

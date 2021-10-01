@@ -55,7 +55,7 @@ const finalReducer = combineReducers({
   user: userReducer,
   components: undoable(componentsReducer, {
     limit: 30,
-    filter: function filterActions(action, currentState, previousHistory) {
+    filter: function filterActions(action) {
       return (
         action.type === UPDATE_INITIAL_POSITION_ENTITY ||
         action.type === UPDATE_ATTRIBUTE_COMPOSITE ||
@@ -84,7 +84,6 @@ const finalReducer = combineReducers({
         action.type === ADD_CONNECTION ||
         action.type === CHANGE_CONNECTION ||
         action.type === MODIFY_CONNECTION ||
-      
         action.type === ADD_ATTRIBUTE ||
         action.type === SET_NAME_ATTRIBUTE ||
         action.type === SET_TYPE_ATTRIBUTE ||
