@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setActiveDiagram, resetComponents, resetMeta } from "../../actions/actions";
+import { setActiveDiagram, resetComponents, resetMeta, setHelpModal } from "../../actions/actions";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,9 +14,11 @@ import { diagramLimit } from "../../global/constants.js";
 
 class Diagram extends React.Component {
   handleClick = () => {
+  
     this.props.resetComponents();
     this.props.resetMeta();
     this.props.setActiveDiagram(this.props.user.diagrams[this.props.index].id);
+    this.props.setHelpModal({modal:false})
   };
 
   // Calculates how much time has passed since each diagram got updated
@@ -127,9 +129,11 @@ const SimpleMenu = (props) => {
 const mapStateToProps = (state) => ({
   user: state.user,
   general: state.general,
+  meta: state.meta
 });
 
 const mapDispatchToProps = {
+  setHelpModal,
   setActiveDiagram,
   resetComponents,
   resetMeta,

@@ -170,7 +170,8 @@ const ImportExportMenuListComposition = (props) => {
   });
    
   element.href=URL.createObjectURL(file);
-  element.download = 'BurntSushi.txt';
+  
+  element.download = props.meta.title + '.txt';
   document.body.appendChild(element);
   element.click();
   
@@ -421,6 +422,7 @@ const ImportExportMenuListComposition = (props) => {
 
 const mapStateToProps = (state) => ({
   components: state.components.present,
+  meta: state.meta
 });
 
 const mapDispatchToProps = {

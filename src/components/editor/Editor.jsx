@@ -45,6 +45,8 @@ class Editor extends React.Component {
     this.props.setComponents(compatibleDiagram.components);
   }
 
+  
+
   componentDidMount = () => {
     document.title = "ERD Maker - Designer";
 
@@ -61,6 +63,7 @@ class Editor extends React.Component {
 
     if (typeof this.props.match.params.id === "undefined") {
       if (this.props.user.isLogged && this.props.general.activeDiagramId) {
+        
         getDiagram(this.props.general.activeDiagramId, this.cancelToken);
         sharediagramtempuser(
           this.props.general.activeDiagramId,
@@ -76,10 +79,14 @@ class Editor extends React.Component {
             }
           })
           .catch(() => {});
+         // this.props.setHelpModal({ modal: false });
       }
-    } else {
+    } 
+    
+    else {
       getDiagramTemp(this.props.match.params.id, this.cancelToken);
     }
+    
   };
 
   componentDidUpdate() {
