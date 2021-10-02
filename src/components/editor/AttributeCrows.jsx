@@ -170,10 +170,19 @@ class AttributeCrows extends React.Component {
           
         />
        
-        
+        <Text text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+           "PK " :   (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
+           'PK  ': ""}  fontSize={fontSize}
+          align="left"
+          verticalAlign="middle"
+          width={entityTextWidth}
+          height={textHeight}
+          offsetX={entityTextWidth / 2 + 22}
+          offsetY={textHeight / 2}
+          listening={false} />
         <Text
-          text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
-           "PK " + this.props.name: 
+          text={ /*this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+           "PK " + this.props.name:*/ 
            this.props.type.unique && this.props.components.notation==='Barker Notation'?
             "# " + this.props.name :
              this.props.type.optional && this.props.components.notation==='Barker Notation'?
@@ -181,8 +190,8 @@ class AttributeCrows extends React.Component {
              this.props.components.notation==='Barker Notation'  ?
              '* ' + this.props.name
              :
-             (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
-             'PK  ' + this.props.name:
+            /* (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
+             'PK  ' + this.props.name:*/
              this.props.components.notation==='UML Notation' && this.props.type.composite ?
               this.props.name + ':':
              this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type.derived?
