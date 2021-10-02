@@ -171,8 +171,16 @@ class AttributeCrows extends React.Component {
         />
        
         <Text text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+          this.props.type.foreign? 'PK, FK' :
            "PK " :   (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
-           'PK  ': ""}  fontSize={fontSize}
+           this.props.type.foreign? 'PK, FK' :
+           'PK  ':
+           this.props.components.notation==="Information Engineering Notation"  && this.props.type.foreign ?
+           "FK " :   (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.foreign ?
+           'FK  ':
+          
+           
+           ""}  fontSize={fontSize}
           align="left"
           verticalAlign="middle"
           width={entityTextWidth}
@@ -206,7 +214,7 @@ class AttributeCrows extends React.Component {
           verticalAlign="middle"
           width={entityTextWidth}
           height={textHeight}
-          offsetX={entityTextWidth / 2}
+          offsetX={this.props.type.unique && this.props.type.foreign?entityTextWidth / 2-3-this.props.name.length:entityTextWidth / 2}
           offsetY={textHeight / 2}
           listening={false}
         /> 

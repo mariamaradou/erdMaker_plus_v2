@@ -543,6 +543,7 @@ const componentsReducer = (state = initialState, action) => {
               optional: false,
               composite: false,
               derived: false,
+              foreign:false
             },
           },
         ],

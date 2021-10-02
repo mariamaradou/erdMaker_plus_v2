@@ -321,6 +321,26 @@ class AttributeProperties extends React.Component {
                 </label>
               </td>
             </tr>
+            <tr style={{display: this.props.components.notation==='Information Engineering Notation' || 
+            this.props.components.notation==='Barker Notation' ||
+            this.props.components.notation==='Bachman Notation' ||
+            this.props.components.notation==='UML Notation' ? 'inherit' : 'none'
+             }}>
+              <td className='buttonmenu'>
+                <label style={{cursor:'pointer'}}>
+                  <input
+                    type="checkbox"
+                    name="type"
+                    className='buttonmenu'
+                    value="foreign"
+                    style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+                    checked={this.props.components.attributes[attributeIndex].type.foreign}
+                    onChange={this.typeValueChange}
+                  />
+                  Foreign
+                </label>
+              </td>
+            </tr>
           </tbody>
         </table>
         <hr />
