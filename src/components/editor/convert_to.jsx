@@ -295,7 +295,8 @@ const ConvertTo = (props) => {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               There is an attribute on a relationship. Tip: If it is a N-1 or
-              1-N relationship, move the attribute under the N side entity. If
+              1-N relationship, move the attribute under the N side entity. If it is a 1-1 relationship,
+              move the attribute under the entity with mandatory participation (if exists, else in any entity) . If
               it is a M-N relationship, convert the relationship to an
               associative entity.
             </DialogContentText>

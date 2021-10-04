@@ -10,7 +10,7 @@ updateInitialPositionEntity,
   select,
   deselect,
 } from "../../actions/actions";
-import { Group, Rect, Line, Text } from "react-konva";
+import { Group, Rect, Text } from "react-konva";
 import {
   stageWidth,
   stageHeight,
@@ -144,35 +144,7 @@ class EntityCrows extends React.Component {
         />
       ) : null;
 
-    var associativeDiamond =
-      this.props.type === "associative" ? (
-        <Line
-        fillLinearGradientStartPoint={{ x: -50, y: -50 }}
-        fillLinearGradientEndPoint={{ x: 50, y: 50 }}
-        fillLinearGradientColorStops={[0, '#fae4b4', 1, '#ffdd91']}
-      
-          
-          stroke={
-            this.props.id === this.props.selector.current.id && this.props.selector.current.type === "entity"
-              ? "red"
-              : "black"
-          }
-          strokeWidth={0.5}
-          listening={false}
-          lineJoin="bevel"
-          closed
-          points={[
-            0,
-            -entityHeight / 2, // TOP
-            entityWidthCrows / 2,
-            0, // RIGHT
-            0,
-            entityHeight / 2, // BOTTOM
-            -entityWidthCrows / 2,
-            0, // LEFT
-          ]}
-        />
-      ) : null;
+    
 
     return (
       
@@ -314,7 +286,7 @@ class EntityCrows extends React.Component {
         
         {weakRect}
        
-        {associativeDiamond}
+      
         
         <Text
         

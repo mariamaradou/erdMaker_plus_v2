@@ -173,10 +173,10 @@ class AttributeCrows extends React.Component {
         <Text text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
           this.props.type.foreign? 'PK, FK' :
            "PK " :    this.props.components.notation==='Bachman Notation'  && this.props.type.unique ?
-           this.props.type.foreign? 'PK, FK' :
+           this.props.type.foreign? 'PFK' :
            'PK  ':
            this.props.components.notation==="Information Engineering Notation"  && this.props.type.foreign ?
-           "FK " :   (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.foreign ?
+           "FK " :    this.props.components.notation==='Bachman Notation'  && this.props.type.foreign ?
            'FK  ':
           
            
