@@ -150,14 +150,15 @@ class Connection extends React.Component {
               }
               onChange={this.handleEntityChange}
             >
-              <option value={0} disabled>
+              <option value={0} >
                 Select an Entity
               </option>
               {this.props.components.entities.map((entity) => (
                 <option
                   key={entity.id}
                   value={entity.id}
-                  disabled={entity.connectionCount >= 8 ? true : false}
+                  style= {{display: typeof entity.parentId==='undefined'? 'inherit':'none'}}
+                  disabled={entity.connectionCount >= 8  ? true : false}
                 >
                   {entity.name}
                 </option>

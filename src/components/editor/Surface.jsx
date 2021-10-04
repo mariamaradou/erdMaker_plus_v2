@@ -632,7 +632,7 @@ class Surface extends React.Component {
             />
             <Arrow
               stroke={"black"}
-              strokeWidth={0}
+              strokeWidth={0.5}
               visible={
                 this.props.components.notation ===
                   "Korth, Silberschatz & Sudarshan" &&
@@ -640,7 +640,7 @@ class Surface extends React.Component {
                   ? true
                   : false
               }
-              fill={"black"}
+              fill={"white"}
               pointerLength={25}
               pointerWidth={15}
               //rotation={this.props.angle}
@@ -762,22 +762,7 @@ class Surface extends React.Component {
             "Korth, Silberschatz & Sudarshan" &&
             this.props.components.extensions[i].cardinality === "disjoint") ? (
           <Group key={keyIndex}>
-            <Arrow
-              stroke={"black"}
-              strokeWidth={0}
-              fill={"black"}
-              pointerLength={25}
-              pointerWidth={15}
-              visible={
-                this.props.components.notation === "UML Notation" ? false : true
-              }
-              points={[
-                this.props.components.extensions[i].x,
-                this.props.components.extensions[i].y,
-                anchor.x,
-                anchor.y,
-              ]} //to velaki gia na fainetai!
-            ></Arrow>
+          
             <Text
               text={"   total"}
               visible={
@@ -853,6 +838,24 @@ class Surface extends React.Component {
                   : anchor.y + 5
               }
             />
+              <Arrow
+              stroke={"black"}
+              strokeWidth={this.props.components.notation ===
+                "Korth, Silberschatz & Sudarshan"?0.5:0}
+              fill={this.props.components.notation ===
+            "Korth, Silberschatz & Sudarshan"?"white":'black'}
+              pointerLength={25}
+              pointerWidth={15}
+              visible={
+                this.props.components.notation === "UML Notation" ? false : true
+              }
+              points={[
+                this.props.components.extensions[i].x,
+                this.props.components.extensions[i].y,
+                anchor.x,
+                anchor.y,
+              ]} //to velaki gia na fainetai!
+            ></Arrow>
             <Rect
               opacity={
                 this.props.components.notation === "UML Notation" &&
@@ -1201,17 +1204,25 @@ class Surface extends React.Component {
                 fill={"white"}
                 stroke={"black"}
                 strokeWidth={0.5}
-                width={18}
-                height={18}
+                width={ this.props.components.notation==='UML Notation'?18:10}
+                height={this.props.components.notation==='UML Notation'?18:10}
                 rotation={47}
                 x={
+                  this.props.components.notation==='UML Notation'?
                   anchor.angle === 90
                     ? anchor.x - 14
                     : anchor.angle === -90
                     ? anchor.x + 14
+                    : anchor.x:
+                    anchor.angle === 90
+                    ? anchor.x - 10
+                    : anchor.angle === -90
+                    ? anchor.x + 10
                     : anchor.x
+
                 }
                 y={
+                  this.props.components.notation==='UML Notation'?
                   anchor.angle === 90
                     ? anchor.y - 12
                     : anchor.angle === 180
@@ -1220,9 +1231,20 @@ class Surface extends React.Component {
                     ? anchor.y + 4
                     : anchor.angle === -90
                     ? anchor.y - 12
+                    : anchor.y:
+                    anchor.angle === 90
+                    ? anchor.y - 7
+                    : anchor.angle === 180
+                    ? anchor.y - 17
+                    : anchor.angle === 0
+                    ? anchor.y + 3
+                    : anchor.angle === -90
+                    ? anchor.y - 7
                     : anchor.y
+
                 }
               ></Rect>
+              
             </Group>
           );
 

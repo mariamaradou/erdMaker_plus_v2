@@ -202,8 +202,7 @@ class AttributeProperties extends React.Component {
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
-           //  ( (this.props.components.notation=== "UML Notation" ) &&
-            //  this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity))  ||
+         
             this.props.components.notation=== "UML Notation" ||
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
             
@@ -296,7 +295,12 @@ class AttributeProperties extends React.Component {
                   <input
                     type="checkbox"
                     name="type"
-                    disabled={ this.props.components.entities.some(entity => entity.id === this.props.components.attributes[attributeIndex].parentId)  || this.props.components.relationships.some(relationship => relationship.id === this.props.components.attributes[attributeIndex].parentId)?false: true}
+                    disabled={
+                      !this.props.components.attributes.find(x=>x.parentId===this.props.selector.current.id) &&
+                   ( this.props.components.entities.some(entity => entity.id === this.props.components.attributes[attributeIndex].parentId)  || 
+                      this.props.components.relationships.some(relationship => relationship.id === this.props.components.attributes[attributeIndex]
+                        .parentId))?
+                      false: true}
                     value="composite"
                     checked={this.props.components.attributes[attributeIndex].type.composite}
                     onChange={this.typeValueChange}

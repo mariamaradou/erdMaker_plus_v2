@@ -67,7 +67,7 @@ class AttributeCrows extends React.Component {
       this.props.components.entities.length &&
       (parentIndex = this.props.components.entities.findIndex(this.findParentIndex)) !== -1
     ) {
-      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak") {
+      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak" && !(this.props.components.notation==='Information Engineering Notation')) {
         var dashedUnderlineList = [];
         if (textRows < 4) {
           for (let i = 0; i < textRows; i++) {
@@ -172,7 +172,7 @@ class AttributeCrows extends React.Component {
        
         <Text text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
           this.props.type.foreign? 'PK, FK' :
-           "PK " :   (this.props.components.notation==='UML Notation' || this.props.components.notation==='Bachman Notation' ) && this.props.type.unique ?
+           "PK " :    this.props.components.notation==='Bachman Notation'  && this.props.type.unique ?
            this.props.type.foreign? 'PK, FK' :
            'PK  ':
            this.props.components.notation==="Information Engineering Notation"  && this.props.type.foreign ?
@@ -192,7 +192,7 @@ class AttributeCrows extends React.Component {
           text={ /*this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
            "PK " + this.props.name:*/ 
            this.props.type.unique && this.props.components.notation==='Barker Notation'?
-            "# " + this.props.name :
+            "# * " + this.props.name :
              this.props.type.optional && this.props.components.notation==='Barker Notation'?
              'o ' + this.props.name :
              this.props.components.notation==='Barker Notation'  ?
@@ -210,7 +210,7 @@ class AttributeCrows extends React.Component {
             }
              textDecoration={ ( this.props.components.notation==='Korth, Silberschatz & Sudarshan' || this.props.components.notation==="Information Engineering Notation" )&& this.props.type.unique ? "underline" : ""}
              fontSize={fontSize}
-          align="center"
+          align={this.props.components.attributes.find(x=>x.id===this.props.parentId)?"right":'center'}
           verticalAlign="middle"
           width={entityTextWidth}
           height={textHeight}

@@ -120,7 +120,9 @@ class EntityCrows extends React.Component {
     var weakRect =
       this.props.type  === "weak" && (this.props.components.notation!=='Korth, Silberschatz & Sudarshan' 
       && this.props.components.notation!=='UML Notation'
-      && this.props.components.notation!=='Information Engineering Notation') ? (
+      && this.props.components.notation!=='Information Engineering Notation'
+      && this.props.components.notation!=='Barker Notation' 
+      && this.props.components.notation!== "Bachman Notation") ? (
         <Rect
       
           x={-entityWidthCrows / 2 + entityWeakOffset / 2}
@@ -316,7 +318,7 @@ class EntityCrows extends React.Component {
         
         <Text
         
-          text={/*this.props.components.notation==='UML Notation'?this.props.nameUML:*/ this.props.name}
+          text={this.props.name}
          fontSize={fontSize}
           align="center"
           verticalAlign="middle"

@@ -57,7 +57,7 @@ export function onSafari() {
 }
 
 export function weakToAggregation(entities, relationships, k, notation) {
-  if (relationships.connections.length === 2 && notation === "UML Notation") {
+  if (relationships.connections.length === 2 && (notation === "UML Notation" || notation==="Barker Notation")) {
     if (k === 0) {
       if (
         entities.find(
