@@ -88,7 +88,7 @@ class Relationship extends React.Component {
         closed
       //  visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
         opacity={                                                      //kryvw ton rompo tou relationship
-       
+          this.props.components.notation==='Batini, Ceri & Navathe Notation' ||
           this.props.components.notation === "Information Engineering Notation" ||
           this.props.components.notation === "Bachman Notation" ||
           this.props.components.notation === "Barker Notation" || 

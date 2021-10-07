@@ -580,6 +580,21 @@ class Surface extends React.Component {
 
         lineList.push(
           <Group key={keyIndex}>
+            <Text text={ this.props.components.extensions[i].participation === "total"?
+             this.props.components.extensions[i].cardinality === "overlap"?
+             '(t,o)':
+             this.props.components.extensions[i].cardinality === "disjoint"?
+             '(t,e)':'t':
+             this.props.components.extensions[i].participation === "partial"?
+             this.props.components.extensions[i].cardinality === "overlap"?
+             '(p,o)':
+             this.props.components.extensions[i].cardinality === "disjoint"?
+             '(p,e)':'p' :''
+          } 
+            visible={ this.props.components.notation === 'Batini, Ceri & Navathe Notation'}
+            x={this.props.components.extensions[i].x + 5}
+            y={this.props.components.extensions[i].y}/>
+
             <Text
               text={"   total"}
               visible={

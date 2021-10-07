@@ -121,7 +121,7 @@ componentDidMount() {
       ) : null;
 
 
-    if(this.props.components.notation!=='Batini, Ceri & Navathe Notation')
+   
     return (
       <div className="sidepanel-content">
         {/*<h3>Extension</h3>*/}
@@ -208,29 +208,7 @@ componentDidMount() {
         </div>
       </div>
     )
-    else return( <div className="sidepanel-content">
-    {/*<h3>Extension</h3>*/}
     
-    
-    <div className="connections-list"  style={{backgroundColor: '#dfdfdf'}}>
-      <XConnections  extension={this.props.components.extensions[extensionIndex]} notation={this.props.components.notation} />
-    </div>
-    <div className="buttons-list">
-      {addEntityButton}
-      <button
-      className='buttonmenu'
-       /* className="properties-delete-button"*/
-       style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
-        type="button"
-        onClick={() => {
-          this.props.deleteExtension({ id: this.props.selector.current.id });
-          this.props.deselect();
-        }}
-      >
-        Delete
-      </button>
-    </div>
-  </div>)
   }
 }
 
