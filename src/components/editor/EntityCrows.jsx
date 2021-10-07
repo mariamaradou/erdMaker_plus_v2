@@ -263,7 +263,7 @@ class EntityCrows extends React.Component {
         {weakReactKorth}
       
         <Rect
-          cornerRadius={ (this.props.components.notation==='Barker Notation' && this.props.attributesNum===0) || this.props.components.hideAttribute? [10, 10, 10, 10]:
+          cornerRadius={ this.props.components.notation==='Barker Notation' && (this.props.components.hideAttribute || this.props.attributesNum===0) ? [10, 10, 10, 10]:
           this.props.components.notation==='Barker Notation' && this.props.attributesNum!==0? [10,10,0,0] : [0,0,0,0]}
           x={-entityWidthCrows / 2}
           y={-entityHeight / 2}
