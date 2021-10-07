@@ -53,6 +53,7 @@ class AttributeProperties extends React.Component {
       checked: e.target.checked
     
     });
+    
   }; 
  
   handleAddAttributeToParent = (parent) => {

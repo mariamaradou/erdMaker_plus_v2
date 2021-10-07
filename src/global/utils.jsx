@@ -57,28 +57,44 @@ export function onSafari() {
 }
 
 export function weakToAggregation(entities, relationships, k, notation) {
-  if (relationships.connections.length === 2 && (notation === "UML Notation" || notation==="Barker Notation")) {
+  if (relationships.connections.length === 2 && (notation === "UML Notation" || notation==="Barker Notation") //&&
+  ) {
     if (k === 0) {
+      if( (typeof relationships.connections[k + 1]!=='undefined' )
+      && typeof  entities.find(
+        (x) => x.id === relationships.connections[k + 1].connectId
+      )!=='undefined'){
       if (
         entities.find(
           (x) => x.id === relationships.connections[k + 1].connectId
         ).type === "weak"
       ) {
+         
         return true;
       } else {
         return false;
       }
-    } else if (k === 1) {
+    } 
+    else{return false}
+  }else if (k === 1) {
+    if( (typeof relationships.connections[k - 1]!=='undefined' )
+    && typeof  entities.find(
+      (x) => x.id === relationships.connections[k - 1].connectId
+    )!=='undefined'){
       if (
         entities.find(
           (x) => x.id === relationships.connections[k - 1].connectId
         ).type === "weak"
       ) {
+        
         return true;
+        
       } else {
         return false;
       }
     }
+    else {return false}
+  }
   } else {
     return false;
   }

@@ -1078,10 +1078,12 @@ const componentsReducer = (state = initialState, action) => {
       return newState;
     case "SET_COMPONENTS":
       return action.payload;
-    case "RESET_COMPONENTS": //afinw mono to notation idio me to reset
+    case "RESET_COMPONENTS": //afinw mono to notation, cardinality kai participation idia me ayta prin to reset
       var clone = Object.assign({}, initialState);
 
       clone.notation = state.notation;
+      clone.cardinalityDirection=state.cardinalityDirection;
+      clone.participationDirection= state.participationDirection;
       return clone;
     // return initialState
     default:

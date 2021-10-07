@@ -67,7 +67,8 @@ class EntityProperties extends React.Component {
       type: e.target.value,
     });
    
-  
+    
+
   }
 
   
@@ -200,7 +201,7 @@ class EntityProperties extends React.Component {
                     name="type"
                     
                     value="weak"
-                    checked={this.props.components.entities[entityIndex].type === "weak"}
+                    checked={this.props.components.entities[entityIndex].type === "weak"   }
                     onChange={this.typeValueChange}
                   />
                   Weak

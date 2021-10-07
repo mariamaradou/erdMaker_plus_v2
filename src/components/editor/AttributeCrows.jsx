@@ -129,7 +129,7 @@ class AttributeCrows extends React.Component {
        
       
         <Rect
-           cornerRadius={ this.props.components.notation==='Barker Notation' && 
+           cornerRadius={ (this.props.components.notation==='Barker Notation' && typeof this.props.components.entities.find(x=>x.id=== this.props.parentEntity)!=='undefined') &&
             this.props.attrNum===this.props.components.entities.find(x=>x.id=== this.props.parentEntity).attributesNum-1? [0,0, 10, 10]: [0,0,0,0]}
           x={-entityWidthCrows / 2}
           y={-entityHeight / 2}
