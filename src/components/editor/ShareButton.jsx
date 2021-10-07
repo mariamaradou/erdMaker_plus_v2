@@ -219,7 +219,7 @@ const handleSubmit=(e)=>{
       >
         <Fade in={openLogIn}>
           <div className={classes.paper}>
-            <h2 id="spring-modal-title">⚠ You must be logged in to share diagram </h2>
+            <h2 id="spring-modal-title">⚠ You must be logged in to share a diagram </h2>
            
           </div>
         </Fade>

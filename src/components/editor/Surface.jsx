@@ -734,7 +734,7 @@ class Surface extends React.Component {
       //vriskw to pio kontino shmeio sthn ontotita gia na paei h grammi apo to extension
       anchor = this.findNearestAnchorExtend(lockedAnchorPoints, index, i);
 
-      // etsi rythmizw se poio shmeio toy entity katalhgei h kathe grammi poy erxetai apo to relationship
+    
       if (
         this.props.components.notation === "Information Engineering Notation" ||
         this.props.components.notation === "Bachman Notation" ||
@@ -1090,10 +1090,20 @@ class Surface extends React.Component {
 
                 break;
               case 180:
-                anchor.y =
-                  anchor.y -
-                  1 +
-                  this.props.components.entities[index].attributesNum * 39.5; //wste h grammi na paei katw apo ta attributes
+                switch (this.props.components.hideAttribute){
+                  case false:
+                    anchor.y =
+                      anchor.y +
+                        this.props.components.entities[index].attributesNum * 39.5; //wste h grammi na paei katw apo ta attributes
+                        break;
+                  case true:
+                    anchor.y =
+                      anchor.y +1  //wste h grammi na paei katw apo ta attributes
+                        break;
+                  default:
+                    anchor.y=anchor.y +
+                   1;
+                  }
                 break;
               case 90:
                 anchor.x = anchor.x + 25;

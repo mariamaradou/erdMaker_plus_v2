@@ -99,9 +99,17 @@ const ImportExportMenuListComposition = (props) => {
           props.components.attributes[j].parentId ===
           props.components.entities[i].id
         ) {
-          if (props.components.attributes[j].type.unique) {
+          if(props.components.attributes[j].type.unique && props.components.attributes[j].type.foreign){
+            state.push("  *+"  + props.components.attributes[j].name);
+          }
+          else if (props.components.attributes[j].type.unique) {
             state.push("  *"  + props.components.attributes[j].name);
-          } else {
+          } 
+          else if(props.components.attributes[j].type.foreign){
+            state.push("  +"  + props.components.attributes[j].name);
+          }
+          
+          else {
             state.push("  " + props.components.attributes[j].name);
           }
         }
