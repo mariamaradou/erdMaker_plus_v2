@@ -60,7 +60,13 @@ export const UPDATE_POSITION_EXTENSION_CHILDREN="UPDATE_POSITION_EXTENSION_CHILD
 export const DELETE_ENTITY_CHILD="DELETE_ENTITY_CHILD";
 export const MODIFY_XCONNECTION_UML= "MODIFY_XCONNECTION_UML";
 export const SET_HELP_MODAL='SET_HELP_MODAL';
+export const HIDE_ATTRIBUTES='HIDE_ATTRIBUTES';
 
+
+export const hideAttributes=(payload)=> ({
+  type:'HIDE_ATTRIBUTES',
+  payload:payload
+})
 
 export const setHelpModal=(payload)=>({
   type:'SET_HELP_MODAL',

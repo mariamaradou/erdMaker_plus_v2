@@ -528,6 +528,7 @@ class Surface extends React.Component {
                 parentCoords.x,
                 parentCoords.y,
               ]}
+              visible={this.props.components.hideAttribute?false:true}
               dash={
                 this.props.components.notation ===
                   "Korth, Silberschatz & Sudarshan" ||
@@ -539,6 +540,7 @@ class Surface extends React.Component {
 
             <Line
               stroke="white"
+              visible={this.props.components.hideAttribute?false:true}
               strokeWidth={
                 this.props.components.attributes[i].type.multivalued &&
                 this.props.components.notation === "Teorey Notation"

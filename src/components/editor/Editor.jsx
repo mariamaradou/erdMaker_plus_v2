@@ -79,7 +79,7 @@ class Editor extends React.Component {
             }
           })
           .catch(() => {});
-         // this.props.setHelpModal({ modal: false });
+       
       }
     } 
     
@@ -90,6 +90,9 @@ class Editor extends React.Component {
   };
 
   componentDidUpdate() {
+   
+    
+
     this.props.setHelpModal({ modal: false });
   }
   componentWillUnmount() {

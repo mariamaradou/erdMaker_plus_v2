@@ -94,9 +94,8 @@ class AttributeCrows extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
-       /* visible={ this.props.components.notation!=='UML Notation' && 
-        typeof this.props.components.entities.find((entity)=> entity.id===this.props.parentId).nameUML!=='undefined'?false:true}
-        */
+        visible={this.props.components.hideAttribute?false:true}
+       
         onTap={() => {
            
             this.props.deselect();
@@ -213,6 +212,7 @@ class AttributeCrows extends React.Component {
           align={this.props.components.attributes.find(x=>x.id===this.props.parentId)?"right":'center'}
           verticalAlign="middle"
           width={entityTextWidth}
+          fontStyle={this.props.components.notation==='Information Engineering Notation'? (!this.props.type.optional && !this.props.type.derived)? 'bold':'normal':'normal'}
           height={textHeight}
           offsetX={this.props.type.unique && this.props.type.foreign?entityTextWidth / 2-3-this.props.name.length:entityTextWidth / 2}
           offsetY={textHeight / 2}

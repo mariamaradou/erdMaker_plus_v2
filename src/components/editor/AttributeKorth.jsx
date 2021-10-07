@@ -49,6 +49,7 @@ class AttributeKorth extends React.Component {
       <Group 
         x={this.props.x}
         y={this.props.y}
+        visible={this.props.components.hideAttribute?false:true}
         draggable
         /*visible={ this.props.components.notation!=='UML Notation' && 
         typeof this.props.components.entities.find((entity)=> entity.id===this.props.parentId).nameUML!=='undefined'?false:true}*/

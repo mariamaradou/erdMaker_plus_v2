@@ -14,6 +14,7 @@ import {
   resetMeta,
   setParticipationDirection,
   setCardinalityDirection,
+  hideAttributes,
   resetComponents,
   setComponents,
   setMeta,
@@ -53,7 +54,12 @@ const ConstraintsButton = (props) => {
     }
   }
   
-  
+  function hideAttribute(e){
+    props.hideAttributes({
+     
+      hide: e.target.checked,
+    });
+  }
 
   // Return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
@@ -119,6 +125,14 @@ const ConstraintsButton = (props) => {
                        
                       </label>
                     </MenuItem>
+                    <MenuItem>
+                    <label>
+                    < input type='checkbox' name='hideAttribute' value='hide'   
+                    checked={props.components.hideAttribute}
+                    onChange={(e)=>hideAttribute(e)}/>
+                    Hide Attributes
+                    </label>
+                    </MenuItem>
                   </MenuList>
                 
               </Paper>
@@ -141,7 +155,7 @@ const mapDispatchToProps = {
   repositionComponents,
   setParticipationDirection,
   setCardinalityDirection,
- // displayRelationship,
+  hideAttributes,
   setMeta,
   deselect,
 };

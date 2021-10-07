@@ -122,6 +122,7 @@ class AttributeBatCerNav extends React.Component {
       <Group
         x={this.props.x}
         y={this.props.y}
+        visible={this.props.components.hideAttribute?false:true}
         draggable
       /*  visible={ this.props.components.notation!=='UML Notation' && 
         typeof this.props.components.entities.find((entity)=> entity.id===this.props.parentId).nameUML!=='undefined'?false:true}*/
@@ -209,7 +210,7 @@ class AttributeBatCerNav extends React.Component {
          
          
          fill={this.props.type.unique?'black':'white'}
-          dash={this.props.type.derived ? [10, 3] : false}
+         
           strokeWidth={1.5}
           stroke={
             this.props.id === this.props.selector.current.id && this.props.selector.current.type === "attribute"
@@ -228,7 +229,7 @@ class AttributeBatCerNav extends React.Component {
           verticalAlign={this.props.type.composite?"middle":"top"}
           width={attributeTextWidth}
           height={textHeight}
-          offsetX={this.props.type.composite?attributeTextWidth / 2:30}
+          offsetX={this.props.type.composite?attributeTextWidth / 2: this.props.type.multivalued || this.props.type.optional?18:30}
           offsetY={ this.props.type.composite? textHeight / 2:25}
           listening={false}
         />
