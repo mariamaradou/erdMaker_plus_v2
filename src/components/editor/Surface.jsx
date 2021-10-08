@@ -592,8 +592,8 @@ class Surface extends React.Component {
              '(p,e)':'p' :''
           } 
             visible={ this.props.components.notation === 'Batini, Ceri & Navathe Notation'}
-            x={this.props.components.extensions[i].x + 5}
-            y={this.props.components.extensions[i].y}/>
+            x={this.props.components.extensions[i].x + 6}
+            y={this.props.components.extensions[i].y - 6}/>
 
             <Text
               text={"   total"}
