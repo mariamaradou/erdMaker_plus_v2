@@ -10,19 +10,19 @@ updatePositionExtensionChildren,
   select,
   deselect,
 } from "../../actions/actions";
-import { Group, Rect, Text } from "react-konva";
+import { Group, Rect, Text, Line } from "react-konva";
 import {
  
   entityWidthCrows,
   entityHeight,
   entityTextWidth,
- 
+  attributeTextWidth,
   fontSize,
   textHeight,
 
 } from "../../global/constants";
 
-
+var pixelWidth = require("string-pixel-width");
 
 
 
@@ -60,12 +60,46 @@ class AttributeCrows extends React.Component {
     
    
     var parentIndex;
+    var dashedUnderlineList = [];
+    var nameText = this.props.name;
+    var namePixelWidth = pixelWidth(nameText, {
+      font: "Arial",
+      size: fontSize,
+    });
     if (
       this.props.components.entities.length &&
       (parentIndex = this.props.components.entities.findIndex(this.findParentIndex)) !== -1
     ) {
-      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak" && !(this.props.components.notation==='Information Engineering Notation')) {
+      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak" 
+      && !(this.props.components.notation==='Information Engineering Notation')) {
+       // Implementation of dashed text underline
+    var textRows = Math.ceil(namePixelWidth / attributeTextWidth);
+   
+    if (
+      this.props.components.entities.length &&
+      (parentIndex = this.props.components.entities.findIndex(this.findParentIndex)) !== -1
+    ) {
+      if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak") {
        
+        if (textRows < 4) {
+          for (let i = 0; i < textRows; i++) {
+            let lineOffset =
+              textRows % 2
+                ? fontSize / 2 + 0.8 + i * fontSize - Math.floor(textRows / 2) * fontSize
+                : fontSize / 2 + 0.8 + i * fontSize - (Math.floor(textRows / 2) * fontSize) / 2;
+            dashedUnderlineList.push(
+              <Line
+                key={i}
+                stroke="#ff9b8e"
+                strokeWidth={0.5}
+                dash={[3, 5]}
+                points={[-attributeTextWidth / 2 + 5, lineOffset, attributeTextWidth / 2 - 5, lineOffset]}
+              />
+            );
+          }
+        }
+      }
+    }
       }
     }
 
@@ -199,7 +233,7 @@ class AttributeCrows extends React.Component {
           listening={false}
         /> 
         
-        
+        {dashedUnderlineList}
      
       </Group>
      
