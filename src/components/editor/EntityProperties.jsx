@@ -67,7 +67,48 @@ class EntityProperties extends React.Component {
       type: e.target.value,
     });
    
-    
+    ///////////////// set min value to one if weak //////////////
+   var relationshipNow= this.props.components.relationships.find(x=> x.connections.find(y=> y.connectId===this.props.selector.current.id))
+   if(relationshipNow) {
+  console.log(    relationshipNow.connections[0].connectId===this.props.selector.current.id &&
+    (e.target.value === "weak" &&
+    relationshipNow.type.weak))
+   if (
+      relationshipNow.connections.length === 2
+    ) {
+     
+        if (
+          relationshipNow.connections[1].connectId===this.props.selector.current.id &&
+          (e.target.value === "weak" &&
+          relationshipNow.type.weak)
+        ) {
+          this.props.modifyConnection({
+            id:  relationshipNow.connections[0].id,
+            parentId:relationshipNow.id,
+            prop: "min", //min, max
+            value: "one",
+          });
+        }
+      
+     
+        if (
+          relationshipNow.connections[0].connectId===this.props.selector.current.id &&
+          (e.target.value === "weak" &&
+          relationshipNow.type.weak)
+        ) {
+          this.props.modifyConnection({
+            id:  relationshipNow
+              .connections[1].id,
+            parentId: relationshipNow.id,
+            prop: "min", //min, max
+            value: "one",
+          });
+        
+      }
+    }}
+    ////////////
+
+
 
   }
 

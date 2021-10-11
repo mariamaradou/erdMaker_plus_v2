@@ -7,7 +7,7 @@ import ternaryRel from "../../img/ternary_rel.jpg"
 import ternaryToBinary from "../../img/ternary_to_binary.jpg"
 import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
-import weakEntity from "../../img/weakEntity.gif"
+
 
 
 const Tutorial = () => {
@@ -18,7 +18,7 @@ const Tutorial = () => {
     <div className="about">
       <div className="containerTwo">
         <div className="flex-container">
-        <div>
+        <div >
         <h2>How to use</h2>
         <h3>Add a component</h3>
         <div style={{textAlign:'left'}}>
@@ -46,20 +46,17 @@ const Tutorial = () => {
          </tbody>
         </table>
   
-          <h4>How to add an identifying relationship (<i>Elmasri, Navathe &amp; notation</i>)</h4>
-          <p>You must have a weak entity in order to have an identifying relationship. <br/>
-            Then, the participation of the non weak entity is automatically 1. </p>
-           <img alt="identifyingRelationship" src={weakEntity} width={'75%'}></img>
+         
            <h4>How to add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     
     <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
         </div>
 
-        <div>
+        <div >
 
           
         <h2 >Some theory</h2>
-        <p> ◉ Constraints button shows Cardinality &amp; Participation for each notation.</p>
+        <p> ◉ Constraints button shows Cardinality &amp; Participation for each notation. Also, it allows you to hide attributes for a more comprehensive diagram.</p>
         <img src={constraintsButton} alt="constraintsButton" width={'50%'}></img>
         <h3>Look Across &amp; Look Here notation</h3>
         

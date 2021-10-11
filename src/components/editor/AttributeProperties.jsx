@@ -14,7 +14,7 @@ import {
   deselect,
   repositionComponents,
 } from "../../actions/actions";
-
+import Tooltip from "@material-ui/core/Tooltip"
 import { getRandomInt } from "../../global/utils";
 import { nameSize, stageWidth, stageHeight, spawnRadius } from "../../global/constants";
 
@@ -292,6 +292,8 @@ class AttributeProperties extends React.Component {
             </tr>
             <tr>
               <td className='buttonmenu'>
+              <Tooltip  title={<h2 style={{ fontSize: 12 }}>Delete children attributes first</h2>} disableHoverListener={
+                 !this.props.components.attributes.find(x=>x.parentId===this.props.selector.current.id) ?true:false} placement="left">
                 <label style={{cursor:'pointer'}}>
                   <input
                     type="checkbox"
@@ -308,6 +310,7 @@ class AttributeProperties extends React.Component {
                   />
                   Composite
                 </label>
+                </Tooltip>
               </td>
             </tr>
             <tr>

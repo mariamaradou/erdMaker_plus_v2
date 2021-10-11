@@ -13,6 +13,25 @@ import DeleteIcon from "@material-ui/icons/Delete";
 class Connection extends React.Component {
   /* state = { expand: true };*/
 
+ 
+  componentDidMount(){
+    var relationshipIndex = this.props.components.relationships.findIndex(
+      this.findRelationshipIndex
+    );
+    if(this.props.components.relationships[relationshipIndex].connections.length===2){
+      console.log(this.props.components.relationships[relationshipIndex].connections)
+      if(this.props.components.entities.find(x=>x.id===this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak'){
+        this.props.modifyConnection({
+          id: this.props.components.relationships[relationshipIndex].connections[1].id,
+          parentId: this.props.selector.current.id,
+          prop: "min", //min, max
+          value: "one",
+        });
+      
+      }
+    }
+  }
+ 
   findRelationshipIndex = (relationship) =>
     relationship.id === this.props.selector.current.id;
 

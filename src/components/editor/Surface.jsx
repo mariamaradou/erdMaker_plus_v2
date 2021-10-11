@@ -22,6 +22,7 @@ import Properties from "./Properties";
 import { Provider, ReactReduxContext, connect } from "react-redux";
 
 
+
 import {
   deselect,
   select,
@@ -1602,6 +1603,8 @@ class Surface extends React.Component {
     document.getElementsByClassName("sidepanel")[0].style.display = "none";
   }
 
+  
+  
   render() {
     return (
       <ReactReduxContext.Consumer>
@@ -1620,12 +1623,16 @@ class Surface extends React.Component {
                 onContextMenu={(e) => e.preventDefault()}
                 onKeyDown={this.clickedButtons}
                 onFocus={() => this.menu()}
+                
+               
               >
                 <Stage
                   //  listening={false otan mi sindedemenos xristis kai params}
                   width={stageWidth}
                   height={stageHeight}
                   onClick={(e) => this.stageClicked(e)}
+                  
+                  
                 >
                   <Provider store={store}>
                     <Layer>

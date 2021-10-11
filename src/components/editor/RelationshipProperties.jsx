@@ -49,7 +49,7 @@ class RelationshipProperties extends React.Component {
         "px";
     }
   }
-
+ 
   componentWillUnmount() {
     document.getElementsByClassName("stage")[0].focus();
     console.log("unmounted");
@@ -223,6 +223,7 @@ class RelationshipProperties extends React.Component {
           }}
           onClick={() => {
             this.props.addConnection({ id: this.props.selector.current.id });
+           
           }}
         >
           Add Connection
@@ -299,27 +300,7 @@ class RelationshipProperties extends React.Component {
                 <label>
                   <input
                     type="checkbox"
-                    disabled={
-                      (this.props.components.relationships[
-                        relationshipIndex
-                      ].connections.find((connection) =>
-                        typeof this.props.components.entities.find(
-                          (x) => x.id === connection.connectId
-                        ) !== "undefined"
-                          ? this.props.components.entities.find(
-                              (x) => x.id === connection.connectId
-                            ).type === "weak"
-                          : null
-                      ) &&
-                        this.props.components.relationships[relationshipIndex]
-                          .connections.length === 2) ||
-                      (this.props.components.relationships[relationshipIndex]
-                        .connections.length === 0 &&
-                        this.props.components.relationships[relationshipIndex]
-                          .type.weak)
-                        ? false
-                        : true
-                    }
+                   
                     name="type"
                     value="weak"
                     checked={
