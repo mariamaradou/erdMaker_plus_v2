@@ -235,6 +235,7 @@ import {
       className={sidepanelClasses}
       style={{
         width: sidepanelWidth + "vw",
+     
         // height: window.innerHeight - toolbarHeight - sidepanelHeightCutoff - scrollbarOffset + "px",
         right: xPosition,
         top: yPosition,

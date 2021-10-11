@@ -23,6 +23,7 @@ import saveImg from "../../img/saveIcon.png";
 import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
+import AddButton from "./addButton";
 
 class Tools extends React.Component {
   state = {
@@ -200,7 +201,7 @@ class Tools extends React.Component {
           </Link>
           <ConstraintsButton />
           <UndoRedo />
-
+          <AddButton/>
           <ShareButton />
 
           <ConvertToMenuListComposition />

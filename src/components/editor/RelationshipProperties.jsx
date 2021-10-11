@@ -243,7 +243,7 @@ class RelationshipProperties extends React.Component {
               outline: "none",
               border: "none",
               margin: 3,
-              width: "280px",
+            //  width: "280px",
               paddingLeft: "6px",
               fontSize: "17px",
               fontFamily:

@@ -176,7 +176,7 @@ class EntityProperties extends React.Component {
           <input
            /* className="big-editor-input" */
            //new
-           style={{outline: 'none',border:'none',margin: 3, width:'220px', paddingLeft: '6px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
+           style={{outline: 'none',border:'none',margin: 3,/* width:'220px',*/ paddingLeft: '6px',fontSize:'17px', fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
            //
            placeholder="Set entity name"
             type="text"
