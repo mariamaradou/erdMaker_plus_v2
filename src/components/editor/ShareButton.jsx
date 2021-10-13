@@ -100,12 +100,12 @@ const handleSubmit=(e)=>{
 
 
 
-  const shareDiagramTemp = () => {
+ /* const shareDiagramTemp = () => {
     
     if (props.user.isLogged && props.general.activeDiagramId) {
       sharediagramtempuser(props.general.activeDiagramId, cancelToken)
       .then((res) => {
-        if (res /*&& res.status === 201*/) {
+        if (res ) {
           console.log(res)
           window.history.pushState("", "", "/designer/"+ res.data.random_id);
         }
@@ -115,7 +115,7 @@ const handleSubmit=(e)=>{
      else {
     sharediagramtemp(cancelToken)
       .then((res) => {
-        if (res /*&& res.status === 201*/) {
+        if (res ) {
           
           window.history.pushState("", "", "/designer/"+ res.data.random_id);
 
@@ -124,6 +124,22 @@ const handleSubmit=(e)=>{
       })
       .catch(() => {});
      }
+  };*/
+
+  const shareDiagramTemp = () => {
+    
+    if (!props.user.isLogged){
+    sharediagramtemp(cancelToken)
+      .then((res) => {
+        if (res ) {
+          
+          window.history.pushState("", "", "/designer/"+ res.data.random_id);
+
+          console.log('saved to db temporary')
+        }
+      })
+      .catch(() => {});
+    }
   };
 
   useEffect(() => {

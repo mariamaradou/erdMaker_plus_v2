@@ -22,6 +22,7 @@ import axios from "axios";
 import { ActionCreators } from "redux-undo";
 import { sharediagramtempuser } from "../../global/diagramRequests";
 import { store } from "../../index.js";
+import { red } from "@material-ui/core/colors";
 
 export var params_id;
 var keys = [];
@@ -62,6 +63,7 @@ class Editor extends React.Component {
     params_id = this.props.match.params.id;
 
     if (typeof this.props.match.params.id === "undefined") {
+      
       if (this.props.user.isLogged && this.props.general.activeDiagramId) {
         
         getDiagram(this.props.general.activeDiagramId, this.cancelToken);
@@ -81,9 +83,27 @@ class Editor extends React.Component {
           .catch(() => {});
        
       }
+      
     } 
     
     else {
+      if(this.props.general.activeDiagramId){
+        
+        sharediagramtempuser(
+          this.props.general.activeDiagramId,
+          this.cancelToken
+        )
+          .then((res) => {
+            if (res && params_id!==res.data.random_id) {
+              window.history.pushState(
+                "",
+                "",
+                "/designer/" + res.data.random_id
+              );
+            }
+          })
+          .catch(() => {});
+      }
       getDiagramTemp(this.props.match.params.id, this.cancelToken);
     }
     

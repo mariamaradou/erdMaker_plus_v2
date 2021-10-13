@@ -12,41 +12,22 @@ import { deselect, select} from "../../actions/actions";
 import Typography from "@material-ui/core/Typography";
 
 import { makeStyles } from "@material-ui/core";
+
+
 const useStyles = makeStyles({
+
+
   dialog: {
     position: "absolute",
+    
     left: 220,
     top: 50,
+  
     width:'20%'
   }
 });
 
-/*const styles = (theme) => ({
-  dialog: {
-    position: "absolute",
-    left: 10,
-    top: 50
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(2),
-    color: theme.palette.grey[500]
-  }
-});*/
-/*const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});*/
+
 const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2)
@@ -69,14 +50,15 @@ function App(props) {
   return (
     <div>
       
-      <Dialog
+      <Dialog 
         classes={{
           paper: classes.dialog
         }}
         onClose={handleClose}
-        open={open}
+        
+        open={ open}
       >
-       {/* <DialogTitle onClose={handleClose}>Modal</DialogTitle>*/}
+      
         <DialogContent dividers>
           <Typography gutterBottom>Press Help button for more info about erdMaker properties, hotkeys, ERD theory and more. </Typography>
         </DialogContent>

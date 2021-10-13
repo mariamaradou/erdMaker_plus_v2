@@ -45,7 +45,7 @@ const ConvertTo = (props) => {
   const [openDialogRelAt, setOpenDialogRelAt] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  const options = [
+  const options = process.env.REACT_APP_ERD_NOTATION_CHEN==='false' ?[
     "Elmasri & Navathe Notation",
     "Crow's foot  (customized)",
     "Min-Max Notation",
@@ -56,6 +56,11 @@ const ConvertTo = (props) => {
     "Teorey Notation",
     "Korth, Silberschatz & Sudarshan",
     "UML Notation",
+  ]: [
+    "Elmasri & Navathe Notation",
+    "Crow's foot  (customized)",
+    "Min-Max Notation",
+  
   ];
 
   const [selectedIndex, setSelectedIndex] = React.useState(
@@ -201,16 +206,7 @@ const ConvertTo = (props) => {
       ) {
         moveAttributetoManySide(option);
       } else {
-   /*   if   (option!=='UML Notation' && props.components.notation==='UML Notation') {
    
-     props.components.attributes.map((attribute)=>props.components.relationships.find((relationship)=>relationship.id===attribute.parentEntity)?
-     props.changeParent({
-       id:attribute.id,
-       parentId:attribute.parentEntity
-     }): null
-     )
-  
-   }*/
         
         props.setNotation({
           notation: option,
@@ -218,16 +214,7 @@ const ConvertTo = (props) => {
         changeDirection(option);
       }
     } else {
-    /*  if   (option==='UML Notation' && props.components.notation!=='UML Notation') {
-       
-         props.components.attributes.map((attribute)=>props.components.relationships.find((relationship)=>relationship.id===attribute.parentEntity)?
-         props.changeParent({
-          id:attribute.id,
-          parentId:attribute.parentEntity
-        }):null
-         )
-      
-       }*/
+    
        
       props.setNotation({
         notation: option,

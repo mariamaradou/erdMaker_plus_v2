@@ -2,6 +2,8 @@ const initialState = {
   title: "New Diagram"
 };
 
+
+
 const metaReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_TITLE":
@@ -12,7 +14,7 @@ const metaReducer = (state = initialState, action) => {
     case "SET_HELP_MODAL":
       return{
         ...state,
-        modal:action.payload.modal
+        modal: window.innerWidth <= 768 ? false : action.payload.modal
       }
     case "SET_META":
       return action.payload;

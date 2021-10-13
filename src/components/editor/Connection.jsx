@@ -19,8 +19,9 @@ class Connection extends React.Component {
       this.findRelationshipIndex
     );
     if(this.props.components.relationships[relationshipIndex].connections.length===2){
-      console.log(this.props.components.relationships[relationshipIndex].connections)
-      if(this.props.components.entities.find(x=>x.id===this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak'){
+      
+      if(this.props.components.entities.find(x=>x.id===this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak' 
+      && this.props.components.relationships[relationshipIndex].type.weak){
         this.props.modifyConnection({
           id: this.props.components.relationships[relationshipIndex].connections[1].id,
           parentId: this.props.selector.current.id,
