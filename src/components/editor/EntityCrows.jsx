@@ -78,7 +78,7 @@ class EntityCrows extends React.Component {
   }*/
 
   render() {
-    var weakReactKorth = 
+    var weakRectKorth = 
     this.props.type  === "weak" && this.props.components.notation==='Korth, Silberschatz & Sudarshan' ? (
       <Rect        //weak rect
       visible={this.props.components.notation==='Korth, Silberschatz & Sudarshan' && this.props.type==='weak'?true:false}
@@ -86,7 +86,8 @@ class EntityCrows extends React.Component {
       y={-entityHeight /1.8}
       listening={false}
       width={entityWidthCrows*1.05}
-      height={this.props.attributesNum===0?
+      height={
+        this.props.attributesNum===0 || this.props.components.hideAttribute ?
       entityHeight*1.1:
       this.props.attributesNum===1?
    
@@ -260,7 +261,7 @@ class EntityCrows extends React.Component {
 
         dragBoundFunc={(pos) => this.stageBound(pos)}
       >
-        {weakReactKorth}
+        {weakRectKorth}
       
         <Rect
           cornerRadius={ this.props.components.notation==='Barker Notation' && (this.props.components.hideAttribute || 
