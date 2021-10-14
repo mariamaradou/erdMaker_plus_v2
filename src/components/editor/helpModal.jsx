@@ -60,7 +60,7 @@ function App(props) {
       >
       
         <DialogContent dividers>
-          <Typography gutterBottom>Press Help button for more info about erdMaker properties, hotkeys, ERD theory and more. </Typography>
+          <Typography gutterBottom>Press Help button for more info about erdMaker properties, keyboard shortcuts, ERD theory and more. </Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">

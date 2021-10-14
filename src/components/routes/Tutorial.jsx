@@ -7,6 +7,8 @@ import ternaryRel from "../../img/ternary_rel.jpg"
 import ternaryToBinary from "../../img/ternary_to_binary.jpg"
 import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
+import weakRel from "../../img/weakRel.gif"
+
 
 
 
@@ -43,11 +45,15 @@ const Tutorial = () => {
          <tr><td>  <b>Arrow</b> keys to move around surface</td></tr>
          <tr><td> <b>  Delete</b> key to delete a surface component</td></tr>
          <tr><td>  <b> Escape</b> key to deselect a surface component</td></tr>
+         <tr><td>  <b> Enter</b> or <b> Escape</b> to close component menu</td></tr>
          </tbody>
         </table>
-  
+        
+    <h4>Add a weak relationship (<i>Elmasri &amp; Navathe notation</i>)</h4>
+    
+    <img alt="weakRel" src={weakRel} width={'75%'}></img>
          
-           <h4>How to add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
+           <h4>Add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     
     <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
         </div>
@@ -64,8 +70,8 @@ const Tutorial = () => {
         <div style={{textAlign:'center'}}>
         <p> 💡 Both notations in figures 1 &amp; 2 below mean the following sentences: *   </p>
         
-        <p>• The entity Employee works for One (1) Department  </p>
-        <p>• The entity Department has Many (N) Employees    </p>
+        <p>• Employee works for One (1) Department  </p>
+        <p>• Department has Many (N) Employees    </p>
         </div>
        
         <p><i>fig 1. Look Across notation </i></p>
