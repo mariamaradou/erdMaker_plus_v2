@@ -164,7 +164,7 @@ extensionLimit=(e)=>{
         opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ||  this.props.xconnections.length===1?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
         <Rect
                offsetX={35}
-               visible={this.props.components.notation==='Information Engineering Notation'}
+               visible={this.props.xconnections.length!==1 && this.props.components.notation==='Information Engineering Notation'}
                offsetY={-extensionRadius}
                 lineJoin="bevel"
                 closed
@@ -173,7 +173,7 @@ extensionLimit=(e)=>{
                 width={ 70}
                 height={0}/>
          <Rect
-         visible={this.props.components.notation==='Information Engineering Notation' && this.props.participation==='total'}
+         visible={this.props.xconnections.length!==1 && this.props.components.notation==='Information Engineering Notation' && this.props.participation==='total'}
                offsetX={35}
                offsetY={-extensionRadius-5}
                 lineJoin="bevel"
