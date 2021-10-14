@@ -56,7 +56,8 @@ const Tutorial = () => {
 
           
         <h2 >Some theory</h2>
-        <p> ◉ Constraints button shows Cardinality &amp; Participation for each notation. Also, it allows you to hide attributes for a more comprehensive diagram.</p>
+        <p> ◉ Constraints button shows Cardinality &amp; Participation for each notation. Also, it allows you to hide attributes for
+           a more comprehensive and clear diagram.</p>
         <img src={constraintsButton} alt="constraintsButton" width={'50%'}></img>
         <h3>Look Across &amp; Look Here notation</h3>
         

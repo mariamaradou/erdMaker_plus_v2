@@ -87,7 +87,7 @@ extensionLimit=(e)=>{
            
           }); 
          
-          this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+          this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan"  || this.props.xconnections.length===1 )?
       this.setState({shadowOffset:0.5, fill:'lightgrey'}):  this.setState({shadowOffset:0, fill:'white'})}
     }
       onMouseOut ={() =>{
@@ -95,7 +95,7 @@ extensionLimit=(e)=>{
           this.props.deselect();
         }
        
-        this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" )?
+        this._isMounted  && (this.props.components.notation==="Korth, Silberschatz & Sudarshan" ||   this.props.xconnections.length===1 )?
        this.setState({shadowOffset:0, fill:'white'}):  this.setState({shadowOffset:0, fill:'white'})}
       }
         onDragStart={(e) => {
@@ -143,7 +143,8 @@ extensionLimit=(e)=>{
         <Circle
      
           radius={extensionRadius}
-          opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap'?
+          opacity={(this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='overlap')
+          || this.props.xconnections.length===1?
           this.state.shadowOffset:
           this.props.components.notation==="Korth, Silberschatz & Sudarshan" && this.props.cardinality==='disjoint'?
           this.state.shadowOffset:
@@ -159,7 +160,8 @@ extensionLimit=(e)=>{
           strokeWidth={ this.props.id === this.props.selector.current.id && this.props.selector.current.type === "extension"?0.7:0.5}
         />
         
-        <Text text={text} fontStyle={"bold"}  listening={false} opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
+        <Text text={text} fontStyle={"bold"}  listening={false} 
+        opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ||  this.props.xconnections.length===1?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
       </Group>
       
     );

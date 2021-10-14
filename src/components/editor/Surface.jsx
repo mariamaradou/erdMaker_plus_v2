@@ -260,6 +260,7 @@ class Surface extends React.Component {
           key={extension.id}
           id={extension.id}
           parentId={extension.parentId}
+          xconnections={extension.xconnections}
           type={extension.type}
           participation={extension.participation}
           cardinality={extension.cardinality}
