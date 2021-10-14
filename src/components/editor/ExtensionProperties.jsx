@@ -124,7 +124,7 @@ componentDidMount() {
    
     return (
       <div className="sidepanel-content">
-        {/*<h3>Extension</h3>*/}
+      
         <div /*className="extension-group"*/ style={{marginBottom: 5, padding: '6px 0px 0px 6px'}}>
           Type:
           <select

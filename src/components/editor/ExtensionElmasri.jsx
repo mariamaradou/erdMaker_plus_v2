@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updatePositionExtension,deselect, updateInitialPositionExtension, select, repositionComponents, modifyExtension } from "../../actions/actions";
-import { Group, Circle, Line, Text } from "react-konva";
+import { Group, Circle, Line,Rect, Text } from "react-konva";
 import { stageWidth, stageHeight, extensionRadius, fontSize, dragBoundOffset } from "../../global/constants";
 var pixelWidth = require("string-pixel-width");
 
@@ -162,6 +162,27 @@ extensionLimit=(e)=>{
         
         <Text text={text} fontStyle={"bold"}  listening={false} 
         opacity={this.props.components.notation==="Korth, Silberschatz & Sudarshan" ||  this.props.xconnections.length===1?0:1} fontSize={fontSize} x={-textPixelWidth / 2} y={-fontSize / 2} />
+        <Rect
+               offsetX={35}
+               visible={this.props.components.notation==='Information Engineering Notation'}
+               offsetY={-extensionRadius}
+                lineJoin="bevel"
+                closed
+                stroke={"black"}
+                strokeWidth={0.5}
+                width={ 70}
+                height={0}/>
+         <Rect
+         visible={this.props.components.notation==='Information Engineering Notation' && this.props.participation==='total'}
+               offsetX={35}
+               offsetY={-extensionRadius-5}
+                lineJoin="bevel"
+                closed
+                stroke={"black"}
+                strokeWidth={0.5}
+                width={ 70}
+                height={0}/>
+      
       </Group>
       
     );

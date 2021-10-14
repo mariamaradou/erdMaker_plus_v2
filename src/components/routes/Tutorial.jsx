@@ -8,6 +8,7 @@ import ternaryToBinary from "../../img/ternary_to_binary.jpg"
 import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
 import weakRel from "../../img/weakRel.gif"
+import addExtension from "../../img/addExtension.gif"
 
 
 
@@ -52,6 +53,10 @@ const Tutorial = () => {
     <h4>Add a weak relationship (<i>Elmasri &amp; Navathe notation</i>)</h4>
     
     <img alt="weakRel" src={weakRel} width={'75%'}></img>
+
+    <h4>Add a partial disjoint specialization (<i>Elmasri &amp; Navathe notation</i>)</h4>
+    
+    <img alt="addExtension" src={addExtension} width={'75%'}></img>
          
            <h4>Add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     

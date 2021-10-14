@@ -808,7 +808,8 @@ class Surface extends React.Component {
               }
               angle={anchor.angle}
             ></Text>
-
+            
+            
             <Line
               stroke="black"
               strokeWidth={
@@ -817,6 +818,7 @@ class Surface extends React.Component {
                 this.props.components.notation !==
                   "Korth, Silberschatz & Sudarshan" &&
                 this.props.components.notation !== "UML Notation" &&
+             
                 this.props.components.extensions[i].participation === "total"
                   ? 3.5
                   : 0.5
@@ -926,7 +928,7 @@ class Surface extends React.Component {
             }
             strokeWidth={
               this.props.components.extensions[i].participation === "total" &&
-              this.props.components.extensions[i].type !== "aggregation"
+              this.props.components.extensions[i].type !== "aggregation" &&    this.props.components.notation !== "Information Engineering Notation" 
                 ? 3.5
                 : 0.5
             }
@@ -945,7 +947,8 @@ class Surface extends React.Component {
       if (
         this.props.components.notation !== "Batini, Ceri & Navathe Notation" &&
         this.props.components.notation !== "Korth, Silberschatz & Sudarshan" &&
-        this.props.components.notation !== "UML Notation"
+        this.props.components.notation !== "UML Notation" &&
+        this.props.components.notation !== "Information Engineering Notation"
       ) {
         if (
           this.props.components.extensions[i].participation === "total" &&
