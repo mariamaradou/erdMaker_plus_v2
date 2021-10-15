@@ -187,7 +187,118 @@ const ImportExportMenuListComposition = (props) => {
 
 
 
+    const handleSubmitGleek = () => {
+ 
 
+      var state = [];
+      var relationships = [];
+  
+     
+      for (let i in props.components.entities) {
+        if(typeof props.components.entities[i].parentId==='undefined'){
+        state.push(" ");
+        state.push( props.components.entities[i].name );
+  
+        for (let j in props.components.attributes)  {
+          if (
+            props.components.attributes[j].parentId ===
+            props.components.entities[i].id
+          ) {
+            if(props.components.attributes[j].type.unique && props.components.attributes[j].type.foreign){
+              state.push("  *+"  + props.components.attributes[j].name);
+            }
+            else if (props.components.attributes[j].type.unique) {
+              state.push("  *"  + props.components.attributes[j].name);
+            } 
+            else if(props.components.attributes[j].type.foreign){
+              state.push("  +"  + props.components.attributes[j].name);
+            }
+            
+            else {
+              state.push("  " + props.components.attributes[j].name);
+            }
+          }
+        }
+      }
+  
+    }
+      state.push(" ");
+     
+      state.push(" ");
+      for (let i in props.components.relationships) {
+        if (props.components.relationships[i].connections.length === 2) {
+          for (let j in props.components.relationships[i].connections) {
+           
+            var max = props.components.relationships[i].connections[j].max;
+            if (max === "one") {
+              var cardinality = "1";
+            } else if ( max === "many") {
+              cardinality = "N";
+           
+            } else cardinality = "";
+  
+            relationships.push(
+              props.components.entities.find(
+                (entity) =>
+                  entity.id ===
+                  props.components.relationships[i].connections[j].connectId
+              ).name
+            );
+            relationships.push("-");
+            relationships.push(cardinality);
+            relationships.push("-");
+            
+          }
+        }
+      }
+      for (var r = 0; r < relationships.length; r += 8) {
+
+        state.push(
+          relationships[r] +
+            
+            relationships[r + 1] +
+           
+            relationships[r + 2] +
+          
+            relationships[r + 3] +
+            "relationship_name"+[r] +
+            relationships[r+5]+
+            relationships[r+6]+
+            relationships[r+7]+
+            relationships[r+4]
+        );
+
+        state.push("relationship_name"+[r]+":diamond")
+      }
+     
+     
+     /* const components = {
+        state,
+      };
+  
+      axios
+        .post(serverHost +"/create", components)        //na to allaksw se serverHost!
+        .then(() => console.log("submitted"))
+        .catch((err) => {
+          console.error(err);
+        });
+       
+        */
+        var surfaceState = JSON.stringify(state, null,2 );
+  
+        var surfaceStateTxt= surfaceState.replace(/,/g, '').replace(/"/g, '')/*.replace(/^\[/,'')*/.replace(/\[/,'').replace(/[ \]]*$/,'')
+    const element = document.createElement('a');
+    const file = new Blob([surfaceStateTxt], {
+      type: "text/plain; charset-utf-8"
+    });
+     
+    element.href=URL.createObjectURL(file);
+    
+    element.download = props.meta.title + '.txt';
+    document.body.appendChild(element);
+    element.click();
+    
+      };
 
 
   // Runs when user clicks to select file for import
@@ -414,6 +525,12 @@ const ImportExportMenuListComposition = (props) => {
                       onClick={()=>handleSubmit()}
                     >
                     Export BurntSushi/erd file
+                    </MenuItem>
+                    <MenuItem
+                      type="button"
+                      onClick={()=>handleSubmitGleek()}
+                    >
+                    Export Gleek (Basic) file
                     </MenuItem>
                      
                    

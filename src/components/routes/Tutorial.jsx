@@ -9,7 +9,7 @@ import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
 import weakRel from "../../img/weakRel.gif"
 import addExtension from "../../img/addExtension.gif"
-
+import exportForms from "../../img/exportForms.jpg";
 
 
 
@@ -61,6 +61,12 @@ const Tutorial = () => {
            <h4>Add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     
     <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
+    <h4>You can export compatible files for BurntSushi/erd and Gleek</h4>
+    <p> Only binary/non-attribute relationships are exported</p>
+    <img alt="exportForms" src={exportForms} width={'45%'}></img>
+    <p> Check  <span><a href="https://www.gleek.io/er-diagrams.html" rel="noreferrer" target="_blank">Gleek </a></span>  
+    and  <span><a href="https://github.com/BurntSushi/erd" rel="noreferrer" target="_blank">BurntSushi/erd</a></span></p>
+  
         </div>
 
         <div >
@@ -112,7 +118,7 @@ const Tutorial = () => {
           <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
           <img alt='ternaryToBinary' src={ternaryToBinary} width={'70%'}></img>
         
-       
+        
         </div>
       </div>
       </div>
