@@ -292,7 +292,7 @@ class EntityCrows extends React.Component {
         
         <Text
         
-          text={this.props.name}
+          text={ this.props.components.notation==='Barker Notation'?this.props.name.toUpperCase() :this.props.name}
          fontSize={fontSize}
           align="center"
           verticalAlign="middle"
