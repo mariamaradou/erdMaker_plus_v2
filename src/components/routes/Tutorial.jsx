@@ -111,7 +111,7 @@ const Tutorial = () => {
 
         <h4>Τernary relationship to Binary  </h4>
         <p>🚩 Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
-          If you have a ternary relationship in Crow's foot  (customized), you have to convert it into binary in order to proceed 
+          If you have a ternary relationship in Crow's foot, you have to convert it into binary in order to proceed 
           to one of the three notations previously mentioned.</p>
           <p><i>fig 4. Ternary relationship</i></p>
           <img alt='ternaryRelationship' src={ternaryRel} width={'70%'}></img>

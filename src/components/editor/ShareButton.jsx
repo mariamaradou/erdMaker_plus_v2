@@ -133,7 +133,7 @@ const handleSubmit=(e)=>{
       .then((res) => {
         if (res ) {
           
-          window.history.pushState("", "", "/designer/"+ res.data.random_id);
+          window.history.pushState("", "", "/erdmaker/designer/"+ res.data.random_id);
 
           console.log('saved to db temporary')
         }

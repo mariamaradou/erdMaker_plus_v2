@@ -176,7 +176,7 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Entity = EntityChen;
         break;
-      case "Crow's foot  (customized)":
+      case "Custom Crow's foot":
         Entity = EntityChen;
         break;
       case "UML Notation":
@@ -229,7 +229,7 @@ class Surface extends React.Component {
       case "Elmasri & Navathe Notation":
         var Extension = ExtensionElmasri;
         break;
-      case "Crow's foot  (customized)":
+      case "Custom Crow's foot":
         Extension = ExtensionElmasri;
         break;
       case "Information Engineering Notation":
@@ -303,7 +303,7 @@ class Surface extends React.Component {
     var attributesList = [];
     if (
       this.props.components.notation === "Elmasri & Navathe Notation" ||
-      this.props.components.notation === "Crow's foot  (customized)" ||
+      this.props.components.notation === "Custom Crow's foot" ||
       this.props.components.notation === "Teorey Notation" ||
       this.props.components.notation === "Min-Max Notation"
     ) {
@@ -1152,7 +1152,7 @@ class Surface extends React.Component {
             case "Elmasri & Navathe Notation":
               CardPart = AnchorChen;
               break;
-            case "Crow's foot  (customized)":
+            case "Custom Crow's foot":
               CardPart = Anchor;
               break;
             case "UML Notation":

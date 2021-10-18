@@ -46,8 +46,8 @@ const ConvertTo = (props) => {
   const anchorRef = React.useRef(null);
 
   const options = process.env.REACT_APP_ERD_NOTATION_CHEN==='false' ?[
+    "Custom Crow's foot",
     "Elmasri & Navathe Notation",
-    "Crow's foot  (customized)",
     "Min-Max Notation",
     "Information Engineering Notation",
     "Bachman Notation",
@@ -56,9 +56,8 @@ const ConvertTo = (props) => {
     "Teorey Notation",
     "Korth, Silberschatz & Sudarshan",
     "UML Notation",
-  ]: [
+  ]: ["Custom Crow's foot",
     "Elmasri & Navathe Notation",
-    "Crow's foot  (customized)",
     "Min-Max Notation",
   
   ];
