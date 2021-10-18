@@ -51,7 +51,7 @@ const Anchor = (props) => {
 
 
    
-  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='n') ? ( //participation many
+  var many = ( props.maximum>1 || props.maximum==='many' ||props.maximum==='N' || props.maximum==='Ν' || props.maximum==='n') ? ( //participation many
       <Text  text={'N'} 
       x= {props.angle===180||props.angle===0?props.x+8 :props.x}
       y={Math.abs(props.angle)===90?props.y-18:props.y-(Math.abs(props.angle/10))}
