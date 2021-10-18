@@ -108,7 +108,7 @@ const ConvertTo = (props) => {
       case "Teorey Notation":
       case "Information Engineering Notation":
       case "UML Notation":
-      case "Crow's foot  (customized)":
+      case "Custom Crow's foot":
         props.setParticipationDirection({
           valuePart: "Look Across",
         });
