@@ -57,7 +57,7 @@ export function onSafari() {
 }
 
 export function weakToAggregation(entities, relationships, k, notation) {
-  if (relationships.connections.length === 2 && (notation === "UML Notation" || notation==="Barker Notation") //&&
+  if (relationships.connections.length === 2 && notation === "UML Notation"  //&&
   ) {
     if (k === 0) {
       if( (typeof relationships.connections[k + 1]!=='undefined' )
@@ -100,6 +100,31 @@ export function weakToAggregation(entities, relationships, k, notation) {
   }
 }
 
+export function weakToDiamond(entities, relationships, k, notation) {
+  if (relationships.connections.length === 2 && notation === "Barker Notation"  //&&
+  ) {
+   
+      if( (typeof relationships.connections[k]!=='undefined' )
+      && typeof  entities.find(
+        (x) => x.id === relationships.connections[k].connectId
+      )!=='undefined'){
+      if (
+        entities.find(
+          (x) => x.id === relationships.connections[k].connectId
+        ).type === "weak"
+      ) {
+         
+        return true;
+      } else {
+        return false;
+      }
+    } 
+    else{return false}
+ 
+  } else {
+    return false;
+  }
+}
 /*export function setMandatory(relationships,entities){
   
 

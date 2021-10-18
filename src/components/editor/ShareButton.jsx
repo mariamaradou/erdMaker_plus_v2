@@ -170,7 +170,7 @@ const handleSubmit=(e)=>{
   }}>*/}
          
         
-         <form action={"/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
+         <form action={"/erdmaker/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
          
            
       <button

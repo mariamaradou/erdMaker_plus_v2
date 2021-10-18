@@ -19,7 +19,7 @@ class Connection extends React.Component {
       this.findRelationshipIndex
     );
     if(this.props.components.relationships[relationshipIndex].connections.length===2){
-      
+      if(this.props.components.entities.find(x=>x.id===this.props.components.relationships[relationshipIndex].connections[0].connectId)){
       if(this.props.components.entities.find(x=>x.id===this.props.components.relationships[relationshipIndex].connections[0].connectId).type==='weak' 
       && this.props.components.relationships[relationshipIndex].type.weak){
         this.props.modifyConnection({
@@ -29,7 +29,7 @@ class Connection extends React.Component {
           value: "one",
         });
       
-      }
+      }}
     }
   }
  

@@ -69,7 +69,7 @@ class Tools extends React.Component {
           if (!this.props.general.activeDiagramId ){
             this.props.setActiveDiagram(res.data.id);
            // console.log(params_id)
-           window.history.pushState("","","/designer/" + res.data.random_id);
+           window.history.pushState("","","/erdmaker/designer/" + res.data.random_id);
           }
          
 
@@ -194,7 +194,7 @@ class Tools extends React.Component {
     return (
       //creating Import/Export button   //creating Convert to button
       <div className="tool-bar">
-        <Link to="/">
+        <Link to="/erdmaker/">
           <img src={Logo} className="logo" alt=":(" />
         </Link>
 
@@ -202,7 +202,7 @@ class Tools extends React.Component {
         <ul className={toolsClasses}>
           {saveButton}
           <App/>
-          <Link to="/help" target="_blank">
+          <Link to="/erdmaker/help" target="_blank">
             <button style={this.props.meta.modal?{backgroundColor:'#FFFF99', opacity:1}:null}className=" tools-button-blue">Help</button>
           </Link>
           <ConstraintsButton />

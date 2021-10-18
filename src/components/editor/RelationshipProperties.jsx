@@ -33,7 +33,7 @@ class RelationshipProperties extends React.Component {
       this.findRelationshipIndex
     );
 
-    if (this.props.components.relationships[relationshipIndex].y !== 37) {
+  /*  if (this.props.components.relationships[relationshipIndex].y !== 37) {
       console.log(this.props.components.relationships[relationshipIndex].y);
       //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-150 + 'px';}
       document.getElementsByClassName("sidepanel")[0].style.top =
@@ -47,6 +47,19 @@ class RelationshipProperties extends React.Component {
         document.getElementsByClassName("sidepanel")[0].style.height / 2 +
         dragBoundOffset +
         "px";
+    }*/
+   
+    if (this.props.components.relationships[relationshipIndex].y===22){
+      
+       document.getElementsByClassName('sidepanel')[0].style.top= dragBoundOffset+38 + 'px'
+     }
+    if(document.getElementsByClassName('sidepanel')[0].offsetTop + document.getElementsByClassName('sidepanel')[0].offsetHeight>690){
+     document.getElementsByClassName('sidepanel')[0].style.top= document.getElementsByClassName('sidepanel')[0].offsetTop-0.8*document.getElementsByClassName('sidepanel')[0].offsetHeight + 'px'
+   
+    }
+   
+    if(document.getElementsByClassName('sidepanel')[0].offsetTop <0){
+     document.getElementsByClassName('sidepanel')[0].style.top= -document.getElementsByClassName('sidepanel')[0].offsetTop+  'px'
     }
   }
  

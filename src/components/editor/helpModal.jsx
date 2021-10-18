@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
 
-
+ 
   dialog: {
     position: "absolute",
     
@@ -56,7 +56,7 @@ function App(props) {
         }}
         onClose={handleClose}
         
-        open={ open}
+        open={  open}
       >
       
         <DialogContent dividers>

@@ -6,7 +6,7 @@ const Header = () => {
   const [headerNavListActive, setHeaderNavListActive] = useState(false);
   const headerLinks = [
    
-    { label: "About", link: "/about", type: "int" },
+    { label: "About", link: "/erdmaker/about", type: "int" },
     {
       label: "Github",
       link: "https://github.com/Raynesz/erdMaker",
@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <nav className="header-nav">
-      <Link to="/" onClick={() => setHeaderNavListActive(false)}>
+      <Link to="/erdmaker/" onClick={() => setHeaderNavListActive(false)}>
         <img src={Logo} className="logo" alt=":(" />
       </Link>
       <ul className={headerNavClasses}>{linksMarkup}</ul>

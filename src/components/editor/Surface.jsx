@@ -42,7 +42,7 @@ import {
   modifyExtension,
   addLabel,
 } from "../../actions/actions";
-import { distance, minJsonArray, weakToAggregation } from "../../global/utils";
+import { distance, minJsonArray, weakToAggregation, weakToDiamond } from "../../global/utils";
 import {
   stageWidth,
   stageHeight,
@@ -1224,6 +1224,7 @@ class Surface extends React.Component {
               />
 
               {/* aggregation otan vlepw weak entity!!! */}
+
               <Rect
                 visible={weakToAggregation(
                   this.props.components.entities,
@@ -1236,25 +1237,20 @@ class Surface extends React.Component {
                 fill={"white"}
                 stroke={"black"}
                 strokeWidth={0.5}
-                width={ this.props.components.notation==='UML Notation'?18:10}
-                height={this.props.components.notation==='UML Notation'?18:10}
+                width={ 18}
+                height={18}
                 rotation={47}
                 x={
-                  this.props.components.notation==='UML Notation'?
+                
                   anchor.angle === 90
                     ? anchor.x - 14
                     : anchor.angle === -90
                     ? anchor.x + 14
-                    : anchor.x:
-                    anchor.angle === 90
-                    ? anchor.x - 10
-                    : anchor.angle === -90
-                    ? anchor.x + 10
                     : anchor.x
 
                 }
                 y={
-                  this.props.components.notation==='UML Notation'?
+                
                   anchor.angle === 90
                     ? anchor.y - 12
                     : anchor.angle === 180
@@ -1263,7 +1259,36 @@ class Surface extends React.Component {
                     ? anchor.y + 4
                     : anchor.angle === -90
                     ? anchor.y - 12
-                    : anchor.y:
+                    : anchor.y
+
+                }
+              ></Rect>
+               <Rect
+                visible={weakToDiamond(
+                  this.props.components.entities,
+                  this.props.components.relationships[i],
+                  j,
+                  this.props.components.notation
+                )}
+                lineJoin="bevel"
+                closed
+                fill={"white"}
+                stroke={"black"}
+                strokeWidth={0.5}
+                width={ 10}
+                height={10}
+                rotation={47}
+                x={
+                  
+                    anchor.angle === 90
+                    ? anchor.x - 10
+                    : anchor.angle === -90
+                    ? anchor.x + 10
+                    : anchor.x
+
+                }
+                y={
+                  
                     anchor.angle === 90
                     ? anchor.y - 7
                     : anchor.angle === 180

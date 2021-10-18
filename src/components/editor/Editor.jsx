@@ -22,7 +22,7 @@ import axios from "axios";
 import { ActionCreators } from "redux-undo";
 import { sharediagramtempuser } from "../../global/diagramRequests";
 import { store } from "../../index.js";
-import { red } from "@material-ui/core/colors";
+
 
 export var params_id;
 var keys = [];
@@ -76,7 +76,7 @@ class Editor extends React.Component {
               window.history.pushState(
                 "",
                 "",
-                "/designer/" + res.data.random_id
+                "/erdmaker/designer/" + res.data.random_id
               );
             }
           })
@@ -98,7 +98,7 @@ class Editor extends React.Component {
               window.history.pushState(
                 "",
                 "",
-                "/designer/" + res.data.random_id
+                "/erdmaker/designer/" + res.data.random_id
               );
             }
           })
