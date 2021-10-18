@@ -112,7 +112,7 @@ class Login extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(process.env.REACT_APP_LOCALHOST)
+   
     const isValid = this.validate();
     if (isValid) this.setState({ response: { data: "Logging in...", color: "#1faacd" } }, () => this.logIn());
   };
