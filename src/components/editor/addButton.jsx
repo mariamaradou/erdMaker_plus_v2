@@ -1,5 +1,5 @@
 import React from "react";
-
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
@@ -100,13 +100,14 @@ const AddButton = (props) => {
               }}
             >
               <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem>
-                    <button
+                  <MenuItem
+                    type='button'
                       onClick={(e) => {
                         props.addEntity({
                           x: window.innerWidth / 2,
@@ -122,10 +123,10 @@ const AddButton = (props) => {
                       }}
                     >
                       Add Entity
-                    </button>
+                    
                   </MenuItem>
-                  <MenuItem>
-                    <button
+                  <MenuItem
+                    type="button"
                       onClick={(e) => {
                         props.addRelationship({
                           x: window.innerWidth / 2,
@@ -142,10 +143,10 @@ const AddButton = (props) => {
                       }}
                     >
                       Add Relationship
-                    </button>
+                   
                   </MenuItem>
-                  <MenuItem>
-                    <button
+                  <MenuItem
+                    type="button"
                       onClick={(e) => {
                         props.addLabel({
                           x: window.innerWidth / 2,
@@ -162,9 +163,10 @@ const AddButton = (props) => {
                       }}
                     >
                       Add Label
-                    </button>
+                   
                   </MenuItem>
                 </MenuList>
+                </ClickAwayListener>
               </Paper>
             </Grow>
           )}

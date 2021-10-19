@@ -1,5 +1,5 @@
 import React  from "react";
-
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
@@ -40,12 +40,12 @@ const ConstraintsButton = (props) => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  /*const handleClose = (event) => {
+  const handleClose = (event) => {
     //if (anchorRef.current && anchorRef.current.contains(event.target)) {
     //  return;
     //}
     setOpen(false);
-  };*/
+  };
 
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -104,7 +104,7 @@ const ConstraintsButton = (props) => {
               }}
             >
               <Paper>
-                
+              <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="menu-list-grow"
@@ -134,7 +134,7 @@ const ConstraintsButton = (props) => {
                     </label>
                     </MenuItem>
                   </MenuList>
-                
+                  </ClickAwayListener>
               </Paper>
             </Grow>
           )}
