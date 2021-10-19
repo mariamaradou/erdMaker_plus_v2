@@ -183,6 +183,17 @@ class Editor extends React.Component {
             editor.
           </div>
         )}
+         {!this.props.user.isLogged && this.props.match.params.id && (
+          <div
+            className="save-warning"
+            style={{
+              visibility: this.state.showSaveWarning ? "visible" : "hidden",
+            }}
+          >
+          Any change you make won't be saved unless you are a logged in user.
+          </div>
+        )}
+
 
         <Surface />
       </div>
