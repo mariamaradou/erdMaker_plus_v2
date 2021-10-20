@@ -87,6 +87,7 @@ class Editor extends React.Component {
     } 
     
     else {
+      if(this.props.user.isLogged){
       if(this.props.general.activeDiagramId){
         
         sharediagramtempuser(
@@ -106,7 +107,8 @@ class Editor extends React.Component {
       }
       getDiagramTemp(this.props.match.params.id, this.cancelToken);
     }
-    
+    else{ window.location.replace("/erdmaker/loginfirst");}
+  }
   };
 
   componentDidUpdate() {

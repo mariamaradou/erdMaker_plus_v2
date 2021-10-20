@@ -6,7 +6,7 @@ import Header from "./components/navbar/Header";
 import About from "./components/routes/About";
 import Tutorial from "./components/routes/Tutorial";
 import Footer from "./components/navbar/Footer";
-
+import { Link } from "react-router-dom";
 import Editor from "./components/editor/Editor";
 import EmailChangeSuccess from "./components/routes/EmailChangeSuccess";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -30,7 +30,7 @@ const App = () => {
                 <Route path="/erdmaker/" exact component={Home} />
                
                 <Route path='/erdmaker/nodiagramfound'  component= {NoDiagramFound}/>
-            
+                <Route path='/erdmaker/loginfirst'  component= {LogInFirst}/>
                 <Route component={NoMatchPage} />
               </Switch>
               
@@ -61,6 +61,20 @@ const NoDiagramFound = () => {
       <div className="container">
         <h1>This link doesn't exist or has been deleted.</h1>
       </div>
+    </div>
+  );
+};
+
+const LogInFirst = () => {
+  document.title = "404";
+  return (
+    <div className="general-centered-container">
+      <div className="container">
+        <h1>Log in to see shared diagram</h1>
+      </div>
+      <Link to="/erdmaker/">
+          <button className='home-button'>Home</button>
+        </Link>
     </div>
   );
 };
