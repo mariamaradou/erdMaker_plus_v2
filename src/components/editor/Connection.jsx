@@ -291,13 +291,7 @@ class Connection extends React.Component {
           </label>
         </div>
 
-        {/* <Tooltip title="Custom min/max values" placement="right" >
-        <span>
-        <IconButton disabled={this.props.components.notation==='Min-Max Notation'?false:true} onClick={this.handleExpand}>{expandIcon}</IconButton>
-        </span>
-        </Tooltip>
-        
-        <br /> */}
+       
         {specificValues} 
       </div>
     ) 

@@ -24,7 +24,7 @@ import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
 import AddButton from "./addButton";
-import { params_id } from "./Editor"
+
 
 
 class Tools extends React.Component {

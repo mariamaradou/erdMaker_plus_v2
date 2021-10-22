@@ -1,5 +1,5 @@
 import React from "react";
-import { Group, Line, Text, Rect } from "react-konva";
+import { Group, Line, Text } from "react-konva";
 
 //sxediasmos plithikothtwn sta relatioships
 

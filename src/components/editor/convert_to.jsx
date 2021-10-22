@@ -16,12 +16,11 @@ import {
   setParticipationDirection,
   setCardinalityDirection,
   setNotation,
-  
   resetComponents,
   setComponents,
   setMeta,
   deselect,
- // changeParent,
+  // changeParent,
 } from "../../actions/actions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -45,22 +44,25 @@ const ConvertTo = (props) => {
   const [openDialogRelAt, setOpenDialogRelAt] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  const options = process.env.REACT_APP_ERD_NOTATION_CHEN==='false' ?[
-    "Custom Crow's foot",
-    "Elmasri & Navathe Notation",
-    "Min-Max Notation",
-    "Information Engineering Notation",
-    "Bachman Notation",
-    "Barker Notation",
-    "Batini, Ceri & Navathe Notation",
-    "Teorey Notation",
-    "Korth, Silberschatz & Sudarshan",
-    "UML Notation",
-  ]: ["Custom Crow's foot",
-    "Elmasri & Navathe Notation",
-    "Min-Max Notation",
-  
-  ];
+  const options =
+    process.env.REACT_APP_ERD_NOTATION_CHEN === "false"
+      ? [
+          "Custom Crow's foot",
+          "Elmasri & Navathe Notation",
+          "Min-Max Notation",
+          "Information Engineering Notation",
+          "Bachman Notation",
+          "Barker Notation",
+          "Batini, Ceri & Navathe Notation",
+          "Teorey Notation",
+          "Korth, Silberschatz & Sudarshan",
+          "UML Notation",
+        ]
+      : [
+          "Custom Crow's foot",
+          "Elmasri & Navathe Notation",
+          "Min-Max Notation",
+        ];
 
   const [selectedIndex, setSelectedIndex] = React.useState(
     options.indexOf(props.components.notation)
@@ -83,7 +85,7 @@ const ConvertTo = (props) => {
   };
 
   const changeDirection = (option) => {
-    switch (option){
+    switch (option) {
       case "Elmasri & Navathe Notation":
       case "Barker Notation":
       case "Korth, Silberschatz & Sudarshan":
@@ -139,10 +141,7 @@ const ConvertTo = (props) => {
   const moveAttributetoManySide = (option) => {
     if (
       props.components.relationships.find(
-        (relationship) => relationship.attributesNum > 0 /* && (
-    (relationship.connections[0].max==='one' && relationship.connections[1].max==='many' ) ||
-    (relationship.connections[0].max==='many' && relationship.connections[1].max==='one' ))
-     */
+        (relationship) => relationship.attributesNum > 0
       )
     )
       handleClickOpenDialogRelAt();
@@ -156,13 +155,17 @@ const ConvertTo = (props) => {
 
   const changeNotation = (option) => {
     props.components.extensions.map((extension) =>
-      (extension.type === "aggregation" || extension.type === "composition") && (option !== "Teorey Notation" && option !== "UML Notation")
+      (extension.type === "aggregation" || extension.type === "composition") &&
+      option !== "Teorey Notation" &&
+      option !== "UML Notation"
         ? props.modifyExtension({
             id: extension.id,
             prop: "type",
             value: "union",
           })
-        : props.modifyExtension({
+        : 
+        
+        props.modifyExtension({
             id: extension.id,
             prop: "type",
             value: extension.type,
@@ -170,7 +173,8 @@ const ConvertTo = (props) => {
     );
 
     props.components.extensions.map((extension) =>
-      extension.type === "union" && (option === "Teorey Notation" || option==='UML Notation')
+      extension.type === "union" &&
+      (option === "Teorey Notation" || option === "UML Notation")
         ? props.modifyExtension({
             id: extension.id,
             prop: "type",
@@ -191,30 +195,22 @@ const ConvertTo = (props) => {
         ) !== "undefined" &&
         (option === "Information Engineering Notation" ||
           option === "Bachman Notation" ||
-        
           option === "Barker Notation")
       ) {
-      
         handleClickOpenDialog();
       } else if (
         option === "Information Engineering Notation" ||
         option === "Bachman Notation" ||
-      
-        option === "Barker Notation" 
-      
+        option === "Barker Notation"
       ) {
         moveAttributetoManySide(option);
       } else {
-   
-        
         props.setNotation({
           notation: option,
         });
         changeDirection(option);
       }
     } else {
-    
-       
       props.setNotation({
         notation: option,
       });
@@ -281,10 +277,11 @@ const ConvertTo = (props) => {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               There is an attribute on a relationship. Tip: If it is a N-1 or
-              1-N relationship, move the attribute under the N side entity. If it is a 1-1 relationship,
-              move the attribute under the entity with mandatory participation (if exists, else in any entity) . If
-              it is a M-N relationship, convert the relationship to an
-              associative entity.
+              1-N relationship, move the attribute under the N side entity. If
+              it is a 1-1 relationship, move the attribute under the entity with
+              mandatory participation (if exists, else in any entity) . If it is
+              a M-N relationship, convert the relationship to an associative
+              entity.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -363,7 +360,7 @@ const mapDispatchToProps = {
   resetMeta,
   resetComponents,
   modifyExtension,
- // changeParent,
+  // changeParent,
   setComponents,
   setParticipationDirection,
   setCardinalityDirection,

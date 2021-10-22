@@ -20,7 +20,7 @@ import { getRandomInt } from "../../global/utils";
 import {
   nameSize,
   spawnRadius,
-  stageHeight,
+  
   dragBoundOffset,
 } from "../../global/constants";
 
@@ -33,21 +33,6 @@ class RelationshipProperties extends React.Component {
       this.findRelationshipIndex
     );
 
-  /*  if (this.props.components.relationships[relationshipIndex].y !== 37) {
-      console.log(this.props.components.relationships[relationshipIndex].y);
-      //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-150 + 'px';}
-      document.getElementsByClassName("sidepanel")[0].style.top =
-        stageHeight / 7 +
-        document.getElementsByClassName("sidepanel")[0].style.height -
-        dragBoundOffset +
-        "px";
-    } else {
-      //  document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y +'px';
-      document.getElementsByClassName("sidepanel")[0].style.top =
-        document.getElementsByClassName("sidepanel")[0].style.height / 2 +
-        dragBoundOffset +
-        "px";
-    }*/
    
     if (this.props.components.relationships[relationshipIndex].y===22){
       
