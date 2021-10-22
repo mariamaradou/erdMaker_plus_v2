@@ -65,7 +65,7 @@ class RelationshipProperties extends React.Component {
  
   componentWillUnmount() {
     document.getElementsByClassName("stage")[0].focus();
-    console.log("unmounted");
+ 
     document.getElementsByClassName("react-contextmenu")[0].style.display =
       "block";
   }

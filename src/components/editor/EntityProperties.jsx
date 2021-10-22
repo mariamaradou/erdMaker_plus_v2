@@ -42,8 +42,7 @@ class EntityProperties extends React.Component {
   
  componentWillUnmount(){ 
   document.getElementsByClassName('stage')[0].focus();
- 
- console.log('unmount')
+
   document.getElementsByClassName('react-contextmenu')[0].style.display='block'
 }
   
@@ -53,7 +52,7 @@ class EntityProperties extends React.Component {
   findEntityIndex = (entity) => entity.id === this.props.selector.current.id;
 
   nameValueChange = (e) =>{
-  console.log(this.props.selector.current)
+ 
     this.props.setNameEntity({
       id: this.props.selector.current.id,
       parentId:this.props.selector.current.parentId,
@@ -70,9 +69,7 @@ class EntityProperties extends React.Component {
     ///////////////// set min value to one if weak //////////////
    var relationshipNow= this.props.components.relationships.find(x=> x.connections.find(y=> y.connectId===this.props.selector.current.id))
    if(relationshipNow) {
-  console.log(    relationshipNow.connections[0].connectId===this.props.selector.current.id &&
-    (e.target.value === "weak" &&
-    relationshipNow.type.weak))
+ 
    if (
       relationshipNow.connections.length === 2
     ) {

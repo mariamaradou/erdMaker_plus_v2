@@ -61,6 +61,9 @@ const NoDiagramFound = () => {
       <div className="container">
         <h1>This link doesn't exist or has been deleted.</h1>
       </div>
+      <Link to="/erdmaker/designer">
+          <button className='home-button'>Back</button>
+        </Link>
     </div>
   );
 };

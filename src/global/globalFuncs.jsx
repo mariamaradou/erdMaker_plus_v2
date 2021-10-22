@@ -73,7 +73,7 @@ export const getDiagramTemp = (params_id,cancelToken) => {
         store.dispatch(setMeta(data.meta));
         store.dispatch(repositionComponents());
         store.dispatch(ActionCreators.clearHistory())
-        console.log(res.data)
+      
       } else {
         store.dispatch(resetActiveDiagram());
         window.location.replace("/erdmaker/nodiagramfound");

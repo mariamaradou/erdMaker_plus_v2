@@ -125,27 +125,4 @@ export function weakToDiamond(entities, relationships, k, notation) {
     return false;
   }
 }
-/*export function setMandatory(relationships,entities){
-  
 
-  if(relationships.connections.length===2){
-   
-    if(relationships.connections[0]){
-      if(entities.find(x=>x.id===relationships.connections[1].connectId).type==='weak' && relationships.type.weak){
-  
-        console.log( "one")
-      }
-      
-    }
-     if(relationships.connections[1]){
-      if(entities.find(x=>x.id===relationships.connections[0].connectId).type==='weak' && relationships.type.weak){
-       console.log('one')
-      }
-    
-    
-    }
-   
-    
-  
-  }
-}*/

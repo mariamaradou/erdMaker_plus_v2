@@ -16,7 +16,7 @@ const LabelProperties = (props) => {
   
     let labelIndex = props.components.labels.findIndex((label) => label.id === props.selector.current.id);
     if (props.components.labels[labelIndex].y===22){
-      console.log(props.components.labels[labelIndex].y)
+     
      document.getElementsByClassName('sidepanel')[0].style.top= '22px';}
     
  

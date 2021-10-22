@@ -24,6 +24,7 @@ import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
 import AddButton from "./addButton";
+import { params_id } from "./Editor"
 
 
 class Tools extends React.Component {
@@ -63,12 +64,14 @@ class Tools extends React.Component {
 
   saveDiagram = () => {
     this.setState({ saveStatus: { text: "Saving...", color: "#0086a8" } });
+ 
     savediagram(this.cancelToken)
       .then((res) => {
         if (res && (res.status === 200 || res.status === 201)) {
+          
           if (!this.props.general.activeDiagramId ){
             this.props.setActiveDiagram(res.data.id);
-           // console.log(params_id)
+           
            window.history.pushState("","","/erdmaker/designer/" + res.data.random_id);
           }
          

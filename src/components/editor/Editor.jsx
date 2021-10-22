@@ -67,12 +67,14 @@ class Editor extends React.Component {
       if (this.props.user.isLogged && this.props.general.activeDiagramId) {
         
         getDiagram(this.props.general.activeDiagramId, this.cancelToken);
+       
         sharediagramtempuser(
           this.props.general.activeDiagramId,
           this.cancelToken
         )
           .then((res) => {
             if (res) {
+             
               window.history.pushState(
                 "",
                 "",

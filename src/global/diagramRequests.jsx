@@ -119,6 +119,7 @@ export const savediagram = (cancelToken) => {
         data: {
           components: store.getState().components.present,
           meta: store.getState().meta,
+       
         },
       },
       {

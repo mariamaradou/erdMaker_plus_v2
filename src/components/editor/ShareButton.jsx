@@ -135,7 +135,7 @@ const handleSubmit=(e)=>{
           
           window.history.pushState("", "", "/erdmaker/designer/"+ res.data.random_id);
 
-          console.log('saved to db temporary')
+       
         }
       })
       .catch(() => {});

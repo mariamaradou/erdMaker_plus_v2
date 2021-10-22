@@ -65,9 +65,7 @@ class Surface extends React.Component {
     this.stage.focus();
   };
 
-  /*componentDidUpdate =() =>{
-    console.log('ok')
-  }*/
+ 
 
   componentWillUnmount = () => {
     this.props.deselect();
@@ -1457,7 +1455,7 @@ class Surface extends React.Component {
   };
 
   stageClicked = (e) => {
-    console.log(this.props.components);
+    //console.log(this.props.components);
 
     if (e.target === e.target.getStage()) {
       document.getElementsByClassName("stage")[0].focus();

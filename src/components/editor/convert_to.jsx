@@ -194,7 +194,7 @@ const ConvertTo = (props) => {
         
           option === "Barker Notation")
       ) {
-        console.log("this notation doesnt accept n ary relationships. ");
+      
         handleClickOpenDialog();
       } else if (
         option === "Information Engineering Notation" ||
