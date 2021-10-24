@@ -136,7 +136,7 @@ class ForgotPassword extends React.Component {
               <div className="form-group">
                 <ReCAPTCHA
                   ref={this.recaptchaRef}
-                  sitekey="6LfnzsoUAAAAAEIhX6yNXpGNXvQjAFlyYh54pJPn"
+                  sitekey="6LeoE7UaAAAAAIJwbijjjitfPp1tbrpDaiqlqOn5"
                   style={{
                     transform: "scale(0.75)",
                     WebkitTransform: "scale(0.75)",
