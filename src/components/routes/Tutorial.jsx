@@ -11,7 +11,7 @@ import weakRel from "../../img/weakRel.gif"
 import addExtension from "../../img/addExtension.gif"
 import exportForms from "../../img/exportForms.jpg"
 import sendDiagram from "../../img/send_Diagram.gif"
-//allagi
+//allagiς
 
 
 const Tutorial = () => {
