@@ -9,7 +9,8 @@ import ternaryTeorey from "../../img/ternary_rel_teorey.jpg"
 import constraintsButton from "../../img/constraintsButton.jpg"
 import weakRel from "../../img/weakRel.gif"
 import addExtension from "../../img/addExtension.gif"
-import exportForms from "../../img/exportForms.jpg";
+import exportForms from "../../img/exportForms.jpg"
+import sendDiagram from "../../img/send_Diagram.gif"
 
 
 
@@ -61,6 +62,9 @@ const Tutorial = () => {
            <h4>Add an overlap extension (<i>Korth, Silberschatz &amp; Sudarshan notation</i>)</h4>
     
     <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
+    <h4>You can share your diagrams through links</h4>
+    <p><i>Always open a received link of a diagram on a new clear canvas!</i></p>
+   <img alt="sendDiagram" src={sendDiagram} width={'100%'}  style={{paddingRight:'20px'}}></img>
     <h4>You can export compatible files for BurntSushi/erd and Gleek</h4>
     <p> Only binary/non-attribute relationships are exported</p>
     <img alt="exportForms" src={exportForms} width={'45%'}></img>
