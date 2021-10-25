@@ -146,7 +146,12 @@ componentDidMount() {
               Select Type
             </option>
             <option value="specialize">Specialize</option>
-            <option style={{display:(this.props.components.notation==='Teorey Notation' || this.props.components.notation==='Korth, Silberschatz & Sudarshan' || this.props.components.notation==='UML Notation')?'none':'block'}} value="union">Union</option>
+            <option style={{display:(this.props.components.notation==='Teorey Notation' || 
+            this.props.components.notation==='Korth, Silberschatz & Sudarshan' || 
+            this.props.components.notation==='UML Notation' ||
+            this.props.components.notation==='Batini, Ceri & Navathe Notation' ||
+             this.props.components.notation==='Information Engineering Notation')
+             ?'none':'block'}} value="union">Union</option>
             <option style={{display:(this.props.components.notation!=='Teorey Notation' && this.props.components.notation!=='UML Notation')?'none':'block'}} value='aggregation'>Aggregation</option>
             <option style={{display: this.props.components.notation!=='UML Notation'?'none':'block'}} value='composition'>Composition</option>
           </select>

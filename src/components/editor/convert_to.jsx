@@ -186,6 +186,21 @@ const ConvertTo = (props) => {
             value: extension.type,
           })
     );
+    
+    props.components.extensions.map((extension) =>
+      extension.type === "union" &&
+      (option === "Korth, Silberschatz & Sudarshan" || option === "Batini, Ceri & Navathe Notation" || option === "Information Engineering Notation" )
+        ? props.modifyExtension({
+          id: extension.id,
+          prop: "type",
+          value: "specialize",
+        })
+        : props.modifyExtension({
+            id: extension.id,
+            prop: "type",
+            value: extension.type,
+          })
+    );
 
     // elegxos gia to an pairnei n ary relationship to kathe notation
     if (props.components.relationships.length !== 0) {
