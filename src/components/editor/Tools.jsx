@@ -1,5 +1,5 @@
 import React from "react";
-import App from './helpModal'
+import App from "./helpModal";
 import { connect } from "react-redux";
 import {
   addEntity,
@@ -24,8 +24,6 @@ import axios from "axios";
 import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
 import AddButton from "./addButton";
-
-
 
 class Tools extends React.Component {
   state = {
@@ -64,17 +62,29 @@ class Tools extends React.Component {
 
   saveDiagram = () => {
     this.setState({ saveStatus: { text: "Saving...", color: "#0086a8" } });
- 
-    savediagram(this.cancelToken)
+   /* var params;               
+    var myRegexp = /designer\/(.*)/;                      //take params_id from search bar 
+    var match = myRegexp.exec(window.location.href);
+    if (match) {
+      params = match[1];
+    } else {
+      params = this.props.params_id;
+    }*/
+    savediagram(this.cancelToken/*,params*/)
       .then((res) => {
         if (res && (res.status === 200 || res.status === 201)) {
-          
-          if (!this.props.general.activeDiagramId ){
+          if (res.data.random_id)
+            window.history.pushState(
+              "",
+              "",
+              "/erdmaker/designer/" + res.data.random_id
+            );
+
+          if (!this.props.general.activeDiagramId) {
             this.props.setActiveDiagram(res.data.id);
-           
-           window.history.pushState("","","/erdmaker/designer/" + res.data.random_id);
+
+            //  window.history.pushState("","","/erdmaker/designer/" + res.data.random_id);
           }
-         
 
           var saveTime = new Date();
           var hours = saveTime.getHours();
@@ -204,13 +214,22 @@ class Tools extends React.Component {
         {saveGroup}
         <ul className={toolsClasses}>
           {saveButton}
-          <App/>
+          <App />
           <Link to="/erdmaker/help" target="_blank">
-            <button style={this.props.meta.modal?{backgroundColor:'#FFFF99', opacity:1}:null}className=" tools-button-blue">Help</button>
+            <button
+              style={
+                this.props.meta.modal
+                  ? { backgroundColor: "#FFFF99", opacity: 1 }
+                  : null
+              }
+              className=" tools-button-blue"
+            >
+              Help
+            </button>
           </Link>
           <ConstraintsButton />
           <UndoRedo />
-          <AddButton/>
+          <AddButton />
           <ShareButton />
 
           <ConvertToMenuListComposition />

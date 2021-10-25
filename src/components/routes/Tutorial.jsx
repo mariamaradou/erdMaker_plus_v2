@@ -63,7 +63,7 @@ const Tutorial = () => {
     
     <img alt="extensionOverlap" src={extensionOverlap} width={'75%'}></img>
     <h4>You can share your diagrams through links</h4>
-    <p><i>Always open a received link of a diagram on a new clear canvas!</i></p>
+    
    <img alt="sendDiagram" src={sendDiagram} width={'100%'}  style={{paddingRight:'20px'}}></img>
     <h4>You can export compatible files for BurntSushi/erd and Gleek</h4>
     <p> Only binary/non-attribute relationships are exported</p>

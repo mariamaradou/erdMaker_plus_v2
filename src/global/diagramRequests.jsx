@@ -110,7 +110,7 @@ export const sharediagramtempuser = (diagramId, cancelToken) => {
 
 
 
-export const savediagram = (cancelToken) => {
+export const savediagram = (cancelToken/*,paramsId*/) => {
   return axios
     .post(
       serverHost + "/api/diagram/savediagram",
@@ -119,6 +119,7 @@ export const savediagram = (cancelToken) => {
         data: {
           components: store.getState().components.present,
           meta: store.getState().meta,
+       //   params_id:paramsId
        
         },
       },

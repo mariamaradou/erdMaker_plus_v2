@@ -90,7 +90,7 @@ class Editor extends React.Component {
     
     else {
       if(this.props.user.isLogged){
-      if(this.props.general.activeDiagramId){
+     if(this.props.general.activeDiagramId){
         
         sharediagramtempuser(
           this.props.general.activeDiagramId,
@@ -98,11 +98,7 @@ class Editor extends React.Component {
         )
           .then((res) => {
             if (res && params_id!==res.data.random_id) {
-              window.history.pushState(
-                "",
-                "",
-                "/erdmaker/designer/" + res.data.random_id
-              );
+              this.props.resetActiveDiagram();
             }
           })
           .catch(() => {});
@@ -115,7 +111,6 @@ class Editor extends React.Component {
 
   componentDidUpdate() {
    
-    
 
     this.props.setHelpModal({ modal: false });
   }
@@ -173,9 +168,10 @@ class Editor extends React.Component {
         onClick={() => this.setState({ showSaveWarning: false })}
         onKeyDown={(e) => this.clicked(e)}
         onKeyUp={(e) => this.unclicked(e)}
+       
       >
-        <Tools />
-
+        <Tools params_id={this.props.match.params.id} />
+   
         {this.props.user.isLogged && (
           <div
             className="save-warning"
