@@ -23,7 +23,6 @@ import { ActionCreators } from "redux-undo";
 import { sharediagramtempuser } from "../../global/diagramRequests";
 import { store } from "../../index.js";
 
-
 export var params_id;
 var keys = [];
 class Editor extends React.Component {
@@ -42,11 +41,8 @@ class Editor extends React.Component {
     var compatibleDiagram = makeCompatible(storedDiagram);
 
     this.props.setMeta(compatibleDiagram.meta);
-    // this.props.setActiveDiagram(this.props.user.diagrams[this.props.index].id);
     this.props.setComponents(compatibleDiagram.components);
   }
-
-  
 
   componentDidMount = () => {
     document.title = "ERD Maker - Designer";
@@ -63,18 +59,15 @@ class Editor extends React.Component {
     params_id = this.props.match.params.id;
 
     if (typeof this.props.match.params.id === "undefined") {
-      
       if (this.props.user.isLogged && this.props.general.activeDiagramId) {
-        
         getDiagram(this.props.general.activeDiagramId, this.cancelToken);
-       
+
         sharediagramtempuser(
           this.props.general.activeDiagramId,
           this.cancelToken
         )
           .then((res) => {
             if (res) {
-             
               window.history.pushState(
                 "",
                 "",
@@ -83,35 +76,29 @@ class Editor extends React.Component {
             }
           })
           .catch(() => {});
-       
       }
-      
-    } 
-    
-    else {
-      if(this.props.user.isLogged){
-     if(this.props.general.activeDiagramId){
-        
-        sharediagramtempuser(
-          this.props.general.activeDiagramId,
-          this.cancelToken
-        )
-          .then((res) => {
-            if (res && params_id!==res.data.random_id) {
-              this.props.resetActiveDiagram();
-            }
-          })
-          .catch(() => {});
+    } else {
+      if (this.props.user.isLogged) {
+        if (this.props.general.activeDiagramId) {
+          sharediagramtempuser(
+            this.props.general.activeDiagramId,
+            this.cancelToken
+          )
+            .then((res) => {
+              if (res && params_id !== res.data.random_id) {
+                this.props.resetActiveDiagram();
+              }
+            })
+            .catch(() => {});
+        }
+        getDiagramTemp(this.props.match.params.id, this.cancelToken);
+      } else {
+        window.location.replace("/erdmaker/loginfirst");
       }
-      getDiagramTemp(this.props.match.params.id, this.cancelToken);
     }
-    else{ window.location.replace("/erdmaker/loginfirst");}
-  }
   };
 
   componentDidUpdate() {
-   
-
     this.props.setHelpModal({ modal: false });
   }
   componentWillUnmount() {
@@ -168,10 +155,9 @@ class Editor extends React.Component {
         onClick={() => this.setState({ showSaveWarning: false })}
         onKeyDown={(e) => this.clicked(e)}
         onKeyUp={(e) => this.unclicked(e)}
-       
       >
-        <Tools  />
-   
+        <Tools />
+
         {this.props.user.isLogged && (
           <div
             className="save-warning"
@@ -183,17 +169,16 @@ class Editor extends React.Component {
             editor.
           </div>
         )}
-         {!this.props.user.isLogged && this.props.match.params.id && (
+        {!this.props.user.isLogged && this.props.match.params.id && (
           <div
             className="save-warning"
             style={{
               visibility: this.state.showSaveWarning ? "visible" : "hidden",
             }}
           >
-          Any change you make won't be saved unless you are a logged in user.
+            Any change you make won't be saved unless you are a logged in user.
           </div>
         )}
-
 
         <Surface />
       </div>
