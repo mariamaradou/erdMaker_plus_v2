@@ -251,6 +251,7 @@ const ImportExportMenuListComposition = (props) => {
           }
         }
       }
+      var n=0;
       for (var r = 0; r < relationships.length; r += 8) {
 
         state.push(
@@ -261,15 +262,17 @@ const ImportExportMenuListComposition = (props) => {
             relationships[r + 2] +
           
             relationships[r + 3] +
-            "relationship_name"+[r] +
+            "relationship_name"+n +
             relationships[r+5]+
             relationships[r+6]+
             relationships[r+7]+
             relationships[r+4]
         );
 
-        state.push("relationship_name"+[r]+":diamond")
+        state.push("relationship_name"+n+":diamond")
+        n=n+1;
       }
+      
      
      
      /* const components = {
