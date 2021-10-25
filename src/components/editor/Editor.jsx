@@ -170,7 +170,7 @@ class Editor extends React.Component {
         onKeyUp={(e) => this.unclicked(e)}
        
       >
-        <Tools params_id={this.props.match.params.id} />
+        <Tools  />
    
         {this.props.user.isLogged && (
           <div

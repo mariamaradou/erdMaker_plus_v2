@@ -244,6 +244,7 @@ const ImportExportMenuListComposition = (props) => {
                   props.components.relationships[i].connections[j].connectId
               ).name
             );
+           
             relationships.push("-");
             relationships.push(cardinality);
             relationships.push("-");
