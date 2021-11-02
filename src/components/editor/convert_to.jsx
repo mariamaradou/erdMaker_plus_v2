@@ -268,7 +268,7 @@ const ConvertTo = (props) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              A relationship in your ERD has up to 2 connections. Tip: Convert
+              A relationship in your ERD has up to 2 connections. <b>Tip</b>: Convert
               the n-ary relationship to an associative entity .
             </DialogContentText>
           </DialogContent>
@@ -291,11 +291,11 @@ const ConvertTo = (props) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              There is an attribute on a relationship. Tip: If it is a N-1 or
+              There is an attribute on a relationship. <b>Tip:</b> If it is a N-1 or
               1-N relationship, move the attribute under the N side entity. If
               it is a 1-1 relationship, move the attribute under the entity with
-              mandatory participation (if exists, else in any entity) . If it is
-              a M-N relationship, convert the relationship to an associative
+              mandatory participation - if exists - else in any entity . If it is
+              a M-N relationship, convert the relationship to an associative or weak
               entity.
             </DialogContentText>
           </DialogContent>

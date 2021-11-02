@@ -71,7 +71,7 @@ const componentsReducer = (state = initialState, action) => {
           {
             id: state.count + 1,
             name: "<New>",
-            nameUML: action.payload.nameUML, //for UML Notation
+           // nameUML: action.payload.nameUML, //for UML Notation
             parentId: action.payload.parentId, //for UML Notation
             x: action.payload.x,
             y: action.payload.y,

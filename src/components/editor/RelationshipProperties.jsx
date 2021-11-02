@@ -144,7 +144,7 @@ class RelationshipProperties extends React.Component {
         x: this.props.components.relationships[relationshipIndex].x + xOffset,
         y: this.props.components.relationships[relationshipIndex].y + yOffset,
         parentId: this.props.selector.current.id,
-        nameUML: this.props.components.relationships[relationshipIndex].name,
+     //   nameUML: this.props.components.relationships[relationshipIndex].name,
       });
       this.props.setNameEntity({
         id: this.props.components.count + 1,

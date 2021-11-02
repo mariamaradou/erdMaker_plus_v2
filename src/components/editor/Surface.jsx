@@ -210,7 +210,7 @@ class Surface extends React.Component {
           key={entity.id}
           attributesNum={entity.attributesNum}
           id={entity.id}
-          nameUML={entity.nameUML}
+        //  nameUML={entity.nameUML}
           parentId={entity.parentId}
           name={entity.name}
           type={entity.type}
@@ -1455,7 +1455,7 @@ class Surface extends React.Component {
   };
 
   stageClicked = (e) => {
-    //console.log(this.props.components);
+   
 
     if (e.target === e.target.getStage()) {
       document.getElementsByClassName("stage")[0].focus();
