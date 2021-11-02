@@ -11,6 +11,8 @@ import weakRel from "../../img/weakRel.gif"
 import addExtension from "../../img/addExtension.gif"
 import exportForms from "../../img/exportForms.jpg"
 import sendDiagram from "../../img/send_Diagram.gif"
+import relationshipAttribute from "../../img/relationshipAttribute.jpg"
+import relationshiptoEntity from "../../img/relationshipToWeak.jpg"
 
 
 
@@ -128,10 +130,10 @@ const Tutorial = () => {
           If it is a N-1 or 1-N relationship, move the attribute of the relationship under the N side entity. 
           If it is a 1-1 relationship, move the attribute under the entity with mandatory participation - if exists - else in any entity . 
           If it is a M-N relationship, convert the relationship to an associative or weak entity. </p>
-          <p><i>fig 4. Ternary relationship</i></p>
-          <img alt='ternaryRelationship'  width={'70%'}></img>
-          <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
-          <img alt='ternaryToBinary'  width={'70%'}></img>
+          <p><i>fig 6. Attribute on relationship</i></p>
+          <img alt='relationshipAttribute'  src={relationshipAttribute} width={'90%'}></img>
+          <p><i>fig 7. The relationship converted to weak entity with its attribute</i></p>
+          <img alt='relationshiptoWeakEntity'  src={relationshiptoEntity} width={'100%'}></img>
         </div>
       </div>
       </div>
