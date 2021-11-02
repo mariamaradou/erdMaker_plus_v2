@@ -269,7 +269,7 @@ const ConvertTo = (props) => {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               A relationship in your ERD has up to 2 connections. <b>Tip</b>: Convert
-              the n-ary relationship to an associative entity .
+              the n-ary relationship to an associative or weak entity .
             </DialogContentText>
           </DialogContent>
           <DialogActions>
