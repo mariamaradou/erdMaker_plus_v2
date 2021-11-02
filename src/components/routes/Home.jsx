@@ -31,6 +31,7 @@ const Description = (props) => (
       label="New Diagram"
       useSpan={true}
       onClick={()=>{props.resetActiveDiagram(); 
+       
         if(window.innerWidth>=1024){
         props.setHelpModal({modal:true})} }}
       pathname="/erdmaker/designer"

@@ -96,7 +96,7 @@ const Tutorial = () => {
         <img alt="Look Here" src={LookHere} width={'85%'}></img>
         <p><i>* We are showing only Cardinalities in our examples but the same goes for Participations.</i> </p>
         <h3 >Ternary relationships</h3>
-        <p style={{textAlign:'left'}}>🚩 Look Here &amp; Look Across notations
+        <p style={{textAlign: 'justify', textJustify: 'inter-word'}}>🚩 Look Here &amp; Look Across notations
        are  interpreted differently in ternary relationships in comparison to binary relationships.
        Ternary relationship in figure 3 is interpreted as: </p>
        <p>(i) In <i><b>Look Across</b></i> notation:</p>
@@ -114,15 +114,24 @@ const Tutorial = () => {
        <img src={ternaryTeorey} alt='ternaryteorey' width='70%'></img>
 
         <h4>Τernary relationship to Binary  </h4>
-        <p>🚩 Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
-          If you have a ternary relationship in Crow's foot, you have to convert it into binary in order to proceed 
-          to one of the three notations previously mentioned.</p>
+        <p style={{textAlign: 'justify', textJustify: 'inter-word'}}>🚩 Information Engineering, Bachman &amp; Barker notations allow only binary relationships. 
+          If you have a ternary relationship in Crow's foot, you have to convert it  into an associative or weak entity 
+          in order to proceed  to one of the three notations previously mentioned.</p>
           <p><i>fig 4. Ternary relationship</i></p>
           <img alt='ternaryRelationship' src={ternaryRel} width={'70%'}></img>
           <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
           <img alt='ternaryToBinary' src={ternaryToBinary} width={'70%'}></img>
         
-        
+          <h4>Attribute in relationship  </h4>
+        <p style={{textAlign: 'justify', textJustify: 'inter-word'}}>🚩 Information Engineering, Bachman &amp; Barker notations don't allow attributes in relationships. 
+        In order to proceed to one of the three notations previously mentioned, you have to follow the instructions below:
+          If it is a N-1 or 1-N relationship, move the attribute of the relationship under the N side entity. 
+          If it is a 1-1 relationship, move the attribute under the entity with mandatory participation - if exists - else in any entity . 
+          If it is a M-N relationship, convert the relationship to an associative or weak entity. </p>
+          <p><i>fig 4. Ternary relationship</i></p>
+          <img alt='ternaryRelationship'  width={'70%'}></img>
+          <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
+          <img alt='ternaryToBinary'  width={'70%'}></img>
         </div>
       </div>
       </div>

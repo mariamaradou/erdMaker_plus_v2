@@ -40,7 +40,7 @@ const DialogActions = withStyles((theme) => ({
   }
 }))(MuiDialogActions);
 
-function App(props) {
+function HelpModal(props) {
   const [open, setOpen] = React.useState(props.meta.modal);
   const classes = useStyles();
   
@@ -84,4 +84,4 @@ const mapStateToProps = (state) => ({
     select
   };
   
-  export default connect(mapStateToProps, mapDispatchToProps)(App);
+  export default connect(mapStateToProps, mapDispatchToProps)(HelpModal);

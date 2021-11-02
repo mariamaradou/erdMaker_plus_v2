@@ -1,5 +1,5 @@
 import React from "react";
-import App from "./helpModal";
+import HelpModal from "./helpModal";
 import { connect } from "react-redux";
 import {
   addEntity,
@@ -214,7 +214,7 @@ class Tools extends React.Component {
         {saveGroup}
         <ul className={toolsClasses}>
           {saveButton}
-          <App />
+          <HelpModal />
           <Link to="/erdmaker/help" target="_blank">
             <button
               style={
