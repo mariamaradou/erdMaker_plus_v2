@@ -124,7 +124,7 @@ const Tutorial = () => {
           <p><i>fig 5. Three Binary relationships instead of one Ternary with SUPPLY as weak entity</i></p>
           <img alt='ternaryToBinary' src={ternaryToBinary} width={'70%'}></img>
         
-          <h4>Attribute in relationship  </h4>
+          <h4>Attribute on relationship  </h4>
         <p style={{textAlign: 'justify', textJustify: 'inter-word'}}>🚩 Information Engineering, Bachman &amp; Barker notations don't allow attributes in relationships. 
         In order to proceed to one of the three notations previously mentioned, you have to follow the instructions below:
           If it is a N-1 or 1-N relationship, move the attribute of the relationship under the N side entity. 
