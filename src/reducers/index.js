@@ -45,6 +45,7 @@ import {
   RESET_COMPONENTS,
   SET_NOTATION,
   UPDATE_ATTRIBUTE_CROWS,
+  HIDE_ATTRIBUTES,
 } from "../actions/actions";
 
 const finalReducer = combineReducers({
@@ -58,6 +59,7 @@ const finalReducer = combineReducers({
     filter: function filterActions(action) {
       return (
         action.type === UPDATE_INITIAL_POSITION_ENTITY ||
+        action.type === HIDE_ATTRIBUTES ||
         action.type === UPDATE_ATTRIBUTE_COMPOSITE ||
         action.type === ADD_ENTITY ||
         action.type === SET_NAME_ENTITY ||
