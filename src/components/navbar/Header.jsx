@@ -9,7 +9,7 @@ const Header = () => {
     { label: "About", link: "/erdmaker/about", type: "int" },
     {
       label: "Github",
-      link: "https://github.com/erdMaker/erdMaker",
+      link: "https://github.com/erdMaker",
       type: "ext",
     },
     {
