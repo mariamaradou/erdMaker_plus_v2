@@ -86,7 +86,6 @@ const About = () => {
     <div className="about">
       <div className="container">
         <h2>About ERD Maker</h2>
-        <p>Version: {process.env.REACT_APP_VERSION}</p>
         {paragraph1}
         {paragraph2}
         <br/>
