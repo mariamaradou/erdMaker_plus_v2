@@ -31,6 +31,7 @@ const App = () => {
                
                 <Route path='/erdmaker/nodiagramfound'  component= {NoDiagramFound}/>
                 <Route path='/erdmaker/loginfirst'  component= {LogInFirst}/>
+                <Route path='/erdmaker/whomadethis'  component= {WhoMadeThis}/>
                 <Route component={NoMatchPage} />
               </Switch>
               
@@ -78,6 +79,26 @@ const LogInFirst = () => {
       <Link to="/erdmaker/">
           <button className='home-button'>Home</button>
         </Link>
+    </div>
+  );
+};
+
+const WhoMadeThis = () => {
+  document.title = "Who made this";
+  return (
+    <div className="general-centered-container">
+      <div className="container">
+      <h3>mariamaradou</h3>
+         <a className="nav__link" href={'https://github.com/mariamaradou'} target="_blank" rel="noopener noreferrer">
+         https://github.com/mariamaradou
+        </a>
+        <br/>
+        <h3> raynesz </h3>
+          <a className="nav__link" href={'https://github.com/raynesz'} target="_blank" rel="noopener noreferrer">
+        https://github.com/raynesz
+        </a>
+      </div>
+      
     </div>
   );
 };

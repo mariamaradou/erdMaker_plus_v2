@@ -1,21 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   const footerLinks =  [
-    { label: "Terms", link: "/erdmaker/terms", type: "int" },
-    { label: "Privacy", link: "/erdmaker/privacy", type: "int" },
+    { label: "Who made this", link: "/erdmaker/terms", type: "int" },
+   
   ];
   
   // External links are rendered as <a> and internal as <Link>
   let linksMarkup = footerLinks.map((link, index) => {
     let linkMarkup =
-      link.type === "int" ? (
-        <Link className="nav__link" to={link.link}>
-          {link.label}
-        </Link>
-      ) : (
-        <a className="nav__link" href={link.link} target="_blank" rel="noopener noreferrer">
+     (
+        <a className="nav__link" href={'/erdmaker/whomadethis'}  rel="noopener noreferrer">
           {link.label}
         </a>
       );
