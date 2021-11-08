@@ -86,7 +86,7 @@ const LogInFirst = () => {
 const WhoMadeThis = () => {
   document.title = "Who made this";
   return (
-    <div className="general-centered-container">
+    <div className="general-centered-container" style={{width: '400px'}}>
       <div className="container">
       <h3>mariamaradou</h3>
          <a className="nav__link" href={'https://github.com/mariamaradou'} target="_blank" rel="noopener noreferrer">
