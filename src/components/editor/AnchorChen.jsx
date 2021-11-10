@@ -7,7 +7,7 @@ import { Group, Line, Text, Circle } from "react-konva";
 
 const Anchor = (props) => {
 
-  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  ) && props.notation==='Elmasri & Navathe Notation' ? ( //cardinality one
+  var mandatory = (props.minimum === "one" || props.minimum === "1" || props.minimum >1  ) && props.notation==='Elmasri & Navathe' ? ( //cardinality one
    <Group>
     <Line
     stroke={"black"}
@@ -70,7 +70,7 @@ const Anchor = (props) => {
      
       <Line
         stroke={"black"}
-        strokeWidth={props.notation==='Elmasri & Navathe Notation' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?5: 0.5}
+        strokeWidth={props.notation==='Elmasri & Navathe' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?5: 0.5}
         x={props.x} 
         y={props.y}
         rotation={props.angle}
@@ -84,7 +84,7 @@ const Anchor = (props) => {
       <Line
         stroke={"white"}
        
-        strokeWidth={props.notation==='Elmasri & Navathe Notation' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?4: 0}
+        strokeWidth={props.notation==='Elmasri & Navathe' && (props.minimum === "one" || props.minimum === "1" || props.minimum >1)?4: 0}
         x={props.x} 
         y={props.y}
         rotation={props.angle}

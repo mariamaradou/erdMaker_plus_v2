@@ -104,7 +104,7 @@ import {
           (attribute) => attribute.id === props.selector.current.id
         );
         if (typeof props.components.attributes[attributeIndex] !== 'undefined') {
-          if((props.components.notation!=="Information Engineering Notation" &&
+          if((props.components.notation!=="Information Engineering" &&
           props.components.notation!=="UML Notation" &&
           props.components.notation!=="Korth, Silberschatz & Sudarshan" &&
           props.components.notation!=='Barker Notation' &&

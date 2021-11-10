@@ -88,8 +88,8 @@ class Relationship extends React.Component {
         closed
       //  visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
         opacity={                                                      //kryvw ton rompo tou relationship
-          this.props.components.notation==='Batini, Ceri & Navathe Notation' ||
-          this.props.components.notation === "Information Engineering Notation" ||
+          this.props.components.notation==='Batini, Ceri & Navathe' ||
+          this.props.components.notation === "Information Engineering" ||
           this.props.components.notation === "Bachman Notation" ||
           this.props.components.notation === "Barker Notation" || 
           (this.props.components.notation === "UML Notation" )
@@ -203,7 +203,7 @@ class Relationship extends React.Component {
          // visible={ (this.props.components.notation === "UML Notation" &&  this.props.attributesNum>0)? false: true}
           visible={                                                      //kryvw ton rompo tou relationship
          
-            this.props.components.notation === "Information Engineering Notation" ||
+            this.props.components.notation === "Information Engineering" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation" || 
             (this.props.components.notation === "UML Notation" &&  this.props.connections.length<=2)
@@ -263,7 +263,7 @@ class Relationship extends React.Component {
           offsetX={relationshipTextWidth / 2}
           offsetY={
         
-            this.props.components.notation === "Information Engineering Notation" ||
+            this.props.components.notation === "Information Engineering" ||
             this.props.components.notation === "Bachman Notation" ||
             this.props.components.notation === "Barker Notation" ||
             this.props.components.notation === "UML Notation"
@@ -275,7 +275,7 @@ class Relationship extends React.Component {
             
             if (
               this._isMounted &&
-              (this.props.components.notation === "Information Engineering Notation" ||
+              (this.props.components.notation === "Information Engineering" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
@@ -288,7 +288,7 @@ class Relationship extends React.Component {
           onMouseOut={() => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Information Engineering Notation" ||
+              (this.props.components.notation === "Information Engineering" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
@@ -301,7 +301,7 @@ class Relationship extends React.Component {
           onMouseDown={(e) => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Information Engineering Notation" ||
+              (this.props.components.notation === "Information Engineering" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
@@ -314,7 +314,7 @@ class Relationship extends React.Component {
           onMouseUp={() => {
             if (
               this._isMounted &&
-              (this.props.components.notation === "Information Engineering Notation" ||
+              (this.props.components.notation === "Information Engineering" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation")
             )
@@ -326,7 +326,7 @@ class Relationship extends React.Component {
           }}
         />
         <Circle
-      visible={this.props.components.notation === "Information Engineering Notation" ||
+      visible={this.props.components.notation === "Information Engineering" ||
       this.props.components.notation === "Bachman Notation" ||
       this.props.components.notation === "Barker Notation" ||  this.props.components.notation === "UML Notation" ? true: false}
      radius={extensionRadius}

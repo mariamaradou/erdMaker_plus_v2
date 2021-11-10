@@ -162,7 +162,7 @@ class AttributeKorth extends React.Component {
        
         
         <Text
-          text={(this.props.components.notation==='Bachman Notation' || this.props.components.notation==="Information Engineering Notation" ) && this.props.type.unique ?
+          text={(this.props.components.notation==='Bachman Notation' || this.props.components.notation==="Information Engineering" ) && this.props.type.unique ?
            "* " + this.props.name: 
            this.props.type.unique && this.props.components.notation==='Barker Notation'?
             "# *" + this.props.name :

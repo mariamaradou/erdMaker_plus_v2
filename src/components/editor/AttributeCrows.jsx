@@ -71,7 +71,7 @@ class AttributeCrows extends React.Component {
       (parentIndex = this.props.components.entities.findIndex(this.findParentIndex)) !== -1
     ) {
       if (this.props.type.unique && this.props.components.entities[parentIndex].type === "weak" 
-      && !(this.props.components.notation==='Information Engineering Notation')) {
+      && !(this.props.components.notation==='Information Engineering')) {
        // Implementation of dashed text underline
     var textRows = Math.ceil(namePixelWidth / attributeTextWidth);
    
@@ -183,12 +183,12 @@ class AttributeCrows extends React.Component {
           
         />
        
-        <Text text={this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+        <Text text={this.props.components.notation==="Information Engineering"  && this.props.type.unique ?
           this.props.type.foreign? 'PK, FK' :
            "PK " :    this.props.components.notation==='Bachman Notation'  && this.props.type.unique ?
            this.props.type.foreign? 'PFK' :
            'PK  ':
-           this.props.components.notation==="Information Engineering Notation"  && this.props.type.foreign ?
+           this.props.components.notation==="Information Engineering"  && this.props.type.foreign ?
            "FK " :    this.props.components.notation==='Bachman Notation'  && this.props.type.foreign ?
            'FK  ':
           
@@ -202,7 +202,7 @@ class AttributeCrows extends React.Component {
           offsetY={textHeight / 2}
           listening={false} />
         <Text
-          text={ /*this.props.components.notation==="Information Engineering Notation"  && this.props.type.unique ?
+          text={ /*this.props.components.notation==="Information Engineering"  && this.props.type.unique ?
            "PK " + this.props.name:*/ 
            this.props.type.unique && this.props.components.notation==='Barker Notation'?
             "# * " + this.props.name :
@@ -221,12 +221,12 @@ class AttributeCrows extends React.Component {
              '[' +this.props.name + ']':
              this.props.name
             }
-             textDecoration={ ( this.props.components.notation==='Korth, Silberschatz & Sudarshan' || this.props.components.notation==="Information Engineering Notation" )&& this.props.type.unique ? "underline" : ""}
+             textDecoration={ ( this.props.components.notation==='Korth, Silberschatz & Sudarshan' || this.props.components.notation==="Information Engineering" )&& this.props.type.unique ? "underline" : ""}
              fontSize={fontSize}
           align={this.props.components.attributes.find(x=>x.id===this.props.parentId)?"right":'center'}
           verticalAlign="middle"
           width={entityTextWidth}
-          fontStyle={this.props.components.notation==='Information Engineering Notation'? (!this.props.type.optional && !this.props.type.derived)? 'bold':'normal':'normal'}
+          fontStyle={this.props.components.notation==='Information Engineering'? (!this.props.type.optional && !this.props.type.derived)? 'bold':'normal':'normal'}
           height={textHeight}
           offsetX={this.props.type.unique && this.props.type.foreign?entityTextWidth / 2-3-this.props.name.length:entityTextWidth / 2}
           offsetY={textHeight / 2}

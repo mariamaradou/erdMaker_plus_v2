@@ -48,19 +48,19 @@ const ConvertTo = (props) => {
     process.env.REACT_APP_ERD_NOTATION_CHEN === "false"
       ? [
           "Custom Crow's foot",
-          "Elmasri & Navathe Notation",
+          "Elmasri & Navathe",
           "Min-Max Notation",
-          "Information Engineering Notation",
+          "Information Engineering",
           "Bachman Notation",
           "Barker Notation",
-          "Batini, Ceri & Navathe Notation",
+          "Batini, Ceri & Navathe",
           "Teorey Notation",
           "Korth, Silberschatz & Sudarshan",
           "UML Notation",
         ]
       : [
           "Custom Crow's foot",
-          "Elmasri & Navathe Notation",
+          "Elmasri & Navathe",
           "Min-Max Notation",
         ];
 
@@ -86,7 +86,7 @@ const ConvertTo = (props) => {
 
   const changeDirection = (option) => {
     switch (option) {
-      case "Elmasri & Navathe Notation":
+      case "Elmasri & Navathe":
       case "Barker Notation":
       case "Korth, Silberschatz & Sudarshan":
       case "Bachman Notation":
@@ -98,7 +98,7 @@ const ConvertTo = (props) => {
         });
         break;
       case "Min-Max Notation":
-      case "Batini, Ceri & Navathe Notation":
+      case "Batini, Ceri & Navathe":
         props.setParticipationDirection({
           valuePart: "Look Here",
         });
@@ -108,7 +108,7 @@ const ConvertTo = (props) => {
         break;
 
       case "Teorey Notation":
-      case "Information Engineering Notation":
+      case "Information Engineering":
       case "UML Notation":
       case "Custom Crow's foot":
         props.setParticipationDirection({
@@ -189,7 +189,7 @@ const ConvertTo = (props) => {
     
     props.components.extensions.map((extension) =>
       extension.type === "union" &&
-      (option === "Korth, Silberschatz & Sudarshan" || option === "Batini, Ceri & Navathe Notation" || option === "Information Engineering Notation" )
+      (option === "Korth, Silberschatz & Sudarshan" || option === "Batini, Ceri & Navathe" || option === "Information Engineering" )
         ? props.modifyExtension({
           id: extension.id,
           prop: "type",
@@ -208,13 +208,13 @@ const ConvertTo = (props) => {
         typeof props.components.relationships.find(
           (relationship) => relationship.connections.length > 2
         ) !== "undefined" &&
-        (option === "Information Engineering Notation" ||
+        (option === "Information Engineering" ||
           option === "Bachman Notation" ||
           option === "Barker Notation")
       ) {
         handleClickOpenDialog();
       } else if (
-        option === "Information Engineering Notation" ||
+        option === "Information Engineering" ||
         option === "Bachman Notation" ||
         option === "Barker Notation"
       ) {

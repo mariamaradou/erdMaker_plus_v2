@@ -34,7 +34,7 @@ const initialState = {
   // Never decreases and new ids depend on it
 };
 
-const componentsReducer = (state = initialState, action) => {
+ const componentsReducer = (state = initialState, action) => {
   var newState = {};
   Object.assign(newState, state);
   var childrenList = [];
@@ -1089,5 +1089,7 @@ const componentsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+
 
 export default componentsReducer;

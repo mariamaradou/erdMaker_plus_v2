@@ -201,7 +201,7 @@ class RelationshipProperties extends React.Component {
     var addConnectionButton =
       this.props.components.relationships[relationshipIndex].connections
         .length > 1 &&
-      (this.props.components.notation === "Information Engineering Notation" ||
+      (this.props.components.notation === "Information Engineering" ||
         this.props.components.notation === "Bachman Notation" ||
         this.props.components.notation === "Barker Notation") ? null : this
           .props.components.relationships[relationshipIndex].connections
@@ -333,7 +333,7 @@ class RelationshipProperties extends React.Component {
             style={{
               display:
                 this.props.components.notation ===
-                  "Information Engineering Notation" ||
+                  "Information Engineering" ||
                 this.props.components.notation === "Bachman Notation" ||
                 this.props.components.notation === "Barker Notation"
                   ? "none"

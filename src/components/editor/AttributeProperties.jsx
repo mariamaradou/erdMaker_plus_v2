@@ -188,7 +188,7 @@ class AttributeProperties extends React.Component {
             onChange={this.nameValueChange}
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to attribute
             onKeyDown={ (event) => {if (event.key==='Delete') {
-              
+              console.log(this.props.selector.current.id)
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
@@ -199,7 +199,7 @@ class AttributeProperties extends React.Component {
 
               this.props.deleteChildren({ id: this.props.selector.current.id });
            
-             if(this.props.components.notation==="Information Engineering Notation" || 
+            /* if(this.props.components.notation==="Information Engineering" || 
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
@@ -208,7 +208,7 @@ class AttributeProperties extends React.Component {
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
             
             this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
-              ){
+              ){*/
                
              this.props.updateAttributeCrows({
                 idRight:this.props.components.attributes[attributeIndex].id,
@@ -221,11 +221,11 @@ class AttributeProperties extends React.Component {
               
               
             
-            }
+          //  }
 
                //delete associative entity of Uml if the last attribute is deleted
               
-           if( this.props.selector.current.attrNum===0 && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
+           if( this.props.selector.current.attrNum===0 && this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).attributesNum===1 && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
               this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
                 parentId:this.props.selector.current.parentId
               });
@@ -329,7 +329,7 @@ class AttributeProperties extends React.Component {
                 </label>
               </td>
             </tr>
-            <tr style={{display: this.props.components.notation==='Information Engineering Notation' || 
+            <tr style={{display: this.props.components.notation==='Information Engineering' || 
             this.props.components.notation==='Barker Notation' ||
             this.props.components.notation==='Bachman Notation' ||
             this.props.components.notation==='UML Notation' ? 'inherit' : 'none'
@@ -379,14 +379,14 @@ class AttributeProperties extends React.Component {
 
               this.props.deleteChildren({ id: this.props.selector.current.id });
            
-             if(this.props.components.notation==="Information Engineering Notation" || 
+           /*  if(this.props.components.notation==="Information Engineering" || 
              this.props.components.notation==="Bachman Notation" ||
             
              this.props.components.notation==="Barker Notation" || 
               this.props.components.notation=== "UML Notation"  ||
             ( (this.props.components.notation=== "Korth, Silberschatz & Sudarshan" ) &&
               this.props.components.entities.find((entity)=>entity.id=== this.props.components.attributes[attributeIndex].parentEntity)) 
-              ){
+              ){ */
                
              this.props.updateAttributeCrows({
                 idRight:this.props.components.attributes[attributeIndex].id,
@@ -399,10 +399,10 @@ class AttributeProperties extends React.Component {
               
               
             
-            }
+          //  }
             //delete associative entity of Uml if the last attribute is deleted
               
-            if( this.props.selector.current.attrNum===0  && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
+            if( this.props.selector.current.attrNum===0  &&  this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).attributesNum===1 && typeof this.props.components.entities.find(x=>x.id===this.props.selector.current.parentId).parentId!=='undefined'){
               this.props.deleteEntity({ id: this.props.selector.current.parentId, attributesNum: this.props.selector.current.attrNum ,
                 parentId:this.props.selector.current.parentId
               });

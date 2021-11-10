@@ -25,7 +25,7 @@ class ExtensionProperties extends React.Component {
 componentDidMount() {
   
 
- if(this.props.components.notation!=='Batini, Ceri & Navathe Notation') document.getElementById('type').focus(); 
+ if(this.props.components.notation!=='Batini, Ceri & Navathe') document.getElementById('type').focus(); 
   document.getElementsByClassName('sidepanel')[0].style.display='block';
   
   //na anoigei mes sta oria tou parathyroy panw kai katw
@@ -105,7 +105,7 @@ componentDidMount() {
     else content = null;
 
     const addEntityButton =
-    this.props.components.notation==='Batini, Ceri & Navathe Notation' || (
+    this.props.components.notation==='Batini, Ceri & Navathe' || (
       this.props.components.extensions[extensionIndex].type !== "undefined" &&
       this.props.components.extensions[extensionIndex].xconnections.length < 30) ? (
         <button
@@ -149,8 +149,8 @@ componentDidMount() {
             <option style={{display:(this.props.components.notation==='Teorey Notation' || 
             this.props.components.notation==='Korth, Silberschatz & Sudarshan' || 
             this.props.components.notation==='UML Notation' ||
-            this.props.components.notation==='Batini, Ceri & Navathe Notation' ||
-             this.props.components.notation==='Information Engineering Notation')
+            this.props.components.notation==='Batini, Ceri & Navathe' ||
+             this.props.components.notation==='Information Engineering')
              ?'none':'block'}} value="union">Union</option>
             <option style={{display:(this.props.components.notation!=='Teorey Notation' && this.props.components.notation!=='UML Notation')?'none':'block'}} value='aggregation'>Aggregation</option>
             <option style={{display: this.props.components.notation!=='UML Notation'?'none':'block'}} value='composition'>Composition</option>

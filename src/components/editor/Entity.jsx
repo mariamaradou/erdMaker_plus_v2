@@ -60,7 +60,7 @@ class EntityChen extends React.Component {
   render() {
     
     var weakRect =
-      this.props.type === "weak" && this.props.components.notation!=='Batini, Ceri & Navathe Notation'? (
+      this.props.type === "weak" && this.props.components.notation!=='Batini, Ceri & Navathe'? (
         <Rect
       
           x={-entityWidth / 2 + entityWeakOffset / 2}

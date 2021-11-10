@@ -68,7 +68,7 @@ class Connection extends React.Component {
     var specificValues = (
       /* this.state.expand ? */ <>
         <div className="connection-input-group"   style={{ display: this.props.components.notation!=='Min-Max Notation' && 
-              this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
+              this.props.components.notation!=='Batini, Ceri & Navathe' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
           <label>
             exactMin:
             <input
@@ -101,7 +101,7 @@ class Connection extends React.Component {
           </label>
         </div>
         <div className="connection-input-group"  style={{  display: this.props.components.notation!=='Min-Max Notation' && 
-              this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
+              this.props.components.notation!=='Batini, Ceri & Navathe' && this.props.components.notation!=='UML Notation'?'none':'inherit' }}>
           <label>
             exactMax:
             <input
@@ -199,7 +199,7 @@ class Connection extends React.Component {
         </IconButton>
         <br />
         <div className="connection-input-group" style={{display: this.props.components.notation!=='Min-Max Notation' && 
-        this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
+        this.props.components.notation!=='Batini, Ceri & Navathe' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
           <label>
             Min:{" "}
             <select
@@ -248,7 +248,7 @@ class Connection extends React.Component {
         </div>
         <div className="connection-input-group" 
         style={{display: this.props.components.notation!=='Min-Max Notation' && 
-        this.props.components.notation!=='Batini, Ceri & Navathe Notation' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
+        this.props.components.notation!=='Batini, Ceri & Navathe' && this.props.components.notation!=='UML Notation'?'inherit':'none'}}>
           <label>
             Max:{" "}
             <select
