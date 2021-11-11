@@ -39,17 +39,17 @@ const Tutorial = () => {
         
         <table  >
           <tbody style={{textAlign:'left', paddingLeft:"100px"}}>
-         <tr><td> <b>"e"</b> key for new Entity</td></tr>
-         <tr><td> <b>"r" </b> key for new Relationship</td></tr>
-         <tr><td> <b>"l"</b> key for new Label</td></tr>
-         <tr><td> <b> "Alt+z" </b> keys for Undo action.<br/> <i>For multiple undos, don't press  'z' key alone, with 'Alt' pressed.
+         <tr><td> <kbd>e</kbd>  for new Entity</td></tr>
+         <tr><td> <kbd>r</kbd>  for new Relationship</td></tr>
+         <tr><td> <kbd>l</kbd>  for new Label</td></tr>
+         <tr><td> <kbd>Alt</kbd> + <kbd>z</kbd>  for Undo action.<br/> <i>For multiple undos, don't press  'z' key alone, with 'Alt' pressed.
           Instead, press both keys  on each undo action.</i></td></tr>
-         <tr><td>  <b> "Alt+y"</b> keys for Redo action.<br/><i> For multiple redos, don't press only 'y' key alone, with 'Alt' pressed.
+         <tr><td>  <kbd> Alt</kbd> + <kbd>y</kbd> for Redo action.<br/><i> For multiple redos, don't press only 'y' key alone, with 'Alt' pressed.
          Instead, press both keys on each redo action.</i></td></tr>
-         <tr><td>  <b>Arrow</b> keys to move around surface</td></tr>
-         <tr><td> <b>  Delete</b> key to delete a surface component</td></tr>
-         <tr><td>  <b> Escape</b> key to deselect a surface component</td></tr>
-         <tr><td>  <b> Enter</b> or <b> Escape</b> to close component menu</td></tr>
+         <tr><td>  <kbd>▲</kbd> or  <kbd>▼</kbd>  or  <kbd>◄</kbd>  or  <kbd>►</kbd>  to move around surface</td></tr>
+         <tr><td> <kbd> Delete</kbd>  to delete a surface component</td></tr>
+         <tr><td>  <kbd>Esc</kbd>  to deselect a surface component</td></tr>
+         <tr><td>  <kbd style={{paddingLeft:'20px', paddingRight:'20px'}}>↵</kbd> or <kbd> Esc</kbd> to close component menu</td></tr>
          </tbody>
         </table>
         
