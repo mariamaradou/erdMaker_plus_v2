@@ -33,6 +33,7 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
           jumpedAdd = true;
           store.dispatch(ActionCreators.jump(-1));
         }
+        
       }}
       disabled={!canUndo}
     >
