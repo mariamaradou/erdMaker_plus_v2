@@ -27,6 +27,7 @@ const initialState = {
   cardinalityDirection: "Look Across",
   participationDirection: "Look Across",
   hideAttribute:false,
+  lastAction: [],
   // hideRelationships: false,
   // cardDir:false,
   // partDir: false,
@@ -41,31 +42,49 @@ const initialState = {
 
   switch (action.type) {
     case "SET_NOTATION": //o xristis epilegei notation
+   
       return {
+        
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
+            
         notation: action.payload.notation,
       };
 
     case "SET_CARDINALITY_DIRECTION":
       return {
         ...state,
-
+        
         cardinalityDirection: action.payload.valueDir,
       };
     case "SET_PARTICIPATION_DIRECTION":
       return {
         ...state,
-
+       
         participationDirection: action.payload.valuePart,
       };
     case "HIDE_ATTRIBUTES":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
          hideAttribute: action.payload.hide,
       }
     case "ADD_ENTITY":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         entities: [
           ...state.entities,
           {
@@ -85,6 +104,7 @@ const initialState = {
     case "UPDATE_POSITION_ENTITY":
       return {
         ...state,
+        
         entities: state.entities.map((entity) =>
           entity.id === action.payload.id
             ? { ...entity, x: action.payload.x, y: action.payload.y }
@@ -95,6 +115,11 @@ const initialState = {
     case "UPDATE_INITIAL_POSITION_ENTITY":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         entities: state.entities.map((entity) =>
           entity.id === action.payload.id
             ? { ...entity, x: action.payload.x, y: action.payload.y }
@@ -104,9 +129,14 @@ const initialState = {
     //
     case "SET_NAME_ENTITY":
    
-
+     
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         entities: state.entities.map((entity) =>
           entity.id === action.payload.id
             ? { ...entity, name: action.payload.name }
@@ -122,6 +152,11 @@ const initialState = {
     case "SET_TYPE_ENTITY":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         entities: state.entities.map((entity) =>
           entity.id === action.payload.id
             ? { ...entity, type: action.payload.type }
@@ -131,6 +166,11 @@ const initialState = {
     case "DELETE_ENTITY":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         entities: state.entities.filter(
           (entity) => entity.id !== action.payload.id
         ),
@@ -172,6 +212,11 @@ const initialState = {
     case "ADD_EXTENSION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: [
           ...state.extensions,
           {
@@ -201,6 +246,7 @@ const initialState = {
     case "UPDATE_POSITION_EXTENSION":
       return {
         ...state,
+       
         extensions: state.extensions.map((extension) =>
           extension.id === action.payload.id
             ? { ...extension, x: action.payload.x, y: action.payload.y }
@@ -211,6 +257,11 @@ const initialState = {
     case "UPDATE_INITIAL_POSITION_EXTENSION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: state.extensions.map((extension) =>
           extension.id === action.payload.id
             ? { ...extension, x: action.payload.x, y: action.payload.y }
@@ -218,6 +269,9 @@ const initialState = {
         ),
       };
     case "MODIFY_EXTENSION":
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
+         
       for (let i in newState.extensions) {
         if (newState.extensions[i].id === action.payload.id) {
           newState.extensions[i] = {
@@ -231,6 +285,11 @@ const initialState = {
     case "DELETE_EXTENSION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: state.extensions.filter(
           (extension) => extension.id !== action.payload.id
         ),
@@ -243,6 +302,11 @@ const initialState = {
     case "ADD_XCONNECTION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: state.extensions.map((extension) =>
           extension.id === action.payload.id
             ? {
@@ -264,6 +328,11 @@ const initialState = {
     case "CHANGE_XCONNECTION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: state.extensions.map((extension) =>
           extension.id === action.payload.id
             ? {
@@ -280,6 +349,11 @@ const initialState = {
     case "MODIFY_XCONNECTION_UML":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         extensions: state.extensions.map((extension) =>
           extension.id === action.payload.id
             ? {
@@ -311,8 +385,11 @@ const initialState = {
         ),
       };*/
     case "DELETE_XCONNECTION": {
+      
       let newState = _.cloneDeep(state);
-
+     
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
       let test = () => true;
       if (action.payload.xconnectionId)
         test = (xconnection) => xconnection.id !== action.payload.xconnectionId;
@@ -329,6 +406,11 @@ const initialState = {
     case "ADD_RELATIONSHIP":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         relationships: [
           ...state.relationships,
           {
@@ -352,6 +434,7 @@ const initialState = {
     case "UPDATE_POSITION_RELATIONSHIP":
       return {
         ...state,
+       
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id
             ? { ...relationship, x: action.payload.x, y: action.payload.y }
@@ -362,6 +445,11 @@ const initialState = {
     case "UPDATE_INITIAL_POSITION_RELATIONSHIP":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id
             ? { ...relationship, x: action.payload.x, y: action.payload.y }
@@ -371,6 +459,11 @@ const initialState = {
     case "SET_NAME_RELATIONSHIP":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id
             ? { ...relationship, name: action.payload.name }
@@ -387,6 +480,11 @@ const initialState = {
     case "SET_TYPE_RELATIONSHIP":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id
             ? {
@@ -401,6 +499,8 @@ const initialState = {
       };
 
     case "DELETE_RELATIONSHIP":
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
       // Reduce connectionCount of involved entities
       function adjustEntities(connection) {
         for (let j in newState.entities) {
@@ -419,6 +519,11 @@ const initialState = {
     case "ADD_CONNECTION":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         relationships: state.relationships.map((relationship) =>
           relationship.id === action.payload.id
             ? {
@@ -445,6 +550,8 @@ const initialState = {
       };
     case "CHANGE_CONNECTION": // Change connected entity
       var prevConnectId = 0;
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
       for (let i in newState.relationships) {
         if (newState.relationships[i].id === action.payload.parentId)
           for (let j in newState.relationships[i].connections) {
@@ -500,6 +607,8 @@ const initialState = {
            { ...connection,  [action.payload.prop]: action.payload.value } : connection
         ),
       };*/
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
       for (let i in newState.relationships) {
         if (newState.relationships[i].id === action.payload.parentId)
           for (let j in newState.relationships[i].connections) {
@@ -516,6 +625,8 @@ const initialState = {
       }
       return newState;
     case "DELETE_CONNECTION":
+      if (newState.lastAction.length>=20){ newState.lastAction=[] }
+      newState.lastAction.push({id: action.type})
       if (action.payload.id) {
         for (let i in newState.entities) {
           if (newState.entities[i].id === action.payload.connectId)
@@ -549,6 +660,11 @@ const initialState = {
     case "ADD_ATTRIBUTE":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         attributes: [
           ...state.attributes,
           {
@@ -661,6 +777,7 @@ const initialState = {
     case "UPDATE_POSITION_ATTRIBUTE":
       return {
         ...state,
+       
         attributes: state.attributes.map((attribute) =>
           attribute.id === action.payload.id
             ? { ...attribute, x: action.payload.x, y: action.payload.y }
@@ -671,6 +788,11 @@ const initialState = {
     case "UPDATE_INITIAL_POSITION_ATTRIBUTE":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         attributes: state.attributes.map((attribute) =>
           attribute.id === action.payload.id
             ? { ...attribute, x: action.payload.x, y: action.payload.y }
@@ -680,6 +802,11 @@ const initialState = {
     case "UPDATE_POSITION_PROPERTY":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         properties: state.attributes.map((property) =>
           property.id === action.payload.id
             ? { ...property, x: action.payload.x, y: action.payload.y }
@@ -690,6 +817,11 @@ const initialState = {
     case "SET_NAME_ATTRIBUTE":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         attributes: state.attributes.map((attribute) =>
           attribute.id === action.payload.id
             ? { ...attribute, name: action.payload.name }
@@ -700,6 +832,11 @@ const initialState = {
     case "SET_TYPE_ATTRIBUTE":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         attributes: state.attributes.map((attribute) =>
           attribute.id === action.payload.id
             ? {
@@ -731,6 +868,11 @@ const initialState = {
 
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         attributes: state.attributes
           .filter((attribute) => attribute.id !== action.payload.id)
           .map((attribute) =>
@@ -771,7 +913,7 @@ const initialState = {
 
       return {
         ...state,
-
+       
         attributes: state.attributes.filter(
           (attribute) => !childrenList.includes(attribute.id)
         ),
@@ -899,6 +1041,11 @@ const initialState = {
     case "ADD_LABEL":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         labels: [
           ...state.labels,
           {
@@ -915,6 +1062,11 @@ const initialState = {
     case "UPDATE_POSITION_LABEL":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         labels: state.labels.map((label) =>
           label.id === action.payload.id
             ? { ...label, x: action.payload.x, y: action.payload.y }
@@ -934,6 +1086,11 @@ const initialState = {
     case "SET_TEXT_LABEL":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         labels: state.labels.map((label) =>
           label.id === action.payload.id
             ? { ...label, text: action.payload.text }
@@ -943,6 +1100,11 @@ const initialState = {
     case "RESIZE_LABEL":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         labels: state.labels.map((label) =>
           label.id === action.payload.id
             ? {
@@ -966,6 +1128,11 @@ const initialState = {
     case "DELETE_LABEL":
       return {
         ...state,
+        lastAction: state.lastAction.length>=20? [ {
+          id: action.type}] :[
+          ...state.lastAction,
+          {
+            id: action.type}],
         labels: state.labels.filter((label) => label.id !== action.payload.id),
       };
     case "REPOSITION_COMPONENTS": // Used to return all components within stage bound if dragged off
@@ -1076,6 +1243,7 @@ const initialState = {
 
       return newState;
     case "SET_COMPONENTS":
+      
       return action.payload;
     case "RESET_COMPONENTS": //afinw mono to notation, cardinality kai participation idia me ayta prin to reset
       var clone = Object.assign({}, initialState);

@@ -55,7 +55,7 @@ const finalReducer = combineReducers({
   meta: metaReducer,
   user: userReducer,
   components: undoable(componentsReducer, {
-    limit: 30,
+    limit: 20,
     filter: function filterActions(action) {
       return (
         action.type === UPDATE_INITIAL_POSITION_ENTITY ||
