@@ -411,12 +411,10 @@ const XEntityList = connect(
         break;
       }
     }
-    if(typeof props.components.entities[i].parentId !== "undefined"){
-      
-      found=true;
-    }
+   
     entityList.push(
-      <option key={props.components.entities[i].id} value={props.components.entities[i].id} disabled={found}>
+      <option key={props.components.entities[i].id} value={props.components.entities[i].id} disabled={found}
+      style= {{display: typeof props.components.entities[i].parentId==='undefined'? 'inherit':'none'}}>
         {props.components.entities[i].name}
       </option>
     );
