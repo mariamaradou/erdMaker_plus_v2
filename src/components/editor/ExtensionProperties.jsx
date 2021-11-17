@@ -402,6 +402,7 @@ const XEntityList = connect(
 )((props) => {
   var entityList = [];
   var found;
+  
   for (let i in props.components.entities) {
     found = false;
     if (props.components.entities[i].id === props.extension.parentId) continue;
