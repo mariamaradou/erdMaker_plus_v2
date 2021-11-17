@@ -269,7 +269,7 @@ const ConvertTo = (props) => {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               A relationship in your ERD has up to 2 connections. See more in 
-              <span> <a href="/help" rel="noreferrer" target="_blank">Help</a></span>
+              <span> <a href="/help" rel="noreferrer" /*target="_blank"*/>Help</a></span>
               .
             </DialogContentText>
           </DialogContent>
@@ -292,7 +292,7 @@ const ConvertTo = (props) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              There is an attribute on a relationship. See more in   <span> <a href="/help" rel="noreferrer" target="_blank">Help</a></span>.
+              There is an attribute on a relationship. See more in   <span> <a href="/help" rel="noreferrer" /*target="_blank"*/>Help</a></span>.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
