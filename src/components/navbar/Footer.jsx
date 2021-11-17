@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   const footerLinks =  [
-    { label: "Who made this", link: "/terms", type: "int" },
+    { label: "Who made this", link: "/whomadethis", type: "int" },
    
   ];
   
@@ -11,9 +11,9 @@ const Footer = () => {
   let linksMarkup = footerLinks.map((link, index) => {
     let linkMarkup =
      (
-        <a className="nav__link" href={'/whomadethis'}  /*rel="noopener noreferrer"*/>
-          {link.label}
-        </a>
+      <Link className="nav__link" to={link.link} >
+      {link.label}
+    </Link>
       );
     return <li key={index}>{linkMarkup}</li>;
   });
