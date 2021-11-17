@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   const footerLinks =  [
-    { label: "Who made this", link: "/erdmaker/terms", type: "int" },
+    { label: "Who made this", link: "/terms", type: "int" },
    
   ];
   
