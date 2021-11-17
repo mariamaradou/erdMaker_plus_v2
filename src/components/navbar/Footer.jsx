@@ -11,7 +11,7 @@ const Footer = () => {
   let linksMarkup = footerLinks.map((link, index) => {
     let linkMarkup =
      (
-        <a className="nav__link" href={'/erdmaker/whomadethis'}  rel="noopener noreferrer">
+        <a className="nav__link" href={'/whomadethis'}  rel="noopener noreferrer">
           {link.label}
         </a>
       );

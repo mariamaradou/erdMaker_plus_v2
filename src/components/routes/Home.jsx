@@ -34,7 +34,7 @@ const Description = (props) => (
        
         if(window.innerWidth>=1024){
         props.setHelpModal({modal:true})} }}
-      pathname="/erdmaker/designer"
+      pathname="/designer"
     />
   </div>
 );

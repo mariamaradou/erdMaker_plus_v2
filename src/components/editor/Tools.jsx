@@ -77,7 +77,7 @@ class Tools extends React.Component {
             window.history.pushState(
               "",
               "",
-              "/erdmaker/designer/" + res.data.random_id
+              "/designer/" + res.data.random_id
             );
 
           if (!this.props.general.activeDiagramId) {
@@ -207,7 +207,7 @@ class Tools extends React.Component {
     return (
       //creating Import/Export button   //creating Convert to button
       <div className="tool-bar">
-        <Link to="/erdmaker/">
+        <Link to="/">
           <img src={Logo} className="logo" alt=":(" />
         </Link>
 
@@ -215,7 +215,7 @@ class Tools extends React.Component {
         <ul className={toolsClasses}>
           {saveButton}
           <HelpModal />
-          <Link to="/erdmaker/help" target="_blank">
+          <Link to="/help" target="_blank">
             <button
               style={
                 this.props.meta.modal

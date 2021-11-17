@@ -49,13 +49,13 @@ export const getDiagram = (diagramId, cancelToken) => {
         store.dispatch(ActionCreators.clearHistory())
       } else {
         store.dispatch(resetActiveDiagram());
-        window.location.replace("/erdmaker/");
+        window.location.replace("/");
       }
     })
     .catch((err) => {
      
       store.dispatch(resetActiveDiagram());
-     window.location.replace("/erdmaker/");
+     window.location.replace("/");
     });
 };
 
@@ -76,14 +76,14 @@ export const getDiagramTemp = (params_id,cancelToken) => {
       
       } else {
         store.dispatch(resetActiveDiagram());
-        window.location.replace("/erdmaker/nodiagramfound");
+        window.location.replace("/nodiagramfound");
         
       }
     })
     .catch((err) => {
      
       store.dispatch(resetActiveDiagram());
-    window.location.replace("/erdmaker/nodiagramfound");
+    window.location.replace("/nodiagramfound");
      
     });
 };
@@ -110,7 +110,7 @@ export const logOut = () => {
     .then((res) => {
       store.dispatch(removeUserData());
       store.dispatch(resetActiveDiagram());
-      window.location.replace("/erdmaker/");
+      window.location.replace("/");
     })
     .catch(() => {});
 };

@@ -133,7 +133,7 @@ const handleSubmit=(e)=>{
       .then((res) => {
         if (res ) {
           
-          window.history.pushState("", "", "/erdmaker/designer/"+ res.data.random_id);
+          window.history.pushState("", "", "/designer/"+ res.data.random_id);
 
        
         }
@@ -170,7 +170,7 @@ const handleSubmit=(e)=>{
   }}>*/}
          
         
-         <form action={"/erdmaker/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
+         <form action={"/designer/*"} className="form"  onSubmit={(e)=>handleSubmit(e)}>
          
            
       <button

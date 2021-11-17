@@ -71,7 +71,7 @@ class Editor extends React.Component {
               window.history.pushState(
                 "",
                 "",
-                "/erdmaker/designer/" + res.data.random_id
+                "/designer/" + res.data.random_id
               );
             }
           })
@@ -93,7 +93,7 @@ class Editor extends React.Component {
         }
         getDiagramTemp(this.props.match.params.id, this.cancelToken);
       } else {
-        window.location.replace("/erdmaker/loginfirst");
+        window.location.replace("/loginfirst");
       }
     }
   };

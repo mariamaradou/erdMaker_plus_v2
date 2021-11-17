@@ -16,22 +16,22 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/erdmaker/designer" exact component={Editor} />
-        <Route path="/erdmaker/designer/:id" render={(props) => <Editor {...props} />} /> 
-        <Route path='/erdmaker/help'  component={Tutorial}/>
+        <Route path="/designer" exact component={Editor} />
+        <Route path="/designer/:id" render={(props) => <Editor {...props} />} /> 
+        <Route path='/help'  component={Tutorial}/>
         <Route>
           <div className="main-page">
             <Header />
             <div className="inner-body">
               <Switch>
-                <Route path="/erdmaker/resetpassword/*" exact component={ResetPassword} />
-                <Route path="/erdmaker/emailchangesuccess" exact component={EmailChangeSuccess} />
-                <Route path="/erdmaker/about" exact component={About} />
-                <Route path="/erdmaker/" exact component={Home} />
+                <Route path="/resetpassword/*" exact component={ResetPassword} />
+                <Route path="/emailchangesuccess" exact component={EmailChangeSuccess} />
+                <Route path="/about" exact component={About} />
+                <Route path="/" exact component={Home} />
                
-                <Route path='/erdmaker/nodiagramfound'  component= {NoDiagramFound}/>
-                <Route path='/erdmaker/loginfirst'  component= {LogInFirst}/>
-                <Route path='/erdmaker/whomadethis'  component= {WhoMadeThis}/>
+                <Route path='/nodiagramfound'  component= {NoDiagramFound}/>
+                <Route path='/loginfirst'  component= {LogInFirst}/>
+                <Route path='/whomadethis'  component= {WhoMadeThis}/>
                 <Route component={NoMatchPage} />
               </Switch>
               
@@ -62,7 +62,7 @@ const NoDiagramFound = () => {
       <div className="container">
         <h1>This link doesn't exist or has been deleted.</h1>
       </div>
-      <Link to="/erdmaker/designer">
+      <Link to="/designer">
           <button className='home-button'>Back</button>
         </Link>
     </div>
@@ -76,7 +76,7 @@ const LogInFirst = () => {
       <div className="container">
         <h1>Log in to see shared diagram</h1>
       </div>
-      <Link to="/erdmaker/">
+      <Link to="/">
           <button className='home-button'>Home</button>
         </Link>
     </div>
