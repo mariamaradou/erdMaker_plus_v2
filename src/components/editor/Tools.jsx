@@ -215,7 +215,7 @@ class Tools extends React.Component {
         <ul className={toolsClasses}>
           {saveButton}
           <HelpModal />
-          <Link to="/help" /*target="_blank"*/>
+          <Link to="/help" target="_blank">
             <button
               style={
                 this.props.meta.modal
