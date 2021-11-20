@@ -21,7 +21,7 @@ import ConvertToMenuListComposition from "./convert_to";
 import ConstraintsButton from "./Constraints";
 import saveImg from "../../img/saveIcon.png";
 import axios from "axios";
-import { diagramLimit, savePeriod,autoSave } from "../../global/constants.js";
+import { diagramLimit, savePeriod } from "../../global/constants.js";
 import UndoRedo from "./UndoRedo";
 import AddButton from "./addButton";
 
@@ -40,7 +40,7 @@ class Tools extends React.Component {
 
   componentDidMount() {
     window.addEventListener("beforeunload", this.timerCleanup);
-    if(autoSave) this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
+   this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
   }
 
   startSave() {
