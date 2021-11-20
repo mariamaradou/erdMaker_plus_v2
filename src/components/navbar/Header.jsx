@@ -51,7 +51,7 @@ const Header = () => {
   return (
     <nav className="header-nav">
       <Link to="/" onClick={() => setHeaderNavListActive(false)}>
-        <img src={Logo} className="logo" alt=":(" />
+        <img src={Logo} className="logo" alt=":(" title='Go to erdMaker Home'/>
       </Link>
       <ul className={headerNavClasses}>{linksMarkup}</ul>
       <div className="burger" onClick={() => setHeaderNavListActive(!headerNavListActive)}>
