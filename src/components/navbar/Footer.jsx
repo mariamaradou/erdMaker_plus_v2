@@ -11,7 +11,7 @@ const Footer = () => {
   let linksMarkup = footerLinks.map((link, index) => {
     let linkMarkup =
      (
-      <a className="nav__link" href={link.link} target="_blank" rel="noopener noreferrer">
+      <a className="nav__link" href={link.link} >
       {link.label}
     </a>
       );
