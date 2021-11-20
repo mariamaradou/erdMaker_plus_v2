@@ -208,7 +208,7 @@ class Tools extends React.Component {
       //creating Import/Export button   //creating Convert to button
       <div className="tool-bar">
         <Link to="/">
-          <img src={Logo} className="logo" alt=":(" />
+          <img src={Logo} className="logo" alt=":(" title='Go to erdMaker Home'/>
         </Link>
 
         {saveGroup}
