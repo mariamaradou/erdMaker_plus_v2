@@ -27,7 +27,7 @@ class ResetPassword extends React.Component {
   }
 
   resetPassword() {
-    const token = window.location.pathname.split("/")[3];  //pairnw to meros meta to "/"
+    const token = window.location.pathname.split("/")[2];  //pairnw to meros meta to "/"
     const newPass = {
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
