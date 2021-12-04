@@ -499,8 +499,12 @@ const initialState = {
       };
 
     case "DELETE_RELATIONSHIP":
+      if(state.entities.find((entity)=>entity.parentId===action.payload.id)){
+        var hasAttribute=true
+       }
+       else {hasAttribute=false}
       if (newState.lastAction.length>=20){ newState.lastAction=[] }
-      newState.lastAction.push({id: action.type})
+      newState.lastAction.push({id: action.type, attribute:hasAttribute})
       // Reduce connectionCount of involved entities
       function adjustEntities(connection) {
         for (let j in newState.entities) {

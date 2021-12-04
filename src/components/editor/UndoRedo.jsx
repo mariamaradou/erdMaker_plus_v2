@@ -20,7 +20,9 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
           components.lastAction[components.lastAction.length - 1].id ===
             "DELETE_ATTRIBUTE" ||
           components.lastAction[components.lastAction.length - 1].id ===
-            "DELETE_ENTITY"
+            "DELETE_ENTITY" || 
+            (components.lastAction[components.lastAction.length - 1].id ===
+            "DELETE_RELATIONSHIP" && components.lastAction[components.lastAction.length - 1].attribute===true )
         ) {
           jumpedDelete = true;
           jumpedAdd = false;
