@@ -121,6 +121,7 @@ class EntityProperties extends React.Component {
     this.props.addAttribute({
       id: this.props.selector.current.id,
       parentEntity:null,
+      
       grandparentAttrId  : this.props.selector.current.parentId,     //UML
       x: this.props.components.entities[entityIndex].x + xOffset,
       y: this.props.components.entities[entityIndex].y + yOffset,

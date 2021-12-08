@@ -499,8 +499,12 @@ const initialState = {
       };
 
     case "DELETE_RELATIONSHIP":
+     if(state.entities.find((entity)=>entity.parentId===action.payload.id)){
+      var hasAttribute=true
+     }
+     else {hasAttribute=false}
       if (newState.lastAction.length>=20){ newState.lastAction=[] }
-      newState.lastAction.push({id: action.type})
+      newState.lastAction.push({id: action.type, attribute:hasAttribute})
       // Reduce connectionCount of involved entities
       function adjustEntities(connection) {
         for (let j in newState.entities) {
@@ -658,13 +662,19 @@ const initialState = {
       }
 
     case "ADD_ATTRIBUTE":
+
+      if(state.relationships.find((relationship)=>relationship.id===action.payload.parentEntity)){
+        
+        var parentRel=true
+       }
+       else {parentRel=false}
       return {
         ...state,
         lastAction: state.lastAction.length>=20? [ {
-          id: action.type}] :[
+          id: action.type, parentRel:parentRel}] :[
           ...state.lastAction,
           {
-            id: action.type}],
+            id: action.type, parentRel:parentRel}],
         attributes: [
           ...state.attributes,
           {
@@ -851,6 +861,12 @@ const initialState = {
       };
 
     case "DELETE_ATTRIBUTE":
+        
+      if(state.relationships.find((relationship)=>relationship.id===action.payload.parentEntity)){
+        
+        var parentRelationship=true
+       }
+       else {parentRelationship=false}
       getChildren(childrenList, state.attributes, action.payload.id);
 
       var grandparentid = state.attributes.find(
@@ -869,10 +885,10 @@ const initialState = {
       return {
         ...state,
         lastAction: state.lastAction.length>=20? [ {
-          id: action.type}] :[
+          id: action.type, parentRel: parentRelationship}] :[
           ...state.lastAction,
           {
-            id: action.type}],
+            id: action.type, parentRel: parentRelationship}],
         attributes: state.attributes
           .filter((attribute) => attribute.id !== action.payload.id)
           .map((attribute) =>

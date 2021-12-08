@@ -82,6 +82,7 @@ class AttributeProperties extends React.Component {
     }
     this.props.addAttribute({
       id: this.props.selector.current.parentId,
+      parentEntity: null,
       x: x,
       y: y,
      
@@ -119,7 +120,7 @@ class AttributeProperties extends React.Component {
       x: this.props.components.attributes[attributeIndex].x + xOffset,
       y: this.props.components.attributes[attributeIndex].y + yOffset,
       parentAttrId:  this.props.components.attributes[attributeIndex].id,
-      
+      parentEntity: this.props.components.attributes[attributeIndex].parentEntity,
       grandparentAttrId:  this.props.components.attributes[attributeIndex].parentId,
       grandgrandparent:  this.props.components.attributes[attributeIndex].parentEntity
     });
@@ -192,6 +193,7 @@ class AttributeProperties extends React.Component {
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
+                parentEntity: this.props.components.attributes[attributeIndex].parentEntity,
                 attrNum: this.props.components.attributes[attributeIndex].attrNum,
         
                
@@ -373,6 +375,7 @@ class AttributeProperties extends React.Component {
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
+                parentEntity: this.props.components.attributes[attributeIndex].parentEntity,
                 attrNum: this.props.components.attributes[attributeIndex].attrNum,
                
               });

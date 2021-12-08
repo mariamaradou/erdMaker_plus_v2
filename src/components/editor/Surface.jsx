@@ -1492,6 +1492,7 @@ console.log(this.props.components)
         this.props.deleteAttribute({
           id: this.props.selector.current.id,
           parentId: this.props.selector.current.parentId,
+          parentEntity:this.props.selector.current.parentEntity,
           attrNum: this.props.selector.current.attrNum,
         });
 

@@ -152,6 +152,7 @@ class RelationshipProperties extends React.Component {
       });
       this.props.addAttribute({
         id: this.props.components.count + 1,
+        parentEntity:this.props.components.relationships[relationshipIndex].id,
         grandparentAttrId:
           this.props.components.relationships[relationshipIndex].id,
         parentId: this.props.components.count + 1,
@@ -163,6 +164,7 @@ class RelationshipProperties extends React.Component {
         id: this.props.components.entities.find(
           (entity) => entity.parentId === this.props.selector.current.id
         ).id,
+        parentEntity:this.props.components.relationships[relationshipIndex].id,
         grandparentAttrId:
           this.props.components.relationships[relationshipIndex].id,
         parentId: this.props.components.entities.find(

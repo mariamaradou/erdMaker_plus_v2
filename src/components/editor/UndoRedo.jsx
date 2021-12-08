@@ -15,13 +15,16 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
         onUndo();
         jumpedDelete = false;
         jumpedAdd = false;
-
+        console.log(components.lastAction)
         if (
+          (components.lastAction[components.lastAction.length - 1].id ===
+            "DELETE_ATTRIBUTE" && components.lastAction[components.lastAction.length - 1].parentRel===false) ||
           components.lastAction[components.lastAction.length - 1].id ===
-            "DELETE_ATTRIBUTE" ||
-          components.lastAction[components.lastAction.length - 1].id ===
-            "DELETE_ENTITY"
+            "DELETE_ENTITY" || 
+            (components.lastAction[components.lastAction.length - 1].id ===
+            "DELETE_RELATIONSHIP" && components.lastAction[components.lastAction.length - 1].attribute===true )
         ) {
+          
           jumpedDelete = true;
           jumpedAdd = false;
           store.dispatch(ActionCreators.jump(-2));
@@ -29,9 +32,14 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
           components.lastAction[components.lastAction.length - 1].id ===
           "ADD_ATTRIBUTE"
         ) {
-          jumpedDelete = false;
+          
+
+          if(components.lastAction[components.lastAction.length - 1].parentRel===false){
+            jumpedDelete = false;
           jumpedAdd = true;
-          store.dispatch(ActionCreators.jump(-1));
+            store.dispatch(ActionCreators.jump(-1))}
+          
+          ;
         }
         
       }}
