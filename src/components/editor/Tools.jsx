@@ -40,7 +40,7 @@ class Tools extends React.Component {
 
   componentDidMount() {
     window.addEventListener("beforeunload", this.timerCleanup);
-    this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
+   this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
   }
 
   startSave() {

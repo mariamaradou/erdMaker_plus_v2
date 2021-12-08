@@ -34,5 +34,6 @@ export const spawnRadius = 110;
 export const weakRelationshipOffset = 6;
 export const anchorLength = 30;
 export const savePeriod = 5000; // How often auto-saving is triggered in ms
+
 export const resizeRectSize = 1000; // Rectangle used for resizing labels
 export const timeout = 10000; // Requests timeout after this many milliseconds
