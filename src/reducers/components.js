@@ -663,13 +663,18 @@ const initialState = {
       }
 
     case "ADD_ATTRIBUTE":
+      if(state.relationships.find((relationship)=>relationship.id===action.payload.parentEntity)){
+        
+        var parentRel=true
+       }
+       else {parentRel=false}
       return {
         ...state,
         lastAction: state.lastAction.length>=20? [ {
-          id: action.type}] :[
+          id: action.type, parentRel:parentRel}] :[
           ...state.lastAction,
           {
-            id: action.type}],
+            id: action.type, parentRel:parentRel}],
         attributes: [
           ...state.attributes,
           {

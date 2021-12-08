@@ -31,9 +31,10 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
           components.lastAction[components.lastAction.length - 1].id ===
           "ADD_ATTRIBUTE"
         ) {
-          jumpedDelete = false;
+          if(components.lastAction[components.lastAction.length - 1].parentRel===false){
+            jumpedDelete = false;
           jumpedAdd = true;
-          store.dispatch(ActionCreators.jump(-1));
+            store.dispatch(ActionCreators.jump(-1))}
         }
         
       }}
