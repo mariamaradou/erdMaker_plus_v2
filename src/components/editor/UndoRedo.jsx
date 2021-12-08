@@ -17,13 +17,13 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
         jumpedAdd = false;
 
         if (
-          components.lastAction[components.lastAction.length - 1].id ===
-            "DELETE_ATTRIBUTE" ||
+          (components.lastAction[components.lastAction.length - 1].id ===
+            "DELETE_ATTRIBUTE" && components.lastAction[components.lastAction.length - 1].parentRel===false) ||
           components.lastAction[components.lastAction.length - 1].id ===
             "DELETE_ENTITY" || 
             (components.lastAction[components.lastAction.length - 1].id ===
             "DELETE_RELATIONSHIP" && components.lastAction[components.lastAction.length - 1].attribute===true )
-        ) {
+        ){
           jumpedDelete = true;
           jumpedAdd = false;
           store.dispatch(ActionCreators.jump(-2));

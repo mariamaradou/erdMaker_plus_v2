@@ -1491,6 +1491,7 @@ console.log(this.props.components)
       } else if (this.props.selector.current.type === "attribute") {
         this.props.deleteAttribute({
           id: this.props.selector.current.id,
+          parentEntity:this.props.selector.current.parentEntity,
           parentId: this.props.selector.current.parentId,
           attrNum: this.props.selector.current.attrNum,
         });
