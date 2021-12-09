@@ -68,7 +68,8 @@ const Tutorial = () => {
     
    <img alt="sendDiagram" src={sendDiagram} width={'100%'}  style={{paddingRight:'20px'}}></img>
     <h4>You can export compatible files for BurntSushi/erd and Gleek</h4>
-    <p> Only binary/non-attribute relationships are exported</p>
+    <p> Only binary/non-attribute relationships are exported.</p>
+    <p> Gleek does not recognize greek characters.</p>
     <img alt="exportForms" src={exportForms} width={'45%'}></img>
     <p> Check  <span><a href="https://www.gleek.io/er-diagrams.html" rel="noreferrer" target="_blank">Gleek </a></span>  
     and  <span><a href="https://github.com/BurntSushi/erd" rel="noreferrer" target="_blank">BurntSushi/erd</a></span></p>
