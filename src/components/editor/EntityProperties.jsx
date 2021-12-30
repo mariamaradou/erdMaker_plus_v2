@@ -32,7 +32,7 @@ class EntityProperties extends React.Component {
     document.getElementsByClassName('sidepanel')[0].style.display='block'
     var entityIndex = this.props.components.entities.findIndex(this.findEntityIndex);
 
-       document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y +'px';
+       document.getElementsByClassName('sidepanel')[0].style.top= this.props.components.entities[entityIndex].y-  document.querySelector(".stage").scrollTop +'px';
      
    
     
@@ -321,7 +321,7 @@ class EntityProperties extends React.Component {
 
 const mapStateToProps = (state) => ({
   components: state.components.present,
-  selector: state.selector,
+  selector: state.selector
 });
 
 const mapDispatchToProps = {
