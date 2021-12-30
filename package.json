@@ -38,7 +38,9 @@
     "start": "react-scripts start",
     "build": "set \"GENERATE_SOURCEMAP=false\" &&  react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "install": "sudo cp -R build/* /var/customers/webs/hciuser/erdmaker/;sudo  chown -R www-data:www-data /var/customers/webs/hciuser/erdmaker"
+
   },
   "engines": {
     "node": ">=12.19.0",

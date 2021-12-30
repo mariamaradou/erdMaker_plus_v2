@@ -40,12 +40,13 @@ class Tools extends React.Component {
 
   componentDidMount() {
     window.addEventListener("beforeunload", this.timerCleanup);
-   this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
+   if (process.env.REACT_APP_AUTOSAVE) this.startSaveTimer = setTimeout(() => this.startSave(), 1000);
   }
 
   startSave() {
     if (this.state.saveEnabled)
-      this.saveTimer = setInterval(() => this.saveDiagram(), savePeriod);
+      //this.saveTimer = setInterval(() => this.saveDiagram(), savePeriod);
+      this.saveTimer = setInterval(() => this.saveDiagram(), process.env.REACT_APP_SAVEPERIOD);
   }
 
   componentWillUnmount() {
