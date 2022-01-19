@@ -15,7 +15,7 @@ let UndoRedo = ({ components, canUndo, canRedo, onUndo, onRedo }) => (
         onUndo();
         jumpedDelete = false;
         jumpedAdd = false;
-        console.log(components.lastAction)
+       // console.log(components.lastAction)
         if (
           (components.lastAction[components.lastAction.length - 1].id ===
             "DELETE_ATTRIBUTE" && components.lastAction[components.lastAction.length - 1].parentRel===false) ||

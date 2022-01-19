@@ -56,7 +56,7 @@ class AttributeProperties extends React.Component {
     
   }; 
  
-  handleAddAttributeToParent = (parent) => {
+  /*handleAddAttributeToParent = (parent) => {
     const radius = spawnRadius;
     var randomAngle = getRandomInt(0, 360);
     var xOffset = radius * Math.cos(randomAngle);
@@ -94,7 +94,7 @@ class AttributeProperties extends React.Component {
       parentId: this.props.selector.current.parentId,
     });
     this.nameInput.focus();
-  };
+  };*/
 
   // sthn periptwsh pou exw syntheto gnwrisma (COMPOSITE ATTRIBUTE)
 
@@ -189,7 +189,7 @@ class AttributeProperties extends React.Component {
             onChange={this.nameValueChange}
             ////prosthesa to kleidi delete wste otan to pataw na diagrafetai to attribute
             onKeyDown={ (event) => {if (event.key==='Delete') {
-              console.log(this.props.selector.current.id)
+            
               this.props.deleteAttribute({
                 id: this.props.selector.current.id,
                 parentId: this.props.components.attributes[attributeIndex].parentId,
@@ -355,15 +355,15 @@ class AttributeProperties extends React.Component {
         </table>
         <hr />
         <div className="buttons-list">
-          <button
+        {/*  <button
           className='buttonmenu'
            style={{cursor:'pointer', border:'none',outline:'none',fontSize:17, backgroundColor: '#f2f2f2', fontFamily:"'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"}}
-           /* className="properties-neutral-button"*/
+           // className="properties-neutral-button"
             type="button"
             onClick={() => this.handleAddAttributeToParent(parent)}
           >
             Add Attribute to Parent
-          </button>
+        </button>*/}
           {addAttributeButton}
           <button
           /*  className="properties-delete-button"*/
