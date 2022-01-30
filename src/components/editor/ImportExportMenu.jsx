@@ -92,7 +92,7 @@ const ImportExportMenuListComposition = (props) => {
     for (let i in props.components.entities) {
       if(typeof props.components.entities[i].parentId==='undefined'){
       state.push(" ");
-      state.push("[" + props.components.entities[i].name + "]  ");
+      state.push("[" + props.components.entities[i].name + "]  {bgcolor:white}");
 
       for (let j in props.components.attributes)  {
         if (
@@ -124,7 +124,7 @@ const ImportExportMenuListComposition = (props) => {
           var min = props.components.relationships[i].connections[j].min;
           var max = props.components.relationships[i].connections[j].max;
           if (min === "zero" && max === "one") {
-            var cardinality = "?";
+            var cardinality = "0";
           } else if (min === "zero" && max === "many") {
             cardinality = "*";
           } else if (min === "one" && max === "one") {
@@ -179,7 +179,7 @@ const ImportExportMenuListComposition = (props) => {
    
   element.href=URL.createObjectURL(file);
   
-  element.download = props.meta.title + '.txt';
+  element.download = props.meta.title + '.er';
   document.body.appendChild(element);
   element.click();
   
