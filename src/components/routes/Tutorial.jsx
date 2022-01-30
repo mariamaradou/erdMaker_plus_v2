@@ -67,12 +67,13 @@ const Tutorial = () => {
     <h4>You can share your diagrams through links</h4>
     
    <img alt="sendDiagram" src={sendDiagram} width={'100%'}  style={{paddingRight:'20px'}}></img>
-    <h4>You can export compatible files for BurntSushi/erd and Gleek</h4>
+    <h4>You can export compatible files for ERD Preview and Gleek</h4>
+    <p>ERD Preview is a Visual Studio Code extension and Gleek is an online app.</p>
     <p> Only binary/non-attribute relationships are exported.</p>
-    <p> Gleek does not recognize greek characters.</p>
-    <img alt="exportForms" src={exportForms} width={'45%'}></img>
+    <p> Gleek and ERD Preview do not recognize greek characters.</p>
+    <img alt="exportWay" src={exportForms} width={'45%'}></img>
     <p> Check  <span><a href="https://www.gleek.io/er-diagrams.html" rel="noreferrer" target="_blank">Gleek </a></span>  
-    and  <span><a href="https://github.com/BurntSushi/erd" rel="noreferrer" target="_blank">BurntSushi/erd</a></span></p>
+    and  <span><a href="https://marketplace.visualstudio.com/items?itemName=kaishuu0123.vscode-erd-preview&ssr=false#overview" rel="noreferrer" target="_blank">ERD Preview</a></span></p>
   
         </div>
 
